@@ -37,3 +37,6 @@ pnpm-debug.log*
 *.local
 Thumds.db
 ehthumbs.db
+
+# Production secrets
+.env.prod

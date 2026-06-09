@@ -1,30 +1,25 @@
+name: efit-improv-prod
+
 services:
   improv-assist-frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/gnueole/improv-assist:latest
     container_name: improv-assist-frontend-prod
     restart: unless-stopped
     environment:
-      - NODE_ENV=production
       - PORT=3000
+      - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
+    networks:
+      - eole_shared_network
     labels:
       - "traefik.enable=true"
-      # Route via the shared Traefik reverse proxy
-      - "traefik.http.routers.improv-assist.rule=Host(`${IMPROV_DOMAIN:-impro.eole.me}`)"
-      - "traefik.http.routers.improv-assist.entrypoints=websecure"
-      - "traefik.http.routers.improv-assist.tls=true"
-      - "traefik.http.routers.improv-assist.tls.certresolver=myresolver"
-      - "traefik.http.services.improv-assist.loadbalancer.server.port=3000"
-      
-      # Log collection via global Vector agent
-      - "vector.dev/collect=true"
-      - "vector.dev/dataset=improv-assist"
-    networks:
-      - default
+      - "traefik.http.routers.improv.rule=Host(`${APP_DOMAIN}`)"
+      - "traefik.http.routers.improv.entrypoints=websecure"
+      - "traefik.http.routers.improv.tls=true"
+      - "traefik.http.routers.improv.tls.certresolver=letsencrypt"
+      - "traefik.http.services.improv.loadbalancer.server.port=3000"
 
 networks:
-  default:
-    name: ${DOCKER_NETWORK_NAME:-eole_shared_network}
-    external: true
+  eole_shared_network:
+    name: ${DOCKER_NETWORK_NAME}
+    external: ${DOCKER_NETWORK_EXTERNAL}

@@ -1,28 +1,49 @@
-version: '3.8'
+name: efit-improv-dev
 
 services:
+  # --- FRONTEND (Local Dev with HMR) ---
   improv-assist-frontend:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: improv-assist-frontend
+    container_name: improv-assist-frontend-dev
     ports:
-      - "${PORT:-3000}:3000"
+      - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
     environment:
+      - PORT=3000
       - NODE_ENV=development
-      - PORT=${PORT:-3000}
-      - WATCHPACK_POLLING=true # Forces polling for HMR (essential for Windows/WSL host mounts)
+      - WATCHPACK_POLLING=true # Essential for HMR in Windows/WSL2 hosts
       - NEXT_TELEMETRY_DISABLED=1
     env_file:
       - .env
     networks:
-      - default
+      - eole_shared_network
+
+  # --- LOCAL MOCK SERVICES (Standalone Profile for community/forks) ---
+  traefik:
+    image: traefik:latest
+    container_name: improv-traefik-local
+    profiles:
+      - standalone
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - eole_shared_network
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: improv-n8n-local
+    profiles:
+      - standalone
+    networks:
+      - eole_shared_network
 
 networks:
-  default:
-    name: eoleme-net
-    driver: bridge
+  eole_shared_network:
+    name: ${DOCKER_NETWORK_NAME}
+    external: ${DOCKER_NETWORK_EXTERNAL}
