@@ -55,11 +55,11 @@ export default function HiHaRules({ onBack }: HiHaRulesProps) {
       name: "Zap",
       command: "Zap !",
       action: "Frottement des mains et mime d'envoi rapide vers n'importe quel joueur du cercle. Le destinataire doit dire 'Je prends' pour continuer.",
-      note: "Interdiction formelle de renvoyer ('zapper') à son 'père' (celui qui vient de nous zapper), sous peine d'élimination."
+      note: "Interdiction formelle de renvoyer ('zapper') à son 'parent' (celui qui vient de nous zapper), sous peine d'élimination."
     },
     {
       name: "Je laisse / Je prends",
-      command: "Je laisse... (Tous : Je prends !)",
+      command: "Je laisse... (N'importe qui peut dire : Je prends !)",
       action: "Un joueur refuse la boule en disant 'Je laisse'. Un autre joueur doit la récupérer au vol en criant 'Je prends'.",
       note: "Celui qui prend doit impérativement indiquer de la main le sens d'origine de la boule, sous peine d'élimination."
     },
@@ -67,7 +67,7 @@ export default function HiHaRules({ onBack }: HiHaRulesProps) {
       name: "Vade Retro",
       command: "Vade Retro !",
       action: "Bras tendus croisés en forme de croix devant soi. Les 3 joueurs suivants disent successivement 'Sa', 'Ta', puis 'Nas' (Satanas).",
-      note: "Le joueur 'Ta' doit désigner un joueur sans hésiter (pas de 'euh...') ni se tromper (éliminatoire). L'appelé doit répondre 'Je brûle' pour continuer."
+      note: "Le joueur 'Ta' (+2) doit désigner un joueur sans hésiter (pas de 'euh...') ni se tromper (éliminatoire). L'appelé doit répondre 'Je brûle' pour continuer."
     },
     {
       name: "Honki Tonk",
