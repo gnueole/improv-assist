@@ -170,11 +170,28 @@ main {
 
 .dashboard-grid {
   display: grid;
-  grid-template-cols: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem; /* Reduced by 20% (from 1rem / gap-4) */
   max-width: 360px; /* Reduced by 20% (from 448px / max-w-md) */
   width: 100%;
   margin: auto auto;
+}
+
+.dashboard-tile {
+  position: relative;
+  background: linear-gradient(135deg, #00f0ff 0%, #ffea00 33%, #ff007f 66%, #7000ff 100%);
+  padding: 1.5px;
+  border-radius: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  text-align: left;
+  outline: none;
+  display: block;
+}
+
+.dashboard-tile:active {
+  transform: scale(0.97);
 }
 
 .dashboard-tile-inner {
