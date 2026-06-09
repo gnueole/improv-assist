@@ -7,14 +7,15 @@
 const PROD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="irised" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00f0ff" />
-      <stop offset="33%" stop-color="#ffea00" />
-      <stop offset="66%" stop-color="#ff007f" />
-      <stop offset="100%" stop-color="#7000ff" />
+      <stop offset="0%" stop-color="#39c2a1" />
+      <stop offset="25%" stop-color="#7bc758" />
+      <stop offset="50%" stop-color="#ffdf26" />
+      <stop offset="75%" stop-color="#d97c35" />
+      <stop offset="100%" stop-color="#c53aa0" />
     </linearGradient>
   </defs>
   <circle cx="256" cy="256" r="240" fill="url(#irised)" />
-  <g transform="translate(106, 106) scale(12.5)" fill="black" stroke="black" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(106, 106) scale(12.5)" fill="none" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
     <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5 5 3Z"/>
     <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z"/>
@@ -30,7 +31,7 @@ const DEV_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     </linearGradient>
   </defs>
   <circle cx="256" cy="256" r="240" fill="url(#dev-grad)" />
-  <g transform="translate(106, 106) scale(12.5)" fill="black" stroke="black" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(106, 106) scale(12.5)" fill="none" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
     <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5 5 3Z"/>
     <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z"/>
