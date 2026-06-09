@@ -19,6 +19,12 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const countdownIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Track touches with a ref to avoid stale closures in setTimeout
+  const touchesRef = useRef<TouchPoint[]>([]);
+  useEffect(() => {
+    touchesRef.current = touches;
+  }, [touches]);
+
   const resetTouchSelector = () => {
     setTouches([]);
     setTouchWinner(null);
@@ -53,8 +59,11 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
       }, 1000);
 
       timerRef.current = setTimeout(() => {
-        const winnerIdx = Math.floor(Math.random() * touches.length);
-        setTouchWinner(touches[winnerIdx].id);
+        const latestTouches = touchesRef.current;
+        if (latestTouches.length > 0) {
+          const winnerIdx = Math.floor(Math.random() * latestTouches.length);
+          setTouchWinner(latestTouches[winnerIdx].id);
+        }
         setIsCountingDown(false);
       }, 3000);
     } 
@@ -245,8 +254,11 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
                 }
               }, 1000);
               setTimeout(() => {
-                const winnerIdx = Math.floor(Math.random() * touches.length);
-                setTouchWinner(touches[winnerIdx].id);
+                const latestTouches = touchesRef.current;
+                if (latestTouches.length > 0) {
+                  const winnerIdx = Math.floor(Math.random() * latestTouches.length);
+                  setTouchWinner(latestTouches[winnerIdx].id);
+                }
                 setIsCountingDown(false);
               }, 3000);
             }}
