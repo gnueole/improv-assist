@@ -12,7 +12,6 @@
 
 # Production build standalone files
 /server.js
-/public/
 /.next/standalone/
 
 # Production compilation traces

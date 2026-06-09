@@ -48,4 +48,4 @@ deploy-improv:
 	scp .env.prod $(VPS_SSH):$(VPS_PATH)/.env
 	# 3. Pull new image from GHCR and recreate container
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d"
-	@echo "✅ Deployment completed on https://improv.eole.me !"
+	@echo "✅ Deployment completed on https://impro.eole.me !"

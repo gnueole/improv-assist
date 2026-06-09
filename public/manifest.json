@@ -1,0 +1,18 @@
+{
+  "name": "improv-assist",
+  "short_name": "ImprovAssist",
+  "description": "Assistant d'improvisation théâtrale minimaliste et moderne.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
