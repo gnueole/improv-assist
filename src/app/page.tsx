@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { 
-  Smile, 
-  Fingerprint, 
-  MapPin, 
-  Clock, 
-  ChevronLeft, 
-  Sparkles, 
+import {
+  Smile,
+  Fingerprint,
+  MapPin,
+  Clock,
+  ChevronLeft,
+  Sparkles,
   Info,
   Hourglass,
   BookOpen,
@@ -72,7 +72,7 @@ export default function Dashboard() {
         console.error("Failed to parse improv_buffer from localStorage", e);
       }
     }
-    
+
     // Initialisation par défaut avec les données statiques
     const initialBuffer: ImprovBuffer = {
       emotions: [...EMOTIONS],
@@ -129,11 +129,11 @@ export default function Dashboard() {
       });
 
       if (!response.ok) {
-        throw new Error("HTTP error");
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const data = await response.json();
-      
+
       const newBuffer: ImprovBuffer = {
         emotions: Array.isArray(data?.emotions) && data.emotions.length > 0 ? data.emotions : [...EMOTIONS],
         locations: Array.isArray(data?.locations) && data.locations.length > 0 ? data.locations : [...LOCATIONS],
@@ -147,12 +147,12 @@ export default function Dashboard() {
     } catch (error) {
       console.error("Regen failed:", error);
       showToast("Erreur de régénération. Utilisation des données locales.");
-      
+
       // Assurer un réservoir non vide en cas d'erreur réseau
       const finalEmotions = buffer.emotions.length === 0 ? [...EMOTIONS] : buffer.emotions;
       const finalLocations = buffer.locations.length === 0 ? [...LOCATIONS] : buffer.locations;
       const finalEras = buffer.eras.length === 0 ? [...ERAS] : buffer.eras;
-      
+
       const resetBuffer: ImprovBuffer = {
         emotions: finalEmotions,
         locations: finalLocations,
@@ -177,7 +177,7 @@ export default function Dashboard() {
     try {
       const currentBuffer = JSON.parse(saved) as ImprovBuffer;
       const items = currentBuffer[category] || [];
-      
+
       let filteredItems = [...items];
       if (filter && filter !== "All") {
         if (category === "emotions") {
@@ -339,7 +339,7 @@ export default function Dashboard() {
 
   return (
     <main className="relative h-full w-full overflow-hidden bg-black flex flex-col justify-between">
-      
+
       {/* Toast Alert */}
       {toastMessage && (
         <div className="fixed top-16 left-4 right-4 max-w-sm mx-auto z-50 p-[1.5px] rounded-2xl bg-gradient-to-r from-cyan-500 via-yellow-500 to-purple-500 animate-toast shadow-2xl">
@@ -350,10 +350,9 @@ export default function Dashboard() {
       )}
 
       {/* 1. Main Dashboard Mode */}
-      <div 
-        className={`absolute inset-0 flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-out z-10 ${
-          activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4" : "opacity-100 scale-100"
-        }`}
+      <div
+        className={`absolute inset-0 flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-out z-10 ${activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4" : "opacity-100 scale-100"
+          }`}
       >
         {/* Header */}
         <header className="flex items-center justify-between pt-safe">
@@ -366,14 +365,14 @@ export default function Dashboard() {
             </h1>
           </div>
           <div className="flex items-center gap-2">
-            <button 
+            <button
               onClick={() => triggerRegen(false)}
               className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="Régénérer le réservoir"
             >
               <RotateCw className="w-4 h-4" />
             </button>
-            <button 
+            <button
               onClick={openAbout}
               className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="À propos"
@@ -381,7 +380,7 @@ export default function Dashboard() {
               <Info className="w-4 h-4" />
             </button>
             <div className="px-3 py-1 rounded-full text-[10px] tracking-widest uppercase bg-zinc-900 border border-zinc-800 text-zinc-400 font-medium">
-              alpha 1
+              beta 1
             </div>
           </div>
         </header>
@@ -428,7 +427,7 @@ export default function Dashboard() {
 
         {/* Dev Prompt Inspector Button */}
         {devMode && (
-          <button 
+          <button
             onClick={openPrompt}
             className="mx-auto mt-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] text-zinc-400 font-semibold active:scale-95 transition-all hover:text-white flex items-center gap-1.5 animate-fade-in"
           >
@@ -443,43 +442,42 @@ export default function Dashboard() {
           <div className="text-[9px] text-zinc-700 font-light flex items-center gap-1.5 flex-wrap justify-center">
             <span>© {new Date().getFullYear()} Éole Labs</span>
             <span>•</span>
-            <a 
-              href="https://github.com/gnueole/eoleme-infra" 
-              target="_blank" 
+            <a
+              href="https://github.com/gnueole/eoleme-infra"
+              target="_blank"
               rel="noopener noreferrer"
               className="hover:underline hover:text-zinc-500 transition-colors"
             >
               GitHub
             </a>
             <span>•</span>
-            <a 
-              href="https://www.improvisation.org/" 
-              target="_blank" 
+            <a
+              href="https://www.improvisation.org/"
+              target="_blank"
               rel="noopener noreferrer"
               className="hover:underline hover:text-zinc-500 transition-colors"
             >
-              Nous rejoindre
+              Rejoindre l'EFIT
             </a>
           </div>
         </footer>
       </div>
 
       {/* 2. Fullscreen Detail Views */}
-      <div 
-        className={`absolute inset-0 bg-black flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-in-out z-20 ${
-          activeTileId === null ? "opacity-0 scale-105 pointer-events-none translate-y-4" : "opacity-100 scale-100"
-        }`}
+      <div
+        className={`absolute inset-0 bg-black flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-in-out z-20 ${activeTileId === null ? "opacity-0 scale-105 pointer-events-none translate-y-4" : "opacity-100 scale-100"
+          }`}
       >
         {/* Detail Header */}
         <header className="flex items-center justify-between pt-safe">
-          <button 
+          <button
             onClick={() => window.history.back()}
             className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 active:scale-95 transition-all text-xs z-30"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Retour</span>
           </button>
-          
+
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 z-30">
             {activeTile?.title}
           </h2>
@@ -501,9 +499,9 @@ export default function Dashboard() {
       </div>
 
       {/* 3. About Modal Overlay */}
-      <AboutModal 
-        isOpen={isAboutOpen} 
-        onClose={closeAbout} 
+      <AboutModal
+        isOpen={isAboutOpen}
+        onClose={closeAbout}
         devMode={devMode}
         onDevModeChange={handleDevModeChange}
       />
@@ -517,7 +515,7 @@ export default function Dashboard() {
               <div className="w-12 h-12 rounded-full bg-black" />
             </div>
             <h3 className="text-lg font-bold tracking-wider text-zinc-100 uppercase">
-              Génération IA...
+              Des nouveaux thèmes arrivent...
             </h3>
             <p className="text-xs text-zinc-500 max-w-xs">
               Mise à jour du réservoir d'improvisation depuis Gemini. Veuillez patienter.
@@ -534,15 +532,15 @@ export default function Dashboard() {
               <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-4">
                 <Terminal className="w-6 h-6 text-cyan-400" />
               </div>
-              
+
               <h3 className="text-lg font-bold tracking-wider text-zinc-100 uppercase mb-2">
                 Prompt Système Gemini
               </h3>
-              
+
               <div className="w-full bg-zinc-950 border border-zinc-900 rounded-xl p-4 mb-6 text-left overflow-y-auto font-mono text-[10px] text-zinc-400 leading-relaxed max-h-[40vh] select-text">
                 {SYSTEM_PROMPT}
               </div>
-              
+
               <button
                 onClick={closePrompt}
                 className="w-full py-2.5 rounded-xl bg-zinc-100 hover:bg-white text-black text-xs font-semibold active:scale-95 transition-all"
