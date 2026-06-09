@@ -27,7 +27,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
           </h3>
           
           <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-medium mb-4">
-            Version alpha 1
+            Version beta 1
           </span>
           
           <p className="text-xs text-zinc-400 leading-relaxed mb-6">
@@ -59,7 +59,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
                 rel="noopener noreferrer"
                 className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
               >
-                Nous rejoindre
+                Rejoindre l'EFIT !
               </a>
             </div>
             <div className="flex justify-between items-center">

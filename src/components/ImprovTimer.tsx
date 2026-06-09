@@ -42,7 +42,7 @@ export default function ImprovTimer() {
             if (timerRef.current) clearInterval(timerRef.current);
             if (soundEnabled && typeof window !== "undefined") {
               playBuzzerSound();
-              speak("Et Iiiiiiimpro !");
+              speak("Hey ! Impro !", true);
             }
             return 0;
           }
@@ -59,27 +59,44 @@ export default function ImprovTimer() {
   }, [isRunning, timeLeft, soundEnabled]);
 
   // Web Speech API French Synthesis Helper
-  const speak = (text: string) => {
+  const speak = (text: string, isFinal: boolean = false) => {
     if (!soundEnabled || typeof window === "undefined" || !window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel(); // cancel any ongoing speech
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "fr-FR";
 
-      // Voice configuration
       const voices = window.speechSynthesis.getVoices();
-      // Look for a high quality French voice (like Google, Siri, or default OS French)
       const frenchVoice = voices.find(v => v.lang.startsWith("fr-FR")) || voices.find(v => v.lang.startsWith("fr"));
-      if (frenchVoice) {
-        utterance.voice = frenchVoice;
+
+      if (isFinal) {
+        // Split utterance to create prosody/vowel duration modification
+        const utterance1 = new SpeechSynthesisUtterance("Hey !");
+        utterance1.lang = "fr-FR";
+        if (frenchVoice) utterance1.voice = frenchVoice;
+        utterance1.rate = 0.9;    // Energetic, standard speed
+        utterance1.pitch = 1.35;  // High pitch for excitement
+        utterance1.volume = 1.0;
+
+        const utterance2 = new SpeechSynthesisUtterance("Impro !");
+        utterance2.lang = "fr-FR";
+        if (frenchVoice) utterance2.voice = frenchVoice;
+        utterance2.rate = 0.65;   // Slow down significantly to stretch the vowels naturally
+        utterance2.pitch = 1.1;   // Confident final tone
+        utterance2.volume = 1.0;
+
+        window.speechSynthesis.speak(utterance1);
+        window.speechSynthesis.speak(utterance2);
+      } else {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "fr-FR";
+        if (frenchVoice) utterance.voice = frenchVoice;
+
+        // Make it sound clear and projected ("douce qui porte fort")
+        utterance.rate = 0.95; // clear, not too fast
+        utterance.pitch = 1.0; // standard pitch
+        utterance.volume = 1.0; // max volume
+
+        window.speechSynthesis.speak(utterance);
       }
-
-      // Make it sound clear and projected ("douce qui porte fort")
-      utterance.rate = 0.95; // clear, not too fast
-      utterance.pitch = 1.0; // standard pitch
-      utterance.volume = 1.0; // max volume
-
-      window.speechSynthesis.speak(utterance);
     } catch (e) {
       console.warn("Speech Synthesis failed to speak.", e);
     }
@@ -227,7 +244,7 @@ export default function ImprovTimer() {
                   Improvisation
                 </span>
                 <h3 className="text-4xl font-black tracking-tight text-white uppercase drop-shadow-[0_0_15px_rgba(112,0,255,0.6)]">
-                  Et Iiiiiiimpro !
+                  Hey ! Impro !
                 </h3>
               </div>
             ) : (
@@ -237,8 +254,10 @@ export default function ImprovTimer() {
                   {isRunning ? "Scène en cours..." : "Temps de scène cible"}
                 </span>
 
-                {/* Big Time Display (Changes style at 30s remaining) */}
-                <h3 className={`text-6xl sm:text-7xl tracking-tight mb-2 transition-all duration-300 tabular-nums ${isLowTime
+                {/* Big Time Display (Changes style at 30s remaining and animates at 10s) */}
+                <h3 className={`text-6xl sm:text-7xl tracking-tight mb-2 transition-all duration-300 tabular-nums ${isUrgentTime
+                  ? "text-red-500 font-black filter drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] animate-scale-urgent"
+                  : isLowTime
                   ? "text-red-500 font-black scale-105 filter drop-shadow-[0_0_15px_rgba(239,68,68,0.7)]"
                   : "text-white font-medium"
                   }`}>
