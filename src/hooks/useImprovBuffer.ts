@@ -181,9 +181,36 @@ export function useImprovBuffer(activeTileId: string | null) {
         }
       }
 
+      // If category is exhausted, refill it with local static default data
       if (filteredItems.length === 0) {
-        triggerRegen(true);
-        return null;
+        let defaults: any[] = [];
+        if (category === "emotions") defaults = [...EMOTIONS];
+        else if (category === "locations") defaults = [...LOCATIONS];
+        else if (category === "eras") defaults = [...ERAS];
+
+        let filteredDefaults = [...defaults];
+        if (filter && filter !== "All") {
+          if (category === "emotions") {
+            filteredDefaults = defaults.filter((e: any) => e.category === filter);
+          } else if (category === "locations") {
+            filteredDefaults = defaults.filter((l: any) => l.category === filter);
+          }
+        }
+
+        if (filteredDefaults.length === 0) return null;
+
+        const randomIndex = Math.floor(Math.random() * filteredDefaults.length);
+        const pickedItem = filteredDefaults[randomIndex];
+
+        const updatedItems = defaults.filter((item: any) => item.text !== pickedItem.text);
+        const updatedBuffer = {
+          ...currentBuffer,
+          [category]: updatedItems
+        };
+
+        setBuffer(updatedBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(updatedBuffer));
+        return pickedItem;
       }
 
       const randomIndex = Math.floor(Math.random() * filteredItems.length);
@@ -198,16 +225,12 @@ export function useImprovBuffer(activeTileId: string | null) {
       setBuffer(updatedBuffer);
       localStorage.setItem("improv_buffer", JSON.stringify(updatedBuffer));
 
-      if (updatedItems.length === 0) {
-        triggerRegen(true);
-      }
-
       return pickedItem;
     } catch (e) {
       console.error(e);
       return null;
     }
-  }, [triggerRegen]);
+  }, []);
 
   return {
     buffer,
