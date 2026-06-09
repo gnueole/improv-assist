@@ -38,4 +38,4 @@ Thumds.db
 ehthumbs.db
 
 # Production secrets
-.env.prod
+docker/.env.prod

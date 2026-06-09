@@ -4,13 +4,13 @@ services:
   # --- FRONTEND (Local Dev with HMR) ---
   improv-assist-frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.dev
+      context: ..
+      dockerfile: docker/Dockerfile.dev
     container_name: improv-assist-frontend-dev
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - ..:/app
       - /app/node_modules
       - /app/.next
     environment:
@@ -19,7 +19,7 @@ services:
       - WATCHPACK_POLLING=true # Essential for HMR in Windows/WSL2 hosts
       - NEXT_TELEMETRY_DISABLED=1
     env_file:
-      - .env
+      - ../.env
     networks:
       - eole_shared_network
 

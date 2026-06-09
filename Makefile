@@ -22,10 +22,10 @@ help:
 
 # Dev commands (Local Dev)
 dev-up:
-	docker compose -f docker-compose.yml up -d
+	docker compose -f docker/docker-compose.yml --env-file .env up -d
 
 dev-down:
-	docker compose -f docker-compose.yml down
+	docker compose -f docker/docker-compose.yml --env-file .env down
 
 # Sync commands
 sync:
@@ -33,10 +33,10 @@ sync:
 
 # Production commands (Local Prod mode)
 up:
-	docker compose -f docker-compose.prod.yml up -d
+	docker compose -f docker/docker-compose.prod.yml --env-file .env up -d
 
 down:
-	docker compose -f docker-compose.prod.yml down
+	docker compose -f docker/docker-compose.prod.yml --env-file .env down
 
 # Automation VPS Deployment
 deploy-improv:
@@ -44,8 +44,8 @@ deploy-improv:
 	# 1. Ensure the remote directory exists
 	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
 	# 2. SCP docker-compose.prod.yml and .env.prod (as .env) to VPS
-	scp docker-compose.prod.yml $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
-	scp .env.prod $(VPS_SSH):$(VPS_PATH)/.env
+	scp docker/docker-compose.prod.yml $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
+	scp docker/.env.prod $(VPS_SSH):$(VPS_PATH)/.env
 	# 3. Pull new image from GHCR and recreate container
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d"
 	@echo "✅ Deployment completed on https://impro.eole.me !"
