@@ -9,16 +9,20 @@ const outfit = Outfit({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "improv-assist",
-  description: "Assistant d'improvisation théâtrale minimaliste et moderne.",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "improv-assist",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const isDev = process.env.NODE_ENV === "development";
+  const title = isDev ? "improv-assist-dev" : "improv-assist";
+  return {
+    title,
+    description: "Assistant d'improvisation théâtrale minimaliste et moderne.",
+    manifest: "/manifest.json",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",

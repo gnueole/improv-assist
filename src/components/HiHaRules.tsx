@@ -1,13 +1,6 @@
 "use client";
 
-/**
- * @file HiHaRules.tsx
- * @description View showing the complete collective rules, voice commands, and gestures of EFIT® "Hi Ha" warming and reflex game.
- * Incorporates detailed rules transcribed from audio guidance.
- */
-
 import React from "react";
-import { ChevronLeft, Volume2, ShieldAlert, Sparkles } from "lucide-react";
 
 interface HiHaRulesProps {
   onBack: () => void;
@@ -66,7 +59,7 @@ export default function HiHaRules({ onBack }: HiHaRulesProps) {
     {
       name: "Vade Retro",
       command: "Vade Retro !",
-      action: "Bras tendus croisés en forme de croix devant soi. Les 3 joueurs suivants disent successivement 'Sa', 'Ta', puis 'Nas' (Satanas).",
+      action: "Bras tendus croisés en forme de croix devant soi. Les 3 joueurs suivants passent successivement par 'Sa', 'Ta', puis 'Nas' (Satanas).",
       note: "Le joueur 'Ta' (+2) doit désigner un joueur sans hésiter (pas de 'euh...') ni se tromper (éliminatoire). L'appelé doit répondre 'Je brûle' pour continuer."
     },
     {
@@ -78,74 +71,68 @@ export default function HiHaRules({ onBack }: HiHaRulesProps) {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col justify-between items-center gap-4 overflow-y-auto px-1 pb-4 max-h-[78vh] w-full">
-
-      {/* Intro Header */}
-      <div className="w-full text-center flex flex-col items-center gap-1.5 mb-2">
-        <div className="w-7 h-7 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center">
-          <Sparkles className="w-3.5 h-3.5" />
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col pb-10">
+      {/* Header fixe / Mobile friendly */}
+      <div className="sticky top-0 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800 px-4 py-4 flex items-center gap-4 z-10">
+        <button
+          onClick={onBack}
+          className="p-2 hover:bg-neutral-900 rounded-lg text-neutral-400 hover:text-white transition-colors"
+          aria-label="Retour au menu principal"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+        </button>
+        <div>
+          <h1 className="text-xl font-bold tracking-tight">Le Hi Ha</h1>
+          <p className="text-xs text-amber-500 font-medium">Les 10 Règles Officielles • EFIT</p>
         </div>
-        <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-200">
-          Règles du Hia (EFIT)
-        </h3>
-        <p className="text-[10px] text-zinc-500 leading-normal max-w-xs">
-          Warming-up et jeu de réflexes collectifs. Élimination en cas d'erreur de commande ou d'hésitation.
-        </p>
       </div>
 
-      {/* Rules Checklist */}
-      <div className="w-full flex flex-col gap-3">
-        {rules.map((rule, idx) => (
+      {/* Liste des Signes */}
+      <div className="flex-1 px-4 py-6 space-y-4 max-w-md mx-auto w-full">
+        {rules.map((rule, index) => (
           <div
-            key={idx}
-            className="flex flex-col p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md shadow-lg hover:border-zinc-700/80 transition-all duration-300"
+            key={index}
+            className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 space-y-3 shadow-xl transition-all active:scale-[0.99]"
           >
-            {/* Rule Header */}
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <div className="flex items-center gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 flex items-center justify-center text-[10px] font-bold font-mono">
-                  {idx + 1}
+            {/* Titre et Commande */}
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono px-2 py-0.5 bg-neutral-800 rounded text-neutral-400">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="font-bold text-xs text-zinc-200 tracking-wide">
-                  {rule.name}
-                </span>
+                <h2 className="font-bold text-base text-white">{rule.name}</h2>
               </div>
-
-              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-500/5 border border-amber-500/10 text-[9px] font-semibold text-amber-400">
-                <Volume2 className="w-3 h-3 text-amber-500" />
-                <span>{rule.command}</span>
-              </div>
+              <span className="text-xs font-bold font-mono px-2 py-1 bg-amber-950/40 text-amber-400 border border-amber-900/50 rounded-lg">
+                {rule.command}
+              </span>
             </div>
 
-            {/* Gesture description */}
-            <p className="text-[11px] text-zinc-400 leading-relaxed font-light mb-2 pl-7">
+            {/* Corps */}
+            <div className="text-sm text-neutral-300 leading-relaxed">
+              <span className="text-neutral-500 font-medium block text-xs uppercase tracking-wider mb-0.5">Geste / Action</span>
               {rule.action}
-            </p>
+            </div>
 
-            {/* Rule Note / Penalties */}
-            <div className="flex items-start gap-1.5 pl-7 text-[9px] text-zinc-500 font-light italic">
-              <ShieldAlert className="w-3 h-3 text-zinc-600 mt-0.5 shrink-0" />
-              <span>{rule.note}</span>
+            {/* Note / Piège évitant l'élimination */}
+            <div className="text-xs bg-neutral-950/60 text-neutral-400 p-2.5 rounded-lg border border-neutral-800/60 flex gap-2">
+              <span className="text-amber-500 select-none">⚠️</span>
+              <p className="italic">{rule.note}</p>
             </div>
           </div>
         ))}
       </div>
-
-      {/* Footer Branding */}
-      <div className="text-center mt-3 mb-2 flex flex-col gap-0.5">
-        <p className="text-[9px] text-zinc-600 font-light">
-          EFIT® est une marque déposée de l'École Française d'Improvisation Théâtrale.
-        </p>
-      </div>
-
-      {/* Back Button */}
-      <button
-        onClick={onBack}
-        className="w-full py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-zinc-300 active:scale-95 transition-all text-xs font-semibold flex items-center justify-center gap-2 hover:text-white hover:bg-zinc-800/40 mt-4 shrink-0"
-      >
-        <ChevronLeft className="w-4 h-4" />
-        Retour au menu
-      </button>
     </div>
   );
 }
