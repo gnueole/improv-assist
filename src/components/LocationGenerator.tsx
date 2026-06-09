@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file LocationGenerator.tsx
+ * @description Component that presents suggested theatrical locations/settings. Supports category filtering,
+ * has an irised border layout, and displays spinning animations during selection.
+ */
+
 import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 import { LOCATIONS } from "@/data/mockData";
@@ -62,8 +68,8 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
       </div>
 
       {/* Display Box */}
-      <div className="irised-border-wrapper w-full max-w-sm aspect-[4/3] flex items-center justify-center shadow-2xl">
-        <div className="irised-border-inner flex flex-col justify-center items-center p-8 text-center relative overflow-hidden">
+      <div className="generator-card">
+        <div className="generator-card-inner">
           <div className={`transition-all duration-300 ${isSpinning ? "scale-90 blur-sm opacity-50" : "scale-100 opacity-100"}`}>
             <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 block mb-3">
               Lieu suggéré

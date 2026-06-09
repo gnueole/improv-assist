@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file EmotionGenerator.tsx
+ * @description Component that presents suggested emotions/mindsets to portray. Features a randomized
+ * intensity indicator (1-10), category filtering, and spinning animation behavior.
+ */
+
 import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 import { EMOTIONS } from "@/data/mockData";
@@ -71,8 +77,8 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
       </div>
 
       {/* Display Card */}
-      <div className="irised-border-wrapper w-full max-w-sm aspect-[4/3] flex items-center justify-center shadow-2xl">
-        <div className="irised-border-inner flex flex-col justify-center items-center p-6 text-center relative overflow-hidden">
+      <div className="generator-card">
+        <div className="generator-card-inner">
           
           <div className={`transition-all duration-300 flex flex-col items-center ${isSpinning ? "scale-90 blur-sm opacity-50" : "scale-100 opacity-100"}`}>
             

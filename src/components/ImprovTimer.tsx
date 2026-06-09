@@ -1,5 +1,12 @@
 "use client";
 
+/**
+ * @file ImprovTimer.tsx
+ * @description Standard theatrical improvisation timer (preset to 2m30s). Features visual feedback,
+ * audible bells (using Web Audio API synthesized tones), speech synthesis, custom duration adjustments,
+ * and high-urgency animation transitions as time runs out.
+ */
+
 import React, { useState, useEffect, useRef } from "react";
 import { Play, Pause, RotateCcw, Plus, Minus, Bell, BellOff } from "lucide-react";
 
@@ -231,11 +238,11 @@ export default function ImprovTimer() {
 
       {/* Main Display Ring */}
       <div
-        className={`irised-border-wrapper w-full max-w-sm aspect-[4/3] flex items-center justify-center shadow-2xl transition-all duration-300 ${isUrgentTime ? "animate-pulse" : ""
-          }`}
+        className={`generator-card transition-all duration-300 ${isUrgentTime ? "animate-pulse" : ""}`}
       >
-        <div className={`irised-border-inner flex flex-col justify-center items-center p-8 text-center transition-colors duration-300 ${isUrgentTime ? "bg-red-950/35" : isLowTime ? "bg-red-950/15" : isFinished ? "bg-purple-950/30" : ""
-          }`}>
+        <div className={`generator-card-inner transition-colors duration-300 ${
+          isUrgentTime ? "urgent" : isLowTime ? "low-time" : isFinished ? "finished" : ""
+        }`}>
 
           <div className="flex flex-col items-center select-none">
             {isFinished ? (

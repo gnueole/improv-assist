@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file HiHaRules.tsx
+ * @description View showing the collective rules/signs of EFIT® "Hi Ha" warming and reflex game.
+ * Features lists of command phrases and corresponding actions.
+ */
+
 import React from "react";
 import { ChevronLeft } from "lucide-react";
 

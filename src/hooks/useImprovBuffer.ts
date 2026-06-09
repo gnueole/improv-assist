@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file useImprovBuffer.ts
+ * @description Custom React hook that manages the offline/caching buffer reservoir of improvisation prompts 
+ * (emotions, locations, eras) in localStorage. Handles state transitions and handles background regeneration triggers.
+ */
+
 import { useState, useEffect, useCallback } from "react";
 import { ImprovBuffer } from "@/types";
 import { EMOTIONS, LOCATIONS, ERAS } from "@/data/mockData";

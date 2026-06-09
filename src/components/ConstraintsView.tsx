@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file ConstraintsView.tsx
+ * @description View showing improvisation constraints fetched from Notion. Supports text searching,
+ * category filter tabs, and displays structured constraint detail cards.
+ */
+
 import React, { useState, useMemo } from "react";
 import { Search } from "lucide-react";
 import notionConstraints from "@/data/notionConstraints.json";

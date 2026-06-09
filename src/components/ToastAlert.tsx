@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file ToastAlert.tsx
+ * @description Component rendering transient, auto-dismissing feedback messages at the top of the viewport.
+ * Uses custom slide-down animation styling defined in globals.css.
+ */
+
 import React from "react";
 
 interface ToastAlertProps {

@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file AboutModal.tsx
+ * @description Modal dialog overlay displaying app credits, versions, description of PWA capabilities,
+ * and developer options (like enabling/disabling Dev Mode).
+ */
+
 import React from "react";
 import { Sparkles } from "lucide-react";
 

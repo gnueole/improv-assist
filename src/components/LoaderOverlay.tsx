@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file LoaderOverlay.tsx
+ * @description Component rendering a full-screen blurred glass overlay with a spinning gradient wheel,
+ * displayed while the prompts reservoir is being updated/synchronized with Gemini.
+ */
+
 import React from "react";
 
 interface LoaderOverlayProps {

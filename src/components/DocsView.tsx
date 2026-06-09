@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file DocsView.tsx
+ * @description View showing documentation details, PWA installation instructions for iOS and Android,
+ * and a summary list of all features included in the application.
+ */
+
 import React from "react";
 import { SlidersHorizontal, Info, Download } from "lucide-react";
 

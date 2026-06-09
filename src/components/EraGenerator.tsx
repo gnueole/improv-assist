@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file EraGenerator.tsx
+ * @description Component that presents suggested eras/time periods. Draws prompts from the offline cache,
+ * features a card display, and spins/animates during randomization.
+ */
+
 import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 import { ERAS } from "@/data/mockData";
@@ -48,8 +54,8 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
       <div className="w-full max-w-[200px] border-b border-zinc-800/80 mb-2"></div>
 
       {/* Display Box */}
-      <div className="irised-border-wrapper w-full max-w-sm aspect-[4/3] flex items-center justify-center shadow-2xl">
-        <div className="irised-border-inner flex flex-col justify-center items-center p-8 text-center relative overflow-hidden">
+      <div className="generator-card">
+        <div className="generator-card-inner">
           <div className={`transition-all duration-300 ${isSpinning ? "scale-90 blur-sm opacity-50" : "scale-100 opacity-100"}`}>
             <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 block mb-3">
               Époque suggérée

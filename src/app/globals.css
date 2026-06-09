@@ -1,3 +1,9 @@
+/*
+ * @file globals.css
+ * @description Global stylesheet containing base layout resets, Tailwind imports, custom CSS variables,
+ * premium irised gradient borders, modal overlays, layout definitions, animations, and customized scrollbars.
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -171,8 +177,8 @@ main {
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem; /* Reduced by 20% (from 1rem / gap-4) */
-  max-width: 360px; /* Reduced by 20% (from 448px / max-w-md) */
+  gap: 12px;
+  max-width: 258px; /* Exactly (123px * 2) + 12px gap */
   width: 100%;
   margin: auto auto;
 }
@@ -181,7 +187,7 @@ main {
   position: relative;
   background: linear-gradient(135deg, #00f0ff 0%, #ffea00 33%, #ff007f 66%, #7000ff 100%);
   padding: 1.5px;
-  border-radius: 1.5rem;
+  border-radius: 1rem; /* Proportional border radius for 123px */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -198,31 +204,94 @@ main {
   background-color: rgba(24, 24, 27, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: calc(1.5rem - 1.5px);
-  padding: 1rem; /* Reduced by 20% (from 1.25rem / p-5) */
+  border-radius: calc(1rem - 1.5px);
+  padding: 0.75rem; /* Reduced for 123x123 size */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 116px; /* Reduced by 20% (from 145px) */
+  min-height: 0; /* Let aspect-ratio dictate height */
   height: 100%;
 }
 
 .dashboard-tile-icon-wrapper {
-  width: 2rem; /* Reduced by 20% (from 2.5rem / w-10) */
-  height: 2rem; /* Reduced by 20% (from 2.5rem / h-10) */
-  border-radius: 0.75rem; /* w-8 h-8 rounded-xl */
+  width: 1.75rem; /* 28px */
+  height: 1.75rem;
+  border-radius: 0.5rem; /* 8px */
   background-color: rgba(39, 39, 42, 0.8);
   border: 1px solid rgba(63, 63, 70, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem; /* Reduced by 20% (from 1.5rem / mb-6) */
+  margin-bottom: 0.5rem;
 }
 
 .dashboard-tile-icon {
-  width: 1rem; /* Reduced by 20% (from 1.25rem / w-5) */
-  height: 1rem; /* Reduced by 20% (from 1.25rem / h-5) */
+  width: 0.875rem; /* 14px */
+  height: 0.875rem;
   color: white;
+}
+
+.dashboard-tile-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #f4f4f5; /* zinc-100 */
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+}
+
+.dashboard-tile-subtitle {
+  font-size: 9px;
+  color: #a1a1aa; /* zinc-400 */
+  font-weight: 300;
+  margin-top: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Generator Card factorized styles */
+.generator-card {
+  position: relative;
+  background: linear-gradient(135deg, #00f0ff 0%, #ffea00 33%, #ff007f 66%, #7000ff 100%);
+  padding: 1.5px;
+  border-radius: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 24rem; /* max-w-sm */
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.generator-card-inner {
+  background-color: rgba(24, 24, 27, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: calc(1.5rem - 1.5px);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.generator-card-inner.urgent {
+  background-color: rgba(69, 10, 10, 0.35);
+}
+
+.generator-card-inner.low-time {
+  background-color: rgba(69, 10, 10, 0.15);
+}
+
+.generator-card-inner.finished {
+  background-color: rgba(88, 28, 135, 0.3);
 }
 
 .dashboard-footer {

@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @file page.tsx
+ * @description Main app orchestrator / home dashboard page. Features a symmetrical 8-item grid of tiles, 
+ * handles active tile navigation, handles virtual history state for smooth back swipe gestures, and mounts generator components.
+ */
+
 import React, { useState, useEffect } from "react";
 import {
   Smile,
@@ -248,12 +254,12 @@ export default function Dashboard() {
                     <Icon className="dashboard-tile-icon" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-sm text-zinc-100 tracking-wide">
+                    <h3 className="dashboard-tile-title">
                       <span className="break-words line-clamp-2 hyphens-auto">
                         {tile.title}
                       </span>
                     </h3>
-                    <p className="text-[11px] text-zinc-400 mt-1 font-light line-clamp-1">
+                    <p className="dashboard-tile-subtitle">
                       {tile.subtitle}
                     </p>
                   </div>
