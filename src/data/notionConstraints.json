@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "Abécédaire",
+    "description": "Chaque réplique doit commencer par la lettre suivante de l'alphabet (ex. A, puis B, puis C...).",
+    "category": "Verbal"
+  },
+  {
+    "id": "2",
+    "title": "Sans Paroles",
+    "description": "La scène doit se dérouler entièrement sans paroles, uniquement par le geste, le mime et le regard.",
+    "category": "Physique"
+  },
+  {
+    "id": "3",
+    "title": "En Rimes",
+    "description": "Toutes les répliques doivent rimer entre elles (généralement en rimes suivies AABB ou croisées ABAB).",
+    "category": "Verbal"
+  },
+  {
+    "id": "4",
+    "title": "Mains dans le dos",
+    "description": "Les joueurs doivent garder leurs mains cachées dans le dos tout le long de l'improvisation.",
+    "category": "Physique"
+  },
+  {
+    "id": "5",
+    "title": "Comédie Musicale",
+    "description": "Les comédiens doivent chanter leurs répliques et danser dès qu'un rythme s'installe.",
+    "category": "Style"
+  },
+  {
+    "id": "6",
+    "title": "Roman-photo",
+    "description": "L'improvisation avance par images fixes successives. À chaque signal, les comédiens se figent instantanément.",
+    "category": "Physique"
+  },
+  {
+    "id": "7",
+    "title": "Questions uniquement",
+    "description": "Chaque réplique doit obligatoirement être formulée sous forme de question.",
+    "category": "Verbal"
+  },
+  {
+    "id": "8",
+    "title": "Changement de registre",
+    "description": "Les comédiens doivent adapter instantanément le genre de la scène (Western, Horreur, Molière, SF) selon les consignes.",
+    "category": "Style"
+  },
+  {
+    "id": "9",
+    "title": "Ralenti / Accéléré",
+    "description": "Les comédiens doivent jouer la scène à une vitesse altérée (par exemple à 10% ou 300% de la vitesse normale).",
+    "category": "Physique"
+  },
+  {
+    "id": "10",
+    "title": "Le traducteur sourd-muet",
+    "description": "Un comédien parle normalement, tandis qu'un autre traduit ses propos en langue des signes imaginaire et outrancière.",
+    "category": "Style"
+  }
+]

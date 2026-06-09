@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  improv-assist-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: improv-assist-frontend
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - PORT=${PORT:-3000}
+      - WATCHPACK_POLLING=true # Forces polling for HMR (essential for Windows/WSL host mounts)
+      - NEXT_TELEMETRY_DISABLED=1
+    env_file:
+      - .env
+    networks:
+      - default
+
+networks:
+  default:
+    name: eoleme-net
+    driver: bridge

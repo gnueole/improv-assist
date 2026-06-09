@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+}
+
+/* Base resets for mobile-first app feel */
+html,
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent iOS bounce behavior */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#__next,
+main {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Custom Irised styles */
+.irised-glow {
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4)) 
+          drop-shadow(0 0 15px rgba(255, 0, 127, 0.2)) 
+          drop-shadow(0 0 25px rgba(112, 0, 255, 0.1));
+}
+
+.irised-border-wrapper {
+  position: relative;
+  background: linear-gradient(135deg, #00f0ff 0%, #ffea00 33%, #ff007f 66%, #7000ff 100%);
+  padding: 1.5px;
+  border-radius: 1.5rem; /* 24px */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.irised-border-inner {
+  background-color: rgba(24, 24, 27, 0.75); /* zinc-900 with high opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: calc(1.5rem - 1.5px);
+  height: 100%;
+  width: 100%;
+}
+
+/* Pulse keyframes for multi-touch simulation */
+@keyframes ring-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.touch-pulse {
+  animation: ring-pulse 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+/* Custom Scrollbar for sleek dark mode */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(63, 63, 70, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(113, 113, 122, 0.4);
+}
+
+/* Toaster Animations */
+@keyframes toast-slide-down {
+  0% {
+    transform: translateY(-120%) scale(0.9);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(10%) scale(1.02);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-toast {
+  animation: toast-slide-down 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
