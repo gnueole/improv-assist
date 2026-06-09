@@ -217,8 +217,7 @@ main {
   width: 1.75rem; /* 28px */
   height: 1.75rem;
   border-radius: 0.5rem; /* 8px */
-  background-color: rgba(39, 39, 42, 0.8);
-  border: 1px solid rgba(63, 63, 70, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +227,7 @@ main {
 .dashboard-tile-icon {
   width: 0.875rem; /* 14px */
   height: 0.875rem;
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .dashboard-tile-title {

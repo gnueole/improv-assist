@@ -1,8 +1,8 @@
 .PHONY: help dev-up dev-down up down deploy-improv
 
 # Connection variables
-VPS_SSH  := user@vps.eole.me
-VPS_PATH := /home/julien/projects/eole.me/improv-assist
+VPS_SSH  := user@impro.eole.me
+VPS_PATH := /home/improv-assist
 
 help:
 	@echo "======================================================================"
