@@ -183,6 +183,8 @@ export function useImprovBuffer(activeTileId: string | null) {
 
       // If category is exhausted, refill it with local static default data
       if (filteredItems.length === 0) {
+        showToast("Réservoir épuisé. Données locales utilisées, pensez à le recharger !");
+        
         let defaults: any[] = [];
         if (category === "emotions") defaults = [...EMOTIONS];
         else if (category === "locations") defaults = [...LOCATIONS];
@@ -230,7 +232,7 @@ export function useImprovBuffer(activeTileId: string | null) {
       console.error(e);
       return null;
     }
-  }, []);
+  }, [showToast]);
 
   return {
     buffer,
