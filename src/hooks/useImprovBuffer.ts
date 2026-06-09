@@ -14,6 +14,8 @@ export function useImprovBuffer(activeTileId: string | null) {
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [devMode, setDevMode] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [n8nStatus, setN8nStatus] = useState<"green" | "red">("green");
+  const [n8nError, setN8nError] = useState<string | null>(null);
   const [buffer, setBuffer] = useState<ImprovBuffer>({
     emotions: [],
     locations: [],
@@ -125,6 +127,10 @@ export function useImprovBuffer(activeTileId: string | null) {
         throw jsonErr;
       }
 
+      if (data && data.error) {
+        throw new Error(data.error);
+      }
+
       const newBuffer: ImprovBuffer = {
         emotions: Array.isArray(data?.emotions) && data.emotions.length > 0 ? data.emotions : [...EMOTIONS],
         locations: Array.isArray(data?.locations) && data.locations.length > 0 ? data.locations : [...LOCATIONS],
@@ -136,10 +142,14 @@ export function useImprovBuffer(activeTileId: string | null) {
 
       setBuffer(newBuffer);
       localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+      setN8nStatus("green");
+      setN8nError(null);
       showToast("Réservoir rechargé avec succès !");
     } catch (error) {
       const errorTime = Date.now() - startTime;
       console.error(`[Regen Diagnostics] Regeneration failed after ${errorTime}ms. Error:`, error);
+      setN8nStatus("red");
+      setN8nError(error instanceof Error ? error.message : String(error));
       showToast("Erreur de régénération. Utilisation des données locales.");
 
       // Ensure non-empty buffer on error
@@ -243,6 +253,8 @@ export function useImprovBuffer(activeTileId: string | null) {
     pickItem,
     showToast,
     setToastMessage,
-    handleDevModeChange
+    handleDevModeChange,
+    n8nStatus,
+    n8nError
   };
 }

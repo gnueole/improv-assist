@@ -65,7 +65,9 @@ export default function Dashboard() {
     toastMessage,
     triggerRegen,
     pickItem,
-    handleDevModeChange
+    handleDevModeChange,
+    n8nStatus,
+    n8nError
   } = useImprovBuffer(activeTileId);
 
   // Grid tiles configuration (symmetrical 8 items grid)
@@ -209,6 +211,11 @@ export default function Dashboard() {
             </h1>
           </div>
           <div className="flex items-center gap-2">
+            {/* Status Light */}
+            <div
+              className={`status-light ${n8nStatus}`}
+              title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion n8n opérationnelle"}
+            />
             <button
               onClick={() => triggerRegen(false)}
               className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
@@ -223,9 +230,6 @@ export default function Dashboard() {
             >
               <Info className="w-4 h-4" />
             </button>
-            <div className="px-3 py-1 rounded-full text-[10px] tracking-widest uppercase bg-zinc-900 border border-zinc-800 text-zinc-400 font-medium">
-              beta 1
-            </div>
           </div>
         </header>
 
@@ -282,18 +286,9 @@ export default function Dashboard() {
 
         {/* Footer */}
         <footer className="dashboard-footer">
-          <div>IMPROV-ASSIST • MOBILE LAB</div>
+          <div>IMPROV-ASSIST</div>
           <div className="text-[9px] text-zinc-700 font-light flex items-center gap-1.5 flex-wrap justify-center">
-            <span>© {new Date().getFullYear()} Éole Labs</span>
-            <span>•</span>
-            <a
-              href="https://github.com/gnueole/eoleme-infra"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline hover:text-zinc-500 transition-colors"
-            >
-              GitHub
-            </a>
+            <span>© {new Date().getFullYear()} Éole</span>
             <span>•</span>
             <a
               href="https://www.improvisation.org/"

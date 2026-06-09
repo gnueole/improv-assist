@@ -1,0 +1,134 @@
+{
+  "id": "IRPFf4VvvoYrzqF6",
+  "name": "Improv-Assist BaaS",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "improv-regen",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        208
+      ],
+      "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ (() => { let rawText = ''; if (typeof $json.output === 'string') { rawText = $json.output; } else if ($json.content && $json.content.parts && $json.content.parts[0] && typeof $json.content.parts[0].text === 'string') { rawText = $json.content.parts[0].text; } else { return $json; } try { return JSON.parse(rawText.replace(/```json|```/g, '').trim()); } catch (e) { return { error: 'Failed to parse JSON', raw: rawText }; } })() }}",
+        "options": {}
+      },
+      "id": "respond-to-webhook-node",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        800,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-3-flash-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Tu es un assistant d'improvisation théâtrale pour l'EFIT. Génère un fichier JSON structuré contenant 3 listes d'éléments inspirants pour alimenter des générateurs d'impro : 1. \"emotions\" : 20 suggestions d'émotions/états d'esprit avec leur catégorie (Positive, Négative, Neutre). Chaque objet doit être au format : { \"text\": string, \"category\": \"Positive\" | \"Négative\" | \"Neutre\" } 2. \"locations\" : 20 suggestions de lieux propices au jeu dramatique ou comique, classés par catégorie (Huis clos, Quotidien, Aventure, Insolite). Chaque objet doit être au format : { \"text\": string, \"category\": \"Huis clos\" | \"Quotidien\" | \"Aventure\" | \"Insolite\" } 3. \"eras\" : 20 suggestions de périodes temporelles ou époques inspirantes, classées par temporalité (Passé, Présent, Futur). Chaque objet doit être au format : { \"text\": string, \"era\": \"Passé\" | \"Présent\" | \"Futur\" } Important : Ne renvoie rien d'autre que le JSON brut de cette structure. Les suggestions doivent être variées, théâtrales, poétiques ou insolites. Fais en sorte que les textes générés soient extrêmement courts (1 à 3 mots maximum par élément)."
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        208
+      ],
+      "id": "5f6b860c-46b5-4d1a-8290-a179336c7640",
+      "name": "Message a model",
+      "onError": "continue",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "QZGttnIQoPa4rsAg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "if (item.error && (item.error.message.includes('429') || item.error.status === 429)) {\n  return {\n    content: {\n      parts: [\n        {\n          text: \"{\\n  \\\"emotions\\\": [\\n    { \\\"text\\\": \\\"Euphorie\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Mélancolie\\\", \\\"category\\\": \\\"Négative\\\" },\\n    { \\\"text\\\": \\\"Indifférence\\\", \\\"category\\\": \\\"Neutre\\\" },\\n    { \\\"text\\\": \\\"Rage\\\", \\\"category\\\": \\\"Négative\\\" },\\n    { \\\"text\\\": \\\"Sérénité\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Confusion\\\", \\\"category\\\": \\\"Neutre\\\" },\\n    { \\\"text\\\": \\\"Gratitude\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Angoisse\\\", \\\"category\\\": \\\"Négative\\\" },\\n    { \\\"text\\\": \\\"Curiosité\\\", \\\"category\\\": \\\"Neutre\\\" },\\n    { \\\"text\\\": \\\"Fierté\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Dégoût\\\", \\\"category\\\": \\\"Négative\\\" },\\n    { \\\"text\\\": \\\"Nostalgie\\\", \\\"category\\\": \\\"Neutre\\\" },\\n    { \\\"text\\\": \\\"Enthousiasme\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Honte\\\", \\\"category\\\": \\\"Négative\\\" },\\n    { \\\"text\\\": \\\"Étonnement\\\", \\\"category\\\": \\\"Neutre\\\" },\\n    { \\\"text\\\": \\\"Tendresse\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Jalousie\\\", \\\"category\\\": \\\"Négative\\\" },\\n    { \\\"text\\\": \\\"Expectative\\\", \\\"category\\\": \\\"Neutre\\\" },\\n    { \\\"text\\\": \\\"Allégresse\\\", \\\"category\\\": \\\"Positive\\\" },\\n    { \\\"text\\\": \\\"Désespoir\\\", \\\"category\\\": \\\"Négative\\\" }\\n  ],\\n  \\\"locations\\\": [\\n    { \\\"text\\\": \\\"Ascenseur bloqué\\\", \\\"category\\\": \\\"Huis clos\\\" },\\n    { \\\"text\\\": \\\"Boulangerie\\\", \\\"category\\\": \\\"Quotidien\\\" },\\n    { \\\"text\\\": \\\"Sommet enneigé\\\", \\\"category\\\": \\\"Aventure\\\" },\\n    { \\\"text\\\": \\\"Intérieur d'horloge\\\", \\\"category\\\": \\\"Insolite\\\" },\\n    { \\\"text\\\": \\\"Cellule de prison\\\", \\\"category\\\": \\\"Huis clos\\\" },\\n    { \\\"text\\\": \\\"Supermarché\\\", \\\"category\\\": \\\"Quotidien\\\" },\\n    { \\\"text\\\": \\\"Jungle dense\\\", \\\"category\\\": \\\"Aventure\\\" },\\n    { \\\"text\\\": \\\"Nuage de coton\\\", \\\"category\\\": \\\"Insolite\\\" },\\n    { \\\"text\\\": \\\"Sous-marin\\\", \\\"category\\\": \\\"Huis clos\\\" },\\n    { \\\"text\\\": \\\"Arrêt de bus\\\", \\\"category\\\": \\\"Quotidien\\\" },\\n    { \\\"text\\\": \\\"Désert de sel\\\", \\\"category\\\": \\\"Aventure\\\" },\\n    { \\\"text\\\": \\\"Musée des ombres\\\", \\\"category\\\": \\\"Insolite\\\" },\\n    { \\\"text\\\": \\\"Grenier poussiéreux\\\", \\\"category\\\": \\\"Huis clos\\\" },\\n    { \\\"text\\\": \\\"Salon de coiffure\\\", \\\"category\\\": \\\"Quotidien\\\" },\\n    { \\\"text\\\": \\\"Temple perdu\\\", \\\"category\\\": \\\"Aventure\\\" },\\n    { \\\"text\\\": \\\"Station spatiale\\\", \\\"category\\\": \\\"Insolite\\\" },\\n    { \\\"text\\\": \\\"Cabine téléphonique\\\", \\\"category\\\": \\\"Huis clos\\\" },\\n    { \\\"text\\\": \\\"File d'attente\\\", \\\"category\\\": \\\"Quotidien\\\" },\\n    { \\\"text\\\": \\\"Île déserte\\\", \\\"category\\\": \\\"Aventure\\\" },\\n    { \\\"text\\\": \\\"Forêt de cristal\\\", \\\"category\\\": \\\"Insolite\\\" }\\n  ],\\n  \\\"eras\\\": [\\n    { \\\"text\\\": \\\"Préhistoire\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Moyen Âge\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Renaissance\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Siècle des Lumières\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Belle Époque\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Années folles\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Guerre froide\\\", \\\"era\\\": \\\"Passé\\\" },\\n    { \\\"text\\\": \\\"Aujourd'hui\\\", \\\"era\\\": \\\"Présent\\\" },\\n    { \\\"text\\\": \\\"Maintenant\\\", \\\"era\\\": \\\"Présent\\\" },\\n    { \\\"text\\\": \\\"Époque actuelle\\\", \\\"era\\\": \\\"Présent\\\" },\\n    { \\\"text\\\": \\\"Ère numérique\\\", \\\"era\\\": \\\"Présent\\\" },\\n    { \\\"text\\\": \\\"Monde moderne\\\", \\\"era\\\": \\\"Présent\\\" },\\n    { \\\"text\\\": \\\"Futur proche\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"An 3000\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"Colonisation martienne\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"Post-apocalyptique\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"Ère des robots\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"Cyberpunk\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"Voyage temporel\\\", \\\"era\\\": \\\"Futur\\\" },\\n    { \\\"text\\\": \\\"Fin des temps\\\", \\\"era\\\": \\\"Futur\\\" }\\n  ]\\n}\",\n          \"thoughtSignature\": \"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_MOCKED\" \n        }\n      ],\n      \"role\": \"model\"\n    },\n    \"finishReason\": \"STOP\",\n    \"index\": 0\n  };\n} else if (item.error) {\n  throw new Error(item.error.message);\n}\nreturn item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        528,
+        208
+      ],
+      "id": "check-error-node",
+      "name": "Check Error and Mock"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Check Error and Mock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Error and Mock": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "pinData": {}
+}

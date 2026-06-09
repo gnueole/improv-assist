@@ -44,7 +44,18 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
           <div className="w-full border-t border-zinc-800/80 pt-4 mb-6 text-xs text-zinc-400 flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Création</span>
-              <span className="font-semibold text-zinc-300">Éole Labs</span>
+              <span className="font-semibold text-zinc-300">Éole</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-500">Instagram</span>
+              <a 
+                href="https://www.instagram.com/eolewind" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
+              >
+                @eolewind
+              </a>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Code Source</span>
@@ -70,7 +81,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
             </div>
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Copyright</span>
-              <span className="text-zinc-300">© {new Date().getFullYear()} Éole Labs</span>
+              <span className="text-zinc-300">© {new Date().getFullYear()} Éole</span>
             </div>
             <div className="text-[10px] text-zinc-500 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
               EFIT® est une marque déposée.
