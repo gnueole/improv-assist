@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Instagram } from "lucide-react";
 
 interface AboutModalProps {
   isOpen: boolean;
@@ -44,17 +44,29 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
           <div className="w-full border-t border-zinc-800/80 pt-4 mb-6 text-xs text-zinc-400 flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Création</span>
-              <span className="font-semibold text-zinc-300">Éole</span>
+              <div className="flex items-center gap-1.5 font-semibold text-zinc-300">
+                <span>Éole</span>
+                <span className="text-zinc-700 font-light">•</span>
+                <a 
+                  href="https://www.instagram.com/eolewind" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-cyan-400 hover:underline flex items-center gap-1 text-xs font-semibold"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-zinc-500" />
+                  <span>@eolewind</span>
+                </a>
+              </div>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-zinc-500">Instagram</span>
+              <span className="text-zinc-500">Communauté</span>
               <a 
-                href="https://www.instagram.com/eolewind" 
+                href="https://www.improvisation.org/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
               >
-                @eolewind
+                Rejoindre l'EFIT !
               </a>
             </div>
             <div className="flex justify-between items-center">
@@ -66,17 +78,6 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
                 className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
               >
                 GitHub
-              </a>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-zinc-500">Communauté</span>
-              <a 
-                href="https://www.improvisation.org/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
-              >
-                Rejoindre l'EFIT !
               </a>
             </div>
             <div className="flex justify-between items-center">
