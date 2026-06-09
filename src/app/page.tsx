@@ -123,7 +123,11 @@ export default function Dashboard() {
     }, "", "");
 
     try {
-      const response = await fetch("/webhook/improv-regen", {
+      const webhookUrl = process.env.NODE_ENV === "development"
+        ? "https://n8n.eole.me/webhook/improv-regen"
+        : "/webhook/improv-regen";
+
+      const response = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" }
       });
