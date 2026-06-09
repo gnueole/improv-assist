@@ -1,45 +1,52 @@
-.PHONY: help dev-up dev-down up down deploy-improv
+# ==============================================================================
+# 🐸 HOUBA HOUBA ! — MOTEUR D'IMPROVISATION THÉÂTRALE
+# ==============================================================================
+# Description : Pilotage de l'environnement de développement local sous WSL.
+# Version     : 1.1.0
+# Équipe      : Éole Wind (EFIT)
+# ==============================================================================
 
-# Connection variables
-VPS_SSH  := user@impro.eole.me
-VPS_PATH := /home/improv-assist
+# ⚙️ CONFIGURATION INTERNE
+COMPOSE_DEV  := docker-compose.yml
+COMPOSE_PROD := docker-compose.prod.yml
 
-help:
-	@echo "======================================================================"
-	@echo "          🎭  improv-assist Project Makefile 🎭"
-	@echo "======================================================================"
-	@echo "Local Development (Dev Mode):"
-	@echo "  make dev-up          - Start the local dev container with HMR (port 3000)"
-	@echo "  make dev-down        - Stop the local dev container"
-	@echo ""
-	@echo "Production Deployment (VPS Mode / behind Traefik):"
-	@echo "  make up              - Start the production container locally"
-	@echo "  make down            - Stop the production container locally"
-	@echo "  make deploy-improv   - Deploy configuration and pull/run image on VPS"
-	@echo "======================================================================"
+# 🎯 CIBLES PRINCIPALES
+.PHONY: dev dev-build down clean logs help
 
-# Dev commands (Local Dev)
-dev-up:
-	docker compose -f docker/docker-compose.yml --env-file .env up -d
+# 🟢 DÉMARRAGE
+dev:
+	@echo "✨ Lancement de l'environnement de dev local..."
+	docker compose -f $(COMPOSE_DEV) up -d
+	@echo "🚀 Houba Houba ! est disponible en local."
 
-dev-down:
-	docker compose -f docker/docker-compose.yml --env-file .env down
+# 🛠️ RECOMPILATION LOCAL
+dev-build:
+	@echo "⚡ Reconstruction des couches Docker locales..."
+	docker compose -f $(COMPOSE_DEV) up -d --build
 
-# Production commands (Local Prod mode)
-up:
-	docker compose -f docker/docker-compose.prod.yml --env-file .env up -d
-
+# 🔴 ARRÊT
 down:
-	docker compose -f docker/docker-compose.prod.yml --env-file .env down
+	@echo "🛑 Arrêt des conteneurs locaux..."
+	docker compose -f $(COMPOSE_DEV) down
 
-# Automation VPS Deployment
-deploy-improv:
-	@echo "🚀 Deploying improv-assist to VPS..."
-	# 1. Ensure the remote directory exists
-	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
-	# 2. SCP docker-compose.prod.yml and rename env file on the remote server
-	scp docker/docker-compose.prod.yml $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
-	scp docker/.env.prod $(VPS_SSH):$(VPS_PATH)/.env
-	# 3. Pull new image from GHCR and recreate container
-	ssh $(VPS_SSH) "cd $(VPS_PATH) && docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d --build"
-	@echo "✅ Deployment completed on VPS!"
+# 🧹 NETTOYAGE PROFOND
+clean:
+	@echo "🧼 Purge complète : conteneurs, volumes et orphelins..."
+	docker compose -f $(COMPOSE_DEV) down -v --remove-orphans
+
+# 📋 LOGS STREAMING
+logs:
+	@echo "📟 Flux de logs du frontend (Ctrl+C pour quitter)..."
+	docker compose -f $(COMPOSE_DEV) logs -f
+
+# ℹ️ AIDE
+help:
+	@echo "=================================================================="
+	@echo "💻 COMMANDES DISPONIBLES POUR LE DEV LOCAL :"
+	@echo "=================================================================="
+	@echo "  make dev        : Démarre l'application en arrière-plan"
+	@echo "  make dev-build  : Force la reconstruction du conteneur (ex: npm install)"
+	@echo "  make down       : Arrête les conteneurs"
+	@echo "  make clean      : Arrête et supprime TOUS les volumes locaux"
+	@echo "  make logs       : Affiche les logs du serveur Next.js en temps réel"
+	@echo "=================================================================="
