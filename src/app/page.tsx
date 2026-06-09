@@ -207,7 +207,7 @@ export default function Dashboard() {
               <Sparkles className="w-4 h-4 text-black" />
             </div>
             <h1 className="font-bold tracking-[0.15em] text-lg uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400">
-              improv-assist
+              Houba Houba !
             </h1>
           </div>
           <div className="flex items-center gap-2">
@@ -286,7 +286,7 @@ export default function Dashboard() {
 
         {/* Footer */}
         <footer className="dashboard-footer">
-          <div>IMPROV-ASSIST</div>
+          <div>Houba Houba !</div>
           <div className="text-[9px] text-zinc-700 font-light flex items-center gap-1.5 flex-wrap justify-center">
             <span>© {new Date().getFullYear()} Éole</span>
             <span>•</span>
@@ -334,7 +334,7 @@ export default function Dashboard() {
 
         {/* Detail Footer */}
         <footer className="text-center text-[9px] text-zinc-700 tracking-wider">
-          IMPROV-ASSIST • CONSOLE D'OUTILS
+          HOUBA HOUBA ! • CONSOLE D'OUTILS
         </footer>
       </div>
 

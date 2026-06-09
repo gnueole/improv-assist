@@ -1,7 +1,7 @@
 {
-  "name": "improv-assist",
-  "short_name": "ImprovAssist",
-  "description": "Assistant d'improvisation théâtrale minimaliste et moderne.",
+  "name": "Houba Houba !",
+  "short_name": "HoubaHouba",
+  "description": "Compagnon de scène ultime pour les comédiens d'improvisation théâtrale.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#09090b",

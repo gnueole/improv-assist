@@ -29,7 +29,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
           </div>
           
           <h3 className="text-xl font-bold tracking-wider text-zinc-100 uppercase mb-1">
-            improv-assist
+            Houba Houba !
           </h3>
           
           <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-medium mb-4">
@@ -37,7 +37,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
           </span>
           
           <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-            Assistant d'improvisation théâtrale minimaliste pour smartphones et tablettes. Conçu pour générer des idées de scènes fluides et rapides.
+            Houba Houba ! est le compagnon de scène ultime pour les comédiens d'improvisation théâtrale. Conçu pour générer des idées de scènes fluides et rapides.
           </p>
           
           {/* Metadata Block */}

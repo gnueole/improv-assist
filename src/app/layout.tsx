@@ -11,10 +11,12 @@ const outfit = Outfit({
 
 export async function generateMetadata(): Promise<Metadata> {
   const isDev = process.env.NODE_ENV === "development";
-  const title = isDev ? "improv-assist-dev" : "improv-assist";
+  const title = isDev 
+    ? "Houba Houba ! [DEV] • Moteur d'improvisation" 
+    : "Houba Houba ! • Moteur d'improvisation";
   return {
     title,
-    description: "Assistant d'improvisation théâtrale minimaliste et moderne.",
+    description: "Compagnon de scène ultime pour les comédiens d'improvisation théâtrale.",
     manifest: "/manifest.json",
     appleWebApp: {
       capable: true,

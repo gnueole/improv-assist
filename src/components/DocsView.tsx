@@ -93,7 +93,7 @@ export default function DocsView() {
           <div className="p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md flex items-start gap-3 text-zinc-400 text-[11px] leading-relaxed">
             <Info className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
             <div>
-              Conçu et optimisé par <strong>Éole Labs</strong> pour les troupes de théâtre d'improvisation. Version active : Beta 1. Tous droits réservés.
+              Conçu et optimisé par <strong>Éole</strong> pour les troupes de théâtre d'improvisation. Version active : Beta 1. Tous droits réservés.
             </div>
           </div>
         </div>
