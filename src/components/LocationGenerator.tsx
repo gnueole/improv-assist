@@ -1,29 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 import { LOCATIONS } from "@/data/mockData";
 import { Location } from "@/types";
 
-export default function LocationGenerator() {
-  const [currentLocation, setCurrentLocation] = useState<Location>(LOCATIONS[0]);
+interface LocationGeneratorProps {
+  pickItem: (category: "emotions" | "locations" | "eras", filter?: string) => Location | null;
+}
+
+export default function LocationGenerator({ pickItem }: LocationGeneratorProps) {
+  const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
   const [locationCategory, setLocationCategory] = useState<string>("All");
   const [isSpinning, setIsSpinning] = useState(false);
+
+  // Piocher un lieu initial au montage
+  useEffect(() => {
+    const initial = pickItem("locations", locationCategory);
+    if (initial) {
+      setCurrentLocation(initial);
+    }
+  }, []);
 
   const spinLocation = () => {
     if (isSpinning) return;
     setIsSpinning(true);
     let count = 0;
-    const filtered = locationCategory === "All" ? LOCATIONS : LOCATIONS.filter(l => l.category === locationCategory);
-    if (filtered.length === 0) return;
 
     const interval = setInterval(() => {
-      const rand = filtered[Math.floor(Math.random() * filtered.length)];
+      const rand = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
       setCurrentLocation(rand);
       count++;
       if (count > 12) {
         clearInterval(interval);
         setIsSpinning(false);
+        const finalLocation = pickItem("locations", locationCategory);
+        if (finalLocation) {
+          setCurrentLocation(finalLocation);
+        } else {
+          setCurrentLocation(null);
+        }
       }
     }, 70);
   };
@@ -53,10 +69,10 @@ export default function LocationGenerator() {
               Lieu suggéré
             </span>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
-              "{currentLocation.text}"
+              {currentLocation ? `"${currentLocation.text}"` : "Réservoir vide..."}
             </h3>
             <div className="inline-block mt-4 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-xs text-zinc-300 font-light">
-              Style : {currentLocation.category}
+              Style : {currentLocation ? currentLocation.category : "-"}
             </div>
           </div>
         </div>

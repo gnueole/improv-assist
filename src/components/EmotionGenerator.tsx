@@ -1,26 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 import { EMOTIONS } from "@/data/mockData";
 import { Emotion } from "@/types";
 
-export default function EmotionGenerator() {
-  const [currentEmotion, setCurrentEmotion] = useState<Emotion>(EMOTIONS[0]);
+interface EmotionGeneratorProps {
+  pickItem: (category: "emotions" | "locations" | "eras", filter?: string) => Emotion | null;
+}
+
+export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
+  const [currentEmotion, setCurrentEmotion] = useState<Emotion | null>(null);
   const [currentIntensity, setCurrentIntensity] = useState<number>(5);
   const [emotionCategory, setEmotionCategory] = useState<string>("All");
   const [isSpinning, setIsSpinning] = useState(false);
+
+  // Piocher une émotion initiale au montage
+  useEffect(() => {
+    const initial = pickItem("emotions", emotionCategory);
+    if (initial) {
+      setCurrentEmotion(initial);
+      setCurrentIntensity(Math.floor(Math.random() * 10) + 1);
+    }
+  }, []);
 
   const spinEmotion = () => {
     if (isSpinning) return;
     setIsSpinning(true);
     let count = 0;
-    const filtered = emotionCategory === "All" ? EMOTIONS : EMOTIONS.filter(e => e.category === emotionCategory);
-    if (filtered.length === 0) return;
 
     const interval = setInterval(() => {
-      const randEmotion = filtered[Math.floor(Math.random() * filtered.length)];
-      const randIntensity = Math.floor(Math.random() * 10) + 1; // 1 to 10
+      // Pour l'effet visuel de défilement, on pioche au hasard dans les données statiques
+      const randEmotion = EMOTIONS[Math.floor(Math.random() * EMOTIONS.length)];
+      const randIntensity = Math.floor(Math.random() * 10) + 1;
       
       setCurrentEmotion(randEmotion);
       setCurrentIntensity(randIntensity);
@@ -29,6 +41,14 @@ export default function EmotionGenerator() {
       if (count > 12) {
         clearInterval(interval);
         setIsSpinning(false);
+        // On atterrit sur la vraie valeur piochée et retirée du réservoir local
+        const finalEmotion = pickItem("emotions", emotionCategory);
+        if (finalEmotion) {
+          setCurrentEmotion(finalEmotion);
+          setCurrentIntensity(Math.floor(Math.random() * 10) + 1);
+        } else {
+          setCurrentEmotion(null);
+        }
       }
     }, 70);
   };
@@ -68,10 +88,10 @@ export default function EmotionGenerator() {
               Émotion suggérée
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
-              {currentEmotion.text}
+              {currentEmotion ? currentEmotion.text : "Réservoir vide..."}
             </h3>
             <div className="inline-block mt-3 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-[11px] text-zinc-300 font-light">
-              Style : {currentEmotion.category}
+              Style : {currentEmotion ? currentEmotion.category : "-"}
             </div>
           </div>
         </div>

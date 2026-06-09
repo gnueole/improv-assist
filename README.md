@@ -8,12 +8,17 @@ The application is styled with a sleek dark aesthetic utilizing vibrant iridesce
 
 ## 🌟 Key Features
 
-- **🎭 Générateur d'Émotions** : Instantly generates emotions or psychological states to inspire characters.
+- **🎭 Générateur d'Émotions** : Instantly generates emotions or psychological states to inspire characters from a local cache.
 - **👆 Qui Commence ? (Multi-touch)** : A visual multitouch picker. Multiple users touch the screen simultaneously, and a random actor is selected to start the scene.
 - **📍 Suggestion de Lieu** : Randomizes locations to set the scene's context.
 - **🕰️ Suggestion d'Époque** : Provides time periods (past, future, or specific eras) for the staging.
 - **⏳ Timer de Scène** : A simple, intuitive timer configured for typical improv limits (e.g., 2m 30s) to keep track of performance length.
+- **⚡ Règles du Hi Ha (EFIT)** : Quick reference guide for the 10 game signals of the "Hi Ha" reflex game.
 - **📚 Contraintes & Docs** : Displays guidelines and game constraints cached directly from a shared Notion workspace.
+- **📦 LocalStorage Buffer** : Caches drawing pools locally to prevent duplicates. Items are selected and consumed dynamically. If any pool runs empty, replenishment is triggered.
+- **🔄 Webhook n8n Regeneration** : Auto or manual refresh of the item buffer through a POST request to `/webhook/improv-regen`. Under normal use, reload calls are rate-limited to once every 5 minutes.
+- **🛠️ Developer Mode** : A toggle inside the About modal enabling bypass of the 5-minute reload limit and rendering a "Consulter le Prompt Système" button to inspect the underlying Gemini prompt.
+- **📱 Popstate Gesture Support** : Deep navigation history synchronization using `window.history.pushState` and `popstate` to ensure that mobile back-swipe gestures close overlays (about, prompt, and loading screens) safely and intuitively.
 - **📶 Offline-ready PWA** : Employs service workers (`sw.js`) to cache assets and constraints so that the app remains fully functional in theaters or basement venues without internet access.
 
 ---
@@ -91,3 +96,8 @@ A `Makefile` is included to simplify Docker orchestration.
 - **Icons**: Lucide React
 - **PWA**: Service Worker caching
 - **Deployment**: Multi-stage Docker build producing a slim standalone Node.js server
+
+---
+
+*EFIT® est une marque déposée. Tous droits réservés.*
+

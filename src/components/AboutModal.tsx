@@ -6,9 +6,11 @@ import { Sparkles } from "lucide-react";
 interface AboutModalProps {
   isOpen: boolean;
   onClose: () => void;
+  devMode: boolean;
+  onDevModeChange: (val: boolean) => void;
 }
 
-export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
+export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }: AboutModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -63,6 +65,24 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Copyright</span>
               <span className="text-zinc-300">© {new Date().getFullYear()} Éole Labs</span>
+            </div>
+            <div className="text-[10px] text-zinc-500 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
+              EFIT® est une marque déposée.
+            </div>
+            <div className="flex justify-between items-center border-t border-zinc-800/80 pt-3 mt-1.5">
+              <span className="text-zinc-500">Mode Développeur</span>
+              <button
+                onClick={() => onDevModeChange(!devMode)}
+                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                  devMode ? "bg-cyan-500" : "bg-zinc-800"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    devMode ? "translate-x-4" : "translate-x-0"
+                  }`}
+                />
+              </button>
             </div>
           </div>
           

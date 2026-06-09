@@ -18,6 +18,8 @@ services:
       - NODE_ENV=development
       - WATCHPACK_POLLING=true # Essential for HMR in Windows/WSL2 hosts
       - NEXT_TELEMETRY_DISABLED=1
+      - GOOGLE_TAG_ID=${GOOGLE_TAG_ID}
+      - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
     env_file:
       - ../.env
     networks:

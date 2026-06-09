@@ -29,3 +29,11 @@ export interface Era {
   text: string;
   era: string;
 }
+
+export interface ImprovBuffer {
+  emotions: Emotion[];
+  locations: Location[];
+  eras: Era[];
+  last_fetch: number | null;
+}
+

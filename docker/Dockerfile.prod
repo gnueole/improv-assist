@@ -1,5 +1,6 @@
 # --- 1. Base Node Image ---
 FROM node:20-alpine AS base
+RUN apk update && apk upgrade --no-cache
 
 # --- 2. Install Dependencies only when needed ---
 FROM base AS deps

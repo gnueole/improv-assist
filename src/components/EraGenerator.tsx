@@ -1,13 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 import { ERAS } from "@/data/mockData";
 import { Era } from "@/types";
 
-export default function EraGenerator() {
-  const [currentEra, setCurrentEra] = useState<Era>(ERAS[0]);
+interface EraGeneratorProps {
+  pickItem: (category: "emotions" | "locations" | "eras", filter?: string) => Era | null;
+}
+
+export default function EraGenerator({ pickItem }: EraGeneratorProps) {
+  const [currentEra, setCurrentEra] = useState<Era | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
+
+  // Piocher une époque initiale au montage
+  useEffect(() => {
+    const initial = pickItem("eras");
+    if (initial) {
+      setCurrentEra(initial);
+    }
+  }, []);
 
   const spinEra = () => {
     if (isSpinning) return;
@@ -20,6 +32,12 @@ export default function EraGenerator() {
       if (count > 12) {
         clearInterval(interval);
         setIsSpinning(false);
+        const finalEra = pickItem("eras");
+        if (finalEra) {
+          setCurrentEra(finalEra);
+        } else {
+          setCurrentEra(null);
+        }
       }
     }, 70);
   };
@@ -37,10 +55,10 @@ export default function EraGenerator() {
               Époque suggérée
             </span>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
-              {currentEra.text}
+              {currentEra ? currentEra.text : "Réservoir vide..."}
             </h3>
             <div className="inline-block mt-4 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-xs text-zinc-300 font-light">
-              Classification : {currentEra.era}
+              Classification : {currentEra ? currentEra.era : "-"}
             </div>
           </div>
         </div>
