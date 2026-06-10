@@ -102,6 +102,12 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ## 📝 Changelog
 
+### Version 0.3 BETA (1.0.0-beta.3)
+- **Robustesse n8n & Fallback automatique** : Résolution du bug de réponse vide (200 sans corps) lorsque le modèle Gemini est surchargé de requêtes (quota limité), en redirigeant le flux d'erreur du nœud Gemini vers le nœud de génération de repli (mock) via la configuration `continueErrorOutput` et un double port de connexion.
+- **Optimisation des performances** : Réduction de 50% de la taille du screenshot `images/improv-assist-beta2.jpg` pour un chargement plus rapide de la documentation.
+- **Formatage** : Présentation du tableau des fonctionnalités dans le `README.md` sous forme de tableau Markdown structuré.
+- **Refactoring & Modularité** : Découpage du hook complexe `useImprovBuffer` en sous-hooks modulaires (`useToast`, `useDevMode`) et fonctions utilitaires (`bufferUtils`), avec normalisation de tous les en-têtes de commentaires de métadonnées.
+
 ### Version BETA 2 (1.0.0-beta.2)
 - **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
 - **Description des échauffements** : Ajout d'un champ description explicatif en français pour chaque exercice d'échauffement dans l'interface et le prompt système Gemini.
