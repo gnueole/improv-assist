@@ -81,22 +81,44 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
     setIsReloading(true);
     setIsLoading(true);
     try {
-      const response = await fetch("/data/reservoir-config.json");
-      if (!response.ok) {
-        throw new Error("Failed to load local reservoir-config.json");
+      if (force) {
+        showToast("Régénération du réservoir en cours via n8n & Gemini (1 à 2 minutes)...");
+        const response = await fetch("/api/improv-regen", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            count: 350,
+            categories_required: ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
+          })
+        });
+        if (!response.ok) {
+          throw new Error("Erreur de communication avec le serveur de génération");
+        }
+        const data = await response.json();
+        const newBuffer = buildBufferFromData(data);
+        setBuffer(newBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+        setN8nStatus("green");
+        setN8nError(null);
+        showToast("Réservoir régénéré avec succès depuis n8n !");
+      } else {
+        const response = await fetch("/data/reservoir-config.json");
+        if (!response.ok) {
+          throw new Error("Failed to load local reservoir-config.json");
+        }
+        const data = await response.json();
+        const newBuffer = buildBufferFromData(data);
+        setBuffer(newBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+        setN8nStatus("green");
+        setN8nError(null);
+        showToast("Réservoir rechargé depuis le pool local.");
       }
-      const data = await response.json();
-      const newBuffer = buildBufferFromData(data);
-      setBuffer(newBuffer);
-      localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
-      setN8nStatus("green");
-      setN8nError(null);
-      showToast("Réservoir rechargé depuis le pool local.");
     } catch (error) {
       console.error("[Regen Diagnostics] Reload failed:", error);
       setN8nStatus("red");
       setN8nError(error instanceof Error ? error.message : String(error));
-      showToast("Erreur de rechargement.");
+      showToast(force ? "Échec de la régénération via n8n." : "Erreur de rechargement.");
     } finally {
       setIsReloading(false);
       setIsLoading(false);

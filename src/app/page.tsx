@@ -296,7 +296,7 @@ export default function Dashboard() {
               title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion n8n opérationnelle"}
             />
             <button
-              onClick={() => triggerRegen(false)}
+              onClick={() => triggerRegen(devMode)}
               className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="Régénérer le réservoir"
             >
