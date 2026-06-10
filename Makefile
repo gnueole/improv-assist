@@ -82,6 +82,5 @@ checklogs:
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && docker compose -f $$(basename $(COMPOSE_PROD)) logs -f"
 
 deploy-delay:
-	@echo "⏳ Waiting 130 seconds for GitHub Actions build to complete..."
-	sleep 130
-	$(MAKE) deploy
+	@echo "⏳ Waiting 150 seconds for GitHub Actions build to complete..."
+	git push && sleep 150 && $(MAKE) deploy

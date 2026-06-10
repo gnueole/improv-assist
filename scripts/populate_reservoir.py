@@ -32,9 +32,12 @@ def fetch_and_populate():
         response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=120)
         response.raise_for_status()
         
-        # On attend de n8n un JSON avec la structure exacte :
-        # { "scenarios": [...], "categories": [...], "themes": [...], "echauffements": [...], "emotions": [...], "locations": [...], "eras": [...] }
-        generated_data = response.json()
+        try:
+            generated_data = response.json()
+        except ValueError as json_err:
+            print(f"❌ Erreur parsing JSON de n8n. Status: {response.status_code}")
+            print(f"Content: {response.text}")
+            raise json_err
         
         # Validation stricte des clés pour ne pas casser le TypeScript de l'App
         required_keys = {"scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"}
