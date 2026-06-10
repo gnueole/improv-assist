@@ -8,7 +8,7 @@
 
 import React, { useState, useMemo } from "react";
 import { Search } from "lucide-react";
-import { STATIC_CONSTRAINTS as notionConstraints } from "@/data/static-reservoir";
+import notionConstraints from "@/data/notionConstraints.json";
 
 export default function ConstraintsView() {
   const [searchQuery, setSearchQuery] = useState("");

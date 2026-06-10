@@ -15,45 +15,25 @@ export interface TouchPoint {
   color: string;
 }
 
-export interface Scenario {
-  id: string;
-  title: string;
-  description: string;
-}
-
-export interface Category {
-  id: string;
-  title: string;
-  description: string;
-}
-
-export interface Constraint {
-  id: string;
-  title: string;
-  description: string;
+export interface Emotion {
+  text: string;
   category: string;
 }
 
-export interface Theme {
-  id: string;
-  title: string;
-  category?: string;
+export interface Location {
+  text: string;
+  category: string;
 }
 
-export interface Echauffement {
-  id: string;
-  title: string;
-  description: string;
-  duration?: string;
+export interface Era {
+  text: string;
+  era: string;
 }
 
 export interface ImprovBuffer {
-  scenarios: Scenario[];
-  categories: Category[];
-  constraints: Constraint[];
-  themes: Theme[];
-  echauffements: Echauffement[];
+  emotions: Emotion[];
+  locations: Location[];
+  eras: Era[];
   last_fetch: number | null;
 }
-
 

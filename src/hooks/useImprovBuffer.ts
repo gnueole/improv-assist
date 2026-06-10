@@ -3,19 +3,12 @@
 /**
  * @file useImprovBuffer.ts
  * @description Custom React hook that manages the offline/caching buffer reservoir of improvisation prompts 
- * (scenarios, categories, constraints, themes, echauffements) in localStorage. Handles state transitions
- * and ensures robust fallback loading from static-reservoir.
+ * (emotions, locations, eras) in localStorage. Handles state transitions and handles background regeneration triggers.
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { ImprovBuffer, Scenario, Category, Constraint, Theme, Echauffement } from "@/types";
-import {
-  STATIC_SCENARIOS,
-  STATIC_CATEGORIES,
-  STATIC_CONSTRAINTS,
-  STATIC_THEMES,
-  STATIC_ECHAUFFEMENTS
-} from "@/data/static-reservoir";
+import { ImprovBuffer } from "@/types";
+import { EMOTIONS, LOCATIONS, ERAS } from "@/data/mockData";
 
 export function useImprovBuffer(activeTileId: string | null) {
   const [isRegenerating, setIsRegenerating] = useState(false);
@@ -24,11 +17,9 @@ export function useImprovBuffer(activeTileId: string | null) {
   const [n8nStatus, setN8nStatus] = useState<"green" | "red">("green");
   const [n8nError, setN8nError] = useState<string | null>(null);
   const [buffer, setBuffer] = useState<ImprovBuffer>({
-    scenarios: [],
-    categories: [],
-    constraints: [],
-    themes: [],
-    echauffements: [],
+    emotions: [],
+    locations: [],
+    eras: [],
     last_fetch: null
   });
 
@@ -39,7 +30,7 @@ export function useImprovBuffer(activeTileId: string | null) {
     }, 4000);
   }, []);
 
-  // Load from local storage or pre-fill with static reservoir
+  // Load from local storage
   useEffect(() => {
     const savedDevMode = localStorage.getItem("dev_mode") === "true";
     setDevMode(savedDevMode);
@@ -48,14 +39,7 @@ export function useImprovBuffer(activeTileId: string | null) {
     if (savedBuffer) {
       try {
         const parsed = JSON.parse(savedBuffer);
-        if (
-          parsed &&
-          Array.isArray(parsed.scenarios) &&
-          Array.isArray(parsed.categories) &&
-          Array.isArray(parsed.constraints) &&
-          Array.isArray(parsed.themes) &&
-          Array.isArray(parsed.echauffements)
-        ) {
+        if (parsed && Array.isArray(parsed.emotions) && Array.isArray(parsed.locations) && Array.isArray(parsed.eras)) {
           setBuffer(parsed);
           return;
         }
@@ -65,11 +49,9 @@ export function useImprovBuffer(activeTileId: string | null) {
     }
 
     const initialBuffer: ImprovBuffer = {
-      scenarios: [...STATIC_SCENARIOS],
-      categories: [...STATIC_CATEGORIES],
-      constraints: [...STATIC_CONSTRAINTS],
-      themes: [...STATIC_THEMES],
-      echauffements: [...STATIC_ECHAUFFEMENTS],
+      emotions: [...EMOTIONS],
+      locations: [...LOCATIONS],
+      eras: [...ERAS],
       last_fetch: null
     };
     setBuffer(initialBuffer);
@@ -148,15 +130,13 @@ export function useImprovBuffer(activeTileId: string | null) {
       }
 
       const newBuffer: ImprovBuffer = {
-        scenarios: Array.isArray(data?.scenarios) && data.scenarios.length > 0 ? data.scenarios : [...STATIC_SCENARIOS],
-        categories: Array.isArray(data?.categories) && data.categories.length > 0 ? data.categories : [...STATIC_CATEGORIES],
-        constraints: Array.isArray(data?.constraints) && data.constraints.length > 0 ? data.constraints : [...STATIC_CONSTRAINTS],
-        themes: Array.isArray(data?.themes) && data.themes.length > 0 ? data.themes : [...STATIC_THEMES],
-        echauffements: Array.isArray(data?.echauffements) && data.echauffements.length > 0 ? data.echauffements : [...STATIC_ECHAUFFEMENTS],
+        emotions: Array.isArray(data?.emotions) && data.emotions.length > 0 ? data.emotions : [...EMOTIONS],
+        locations: Array.isArray(data?.locations) && data.locations.length > 0 ? data.locations : [...LOCATIONS],
+        eras: Array.isArray(data?.eras) && data.eras.length > 0 ? data.eras : [...ERAS],
         last_fetch: Date.now()
       };
 
-      console.log(`[Regen Diagnostics] New buffer counts - scenarios: ${newBuffer.scenarios.length}, categories: ${newBuffer.categories.length}, constraints: ${newBuffer.constraints.length}, themes: ${newBuffer.themes.length}, echauffements: ${newBuffer.echauffements.length}`);
+      console.log(`[Regen Diagnostics] New buffer counts - emotions: ${newBuffer.emotions.length}, locations: ${newBuffer.locations.length}, eras: ${newBuffer.eras.length}`);
 
       setBuffer(newBuffer);
       localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
@@ -172,25 +152,20 @@ export function useImprovBuffer(activeTileId: string | null) {
 
       // Ensure non-empty buffer on error
       setBuffer((prev) => {
-        const finalScenarios = prev.scenarios.length === 0 ? [...STATIC_SCENARIOS] : prev.scenarios;
-        const finalCategories = prev.categories.length === 0 ? [...STATIC_CATEGORIES] : prev.categories;
-        const finalConstraints = prev.constraints.length === 0 ? [...STATIC_CONSTRAINTS] : prev.constraints;
-        const finalThemes = prev.themes.length === 0 ? [...STATIC_THEMES] : prev.themes;
-        const finalEchauffements = prev.echauffements.length === 0 ? [...STATIC_ECHAUFFEMENTS] : prev.echauffements;
+        const finalEmotions = prev.emotions.length === 0 ? [...EMOTIONS] : prev.emotions;
+        const finalLocations = prev.locations.length === 0 ? [...LOCATIONS] : prev.locations;
+        const finalEras = prev.eras.length === 0 ? [...ERAS] : prev.eras;
 
         const resetBuffer: ImprovBuffer = {
-          scenarios: finalScenarios,
-          categories: finalCategories,
-          constraints: finalConstraints,
-          themes: finalThemes,
-          echauffements: finalEchauffements,
+          emotions: finalEmotions,
+          locations: finalLocations,
+          eras: finalEras,
           last_fetch: Date.now()
         };
         localStorage.setItem("improv_buffer", JSON.stringify(resetBuffer));
         return resetBuffer;
       });
     } finally {
-      // 🎯 Glitch Fix: Ensure loading state is reset inside finally block
       setIsRegenerating(false);
       if (window.history.state && window.history.state.isRegenerating) {
         window.history.back();
@@ -198,30 +173,46 @@ export function useImprovBuffer(activeTileId: string | null) {
     }
   }, [devMode, activeTileId, showToast]);
 
-  const pickItem = useCallback((category: "scenarios" | "categories" | "constraints" | "themes" | "echauffements"): any => {
+  const pickItem = useCallback((category: "emotions" | "locations" | "eras", filter?: string): any => {
     const saved = localStorage.getItem("improv_buffer");
     if (!saved) return null;
     try {
       const currentBuffer = JSON.parse(saved) as ImprovBuffer;
       const items = currentBuffer[category] || [];
 
+      let filteredItems = [...items];
+      if (filter && filter !== "All") {
+        if (category === "emotions") {
+          filteredItems = items.filter((e: any) => e.category === filter);
+        } else if (category === "locations") {
+          filteredItems = items.filter((l: any) => l.category === filter);
+        }
+      }
+
       // If category is exhausted, refill it with local static default data
-      if (items.length === 0) {
+      if (filteredItems.length === 0) {
         showToast("Réservoir épuisé. Données locales utilisées, pensez à le recharger !");
         
         let defaults: any[] = [];
-        if (category === "scenarios") defaults = [...STATIC_SCENARIOS];
-        else if (category === "categories") defaults = [...STATIC_CATEGORIES];
-        else if (category === "constraints") defaults = [...STATIC_CONSTRAINTS];
-        else if (category === "themes") defaults = [...STATIC_THEMES];
-        else if (category === "echauffements") defaults = [...STATIC_ECHAUFFEMENTS];
+        if (category === "emotions") defaults = [...EMOTIONS];
+        else if (category === "locations") defaults = [...LOCATIONS];
+        else if (category === "eras") defaults = [...ERAS];
 
-        if (defaults.length === 0) return null;
+        let filteredDefaults = [...defaults];
+        if (filter && filter !== "All") {
+          if (category === "emotions") {
+            filteredDefaults = defaults.filter((e: any) => e.category === filter);
+          } else if (category === "locations") {
+            filteredDefaults = defaults.filter((l: any) => l.category === filter);
+          }
+        }
 
-        const randomIndex = Math.floor(Math.random() * defaults.length);
-        const pickedItem = defaults[randomIndex];
+        if (filteredDefaults.length === 0) return null;
 
-        const updatedItems = defaults.filter((item: any) => item.id !== pickedItem.id);
+        const randomIndex = Math.floor(Math.random() * filteredDefaults.length);
+        const pickedItem = filteredDefaults[randomIndex];
+
+        const updatedItems = defaults.filter((item: any) => item.text !== pickedItem.text);
         const updatedBuffer = {
           ...currentBuffer,
           [category]: updatedItems
@@ -232,10 +223,10 @@ export function useImprovBuffer(activeTileId: string | null) {
         return pickedItem;
       }
 
-      const randomIndex = Math.floor(Math.random() * items.length);
-      const pickedItem = items[randomIndex];
+      const randomIndex = Math.floor(Math.random() * filteredItems.length);
+      const pickedItem = filteredItems[randomIndex];
 
-      const updatedItems = items.filter((item: any) => item.id !== pickedItem.id);
+      const updatedItems = items.filter((item: any) => item.text !== pickedItem.text);
       const updatedBuffer = {
         ...currentBuffer,
         [category]: updatedItems
