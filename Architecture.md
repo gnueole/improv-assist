@@ -55,6 +55,7 @@ graph TD
 
 Le projet est organisé selon une structure modulaire séparant les configurations d'infrastructure, les scénarios d'automatisation, et le code source de l'application Next.js :
 
+* **`configure`** : Script shell de diagnostic système et d'initialisation du projet (dépendances Next.js, Python et fichiers d'environnement).
 * **`/docker`** : Contient les `Dockerfile` (dev et prod) et les configurations Docker Compose définissant les conteneurs et les variables d'environnement.
 * **`/images`** : Héberge les captures d'écran et ressources visuelles intégrées dans la documentation du projet.
 * **`/n8n`** : Versionne localement les workflows n8n (`improv-assist-baas.json` et `improv-feedback.json`) ainsi que les prompts système (`prompts/master.prompt`) pour assurer la cohérence entre les versions de code et les automatisations.
@@ -83,7 +84,7 @@ Le projet est organisé selon une structure modulaire séparant les configuratio
 ## 🧠 Défis Techniques Résolus
 
 * **Gestion de la Réponse Vide sur Surcharge IA** : Lorsque le modèle Gemini dépasse ses quotas gratuits (erreur 429), le nœud LangChain n8n renvoyait un tableau vide `[]`, ce qui court-circuitait le reste du workflow et renvoyait un code HTTP `200` vide, cassant le parsing JSON du client. Résolu en paramétrant le nœud Gemini sur `continueErrorOutput` et en connectant son port d'erreur au nœud de secours JavaScript pour renvoyer le réservoir d'improvisation de secours.
-* **Contournement des limitations de Quotas (Rate Limiting)** : La génération de 150 suggestions par l'IA consomme beaucoup de requêtes. La logique client (`useImprovBuffer.ts`) a été conçue pour consommer en priorité le réservoir local persistant, et ne solliciter le webhook n8n en temps réel que pour un seul élément à la fois en cas de réservoir complètement vide, minimisant drastiquement l'usage de jetons.
+* **Contournement des limitations de Quotas (Rate Limiting)** : La génération de 50 suggestions par l'IA consomme beaucoup de requêtes. La logique client (`useImprovBuffer.ts`) a été conçue pour consommer en priorité le réservoir local persistant, et ne solliciter le webhook n8n en temps réel que pour un seul élément à la fois en cas de réservoir complètement vide, minimisant drastiquement l'usage de jetons.
 * **Hydratation React en PWA et LocalStorage** : Le chargement d'états depuis le `localStorage` du navigateur pendant la phase d'initialisation provoquait des avertissements de divergence d'hydratation (le rendu serveur de Next.js différant du stockage local du client). Ce défi a été résolu en externalisant et en isolant les lectures de stockage dans des hooks secondaires (`useDevMode`, `useToast`) et en différant l'hydratation du buffer principal dans un `useEffect` exécuté uniquement côté client.
 
 ---
@@ -144,7 +145,7 @@ L'application utilise deux types de fichiers de données persistés localement :
 
 ## 🚀 5. Déploiement et Infrastructure
 
-L'infrastructure est entièrement conteneurisée à l'aide de Docker.
+L'infrastructure est entièrement conteneurisée à l'aide de Docker et automatisée par Makefile et GitHub Actions. Elle est composée de deux environnements distincts :
 
 * **WSL / Localhost** : Environnement de développement lancé via Docker Compose et géré localement à l'aide de raccourcis Makefile :
   * `make up` : Lance le serveur Next.js en mode développement avec Hot Module Replacement (HMR) sur le port 3000.
@@ -152,4 +153,4 @@ L'infrastructure est entièrement conteneurisée à l'aide de Docker.
   * `make restart` : Redémarre l'environnement.
 * **VPS (Production - impro.eole.me)** :
   * **CI/CD** : Chaque push sur la branche `main` déclenche un workflow GitHub Actions qui compile une image de production Docker immuable et la publie sur le registre GitHub Packages (GHCR).
-  * **Déploiement** : La commande `make deploy-delay` permet de pousser automatiquement les fichiers de configuration de production via SSH/SCP sur le VPS, d'attendre la fin de la compilation CI/CD, puis de recréer les conteneurs de production derrière le proxy inverse **Traefik**.
+  * **Déploiement** : La commande `make deploy-delay` permet de pousser automatiquement les fichiers de configuration de production via SSH/SCP sur le VPS, d'attendre la fin de la compilation CI/CD, puis de recréer les conteneurs de production derrière le proxy inverse **Traefik**. (en production https://impro.eole.me seulement.)
