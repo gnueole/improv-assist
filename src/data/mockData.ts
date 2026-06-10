@@ -1,3 +1,11 @@
+/**
+ * @file mockData.ts
+ * @description Local static fallback datasets for emotions, locations, and eras.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import { Emotion, Location, Era } from "@/types";
 import reservoirData from "../../public/data/reservoir-config.json";
 

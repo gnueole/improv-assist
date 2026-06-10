@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file WhoStarts.tsx
+ * @description Interactive multi-touch component to decide which actor starts the scene.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import React, { useState, useEffect, useRef } from "react";
 import { Fingerprint } from "lucide-react";
 import { PRESET_COLORS } from "@/data/mockData";

@@ -1,3 +1,11 @@
+/**
+ * @file layout.tsx
+ * @description Root HTML layout wrapper for Next.js. Configures the metadata, viewport, fonts, and Google Analytics script injection.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import Script from "next/script";

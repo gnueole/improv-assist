@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file useImprovBuffer.ts
+ * @description React hook that manages the local prompts reservoir buffer and n8n sync states.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import { useState, useEffect, useCallback } from "react";
 import { ImprovBuffer } from "@/types";
 

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file GenericGenerator.tsx
+ * @description Generic generator component that displays card options with spinning animation and random item selection.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import React, { useState, useEffect } from "react";
 import { RefreshCw, Clock, Tag } from "lucide-react";
 
@@ -8,6 +16,7 @@ interface GenericItem {
   text: string;
   category?: string;
   duration?: string;
+  description?: string;
 }
 
 interface GenericGeneratorProps {
@@ -96,9 +105,16 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
             )}
 
             {/* Main Item Title */}
-            <h4 className="text-2xl font-extrabold tracking-tight text-white mb-3">
+            <h4 className="text-2xl font-extrabold tracking-tight text-white mb-1">
               {currentItem ? currentItem.text : "Réservoir vide..."}
             </h4>
+
+            {/* Description if available */}
+            {currentItem?.description && (
+              <p className="text-sm text-zinc-400 leading-relaxed max-w-xs mt-2">
+                {currentItem.description}
+              </p>
+            )}
 
           </div>
         </div>

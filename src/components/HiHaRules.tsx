@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file HiHaRules.tsx
+ * @description View detailing the game rules and gestures for the 'Hi Ha' warmup game.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import React from "react";
 
 export default function HiHaRules() {

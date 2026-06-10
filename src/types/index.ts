@@ -1,3 +1,11 @@
+/**
+ * @file index.ts
+ * @description Global TypeScript interface and type declarations for the Improv Engine.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import React from "react";
 
 export interface Tile {
@@ -49,6 +57,7 @@ export interface Echauffement {
   text: string;
   duration?: string;
   category?: string;
+  description?: string;
 }
 
 export interface ImprovBuffer {

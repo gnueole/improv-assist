@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @file FeedbackView.tsx
+ * @description View showing the feedback form for user comments, bug reports, and rating.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import React, { useState, useRef } from "react";
 import { Send, CheckCircle2, MessageSquare, AlertCircle, Star } from "lucide-react";
 

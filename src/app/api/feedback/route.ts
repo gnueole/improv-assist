@@ -1,3 +1,11 @@
+/**
+ * @file route.ts
+ * @description API route proxying user feedback to the n8n feedback webhook.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

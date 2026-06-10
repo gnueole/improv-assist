@@ -1,3 +1,11 @@
+/**
+ * @file route.ts
+ * @description API route serving the dynamically cached constraints list.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
+ */
+
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
