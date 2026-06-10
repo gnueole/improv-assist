@@ -1,3 +1,11 @@
+/**
+ * @file notion_fetch.js
+ * @description Script to fetch constraints from Notion database/page and write them to a local JSON cache.
+ * @author Éole <hi@eole>
+ * @creation-date 2026-06-11
+ * @license MIT
+ */
+
 const fs = require('fs');
 const path = require('path');
 const https = require('https');

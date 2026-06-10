@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# ==============================================================================
-# 🎭 HOUBA HOUBA ! — RESERVOIR POPULATION SCRIPT
-# ==============================================================================
-# Description : Fetches a new batch of random improvisation triggers from n8n 
-#               and populates the local static reservoir pool config file.
-# Author      : Éole <hi@eole>
-# Date        : 2026-06-11
-# License     : MIT
-# ==============================================================================
+"""
+@file populate_reservoir.py
+@description Fetches a new batch of random improvisation triggers from n8n and populates the local static reservoir pool config file.
+@author Éole <hi@eole>
+@creation-date 2026-06-11
+@license MIT
+"""
 
 
 import os
