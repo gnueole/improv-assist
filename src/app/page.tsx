@@ -2,8 +2,8 @@
 
 /**
  * @file page.tsx
- * @description Main app orchestrator / home dashboard page. Features a symmetrical 8-item grid of tiles, 
- * handles active tile navigation, handles virtual history state for smooth back swipe gestures, and mounts generator components.
+ * @description Main app orchestrator / home dashboard page. Features a balanced 10-item grid of tiles, 
+ * handles active tile navigation, virtual history states, and mounts generator components.
  */
 
 import React, { useState, useEffect } from "react";
@@ -38,9 +38,12 @@ import ImprovTimer from "@/components/ImprovTimer";
 import DocsView from "@/components/DocsView";
 import ConstraintsView from "@/components/ConstraintsView";
 import HiHaRules from "@/components/HiHaRules";
+import GenericGenerator from "@/components/GenericGenerator";
+
+import reservoirPool from "../../public/data/reservoir-config.json";
 
 const SYSTEM_PROMPT = `Tu es un assistant d'improvisation théâtrale. 
-Génère un fichier JSON structuré contenant 3 listes d'éléments inspirants pour alimenter des générateurs d'impro :
+Génère un fichier JSON structuré contenant les listes suivantes pour alimenter les générateurs d'impro :
 
 1. "emotions" : 20 suggestions d'émotions/états d'esprit avec leur catégorie (Positive, Négative, Neutre).
 Chaque objet doit être au format : { "text": string, "category": "Positive" | "Négative" | "Neutre" }
@@ -48,10 +51,14 @@ Chaque objet doit être au format : { "text": string, "category": "Positive" | "
 2. "locations" : 20 suggestions de lieux propices au jeu dramatique ou comique, classés par catégorie (Huis clos, Quotidien, Aventure, Insolite).
 Chaque objet doit être au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite" }
 
-3. "eras" : 20 suggestions de périodes temporelles ou époques inspirantes, classées par temporalité (Passé, Présent, Futur).
+3. "eras" : 20 suggestions de périodes temporelles ou époques inspirantes, classées par géographie/époque (Passé, Présent, Futur).
 Chaque objet doit être au format : { "text": string, "era": "Passé" | "Présent" | "Futur" }
 
-Important : Ne renvoie rien d'autre que le JSON brut de cette structure. Les suggestions doivent être variées, théâtrales, poétiques ou insolites. Fais en sorte que les textes générés soient extrêmement courts (1 à 3 mots maximum par élément).`;
+4. "themes" : 20 suggestions de thèmes d'improvisation (sujets courts).
+Chaque objet doit être au format : { "text": string, "category": string }
+
+5. "scenarios" : 20 suggestions de situations de départ ou d'intrigues dramatiques/comiques.
+Chaque objet doit être au format : { "text": string, "category": string }`;
 
 export default function Dashboard() {
   const [activeTileId, setActiveTileId] = useState<string | null>(null);
@@ -61,6 +68,7 @@ export default function Dashboard() {
   // Expose functions & state from hook
   const {
     isRegenerating,
+    isReloading,
     devMode,
     toastMessage,
     triggerRegen,
@@ -70,10 +78,12 @@ export default function Dashboard() {
     n8nError
   } = useImprovBuffer(activeTileId);
 
-  // Grid tiles configuration (symmetrical 8 items grid)
+  // Symmetrical layout with 10 items grid (2 columns on mobile, 3 columns on desktop)
   const tiles: Tile[] = [
     { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500" },
     { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500" },
+    { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400" },
+    { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500" },
     { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
     { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
     { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
@@ -156,7 +166,7 @@ export default function Dashboard() {
         setIsPromptOpen(!!state.isPromptOpen);
       } else {
         const path = window.location.pathname.replace(/^\//, "");
-        const validTileIds = ["emotions", "who_starts", "locations", "eras", "timer", "constraints", "docs", "hiha"];
+        const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha"];
         setActiveTileId(validTileIds.includes(path) ? path : null);
         setIsAboutOpen(false);
         setIsPromptOpen(false);
@@ -172,7 +182,7 @@ export default function Dashboard() {
   // Initial load pathname detection
   useEffect(() => {
     const path = window.location.pathname.replace(/^\//, "");
-    const validTileIds = ["emotions", "who_starts", "locations", "eras", "timer", "constraints", "docs", "hiha"];
+    const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha"];
     if (validTileIds.includes(path)) {
       setActiveTileId(path);
       window.history.replaceState({
@@ -201,7 +211,25 @@ export default function Dashboard() {
       case "emotions":
         return <EmotionGenerator pickItem={pickItem} />;
       case "who_starts":
-        return <WhoStarts onBack={() => window.history.back()} />;
+        return <WhoStarts onBack={handleBackToDashboard} />;
+      case "themes":
+        return (
+          <GenericGenerator
+            categoryKey="themes"
+            title="Thèmes"
+            pickItem={pickItem}
+            itemsPool={reservoirPool.themes || []}
+          />
+        );
+      case "scenarios":
+        return (
+          <GenericGenerator
+            categoryKey="scenarios"
+            title="Scénarios"
+            pickItem={pickItem}
+            itemsPool={reservoirPool.scenarios || []}
+          />
+        );
       case "locations":
         return <LocationGenerator pickItem={pickItem} />;
       case "eras":
@@ -378,7 +406,7 @@ export default function Dashboard() {
       />
 
       {/* Loader Overlay */}
-      <LoaderOverlay isVisible={isRegenerating} />
+      <LoaderOverlay isVisible={isRegenerating || isReloading} />
 
       {/* Prompt Modal Overlay */}
       <PromptModal

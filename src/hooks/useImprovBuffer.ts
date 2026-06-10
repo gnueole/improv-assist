@@ -1,25 +1,22 @@
 "use client";
 
-/**
- * @file useImprovBuffer.ts
- * @description Custom React hook that manages the offline/caching buffer reservoir of improvisation prompts 
- * (emotions, locations, eras) in localStorage. Handles state transitions and handles background regeneration triggers.
- */
-
 import { useState, useEffect, useCallback } from "react";
 import { ImprovBuffer } from "@/types";
-import { EMOTIONS, LOCATIONS, ERAS } from "@/data/mockData";
 
 export function useImprovBuffer(activeTileId: string | null) {
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [isReloading, setIsReloading] = useState(false);
   const [devMode, setDevMode] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [n8nStatus, setN8nStatus] = useState<"green" | "red">("green");
   const [n8nError, setN8nError] = useState<string | null>(null);
+  
   const [buffer, setBuffer] = useState<ImprovBuffer>({
     emotions: [],
     locations: [],
     eras: [],
+    themes: [],
+    scenarios: [],
     last_fetch: null
   });
 
@@ -30,32 +27,59 @@ export function useImprovBuffer(activeTileId: string | null) {
     }, 4000);
   }, []);
 
-  // Load from local storage
+  // Initialize buffer from localStorage or fetch from public/data/reservoir-config.json
   useEffect(() => {
     const savedDevMode = localStorage.getItem("dev_mode") === "true";
     setDevMode(savedDevMode);
 
-    const savedBuffer = localStorage.getItem("improv_buffer");
-    if (savedBuffer) {
-      try {
-        const parsed = JSON.parse(savedBuffer);
-        if (parsed && Array.isArray(parsed.emotions) && Array.isArray(parsed.locations) && Array.isArray(parsed.eras)) {
-          setBuffer(parsed);
-          return;
+    const initialize = async () => {
+      const savedBuffer = localStorage.getItem("improv_buffer");
+      if (savedBuffer) {
+        try {
+          const parsed = JSON.parse(savedBuffer);
+          if (
+            parsed &&
+            Array.isArray(parsed.emotions) &&
+            Array.isArray(parsed.locations) &&
+            Array.isArray(parsed.eras) &&
+            Array.isArray(parsed.themes) &&
+            Array.isArray(parsed.scenarios)
+          ) {
+            setBuffer(parsed);
+            return;
+          }
+        } catch (e) {
+          console.error("Failed to parse improv_buffer from localStorage", e);
         }
-      } catch (e) {
-        console.error("Failed to parse improv_buffer from localStorage", e);
       }
-    }
 
-    const initialBuffer: ImprovBuffer = {
-      emotions: [...EMOTIONS],
-      locations: [...LOCATIONS],
-      eras: [...ERAS],
-      last_fetch: null
+      // Pre-fill from public/data/reservoir-config.json
+      try {
+        const response = await fetch("/data/reservoir-config.json");
+        if (response.ok) {
+          const data = await response.json();
+          const initialBuffer: ImprovBuffer = {
+            emotions: data.emotions || [],
+            locations: data.locations || [],
+            eras: data.eras || [],
+            themes: data.themes || [],
+            scenarios: data.scenarios || [],
+            last_fetch: null
+          };
+          setBuffer(initialBuffer);
+          localStorage.setItem("improv_buffer", JSON.stringify(initialBuffer));
+          // Clear consumed IDs on fresh pre-fill
+          localStorage.setItem(
+            "improv_consumed_ids",
+            JSON.stringify({ emotions: [], locations: [], eras: [], themes: [], scenarios: [] })
+          );
+        }
+      } catch (err) {
+        console.error("Failed to fetch initial reservoir config", err);
+      }
     };
-    setBuffer(initialBuffer);
-    localStorage.setItem("improv_buffer", JSON.stringify(initialBuffer));
+
+    initialize();
   }, []);
 
   const handleDevModeChange = useCallback((val: boolean) => {
@@ -63,6 +87,7 @@ export function useImprovBuffer(activeTileId: string | null) {
     localStorage.setItem("dev_mode", val ? "true" : "false");
   }, []);
 
+  // Reload Reservoir logic with n8n/API fallback
   const triggerRegen = useCallback(async (force: boolean = false) => {
     const savedBuffer = localStorage.getItem("improv_buffer");
     let currentLastFetch: number | null = null;
@@ -85,7 +110,9 @@ export function useImprovBuffer(activeTileId: string | null) {
       }
     }
 
+    setIsReloading(true);
     setIsRegenerating(true);
+
     window.history.pushState({
       activeTileId,
       isAboutOpen: false,
@@ -96,76 +123,100 @@ export function useImprovBuffer(activeTileId: string | null) {
     const startTime = Date.now();
     const webhookUrl = "https://n8n.eole.me/webhook/improv-regen";
 
-    console.log(`[Regen Diagnostics] Starting webhook call to: ${webhookUrl}`);
-
     try {
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" }
-      });
-
-      const responseTime = Date.now() - startTime;
-      console.log(`[Regen Diagnostics] HTTP response received. Status: ${response.status} (${response.statusText}) in ${responseTime}ms`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status} (${response.statusText})`);
+      // 1. Fetch the full pool from the local JSON config file
+      const localResponse = await fetch("/data/reservoir-config.json");
+      if (!localResponse.ok) {
+        throw new Error("Failed to load local reservoir-config.json");
       }
+      const localPool = await localResponse.json();
 
-      const rawText = await response.text();
-      const textTime = Date.now() - startTime;
-      console.log(`[Regen Diagnostics] Raw response text fetched (length: ${rawText.length} chars) in ${textTime}ms`);
+      // Read current consumed IDs from localStorage
+      const consumedStr = localStorage.getItem("improv_consumed_ids");
+      const consumed = consumedStr ? JSON.parse(consumedStr) : { emotions: [], locations: [], eras: [], themes: [], scenarios: [] };
 
-      let data;
-      try {
-        data = JSON.parse(rawText);
-        console.log(`[Regen Diagnostics] JSON parsed successfully. Keys present:`, Object.keys(data));
-      } catch (jsonErr: any) {
-        console.error(`[Regen Diagnostics] JSON Parse Error:`, jsonErr);
-        console.log(`[Regen Diagnostics] Raw Response was:`, rawText);
-        throw jsonErr;
-      }
+      // Read current buffer
+      const currentBufStr = localStorage.getItem("improv_buffer");
+      const currentBuf = currentBufStr ? JSON.parse(currentBufStr) : { emotions: [], locations: [], eras: [], themes: [], scenarios: [] };
 
-      if (data && data.error) {
-        throw new Error(data.error);
-      }
-
-      const newBuffer: ImprovBuffer = {
-        emotions: Array.isArray(data?.emotions) && data.emotions.length > 0 ? data.emotions : [...EMOTIONS],
-        locations: Array.isArray(data?.locations) && data.locations.length > 0 ? data.locations : [...LOCATIONS],
-        eras: Array.isArray(data?.eras) && data.eras.length > 0 ? data.eras : [...ERAS],
-        last_fetch: Date.now()
+      // Determine available items for each category
+      const available: ImprovBuffer = {
+        emotions: (localPool.emotions || []).filter((item: any) => !consumed.emotions.includes(item.text) && !currentBuf.emotions.some((x: any) => x.text === item.text)),
+        locations: (localPool.locations || []).filter((item: any) => !consumed.locations.includes(item.text) && !currentBuf.locations.some((x: any) => x.text === item.text)),
+        eras: (localPool.eras || []).filter((item: any) => !consumed.eras.includes(item.text) && !currentBuf.eras.some((x: any) => x.text === item.text)),
+        themes: (localPool.themes || []).filter((item: any) => !consumed.themes.includes(item.text) && !currentBuf.themes.some((x: any) => x.text === item.text)),
+        scenarios: (localPool.scenarios || []).filter((item: any) => !consumed.scenarios.includes(item.text) && !currentBuf.scenarios.some((x: any) => x.text === item.text)),
+        last_fetch: null
       };
 
-      console.log(`[Regen Diagnostics] New buffer counts - emotions: ${newBuffer.emotions.length}, locations: ${newBuffer.locations.length}, eras: ${newBuffer.eras.length}`);
+      // Check if any category is exhausted
+      const isExhausted = 
+        (localPool.emotions && localPool.emotions.length > 0 && available.emotions.length === 0 && currentBuf.emotions.length === 0) ||
+        (localPool.locations && localPool.locations.length > 0 && available.locations.length === 0 && currentBuf.locations.length === 0) ||
+        (localPool.eras && localPool.eras.length > 0 && available.eras.length === 0 && currentBuf.eras.length === 0) ||
+        (localPool.themes && localPool.themes.length > 0 && available.themes.length === 0 && currentBuf.themes.length === 0) ||
+        (localPool.scenarios && localPool.scenarios.length > 0 && available.scenarios.length === 0 && currentBuf.scenarios.length === 0);
 
-      setBuffer(newBuffer);
-      localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
-      setN8nStatus("green");
-      setN8nError(null);
-      showToast("Réservoir rechargé avec succès !");
-    } catch (error) {
-      const errorTime = Date.now() - startTime;
-      console.error(`[Regen Diagnostics] Regeneration failed after ${errorTime}ms. Error:`, error);
-      setN8nStatus("red");
-      setN8nError(error instanceof Error ? error.message : String(error));
-      showToast("Erreur de régénération. Utilisation des données locales.");
-
-      // Ensure non-empty buffer on error
-      setBuffer((prev) => {
-        const finalEmotions = prev.emotions.length === 0 ? [...EMOTIONS] : prev.emotions;
-        const finalLocations = prev.locations.length === 0 ? [...LOCATIONS] : prev.locations;
-        const finalEras = prev.eras.length === 0 ? [...ERAS] : prev.eras;
-
-        const resetBuffer: ImprovBuffer = {
-          emotions: finalEmotions,
-          locations: finalLocations,
-          eras: finalEras,
+      // If we have available items in the local pool, refill the queue
+      if (!isExhausted) {
+        const newBuffer: ImprovBuffer = {
+          emotions: [...currentBuf.emotions, ...available.emotions],
+          locations: [...currentBuf.locations, ...available.locations],
+          eras: [...currentBuf.eras, ...available.eras],
+          themes: [...currentBuf.themes, ...available.themes],
+          scenarios: [...currentBuf.scenarios, ...available.scenarios],
           last_fetch: Date.now()
         };
-        localStorage.setItem("improv_buffer", JSON.stringify(resetBuffer));
-        return resetBuffer;
-      });
+
+        setBuffer(newBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+        setN8nStatus("green");
+        setN8nError(null);
+        showToast("Réservoir rechargé depuis le pool local.");
+      } else {
+        // Fallback to n8n AI Endpoint
+        console.log(`[Regen Diagnostics] Local pool exhausted, falling back to: ${webhookUrl}`);
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data && data.error) {
+          throw new Error(data.error);
+        }
+
+        const newBuffer: ImprovBuffer = {
+          emotions: Array.isArray(data?.emotions) && data.emotions.length > 0 ? data.emotions : (localPool.emotions || []),
+          locations: Array.isArray(data?.locations) && data.locations.length > 0 ? data.locations : (localPool.locations || []),
+          eras: Array.isArray(data?.eras) && data.eras.length > 0 ? data.eras : (localPool.eras || []),
+          themes: Array.isArray(data?.themes) && data.themes.length > 0 ? data.themes : (localPool.themes || []),
+          scenarios: Array.isArray(data?.scenarios) && data.scenarios.length > 0 ? data.scenarios : (localPool.scenarios || []),
+          last_fetch: Date.now()
+        };
+
+        setBuffer(newBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+        // Reset consumed list since we got fresh AI items
+        localStorage.setItem(
+          "improv_consumed_ids",
+          JSON.stringify({ emotions: [], locations: [], eras: [], themes: [], scenarios: [] })
+        );
+        setN8nStatus("green");
+        setN8nError(null);
+        showToast("Réservoir régénéré par l'IA !");
+      }
+    } catch (error) {
+      console.error("[Regen Diagnostics] Reload failed:", error);
+      setN8nStatus("red");
+      setN8nError(error instanceof Error ? error.message : String(error));
+      showToast("Erreur de rechargement.");
     } finally {
+      setIsReloading(false);
       setIsRegenerating(false);
       if (window.history.state && window.history.state.isRegenerating) {
         window.history.back();
@@ -173,7 +224,7 @@ export function useImprovBuffer(activeTileId: string | null) {
     }
   }, [devMode, activeTileId, showToast]);
 
-  const pickItem = useCallback((category: "emotions" | "locations" | "eras", filter?: string): any => {
+  const pickItem = useCallback((category: "emotions" | "locations" | "eras" | "themes" | "scenarios", filter?: string): any => {
     const saved = localStorage.getItem("improv_buffer");
     if (!saved) return null;
     try {
@@ -182,45 +233,16 @@ export function useImprovBuffer(activeTileId: string | null) {
 
       let filteredItems = [...items];
       if (filter && filter !== "All") {
-        if (category === "emotions") {
+        if (category === "emotions" || category === "locations" || category === "themes" || category === "scenarios") {
           filteredItems = items.filter((e: any) => e.category === filter);
-        } else if (category === "locations") {
-          filteredItems = items.filter((l: any) => l.category === filter);
+        } else if (category === "eras") {
+          filteredItems = items.filter((e: any) => e.era === filter);
         }
       }
 
-      // If category is exhausted, refill it with local static default data
       if (filteredItems.length === 0) {
-        showToast("Réservoir épuisé. Données locales utilisées, pensez à le recharger !");
-        
-        let defaults: any[] = [];
-        if (category === "emotions") defaults = [...EMOTIONS];
-        else if (category === "locations") defaults = [...LOCATIONS];
-        else if (category === "eras") defaults = [...ERAS];
-
-        let filteredDefaults = [...defaults];
-        if (filter && filter !== "All") {
-          if (category === "emotions") {
-            filteredDefaults = defaults.filter((e: any) => e.category === filter);
-          } else if (category === "locations") {
-            filteredDefaults = defaults.filter((l: any) => l.category === filter);
-          }
-        }
-
-        if (filteredDefaults.length === 0) return null;
-
-        const randomIndex = Math.floor(Math.random() * filteredDefaults.length);
-        const pickedItem = filteredDefaults[randomIndex];
-
-        const updatedItems = defaults.filter((item: any) => item.text !== pickedItem.text);
-        const updatedBuffer = {
-          ...currentBuffer,
-          [category]: updatedItems
-        };
-
-        setBuffer(updatedBuffer);
-        localStorage.setItem("improv_buffer", JSON.stringify(updatedBuffer));
-        return pickedItem;
+        showToast("Réservoir vide, pensez à le recharger !");
+        return null;
       }
 
       const randomIndex = Math.floor(Math.random() * filteredItems.length);
@@ -235,6 +257,14 @@ export function useImprovBuffer(activeTileId: string | null) {
       setBuffer(updatedBuffer);
       localStorage.setItem("improv_buffer", JSON.stringify(updatedBuffer));
 
+      // Track consumed ID (using the text since original items don't have id)
+      const consumedStr = localStorage.getItem("improv_consumed_ids");
+      const consumed = consumedStr ? JSON.parse(consumedStr) : { emotions: [], locations: [], eras: [], themes: [], scenarios: [] };
+      if (!consumed[category].includes(pickedItem.text)) {
+        consumed[category].push(pickedItem.text);
+        localStorage.setItem("improv_consumed_ids", JSON.stringify(consumed));
+      }
+
       return pickedItem;
     } catch (e) {
       console.error(e);
@@ -245,6 +275,7 @@ export function useImprovBuffer(activeTileId: string | null) {
   return {
     buffer,
     isRegenerating,
+    isReloading,
     devMode,
     toastMessage,
     triggerRegen,

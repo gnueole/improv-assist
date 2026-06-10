@@ -30,10 +30,21 @@ export interface Era {
   era: string;
 }
 
+export interface Theme {
+  text: string;
+  category?: string;
+}
+
+export interface Scenario {
+  text: string;
+  category?: string;
+}
+
 export interface ImprovBuffer {
   emotions: Emotion[];
   locations: Location[];
   eras: Era[];
+  themes: Theme[];
+  scenarios: Scenario[];
   last_fetch: number | null;
 }
-
