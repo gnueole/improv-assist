@@ -66,7 +66,7 @@ export default function DocsView() {
           </button>
           <button
             onClick={() => changeScale(Math.min(2, textScale + 1))}
-            disabled={textScale === 2}
+            disabled={textScale === 4}
             className="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 flex items-center justify-center font-bold text-sm disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all"
             title="Augmenter la taille"
           >
@@ -78,7 +78,7 @@ export default function DocsView() {
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto pr-1 pb-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-800">
         <div className={`space-y-4 animate-fade-in text-zinc-200 ${fonts.base}`}>
-          
+
           {/* Install PWA section */}
           <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
             <div className="flex items-center gap-2 text-zinc-100 font-bold mb-2">

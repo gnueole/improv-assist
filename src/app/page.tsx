@@ -92,7 +92,7 @@ export default function Dashboard() {
       isAboutOpen: false,
       isPromptOpen: false,
       isRegenerating: false
-    }, "", "");
+    }, "", `/${id}`);
   };
 
   // Modals History Open/Close Actions
@@ -103,7 +103,7 @@ export default function Dashboard() {
       isAboutOpen: true,
       isPromptOpen: false,
       isRegenerating: false
-    }, "", "");
+    }, "", activeTileId ? `/${activeTileId}` : "/");
   };
 
   const closeAbout = () => {
@@ -121,7 +121,7 @@ export default function Dashboard() {
       isAboutOpen: false,
       isPromptOpen: true,
       isRegenerating: false
-    }, "", "");
+    }, "", activeTileId ? `/${activeTileId}` : "/");
   };
 
   const closePrompt = () => {
@@ -129,6 +129,20 @@ export default function Dashboard() {
       window.history.back();
     } else {
       setIsPromptOpen(false);
+    }
+  };
+
+  const handleBackToDashboard = () => {
+    if (window.history.state === null || window.history.state?.activeTileId === undefined) {
+      setActiveTileId(null);
+      window.history.pushState({
+        activeTileId: null,
+        isAboutOpen: false,
+        isPromptOpen: false,
+        isRegenerating: false
+      }, "", "/");
+    } else {
+      window.history.back();
     }
   };
 
@@ -141,7 +155,9 @@ export default function Dashboard() {
         setIsAboutOpen(!!state.isAboutOpen);
         setIsPromptOpen(!!state.isPromptOpen);
       } else {
-        setActiveTileId(null);
+        const path = window.location.pathname.replace(/^\//, "");
+        const validTileIds = ["emotions", "who_starts", "locations", "eras", "timer", "constraints", "docs", "hiha"];
+        setActiveTileId(validTileIds.includes(path) ? path : null);
         setIsAboutOpen(false);
         setIsPromptOpen(false);
       }
@@ -151,6 +167,21 @@ export default function Dashboard() {
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
+  }, []);
+
+  // Initial load pathname detection
+  useEffect(() => {
+    const path = window.location.pathname.replace(/^\//, "");
+    const validTileIds = ["emotions", "who_starts", "locations", "eras", "timer", "constraints", "docs", "hiha"];
+    if (validTileIds.includes(path)) {
+      setActiveTileId(path);
+      window.history.replaceState({
+        activeTileId: path,
+        isAboutOpen: false,
+        isPromptOpen: false,
+        isRegenerating: false
+      }, "", `/${path}`);
+    }
   }, []);
 
   // Service Worker Registration
@@ -311,7 +342,7 @@ export default function Dashboard() {
         {/* Detail Header */}
         <header className="flex items-center justify-between pt-safe">
           <button
-            onClick={() => window.history.back()}
+            onClick={handleBackToDashboard}
             className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 active:scale-95 transition-all text-xs z-30"
           >
             <ChevronLeft className="w-4 h-4" />
