@@ -36,6 +36,16 @@ export default function DocsView() {
           base: "text-lg sm:text-xl",
           small: "text-base sm:text-lg",
         };
+      case 3:
+        return {
+          base: "text-xl sm:text-2xl",
+          small: "text-lg sm:text-xl",
+        };
+      case 4:
+        return {
+          base: "text-2xl sm:text-3xl",
+          small: "text-xl sm:text-2xl",
+        };
       case 0:
       default:
         return {
@@ -65,7 +75,7 @@ export default function DocsView() {
             A-
           </button>
           <button
-            onClick={() => changeScale(Math.min(2, textScale + 1))}
+            onClick={() => changeScale(Math.min(4, textScale + 1))}
             disabled={textScale === 4}
             className="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 flex items-center justify-center font-bold text-sm disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all"
             title="Augmenter la taille"
