@@ -254,8 +254,8 @@ export default function Dashboard() {
                 className="dashboard-tile aspect-square"
               >
                 <div className="dashboard-tile-inner">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center mb-2">
-                    <Icon className="w-4 h-4 text-white/90" strokeWidth={2} />
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center mb-2 shrink-0">
+                    <Icon className="w-4 h-4 text-white/90 shrink-0" strokeWidth={2} />
                   </div>
                   <div>
                     <h3 className="text-base md:text-sm font-semibold text-zinc-100 tracking-wide leading-snug">
