@@ -73,17 +73,17 @@ export default function Dashboard() {
 
   // Expose functions & state from hook
   const {
-    isRegenerating,
-    isReloading,
-    isLoading,
-    devMode,
-    toastMessage,
-    triggerRegen,
-    pickItem,
-    showToast,
-    handleDevModeChange,
-    n8nStatus,
-    n8nError
+    isRegenerating,      // Legacy loading state maintained for compatibility
+    isReloading,         // True when resetting/reloading the local reservoir pool
+    isLoading,           // General loading indicator for async operations
+    devMode,             // Flag indicating if Developer Mode is enabled
+    toastMessage,        // Message text to display in ToastAlert
+    triggerRegen,        // Reloads the static reservoir JSON into the buffer
+    pickItem,            // Draws a random prompt item from a category or fetches via n8n
+    showToast,           // Dispatches a toast notification message
+    handleDevModeChange, // Toggles developer mode on/off
+    n8nStatus,           // Connection status to n8n webhook ("green" or "red")
+    n8nError             // Details of the last n8n sync/connection error
   } = useImprovBuffer(activeTileId);
 
   // Symmetrical layout with 11 items grid (2 columns on mobile, 3 columns on desktop)
@@ -96,8 +96,8 @@ export default function Dashboard() {
     { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
     { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
     { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
-    { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
     { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
+    { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
     { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
     { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
   ];
