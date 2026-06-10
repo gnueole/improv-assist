@@ -48,29 +48,28 @@ import FeedbackView from "@/components/FeedbackView";
 
 import reservoirPool from "../../public/data/reservoir-config.json";
 
-const SYSTEM_PROMPT = `Tu es un assistant d'improvisation théâtrale. 
-Génère un fichier JSON structuré contenant les listes suivantes pour alimenter les générateurs d'impro :
-
-1. "emotions" : 20 suggestions d'émotions/états d'esprit avec leur catégorie (Positive, Négative, Neutre).
-Chaque objet doit être au format : { "text": string, "category": "Positive" | "Négative" | "Neutre" }
-
-2. "locations" : 20 suggestions de lieux propices au jeu dramatique ou comique, classés par catégorie (Huis clos, Quotidien, Aventure, Insolite).
-Chaque objet doit être au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite" }
-
-3. "eras" : 20 suggestions de périodes temporelles ou époques inspirantes, classées par géographie/époque (Passé, Présent, Futur).
-Chaque objet doit être au format : { "text": string, "era": "Passé" | "Présent" | "Futur" }
-
-4. "themes" : 20 suggestions de thèmes d'improvisation (sujets courts).
-Chaque objet doit être au format : { "text": string, "category": string }
-
-5. "scenarios" : 20 suggestions de situations de départ ou d'intrigues dramatiques/comiques.
-Chaque objet doit être au format : { "text": string, "category": string }`;
-
 export default function Dashboard() {
   const [activeTileId, setActiveTileId] = useState<string | null>(null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [systemPrompt, setSystemPrompt] = useState<string>("Chargement du prompt...");
+
+  // Fetch master.prompt dynamically when prompt modal is opened
+  useEffect(() => {
+    if (isPromptOpen) {
+      fetch("/api/prompt")
+        .then((res) => {
+          if (!res.ok) throw new Error("Impossible de lire le fichier");
+          return res.text();
+        })
+        .then((text) => setSystemPrompt(text))
+        .catch((err) => {
+          console.error("Error loading system prompt:", err);
+          setSystemPrompt("Erreur lors de la lecture de master.prompt.");
+        });
+    }
+  }, [isPromptOpen]);
 
   // Expose functions & state from hook
   const {
@@ -92,14 +91,14 @@ export default function Dashboard() {
     { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500" },
     { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500" },
     { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400" },
+    { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
     { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500" },
     { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
     { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
-    { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
     { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
     { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
-    { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
     { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
+    { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
     { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
   ];
 
@@ -271,15 +270,14 @@ export default function Dashboard() {
 
   return (
     <main className="relative h-full w-full overflow-hidden bg-black flex flex-col justify-between">
-      
+
       {/* Toast Alert */}
       <ToastAlert message={toastMessage} />
 
       {/* 1. Main Dashboard Mode */}
       <div
-        className={`dashboard-container transition-all duration-500 ease-out z-10 ${
-          activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4" : "opacity-100 scale-100"
-        }`}
+        className={`dashboard-container transition-all duration-500 ease-out z-10 ${activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4" : "opacity-100 scale-100"
+          }`}
       >
         {/* Header */}
         <header className="dashboard-header">
@@ -385,9 +383,8 @@ export default function Dashboard() {
 
       {/* 2. Fullscreen Detail Views */}
       <div
-        className={`absolute inset-0 bg-black flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-in-out z-20 ${
-          activeTileId === null ? "opacity-0 scale-105 pointer-events-none translate-y-4" : "opacity-100 scale-100"
-        }`}
+        className={`absolute inset-0 bg-black flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-in-out z-20 ${activeTileId === null ? "opacity-0 scale-105 pointer-events-none translate-y-4" : "opacity-100 scale-100"
+          }`}
       >
         {/* Detail Header */}
         <header className="flex items-center justify-between pt-safe">
@@ -438,7 +435,7 @@ export default function Dashboard() {
       <PromptModal
         isOpen={isPromptOpen}
         onClose={closePrompt}
-        systemPrompt={SYSTEM_PROMPT}
+        systemPrompt={systemPrompt}
       />
 
       {/* Privacy Policy Modal Overlay */}
