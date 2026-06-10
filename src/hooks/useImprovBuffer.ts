@@ -196,9 +196,9 @@ export function useImprovBuffer(activeTileId: string | null) {
     setIsReloading(true);
     showToast(`Réservoir vide pour ${category}. Récupération d'un nouvel élément via n8n...`);
 
-    const webhookUrl = "https://n8n.eole.me/webhook/improv-regen";
+    const apiUrl = "/api/improv-regen";
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ category, count: 1 })

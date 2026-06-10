@@ -1,0 +1,39 @@
+import { NextResponse } from "next/server";
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const webhookUrl = process.env.N8N_POPULATE_URL || "https://n8n.eole.me/webhook/improv-regen";
+    
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: `n8n webhook returned status ${response.status}` },
+        { status: response.status }
+      );
+    }
+    
+    let responseData = {};
+    const text = await response.text();
+    if (text) {
+      try {
+        responseData = JSON.parse(text);
+      } catch (e) {
+        responseData = { text };
+      }
+    }
+    
+    return NextResponse.json(responseData);
+  } catch (error) {
+    console.error("[Improv Regen API Proxy Error]:", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

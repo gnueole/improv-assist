@@ -27,9 +27,9 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
     setIsSubmitting(true);
     setErrorMessage(null);
 
-    const webhookUrl = "https://n8n.eole.me/webhook/improv-feedback";
+    const apiUrl = "/api/feedback";
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -41,7 +41,14 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        let errorMsg = `Erreur HTTP ${response.status}`;
+        try {
+          const errData = await response.json();
+          if (errData && errData.error) {
+            errorMsg = errData.error;
+          }
+        } catch (e) {}
+        throw new Error(errorMsg);
       }
 
       setIsSuccess(true);
@@ -53,7 +60,7 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
       setComment("");
     } catch (err) {
       console.error("[Feedback Submit Error]:", err);
-      setErrorMessage("Impossible d'envoyer le feedback pour le moment. Veuillez réessayer.");
+      setErrorMessage(err instanceof Error ? err.message : "Impossible d'envoyer le feedback pour le moment.");
       showToast("Erreur de transmission.");
     } finally {
       setIsSubmitting(false);
