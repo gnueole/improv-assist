@@ -4,6 +4,9 @@
  * @file PromptModal.tsx
  * @description Modal dialog overlay displaying the system prompt used for Gemini generation.
  * Only visible/accessible when Dev Mode is activated.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React from "react";

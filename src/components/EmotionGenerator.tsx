@@ -4,6 +4,9 @@
  * @file EmotionGenerator.tsx
  * @description Component that presents suggested emotions/mindsets to portray. Features a randomized
  * intensity indicator (1-10), category filtering, and spinning animation behavior.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useEffect } from "react";

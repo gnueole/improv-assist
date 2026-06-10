@@ -1,26 +1,74 @@
 "use client";
 
-import React, { useState } from "react";
-import { Send, CheckCircle2, MessageSquare, AlertCircle } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { Send, CheckCircle2, MessageSquare, AlertCircle, Star } from "lucide-react";
 
 interface FeedbackViewProps {
   showToast: (msg: string) => void;
+  onOpenPrivacy: () => void;
 }
 
-export default function FeedbackView({ showToast }: FeedbackViewProps) {
+export default function FeedbackView({ showToast, onOpenPrivacy }: FeedbackViewProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [feedbackType, setFeedbackType] = useState<"Demande" | "Suggestion" | "Observation">("Suggestion");
   const [comment, setComment] = useState("");
+  const [score, setScore] = useState<number>(5);
+  const [isDragging, setIsDragging] = useState(false);
+  const [consent, setConsent] = useState(false);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const calculateScore = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const pct = x / rect.width;
+    const newScore = Math.max(1, Math.min(5, Math.ceil(pct * 5)));
+    setScore(newScore);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    calculateScore(e.clientX);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      calculateScore(e.clientX);
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    setIsDragging(false);
+    e.currentTarget.releasePointerCapture(e.pointerId);
+  };
+
+  const getScoreLabel = (s: number) => {
+    switch (s) {
+      case 1: return "Mauvais 😢";
+      case 2: return "Bof 😕";
+      case 3: return "Moyen 🙂";
+      case 4: return "Très bon ! 👍";
+      case 5:
+      default:
+        return "Excellent ! 🐸";
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !comment.trim()) {
       showToast("Veuillez remplir les champs obligatoires.");
+      return;
+    }
+    if (!consent) {
+      showToast("Veuillez accepter la politique de confidentialité.");
       return;
     }
 
@@ -36,7 +84,8 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
           name: name.trim(),
           email: email.trim() || undefined,
           type: feedbackType,
-          comment: comment.trim()
+          comment: comment.trim(),
+          score
         })
       });
 
@@ -58,6 +107,8 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
       setEmail("");
       setFeedbackType("Suggestion");
       setComment("");
+      setScore(5);
+      setConsent(false);
     } catch (err) {
       console.error("[Feedback Submit Error]:", err);
       setErrorMessage(err instanceof Error ? err.message : "Impossible d'envoyer le feedback pour le moment.");
@@ -75,12 +126,12 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
         <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">
           Votre retour a bien été envoyé. Vos observations et suggestions nous aident à améliorer Houba Houba !
         </p>
-        <button
-          onClick={() => setIsSuccess(false)}
-          className="mt-4 px-6 py-2.5 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700 hover:bg-zinc-700 active:scale-95 transition-all text-xs font-semibold"
+        <a
+          href="index.html"
+          className="mt-4 px-6 py-2.5 rounded-xl bg-zinc-100 text-black hover:bg-white active:scale-95 transition-all text-xs font-semibold"
         >
-          Envoyer un autre retour
-        </button>
+          Je retourne improviser
+        </a>
       </div>
     );
   }
@@ -148,6 +199,45 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
         </div>
       </div>
 
+      {/* Star Rating (Swipeable) */}
+      <div className="flex flex-col gap-1.5 text-left select-none">
+        <label className="text-xs font-semibold text-zinc-400 flex justify-between items-center">
+          <span>Note d'évaluation</span>
+          <span className="text-zinc-500 text-[10px] font-normal italic">Glissez pour ajuster</span>
+        </label>
+        <div 
+          ref={containerRef}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={() => setIsDragging(false)}
+          className={`flex flex-col items-center gap-2 py-3 px-4 bg-zinc-950 border rounded-xl cursor-ew-resize touch-none select-none transition-all duration-200 ${
+            isDragging 
+              ? "border-amber-500/50 shadow-md shadow-amber-950/20 bg-zinc-950/80" 
+              : "border-zinc-800 bg-zinc-950/60"
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            {[1, 2, 3, 4, 5].map((index) => {
+              const active = index <= score;
+              return (
+                <Star
+                  key={index}
+                  className={`w-7 h-7 transition-all duration-150 pointer-events-none ${
+                    active
+                      ? "fill-amber-400 text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)] scale-110"
+                      : "text-zinc-750 fill-transparent"
+                  }`}
+                />
+              );
+            })}
+          </div>
+          <span className="text-[11px] font-semibold text-zinc-400 tracking-wide uppercase transition-all duration-300">
+            {getScoreLabel(score)}
+          </span>
+        </div>
+      </div>
+
       {/* Comment (Required) */}
       <div className="flex flex-col gap-1.5 text-left">
         <label className="text-xs font-semibold text-zinc-400 flex items-center gap-1">
@@ -162,6 +252,29 @@ export default function FeedbackView({ showToast }: FeedbackViewProps) {
           onChange={(e) => setComment(e.target.value)}
           className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-zinc-100 text-sm focus:outline-none focus:border-zinc-700 placeholder-zinc-600 transition-colors h-24 resize-none"
         />
+      </div>
+
+      {/* GDPR Consent Explicit Checkbox */}
+      <div className="flex items-start gap-2.5 text-left py-1">
+        <input
+          id="consent-checkbox"
+          type="checkbox"
+          required
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="w-4 h-4 accent-cyan-500 rounded border-zinc-800 bg-zinc-950 mt-0.5 cursor-pointer shrink-0"
+        />
+        <label htmlFor="consent-checkbox" className="text-[10px] text-zinc-400 leading-snug cursor-pointer select-none">
+          J'accepte que mes données soient traitées conformément à la{" "}
+          <button
+            type="button"
+            onClick={onOpenPrivacy}
+            className="text-cyan-400 underline hover:text-cyan-300 font-semibold inline"
+          >
+            Politique de Confidentialité
+          </button>
+          . <span className="text-red-400">*</span>
+        </label>
       </div>
 
       {/* Error Message */}

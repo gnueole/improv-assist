@@ -4,6 +4,9 @@
  * @file LocationGenerator.tsx
  * @description Component that presents suggested theatrical locations/settings. Supports category filtering,
  * has an irised border layout, and displays spinning animations during selection.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useEffect } from "react";

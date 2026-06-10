@@ -1,3 +1,17 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# ==============================================================================
+# 🎭 HOUBA HOUBA ! — RESERVOIR POPULATION SCRIPT
+# ==============================================================================
+# Description : Fetches a new batch of random improvisation triggers from n8n 
+#               and populates the local static reservoir pool config file.
+# Author      : Éole <hi@eole>
+# Date        : $Creation Date$
+# License     : MIT
+# ==============================================================================
+
+
 import os
 import json
 import requests
@@ -15,7 +29,7 @@ def fetch_and_populate():
     }
     
     try:
-        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=60)
+        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=120)
         response.raise_for_status()
         
         # On attend de n8n un JSON avec la structure exacte :
@@ -42,4 +56,7 @@ def fetch_and_populate():
         print(f"❌ Erreur de structure de données : {e}")
 
 if __name__ == "__main__":
-    fetch_and_populate()
+    try:
+        fetch_and_populate()
+    except KeyboardInterrupt:
+        print("\n🛑 Processus interrompu par l'utilisateur (Ctrl+C). Sortie...")

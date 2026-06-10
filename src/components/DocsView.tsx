@@ -4,12 +4,19 @@
  * @file DocsView.tsx
  * @description View showing documentation details, PWA installation instructions for iOS and Android,
  * and a summary list of all features included in the application.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useEffect } from "react";
-import { SlidersHorizontal, Info, Download, Type } from "lucide-react";
+import { SlidersHorizontal, Info, Download, Type, ShieldCheck } from "lucide-react";
 
-export default function DocsView() {
+interface DocsViewProps {
+  onOpenPrivacy: () => void;
+}
+
+export default function DocsView({ onOpenPrivacy }: DocsViewProps) {
   const [textScale, setTextScale] = useState<number>(0);
 
   useEffect(() => {
@@ -226,6 +233,23 @@ export default function DocsView() {
                 Un formulaire de feedback direct permettant aux utilisateurs d'envoyer des demandes, suggestions ou observations pour améliorer l'application.
               </p>
             </div>
+          </div>
+
+          {/* GDPR / Privacy card */}
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-zinc-100 font-bold mb-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span>Protection des Données & RGPD</span>
+            </div>
+            <p className="text-zinc-355 text-sm leading-relaxed">
+              Vos données personnelles (nom, email, commentaires, score) sont traitées avec soin et en stricte conformité avec la réglementation européenne RGPD.
+            </p>
+            <button
+              onClick={onOpenPrivacy}
+              className="mt-3 w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-750 text-zinc-200 border border-zinc-700 active:scale-95 transition-all text-xs font-semibold"
+            >
+              Consulter la Politique de Confidentialité
+            </button>
           </div>
 
           {/* About / Credits */}

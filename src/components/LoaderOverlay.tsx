@@ -4,6 +4,9 @@
  * @file LoaderOverlay.tsx
  * @description Component rendering a full-screen blurred glass overlay with a spinning gradient wheel,
  * displayed while the prompts reservoir is being updated/synchronized with Gemini.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React from "react";

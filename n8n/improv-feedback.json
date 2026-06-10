@@ -1,4 +1,5 @@
 {
+  "id": "FBKdb1280a59b767",
   "name": "Improv-Feedback",
   "active": true,
   "nodes": [
@@ -35,12 +36,16 @@
               "title": "={{ $json.body.name }}"
             },
             {
-              "key": "Type|rich_text",
-              "textContent": "={{ $json.body.type }}"
+              "key": "Type|select",
+              "selectValue": "={{ $json.body.type }}"
             },
             {
-              "key": "email|rich_text",
-              "textContent": "={{ $json.body.email || '' }}"
+              "key": "email|email",
+              "emailValue": "={{ $json.body.email }}"
+            },
+            {
+              "key": "score|number",
+              "numberValue": "={{ Number($json.body.score) }}"
             }
           ]
         },

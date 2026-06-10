@@ -4,6 +4,9 @@
  * @file AboutModal.tsx
  * @description Modal dialog overlay displaying app credits, versions, description of PWA capabilities,
  * and developer options (like enabling/disabling Dev Mode).
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React from "react";
@@ -14,9 +17,10 @@ interface AboutModalProps {
   onClose: () => void;
   devMode: boolean;
   onDevModeChange: (val: boolean) => void;
+  onOpenPrivacy: () => void;
 }
 
-export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }: AboutModalProps) {
+export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, onOpenPrivacy }: AboutModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -83,6 +87,15 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Copyright</span>
               <span className="text-zinc-300">© {new Date().getFullYear()} Éole</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-zinc-500">Confidentialité</span>
+              <button 
+                onClick={onOpenPrivacy}
+                className="font-semibold text-cyan-400 hover:underline flex items-center gap-1 active:scale-95 transition-transform"
+              >
+                Politique & RGPD
+              </button>
             </div>
             <div className="text-xs text-zinc-400 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
               Moteur d'improvisation théâtrale.

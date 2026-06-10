@@ -2,6 +2,9 @@
  * @file icon-helper.ts
  * @description Helper functions that provide the Sparkles icon SVG definition 
  * (matching the dashboard header sparkles) with different color themes depending on the environment.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 const PROD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

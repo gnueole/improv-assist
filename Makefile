@@ -3,7 +3,9 @@
 # ==============================================================================
 # Description : Local development management and automated VPS deployment.
 # Version     : 1.3.0
-# Author      : Éole Wind
+# Author      : Éole <hi@eole>
+# Date        : $Creation Date$
+# License     : MIT
 # Troubleshooting 504: ssh eole.me "docker network connect jobby-md2html_default <real_traefik_container_name>"
 # ==============================================================================
 
@@ -66,12 +68,12 @@ down:
 # ==============================================================================
 deploy:
 	@echo "🚀 Deploying Houba Houba ! to VPS Target [$(VPS_SSH)]..."
-	# 1. Ensure the remote deployment directory exists
+# 1. Ensure the remote deployment directory exists
 	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
-	# 2. SCP the production compose file and environment file
+# 2. SCP the production compose file and environment file
 	scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
 	scp $(DOCKER_DIR)/.env.prod $(VPS_SSH):$(VPS_PATH)/.env
-	# 3. Pull the immutable image from GHCR and recreate containers (NO local build)
+# 3. Pull the immutable image from GHCR and recreate containers (NO local build)
 	@echo "📥 Pulling latest immutable image from GHCR..."
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && \
 		docker compose -f docker-compose.prod.yml pull && \

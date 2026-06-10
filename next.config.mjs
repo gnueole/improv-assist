@@ -2,6 +2,9 @@
  * @file next.config.mjs
  * @description Next.js configuration. Sets standalone output target, configures file watcher options for HMR,
  * and maps subpaths internally to the root route to prevent 404s on browser reloads while supporting analytics tracking.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 /** @type {import('next').NextConfig} */
@@ -10,6 +13,7 @@ const nextConfig = {
   output: "standalone",
   async rewrites() {
     return [
+      { source: "/index.html", destination: "/" },
       { source: "/emotions", destination: "/" },
       { source: "/who_starts", destination: "/" },
       { source: "/locations", destination: "/" },
@@ -18,6 +22,10 @@ const nextConfig = {
       { source: "/constraints", destination: "/" },
       { source: "/docs", destination: "/" },
       { source: "/hiha", destination: "/" },
+      { source: "/themes", destination: "/" },
+      { source: "/scenarios", destination: "/" },
+      { source: "/echauffements", destination: "/" },
+      { source: "/feedback", destination: "/" },
     ];
   },
   // Allow running inside docker HMR with specific web socket port/host if needed

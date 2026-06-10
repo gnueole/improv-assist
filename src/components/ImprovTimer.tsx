@@ -5,6 +5,9 @@
  * @description Standard theatrical improvisation timer (preset to 2m30s). Features visual feedback,
  * audible bells (using Web Audio API synthesized tones), speech synthesis, custom duration adjustments,
  * and high-urgency animation transitions as time runs out.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useEffect, useRef } from "react";

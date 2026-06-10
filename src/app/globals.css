@@ -2,6 +2,9 @@
  * @file globals.css
  * @description Global stylesheet containing base layout resets, Tailwind imports, custom CSS variables,
  * premium irised gradient borders, modal overlays, layout definitions, animations, and customized scrollbars.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 @tailwind base;

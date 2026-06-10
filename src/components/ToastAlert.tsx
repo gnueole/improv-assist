@@ -4,6 +4,9 @@
  * @file ToastAlert.tsx
  * @description Component rendering transient, auto-dismissing feedback messages at the top of the viewport.
  * Uses custom slide-down animation styling defined in globals.css.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React from "react";

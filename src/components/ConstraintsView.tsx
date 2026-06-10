@@ -4,6 +4,9 @@
  * @file ConstraintsView.tsx
  * @description View showing improvisation constraints fetched from Notion. Supports text searching,
  * category filter tabs, and displays structured constraint detail cards.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useMemo } from "react";

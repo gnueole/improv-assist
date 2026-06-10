@@ -4,6 +4,9 @@
  * @file EraGenerator.tsx
  * @description Component that presents suggested eras/time periods. Draws prompts from the offline cache,
  * features a card display, and spins/animates during randomization.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useEffect } from "react";

@@ -4,6 +4,9 @@
  * @file page.tsx
  * @description Main app orchestrator / home dashboard page. Features a balanced 10-item grid of tiles, 
  * handles active tile navigation, virtual history states, and mounts generator components.
+ * @author Éole <hi@eole>
+ * @creation-date $Creation Date$
+ * @license MIT
  */
 
 import React, { useState, useEffect } from "react";
@@ -27,6 +30,7 @@ import {
 import { Tile } from "@/types";
 import { useImprovBuffer } from "@/hooks/useImprovBuffer";
 import AboutModal from "@/components/AboutModal";
+import PrivacyModal from "@/components/PrivacyModal";
 import PromptModal from "@/components/PromptModal";
 import LoaderOverlay from "@/components/LoaderOverlay";
 import ToastAlert from "@/components/ToastAlert";
@@ -66,6 +70,7 @@ export default function Dashboard() {
   const [activeTileId, setActiveTileId] = useState<string | null>(null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   // Expose functions & state from hook
   const {
@@ -245,7 +250,7 @@ export default function Dashboard() {
       case "constraints":
         return <ConstraintsView />;
       case "docs":
-        return <DocsView />;
+        return <DocsView onOpenPrivacy={() => setIsPrivacyOpen(true)} />;
       case "hiha":
         return <HiHaRules />;
       case "echauffements":
@@ -258,7 +263,7 @@ export default function Dashboard() {
           />
         );
       case "feedback":
-        return <FeedbackView showToast={showToast} />;
+        return <FeedbackView showToast={showToast} onOpenPrivacy={() => setIsPrivacyOpen(true)} />;
       default:
         return null;
     }
@@ -420,6 +425,10 @@ export default function Dashboard() {
         onClose={closeAbout}
         devMode={devMode}
         onDevModeChange={handleDevModeChange}
+        onOpenPrivacy={() => {
+          setIsAboutOpen(false);
+          setIsPrivacyOpen(true);
+        }}
       />
 
       {/* Loader Overlay */}
@@ -430,6 +439,12 @@ export default function Dashboard() {
         isOpen={isPromptOpen}
         onClose={closePrompt}
         systemPrompt={SYSTEM_PROMPT}
+      />
+
+      {/* Privacy Policy Modal Overlay */}
+      <PrivacyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
       />
 
     </main>
