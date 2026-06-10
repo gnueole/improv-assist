@@ -263,7 +263,7 @@ export default function Dashboard() {
                         {tile.title}
                       </span>
                     </h3>
-                    <p className="text-sm md:text-xs text-zinc-400 font-light mt-1">
+                    <p className="text-xs md:text-[10px] text-zinc-400 font-light mt-1">
                       {tile.subtitle}
                     </p>
                   </div>

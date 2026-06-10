@@ -14,7 +14,7 @@ export default function DocsView() {
     <div className="w-full flex flex-col h-[calc(100vh-180px)] max-w-md mx-auto relative px-2">
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto pr-1 pb-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-800">
-        <div className="space-y-4 animate-fade-in text-zinc-300 text-xs sm:text-sm">
+        <div className="space-y-4 animate-fade-in text-zinc-300 text-sm sm:text-base">
           
           {/* Install PWA section */}
           <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
@@ -25,7 +25,7 @@ export default function DocsView() {
             <p className="text-zinc-400 leading-relaxed">
               Cette application est conçue pour fonctionner <strong>100% hors-ligne</strong> (sans réseau) dans les théâtres et les salles de répétition.
             </p>
-            <div className="mt-3 p-3 bg-zinc-950/80 rounded-xl border border-zinc-800/50 text-[11px] space-y-1.5 text-zinc-400">
+            <div className="mt-3 p-3 bg-zinc-950/80 rounded-xl border border-zinc-800/50 text-xs sm:text-sm space-y-1.5 text-zinc-400">
               <div className="flex items-start gap-1.5">
                 <span className="text-cyan-400">iOS:</span>
                 <span>Ouvrez dans Safari &rarr; bouton Partager &rarr; <strong>Sur l'écran d'accueil</strong>.</span>
@@ -50,7 +50,7 @@ export default function DocsView() {
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
                 Générateur d'Émotions
               </h4>
-              <p className="text-[11px] text-zinc-400 pl-3.5 leading-normal">
+              <p className="text-xs sm:text-sm text-zinc-400 pl-3.5 leading-normal">
                 Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de <strong>1 à 10</strong>. Ce niveau de performance pousse les acteurs à nuancer ou à exagérer leur état psychologique.
               </p>
             </div>
@@ -61,7 +61,7 @@ export default function DocsView() {
                 <span className="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
                 Qui Commence ? (Multi-touch)
               </h4>
-              <p className="text-[11px] text-zinc-400 pl-3.5 leading-normal">
+              <p className="text-xs sm:text-sm text-zinc-400 pl-3.5 leading-normal">
                 Idéal pour désigner l'initiateur d'une scène. Posez jusqu'à 5 doigts sur l'écran. Après 3 secondes de décompte, le gagnant s'affiche en vert vif avec un effet haptique.
               </p>
             </div>
@@ -72,7 +72,7 @@ export default function DocsView() {
                 <span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
                 Suggestions de Lieu & Époque
               </h4>
-              <p className="text-[11px] text-zinc-400 pl-3.5 leading-normal">
+              <p className="text-xs sm:text-sm text-zinc-400 pl-3.5 leading-normal">
                 Des idées créatives instantanées pour planter le décor physique (salon de coiffure, sous-marin) et temporel (Moyen Âge, an 3000, années 80) de vos histoires.
               </p>
             </div>
@@ -83,14 +83,14 @@ export default function DocsView() {
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                 Timer de Scène
               </h4>
-              <p className="text-[11px] text-zinc-400 pl-3.5 leading-normal">
+              <p className="text-xs sm:text-sm text-zinc-400 pl-3.5 leading-normal">
                 Un chronomètre préréglé sur 2 minutes 30 secondes (durée standard d'improvisation). Lorsque le temps est écoulé, le message dynamique <strong>« Hey ! Impro ! »</strong> signale la fin.
               </p>
             </div>
           </div>
 
           {/* About / Credits */}
-          <div className="p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md flex items-start gap-3 text-zinc-400 text-[11px] leading-relaxed">
+          <div className="p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md flex items-start gap-3 text-zinc-400 text-xs sm:text-sm leading-relaxed">
             <Info className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
             <div>
               Conçu et optimisé par <strong>Éole</strong> pour les troupes de théâtre d'improvisation. Version active : Beta 1. Tous droits réservés.
