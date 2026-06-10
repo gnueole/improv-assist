@@ -36,19 +36,28 @@ jobs:
 
       - name: 🔑 Log in to GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🏷️ Extract Docker metadata & tags
         id: meta
         uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
 
       - name: 🚀 Build production image & Push to GHCR
         uses: docker/build-push-action@v6 # Upgraded to v6 for full Node 24/25 compliance
         with:
           context: .
-          file: ./Dockerfile
+          file: docker/Dockerfile.prod
           push: true
-          tags: ${{ id.meta.outputs.tags }}
-          labels: ${{ id.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
