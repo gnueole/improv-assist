@@ -11,20 +11,20 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Smile,
-  Fingerprint,
-  MapPin,
-  Clock,
-  ChevronLeft,
-  Sparkles,
-  Info,
-  Hourglass,
-  BookOpen,
-  Zap,
-  HelpCircle,
-  Terminal,
-  RotateCw,
-  MessageSquare
+  Smile,         // Emotions Generator
+  Fingerprint,   // Who Starts? (Multi-touch)
+  MapPin,        // Location Generator
+  Clock,         // Era Generator
+  ChevronLeft,   // Back navigation button
+  Sparkles,      // Themes Generator
+  Info,          // About / Help Trigger
+  Hourglass,     // Scene Timer
+  BookOpen,      // Scenarios & Constraints Views
+  Zap,           // HiHa Rules & Echauffements Generators
+  HelpCircle,    // Help & Guide Modal
+  Terminal,      // Dev Prompt Inspector Trigger
+  RotateCw,      // Reservoir Regeneration Button
+  MessageSquare  // Feedback & Ideas Form
 } from "lucide-react";
 
 import { Tile } from "@/types";

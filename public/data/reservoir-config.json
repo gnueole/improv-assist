@@ -2,203 +2,253 @@
   "scenarios": [
     {
       "text": "Rupture devant une caissière fatiguée",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Un couple se sépare en plein règlement d'achats sous le regard blasé de l'employée."
     },
     {
       "text": "Coincés dans un ascenseur bloqué",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "Deux inconnus aux tempéraments opposés doivent cohabiter le temps du dépannage."
     },
     {
       "text": "Deux espions oubliant leur mot de passe",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Devant la porte blindée, l'infiltration est compromise par un trou de mémoire."
     },
     {
       "text": "Un chevalier face à un lave-linge",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Un guerrier médiéval prend l'électroménager moderne pour une créature démoniaque."
     },
     {
       "text": "Entretien d'embauche pour être clown triste",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Le candidat tente de prouver que sa mélancolie est un atout artistique."
     },
     {
       "text": "Une confession dans un confessionnal trop petit",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "Un prêtre et un fidèle s'entassent dans un espace exigu pour un aveu embarrassant."
     },
     {
       "text": "Négociation de rançon pour un doudou perdu",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Un parent désespéré négocie avec un ravisseur exigeant des bonbons."
     },
     {
       "text": "Le premier rendez-vous d'un vampire timide",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Il tente de cacher sa nature tout en évitant le miroir et l'ail."
     },
     {
       "text": "Deux alpinistes suspendus à un fil",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "En pleine paroi rocheuse, ils règlent un différend familial crucial."
     },
     {
       "text": "Un client mécontent dans un magasin de blagues",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Il veut se faire rembourser un coussin péteur défectueux."
     },
     {
       "text": "Un astronaute et un extraterrestre font du stop",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Sur le bord d'une route spatiale, ils cherchent à rejoindre la Terre."
     },
     {
       "text": "Deux statues de cire qui prennent vie la nuit",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Elles en profitent pour régler leurs comptes historiques hors de leurs socles."
     },
     {
       "text": "Un contrôle fiscal surprise au pôle Nord",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Un agent tatillon vérifie la comptabilité de l'usine de jouets des elfes."
     },
     {
       "text": "Un chirurgien qui cherche ses clés dans le patient",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Il tente de réparer son oubli avant la fin de l'anesthésie."
     },
     {
       "text": "Perdus dans le labyrinthe d'un supermarché la nuit",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "Deux clients oubliés cherchent la sortie entre les rayons obscurs."
     },
     {
       "text": "Deux enfants tentent d'acheter une voiture",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Armés d'une tirelire et d'un faux permis, ils négocient avec le vendeur."
     },
     {
       "text": "Un cours de pilotage d'avion sans manuel",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "L'instructeur improvise les commandes en plein vol de démonstration."
     },
     {
       "text": "Une dispute pour le dernier rouleau de papier toilette",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "En pleine pénurie, deux clients ne lâchent pas le précieux sésame."
     },
     {
       "text": "Un détective privé interroge son propre reflet",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Persuadé d'avoir trouvé le coupable, il mène une confrontation interne."
     },
     {
       "text": "Une première leçon de magie qui tourne mal",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "L'apprenti transforme accidentellement son maître en animal de compagnie."
     },
     {
       "text": "Coincés dans une cabine de téléphérique en panne",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "Le vertige et la promiscuité font grimper la tension entre les passagers."
     },
     {
       "text": "Un inventeur présente une machine à faire du vent",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Le prototype s'emballe et menace de souffler le salon de présentation."
     },
     {
       "text": "Un naufrage sur une île déserte minuscule",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Deux rescapés doivent partager un espace de trois mètres carrés."
     },
     {
       "text": "Un client veut échanger son chien contre un chat",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Il explique au vendeur de l'animalerie les défauts logistiques de son canidé."
     },
     {
       "text": "Un rendez-vous chez le dentiste des monstres",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Le praticien doit soigner la carie d'un loup-garou récalcitrant."
     },
     {
       "text": "Deux fantômes discutent de l'inflation de l'ectoplasme",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Ils constatent que hanter les maisons devient un luxe hors de prix."
     },
     {
       "text": "Un braquage de banque avec une banane",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Le malfaiteur tente de rester menaçant avec son fruit mûr."
     },
     {
       "text": "Une demande en mariage pendant un séisme",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Il cherche la bague alors que les murs s'écroulent autour d'eux."
     },
     {
       "text": "Le réveil difficile d'un ours après l'hibernation",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Son voisin de tanière fait beaucoup trop de bruit avec sa tondeuse."
     },
     {
       "text": "Un critique gastronomique chez sa grand-mère",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Il doit noter son gigot dominical sans froisser l'amour familial."
     },
     {
       "text": "Dans le ventre d'une baleine bavarde",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "Deux marins avalés essaient de convaincre le cétacé de les recracher."
     },
     {
       "text": "Deux archivistes découvrent le secret de l'univers",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "La vérité est si absurde qu'ils hésitent à la classer ou à la brûler."
     },
     {
       "text": "Un coiffeur pour chauves très pointilleux",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Il passe des heures à lustrer le crâne de son client méfiant."
     },
     {
       "text": "Un cours de yoga pour personnes colériques",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Le professeur tente d'apaiser des élèves qui s'énervent à la moindre posture."
     },
     {
       "text": "Une négociation de paix entre deux chats",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Ils délimitent la frontière du canapé après des semaines de griffades."
     },
     {
       "text": "Deux agents secrets déguisés en buisson",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Ils découvrent qu'ils surveillent la même cible depuis le même jardin."
     },
     {
       "text": "Une séance de spiritisme pour retrouver une chaussette",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Les participants invoquent le fantôme de la machine à laver."
     },
     {
       "text": "Un cosmonaute qui a oublié sa combinaison",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Il réalise son oubli juste avant l'ouverture du sas de sortie."
     },
     {
       "text": "Coincés sous une tente de camping sous la tempête",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "L'eau monte et l'armature menace de céder à tout moment."
     },
     {
       "text": "Le procès d'un écureuil accusé de vol de noisettes",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Son avocat tente de plaider la clémence face au procureur hibou."
     },
     {
       "text": "Une dispute entre un GPS et un conducteur",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "La voix de synthèse refuse de recalculer l'itinéraire par fierté."
     },
     {
       "text": "Deux plongeurs découvrent une boîte aux lettres sous l'eau",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Ils se demandent s'ils doivent y poster leur courrier de vacances."
     },
     {
       "text": "Un test d'orientation scolaire pour un futur super-vilain",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Le conseiller tente de canaliser ses ambitions destructrices vers des métiers stables."
     },
     {
       "text": "Un client veut acheter une œuvre d'art invisible",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Le galeriste tente de justifier le prix exorbitant du vide."
     },
     {
       "text": "Coincés dans la caisse d'un camion de déménagement",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "Deux passagers clandestins réalisent qu'ils ne connaissent pas la destination."
     },
     {
       "text": "Un cours de cuisine où tout prend feu",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Le chef insiste sur le fait que la carbonisation fait partie de la recette."
     },
     {
       "text": "Une rencontre fortuite au sommet de la Tour Eiffel",
-      "category": "Aventure"
+      "category": "Aventure",
+      "brief": "Deux rivaux découvrent qu'ils ont tous deux un rendez-vous mystère au même endroit."
     },
     {
       "text": "Un horloger face au temps qui s'est arrêté",
-      "category": "Insolite"
+      "category": "Insolite",
+      "brief": "Les aiguilles figées le forcent à mener une enquête temporelle."
     },
     {
       "text": "Dans une capsule spatiale en route vers le Soleil",
-      "category": "Huis clos"
+      "category": "Huis clos",
+      "brief": "L'ordinateur de bord annonce une erreur de trajectoire irréversible."
     },
     {
       "text": "Une discussion animée dans une file d'attente de cinéma",
-      "category": "Quotidien"
+      "category": "Quotidien",
+      "brief": "Deux cinéphiles débattent du spoil de la fin du film qu'ils vont voir."
     }
   ],
   "categories": [

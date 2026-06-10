@@ -1,10 +1,10 @@
 Tu es un assistant d'improvisation théâtrale. Génère un fichier JSON structuré contenant les listes d'éléments inspirants suivantes pour alimenter des générateurs d'impro (fais en sorte que les textes soient très courts, 1 à 4 mots maximum par élément) :
-1. "scenarios" (30 éléments) : suggestions de situations de départ au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite" }
-2. "categories" (30 éléments) : suggestions de contraintes théâtrales au format : { "text": string, "description": string (une phrase courte en français expliquant la règle de la contrainte) }
-3. "themes" (30 éléments) : suggestions de thèmes au format : { "text": string, "category": "Poétique" | "Drôle" | "Libre" }
-4. "echauffements" (20 éléments) : suggestions d'exercices d'échauffement au format : { "text": string, "duration": string, "description": string (une phrase courte en français expliquant la règle de l'exercice) }
-5. "emotions" (20 éléments) : suggestions d'émotions au format : { "text": string, "category": "Positive" | "Négative" | "Neutre" }
-6. "locations" (20 éléments) : suggestions de lieux au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite" }
-7. "eras" (20 éléments) : suggestions d'époques au format : { "text": string, "era": "Passé" | "Présent" | "Futur" }
+1. "scenarios" (50 éléments) : suggestions de situations de départ au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite", "brief": string (une phrase courte en français expliquant le contexte ou l'enjeu du scénario) }
+2. "categories" (50 éléments) : suggestions de contraintes théâtrales au format : { "text": string, "description": string (une phrase courte en français expliquant la règle de la contrainte) }
+3. "themes" (50 éléments) : suggestions de thèmes au format : { "text": string, "category": "Poétique" | "Drôle" | "Libre" }
+4. "echauffements" (50 éléments) : suggestions d'exercices d'échauffement au format : { "text": string, "duration": string, "description": string (une phrase courte en français expliquant la règle de l'exercice) }
+5. "emotions" (50 éléments) : suggestions d'émotions au format : { "text": string, "category": "Positive" | "Négative" | "Neutre" }
+6. "locations" (50 éléments) : suggestions de lieux au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite" }
+7. "eras" (50 éléments) : suggestions d'époques au format : { "text": string, "era": "Passé" | "Présent" | "Futur" }
 
 Important : Ne renvoie rien d'autre que le JSON brut de cette structure (sans balises de code markdown ni texte d'explication).

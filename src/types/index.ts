@@ -46,6 +46,7 @@ export interface Theme {
 export interface Scenario {
   text: string;
   category?: string;
+  brief?: string;
 }
 
 export interface Category {

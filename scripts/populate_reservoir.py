@@ -22,7 +22,7 @@ def fetch_and_populate():
     
     # Corps de la requête pour guider n8n sur ce qu'on attend
     payload = {
-        "count": 150,
+        "count": 350,
         "categories_required": ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
     }
     
@@ -49,7 +49,7 @@ def fetch_and_populate():
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(generated_data, f, ensure_ascii=False, indent=2)
             
-        print(f"✨ Réservoir statique de 150 entrées généré avec succès via n8n : {output_path}")
+        print(f"✨ Réservoir statique de 350 entrées généré avec succès via n8n : {output_path}")
         
     except requests.exceptions.RequestException as e:
         print(f"❌ Erreur lors de la requête n8n : {e}")

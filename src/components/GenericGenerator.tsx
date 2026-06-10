@@ -17,6 +17,7 @@ interface GenericItem {
   category?: string;
   duration?: string;
   description?: string;
+  brief?: string;
 }
 
 interface GenericGeneratorProps {
@@ -109,10 +110,10 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
               {currentItem ? currentItem.text : "Réservoir vide..."}
             </h4>
 
-            {/* Description if available */}
-            {currentItem?.description && (
+            {/* Description or Brief if available */}
+            {(currentItem?.description || currentItem?.brief) && (
               <p className="text-sm text-zinc-400 leading-relaxed max-w-xs mt-2">
-                {currentItem.description}
+                {currentItem.description || currentItem.brief}
               </p>
             )}
 
