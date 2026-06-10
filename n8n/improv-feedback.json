@@ -37,11 +37,12 @@
             },
             {
               "key": "Type|select",
-              "selectValue": "={{ $json.body.type }}"
+              "selectValue": "={{ $json.body.type === 'Demande' ? 'Observation' : $json.body.type }}"
             },
             {
               "key": "email|email",
-              "emailValue": "={{ $json.body.email }}"
+              "emailValue": "={{ $json.body.email }}",
+              "ignoreIfEmpty": true
             },
             {
               "key": "score|number",
