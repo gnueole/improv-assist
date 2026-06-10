@@ -207,7 +207,7 @@ main {
   padding: 1rem; /* Breathes comfortably by default on mobile */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 0; /* Let aspect-ratio dictate height */
   height: 100%;
 }
