@@ -19,7 +19,7 @@ DOCKER_DIR   := docker
 COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
 COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 
-.PHONY: help dev-up dev-down up down deploy
+.PHONY: help dev-up dev-down up down restart deploy
 
 # ==============================================================================
 # ℹ️ HELP MENU
@@ -31,6 +31,7 @@ help:
 	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
 	@echo "  make up            - Start local dev environment with HMR (Port 3000)"
 	@echo "  make down          - Stop local dev environment"
+	@echo "  make restart       - Restart local dev environment (down && up)"
 	@echo ""
 	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - impro.eole.me):"
 	@echo "  make deploy        - Push config and pull immutable image from GHCR"
@@ -54,6 +55,8 @@ dev-down:
 up: dev-up
 
 down: dev-down
+
+restart: down up
 
 # ==============================================================================
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
