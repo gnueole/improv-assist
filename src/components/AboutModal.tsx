@@ -49,7 +49,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Création</span>
               <div className="flex items-center gap-1.5 font-semibold text-zinc-200">
-                <span>Éole</span>
+                <span>@eolewind</span>
                 <span className="text-zinc-700 font-light">•</span>
                 <a 
                   href="https://www.instagram.com/eolewind" 
@@ -58,7 +58,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
                   className="text-cyan-400 hover:underline flex items-center gap-1 text-sm font-semibold"
                 >
                   <Instagram className="w-3.5 h-3.5 text-zinc-500" />
-                  <span>@eolewind</span>
+                  <span>Éole</span>
                 </a>
               </div>
             </div>
