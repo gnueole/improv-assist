@@ -105,10 +105,16 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ## 📋 Wishlist / Todo
 
-Voici les fonctionnalités futures envisagées pour enrichir l'application :
+Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'application :
+- [ ] **Idées de tuiles à rajouter** : 
+  - Personnas avec tips et variantes
+  - Animaux 
+  - Objets
+  - Un grand mixer pour créer ses propres combinaisons les plus folles !
 
+- [ ] **Ajout de nouvelles tuiles freemium/premium** : Pour financer l'application (voire la rendre pérenne), il faudrait ajouter de nouvelles tuiles personalisées payantes ou via un abonnement mensuel/annuel.
+- [ ] **Application Mo MOBILE** : Développer une application mobile pour Android et iOS. Cela permettrait d'avoir des notifications push, des widgets, etc.
 - [ ] **Mode Hors-ligne 100% autonome (Service Worker)** : Améliorer le cache de l'application pour un fonctionnement optimal sans connexion réseau via un Service Worker robuste.
-- [ ] **Import / Export de sets personnalisés** : Possibilité pour les troupes d'impro d'importer leurs propres fichiers de prompts au format JSON ou d'exporter le pool actuel.
 - [ ] **Historique de jeu & Historique des tirages** : Garder une trace locale (dans le `localStorage`) des 10 dernières improvisations jouées pour éviter les doublons absolus d'une séance sur l'autre.
 - [ ] **Timer avancé avec buzzer** : Ajouter des sons de buzzer de fin configurables, ainsi que la possibilité de régler le temps libre.
 - [ ] **Multilingue (FR / EN)** : Traduction complète de l'application pour l'usage dans des festivals ou ateliers internationaux.
