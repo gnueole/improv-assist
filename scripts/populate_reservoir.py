@@ -7,7 +7,7 @@
 # Description : Fetches a new batch of random improvisation triggers from n8n 
 #               and populates the local static reservoir pool config file.
 # Author      : Éole <hi@eole>
-# Date        : $Creation Date$
+# Date        : 2026-06-11
 # License     : MIT
 # ==============================================================================
 

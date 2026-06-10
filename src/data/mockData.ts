@@ -2,7 +2,7 @@
  * @file mockData.ts
  * @description Local static fallback datasets for emotions, locations, and eras.
  * @author Éole <hi@eole>
- * @creation-date $Creation Date$
+ * @creation-date 2026-06-11
  * @license MIT
  */
 

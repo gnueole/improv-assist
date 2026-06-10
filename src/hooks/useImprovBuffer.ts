@@ -4,12 +4,41 @@
  * @file useImprovBuffer.ts
  * @description React hook that manages the local prompts reservoir buffer and n8n sync states.
  * @author Éole <hi@eole>
- * @creation-date $Creation Date$
+ * @creation-date 2026-06-11
  * @license MIT
  */
 
 import { useState, useEffect, useCallback } from "react";
 import { ImprovBuffer } from "@/types";
+import { EMOTIONS, LOCATIONS, ERAS } from "@/data/mockData";
+
+const EMPTY_BUFFER: ImprovBuffer = {
+  scenarios: [],
+  categories: [],
+  themes: [],
+  echauffements: [],
+  emotions: [],
+  locations: [],
+  eras: [],
+  last_fetch: null
+};
+
+/**
+ * Helper to construct an ImprovBuffer object from raw JSON data,
+ * falling back to static mock datasets when optional lists are empty.
+ */
+function buildBufferFromData(data: any): ImprovBuffer {
+  return {
+    scenarios: data.scenarios || [],
+    categories: data.categories || [],
+    themes: data.themes || [],
+    echauffements: data.echauffements || [],
+    emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : EMOTIONS,
+    locations: (data.locations && data.locations.length > 0) ? data.locations : LOCATIONS,
+    eras: (data.eras && data.eras.length > 0) ? data.eras : ERAS,
+    last_fetch: Date.now()
+  };
+}
 
 export function useImprovBuffer(activeTileId: string | null) {
   const [isRegenerating, setIsRegenerating] = useState(false);
@@ -20,16 +49,7 @@ export function useImprovBuffer(activeTileId: string | null) {
   const [n8nStatus, setN8nStatus] = useState<"green" | "red">("green");
   const [n8nError, setN8nError] = useState<string | null>(null);
   
-  const [buffer, setBuffer] = useState<ImprovBuffer>({
-    scenarios: [],
-    categories: [],
-    themes: [],
-    echauffements: [],
-    emotions: [],
-    locations: [],
-    eras: [],
-    last_fetch: null
-  });
+  const [buffer, setBuffer] = useState<ImprovBuffer>(EMPTY_BUFFER);
 
   const showToast = useCallback((message: string) => {
     setToastMessage(message);
@@ -71,17 +91,7 @@ export function useImprovBuffer(activeTileId: string | null) {
         const response = await fetch("/data/reservoir-config.json");
         if (response.ok) {
           const data = await response.json();
-          const mock = require("@/data/mockData");
-          const initialBuffer: ImprovBuffer = {
-            scenarios: data.scenarios || [],
-            categories: data.categories || [],
-            themes: data.themes || [],
-            echauffements: data.echauffements || [],
-            emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : mock.EMOTIONS,
-            locations: (data.locations && data.locations.length > 0) ? data.locations : mock.LOCATIONS,
-            eras: (data.eras && data.eras.length > 0) ? data.eras : mock.ERAS,
-            last_fetch: Date.now()
-          };
+          const initialBuffer = buildBufferFromData(data);
           setBuffer(initialBuffer);
           localStorage.setItem("improv_buffer", JSON.stringify(initialBuffer));
         }
@@ -108,17 +118,7 @@ export function useImprovBuffer(activeTileId: string | null) {
         throw new Error("Failed to load local reservoir-config.json");
       }
       const data = await response.json();
-      const mock = require("@/data/mockData");
-      const newBuffer: ImprovBuffer = {
-        scenarios: data.scenarios || [],
-        categories: data.categories || [],
-        themes: data.themes || [],
-        echauffements: data.echauffements || [],
-        emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : mock.EMOTIONS,
-        locations: (data.locations && data.locations.length > 0) ? data.locations : mock.LOCATIONS,
-        eras: (data.eras && data.eras.length > 0) ? data.eras : mock.ERAS,
-        last_fetch: Date.now()
-      };
+      const newBuffer = buildBufferFromData(data);
       setBuffer(newBuffer);
       localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
       setN8nStatus("green");
@@ -145,16 +145,7 @@ export function useImprovBuffer(activeTileId: string | null) {
 
     // 2. Fetch the current buffer
     const saved = localStorage.getItem("improv_buffer");
-    let currentBuffer: ImprovBuffer = {
-      scenarios: [],
-      categories: [],
-      themes: [],
-      echauffements: [],
-      emotions: [],
-      locations: [],
-      eras: [],
-      last_fetch: null
-    };
+    let currentBuffer = { ...EMPTY_BUFFER };
     if (saved) {
       try {
         currentBuffer = JSON.parse(saved);
