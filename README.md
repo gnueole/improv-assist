@@ -60,17 +60,23 @@ node notion_fetch.js
 
 ---
 
+## 🏗️ Architecture Technique
+
+Pour en savoir plus sur l'organisation des composants client, l'orchestration des API proxies, la logique d'automatisation n8n et l'infrastructure de déploiement, veuillez consulter le document **[Architecture.md](Architecture.md)**.
+
+---
+
 ## 🐳 Docker & Makefile
 
-L'application est conteneurisée et gérée à l'aide d'un `Makefile` local et dans WSL.
+L'application est entièrement conteneurisée et gérée de manière simplifiée à l'aide d'un `Makefile` en local ou dans WSL.
 
 | Commande | Action |
 | :--- | :--- |
-| `make dev-up` | Démarre le conteneur de développement local avec HMR (Port 3000) |
-| `make dev-down` | Arrête le conteneur de développement local |
-| `make up` | Démarre la configuration de production localement |
-| `make down` | Arrête la configuration de production localement |
-| `make deploy` | Déploie automatiquement l'application sur le serveur VPS (mise en production) |
+| `make up` | Démarre le conteneur de développement local avec HMR (Port 3000 - [http://localhost:3000](http://localhost:3000)) |
+| `make down` | Arrête le conteneur de développement local |
+| `make restart` | Redémarre l'environnement de développement local (down puis up) |
+| `make deploy` | Déploie automatiquement l'application sur le VPS de production |
+| `make deploy-delay` | Envoie les commits, attend 150 secondes pour laisser le temps à GitHub Actions de compiler, puis déploie |
 | `make checklogs` | Affiche les journaux de production du VPS en temps réel |
 
 ### Résolution d'erreur 504 (Passerelle Traefik)
@@ -90,4 +96,16 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ---
 
+## 📝 Changelog
 
+### Version BETA 2 (1.0.0-beta.2)
+- **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
+- **Description des échauffements** : Ajout d'un champ description explicatif en français pour chaque exercice d'échauffement dans l'interface et le prompt système Gemini.
+- **Robustesse n8n & Notion** : Gestion proactive des échecs d'API Notion dans le workflow n8n (renvoi d'une erreur 500 explicite et propagation propre au client).
+- **Simplification Docker & Makefile** : Harmonisation des commandes de démarrage local (`make up` / `make down` / `make restart`) et isolation réseau locale complète pour éviter tout conflit de ports ou de réseaux Docker. Ajout de `make deploy-delay` pour automatiser l'attente du cycle de build CI/CD.
+- **Normalisation du code** : Ajout d'en-têtes de commentaires de métadonnées normalisés pour toutes les classes, interfaces et routes d'API de l'application.
+
+### Version Beta 1 (1.0.0-beta.1)
+- **Privacy & RGPD** : Ajout d'un modal de politique de confidentialité conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
+- **Generateur de Feedback** : Sélecteur de note par balayage/glissement d'étoiles (1 à 5) avec retour textuel et émoticônes dynamiques.
+- **Optimisation PWA** : Intégration de redirections internes Next.js pour éviter les erreurs 404 lors du rafraîchissement d'URL.
