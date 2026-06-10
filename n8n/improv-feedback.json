@@ -41,7 +41,7 @@
             },
             {
               "key": "email|email",
-              "emailValue": "={{ $json.body.email }}",
+              "emailValue": "={{ $json.body.email || null }}",
               "ignoreIfEmpty": true
             },
             {
