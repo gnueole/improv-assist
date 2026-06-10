@@ -12,8 +12,15 @@ export async function POST(request: Request) {
     });
     
     if (!response.ok) {
+      let errorMsg = `n8n webhook returned status ${response.status}`;
+      try {
+        const errBody = await response.json();
+        if (errBody && errBody.error) {
+          errorMsg = errBody.error;
+        }
+      } catch (e) {}
       return NextResponse.json(
-        { error: `n8n webhook returned status ${response.status}` },
+        { error: errorMsg },
         { status: response.status }
       );
     }

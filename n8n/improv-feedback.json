@@ -86,6 +86,7 @@
         480,
         300
       ],
+      "onError": "continue",
       "credentials": {
         "notionApi": {
           "id": "notion-api-creds-id",
@@ -96,8 +97,10 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{\n  \"success\": true\n}",
-        "options": {}
+        "responseBody": "={{ $json.id ? { \"success\": true } : { \"success\": false, \"error\": $json.message || \"Notion API Error\" } }}",
+        "options": {
+          "responseCode": "={{ $json.id ? 200 : 500 }}"
+        }
       },
       "id": "respond-node",
       "name": "Respond to Webhook",
