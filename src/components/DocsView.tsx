@@ -182,6 +182,50 @@ export default function DocsView() {
                 Un chronomètre préréglé sur 2 minutes 30 secondes (durée standard d'improvisation). Lorsque le temps est écoulé, le message dynamique <strong>« Hey ! Impro ! »</strong> signale la fin.
               </p>
             </div>
+
+            {/* Feature 5 */}
+            <div className="space-y-1">
+              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                Thèmes d'Impro
+              </h4>
+              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
+                Une sélection de sujets courts poétiques ou comiques pour servir de fil conducteur ou d'inspiration pour vos improvisations.
+              </p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="space-y-1">
+              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                Scénarios
+              </h4>
+              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
+                Des situations de départ et intrigues dramatiques ou comiques pour amorcer les scènes avec un enjeu immédiat.
+              </p>
+            </div>
+
+            {/* Feature 7 */}
+            <div className="space-y-1">
+              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Échauffements
+              </h4>
+              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
+                Des exercices de préparation physique, mentale et vocale pour se mettre en condition de jeu individuellement ou collectivement.
+              </p>
+            </div>
+
+            {/* Feature 8 */}
+            <div className="space-y-1">
+              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                Retour & Idées
+              </h4>
+              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
+                Un formulaire de feedback direct permettant aux utilisateurs d'envoyer des demandes, suggestions ou observations pour améliorer l'application.
+              </p>
+            </div>
           </div>
 
           {/* About / Credits */}

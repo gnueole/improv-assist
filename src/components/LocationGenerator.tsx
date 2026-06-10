@@ -12,7 +12,7 @@ import { LOCATIONS } from "@/data/mockData";
 import { Location } from "@/types";
 
 interface LocationGeneratorProps {
-  pickItem: (category: "emotions" | "locations" | "eras", filter?: string) => Location | null;
+  pickItem: (category: string, filter?: string) => Promise<any>;
 }
 
 export default function LocationGenerator({ pickItem }: LocationGeneratorProps) {
@@ -22,10 +22,15 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
 
   // Piocher un lieu initial au montage
   useEffect(() => {
-    const initial = pickItem("locations", locationCategory);
-    if (initial) {
-      setCurrentLocation(initial);
-    }
+    let active = true;
+    pickItem("locations", locationCategory).then((initial) => {
+      if (active && initial) {
+        setCurrentLocation(initial);
+      }
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const spinLocation = () => {
@@ -37,17 +42,23 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
       const rand = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
       setCurrentLocation(rand);
       count++;
-      if (count > 12) {
+    }, 70);
+
+    pickItem("locations", locationCategory)
+      .then((finalLocation) => {
+        const minSpinTime = 12 * 70;
+        setTimeout(() => {
+          clearInterval(interval);
+          setIsSpinning(false);
+          setCurrentLocation(finalLocation || null);
+        }, Math.max(0, minSpinTime - count * 70));
+      })
+      .catch((err) => {
+        console.error(err);
         clearInterval(interval);
         setIsSpinning(false);
-        const finalLocation = pickItem("locations", locationCategory);
-        if (finalLocation) {
-          setCurrentLocation(finalLocation);
-        } else {
-          setCurrentLocation(null);
-        }
-      }
-    }, 70);
+        setCurrentLocation(null);
+      });
   };
 
   return (

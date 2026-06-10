@@ -40,11 +40,21 @@ export interface Scenario {
   category?: string;
 }
 
+export interface Category {
+  text: string;
+  category?: string;
+}
+
+export interface Echauffement {
+  text: string;
+  duration?: string;
+  category?: string;
+}
+
 export interface ImprovBuffer {
-  emotions: Emotion[];
-  locations: Location[];
-  eras: Era[];
-  themes: Theme[];
   scenarios: Scenario[];
+  categories: Category[];
+  themes: Theme[];
+  echauffements: Echauffement[];
   last_fetch: number | null;
 }

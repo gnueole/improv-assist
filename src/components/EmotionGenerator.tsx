@@ -12,7 +12,7 @@ import { EMOTIONS } from "@/data/mockData";
 import { Emotion } from "@/types";
 
 interface EmotionGeneratorProps {
-  pickItem: (category: "emotions" | "locations" | "eras", filter?: string) => Emotion | null;
+  pickItem: (category: string, filter?: string) => Promise<any>;
 }
 
 export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
@@ -23,11 +23,16 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
 
   // Piocher une émotion initiale au montage
   useEffect(() => {
-    const initial = pickItem("emotions", emotionCategory);
-    if (initial) {
-      setCurrentEmotion(initial);
-      setCurrentIntensity(Math.floor(Math.random() * 10) + 1);
-    }
+    let active = true;
+    pickItem("emotions", emotionCategory).then((initial) => {
+      if (active && initial) {
+        setCurrentEmotion(initial);
+        setCurrentIntensity(Math.floor(Math.random() * 10) + 1);
+      }
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const spinEmotion = () => {
@@ -43,20 +48,28 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
       setCurrentEmotion(randEmotion);
       setCurrentIntensity(randIntensity);
       count++;
+    }, 70);
 
-      if (count > 12) {
+    pickItem("emotions", emotionCategory)
+      .then((finalEmotion) => {
+        const minSpinTime = 12 * 70;
+        setTimeout(() => {
+          clearInterval(interval);
+          setIsSpinning(false);
+          if (finalEmotion) {
+            setCurrentEmotion(finalEmotion);
+            setCurrentIntensity(Math.floor(Math.random() * 10) + 1);
+          } else {
+            setCurrentEmotion(null);
+          }
+        }, Math.max(0, minSpinTime - count * 70));
+      })
+      .catch((err) => {
+        console.error(err);
         clearInterval(interval);
         setIsSpinning(false);
-        // On atterrit sur la vraie valeur piochée et retirée du réservoir local
-        const finalEmotion = pickItem("emotions", emotionCategory);
-        if (finalEmotion) {
-          setCurrentEmotion(finalEmotion);
-          setCurrentIntensity(Math.floor(Math.random() * 10) + 1);
-        } else {
-          setCurrentEmotion(null);
-        }
-      }
-    }, 70);
+        setCurrentEmotion(null);
+      });
   };
 
   return (

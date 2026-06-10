@@ -12,7 +12,7 @@ import { ERAS } from "@/data/mockData";
 import { Era } from "@/types";
 
 interface EraGeneratorProps {
-  pickItem: (category: "emotions" | "locations" | "eras", filter?: string) => Era | null;
+  pickItem: (category: string, filter?: string) => Promise<any>;
 }
 
 export default function EraGenerator({ pickItem }: EraGeneratorProps) {
@@ -21,10 +21,15 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
 
   // Piocher une époque initiale au montage
   useEffect(() => {
-    const initial = pickItem("eras");
-    if (initial) {
-      setCurrentEra(initial);
-    }
+    let active = true;
+    pickItem("eras").then((initial) => {
+      if (active && initial) {
+        setCurrentEra(initial);
+      }
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const spinEra = () => {
@@ -35,17 +40,23 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
       const rand = ERAS[Math.floor(Math.random() * ERAS.length)];
       setCurrentEra(rand);
       count++;
-      if (count > 12) {
+    }, 70);
+
+    pickItem("eras")
+      .then((finalEra) => {
+        const minSpinTime = 12 * 70;
+        setTimeout(() => {
+          clearInterval(interval);
+          setIsSpinning(false);
+          setCurrentEra(finalEra || null);
+        }, Math.max(0, minSpinTime - count * 70));
+      })
+      .catch((err) => {
+        console.error(err);
         clearInterval(interval);
         setIsSpinning(false);
-        const finalEra = pickItem("eras");
-        if (finalEra) {
-          setCurrentEra(finalEra);
-        } else {
-          setCurrentEra(null);
-        }
-      }
-    }, 70);
+        setCurrentEra(null);
+      });
   };
 
   return (

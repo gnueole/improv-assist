@@ -20,7 +20,8 @@ import {
   Zap,
   HelpCircle,
   Terminal,
-  RotateCw
+  RotateCw,
+  MessageSquare
 } from "lucide-react";
 
 import { Tile } from "@/types";
@@ -39,6 +40,7 @@ import DocsView from "@/components/DocsView";
 import ConstraintsView from "@/components/ConstraintsView";
 import HiHaRules from "@/components/HiHaRules";
 import GenericGenerator from "@/components/GenericGenerator";
+import FeedbackView from "@/components/FeedbackView";
 
 import reservoirPool from "../../public/data/reservoir-config.json";
 
@@ -69,16 +71,18 @@ export default function Dashboard() {
   const {
     isRegenerating,
     isReloading,
+    isLoading,
     devMode,
     toastMessage,
     triggerRegen,
     pickItem,
+    showToast,
     handleDevModeChange,
     n8nStatus,
     n8nError
   } = useImprovBuffer(activeTileId);
 
-  // Symmetrical layout with 10 items grid (2 columns on mobile, 3 columns on desktop)
+  // Symmetrical layout with 11 items grid (2 columns on mobile, 3 columns on desktop)
   const tiles: Tile[] = [
     { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500" },
     { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500" },
@@ -89,7 +93,9 @@ export default function Dashboard() {
     { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
     { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
     { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
-    { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" }
+    { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
+    { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
+    { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
   ];
 
   const activeTile = tiles.find(t => t.id === activeTileId);
@@ -166,7 +172,7 @@ export default function Dashboard() {
         setIsPromptOpen(!!state.isPromptOpen);
       } else {
         const path = window.location.pathname.replace(/^\//, "");
-        const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha"];
+        const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback"];
         setActiveTileId(validTileIds.includes(path) ? path : null);
         setIsAboutOpen(false);
         setIsPromptOpen(false);
@@ -182,7 +188,7 @@ export default function Dashboard() {
   // Initial load pathname detection
   useEffect(() => {
     const path = window.location.pathname.replace(/^\//, "");
-    const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha"];
+    const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback"];
     if (validTileIds.includes(path)) {
       setActiveTileId(path);
       window.history.replaceState({
@@ -242,6 +248,17 @@ export default function Dashboard() {
         return <DocsView />;
       case "hiha":
         return <HiHaRules />;
+      case "echauffements":
+        return (
+          <GenericGenerator
+            categoryKey="echauffements"
+            title="Échauffements"
+            pickItem={pickItem}
+            itemsPool={reservoirPool.echauffements || []}
+          />
+        );
+      case "feedback":
+        return <FeedbackView showToast={showToast} />;
       default:
         return null;
     }
@@ -406,7 +423,7 @@ export default function Dashboard() {
       />
 
       {/* Loader Overlay */}
-      <LoaderOverlay isVisible={isRegenerating || isReloading} />
+      <LoaderOverlay isVisible={isRegenerating || isReloading || isLoading} />
 
       {/* Prompt Modal Overlay */}
       <PromptModal

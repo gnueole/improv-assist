@@ -1,179 +1,45 @@
 import os
 import json
+import requests
 
-def populate():
-    # 150 premium French improvisation items in decoupled JSON configuration across 5 categories
-    data = {
-        "emotions": [
-            {"text": "Joie exubérante", "category": "Positive"},
-            {"text": "Colère froide", "category": "Négative"},
-            {"text": "Tristesse infinie", "category": "Négative"},
-            {"text": "Peur panique", "category": "Négative"},
-            {"text": "Amour inconditionnel", "category": "Positive"},
-            {"text": "Jalousie maladive", "category": "Négative"},
-            {"text": "Fierté orgueilleuse", "category": "Positive"},
-            {"text": "Dégoût viscéral", "category": "Négative"},
-            {"text": "Excitation enfantine", "category": "Positive"},
-            {"text": "Indifférence totale", "category": "Neutre"},
-            {"text": "Cynisme mordant", "category": "Neutre"},
-            {"text": "Nostalgie mélancolique", "category": "Neutre"},
-            {"text": "Hystérie joyeuse", "category": "Positive"},
-            {"text": "Sérénité absolue", "category": "Positive"},
-            {"text": "Méfiance paranoïaque", "category": "Négative"},
-            {"text": "Frustration intense", "category": "Négative"},
-            {"text": "Euphorie créative", "category": "Positive"},
-            {"text": "Timide réserve", "category": "Neutre"},
-            {"text": "Arrogance méprisante", "category": "Négative"},
-            {"text": "Compassion sincère", "category": "Positive"},
-            {"text": "Stupeur muette", "category": "Neutre"},
-            {"text": "Ennui mortel", "category": "Neutre"},
-            {"text": "Admiration sans borne", "category": "Positive"},
-            {"text": "Honte dévorante", "category": "Négative"},
-            {"text": "Curiosité insatiable", "category": "Positive"},
-            {"text": "Angoisse sourde", "category": "Négative"},
-            {"text": "Optimisme aveugle", "category": "Positive"},
-            {"text": "Résignation passive", "category": "Neutre"},
-            {"text": "Détermination farouche", "category": "Positive"},
-            {"text": "Lassitude profonde", "category": "Négative"}
-        ],
-        "locations": [
-            {"text": "Un sous-marin en panne à 4000m", "category": "Huis clos"},
-            {"text": "Une file d'attente chez le boulanger", "category": "Quotidien"},
-            {"text": "La surface hostile de Mars", "category": "Insolite"},
-            {"text": "Une cabane arboricole en pleine tempête", "category": "Aventure"},
-            {"text": "Le sommet brumeux du Mont Blanc", "category": "Aventure"},
-            {"text": "Un ascenseur bloqué au 80ème étage", "category": "Huis clos"},
-            {"text": "Un musée de cire au milieu de la nuit", "category": "Insolite"},
-            {"text": "Les coulisses d'un défilé de haute couture", "category": "Quotidien"},
-            {"text": "Une île déserte recouverte de brume", "category": "Aventure"},
-            {"text": "La salle d'attente des urgences vétérinaires", "category": "Quotidien"},
-            {"text": "Un bunker anti-atomique ultra-luxueux", "category": "Huis clos"},
-            {"text": "La terrasse d'un café parisien sous la pluie", "category": "Quotidien"},
-            {"text": "Un vaisseau spatial en perdition", "category": "Insolite"},
-            {"text": "Une mine d'or désaffectée au Far West", "category": "Aventure"},
-            {"text": "La cabine d'un avion en plein turbulences", "category": "Huis clos"},
-            {"text": "Une serre tropicale géante et humide", "category": "Insolite"},
-            {"text": "Un guichet de gare de province désert", "category": "Quotidien"},
-            {"text": "Le sommet d'une grue de chantier", "category": "Aventure"},
-            {"text": "Une montgolfière dérivant au-dessus des nuages", "category": "Huis clos"},
-            {"text": "Une cuisine de restaurant gastronomique", "category": "Quotidien"},
-            {"text": "Le laboratoire secret d'un savant fou", "category": "Insolite"},
-            {"text": "Une expédition archéologique dans un temple", "category": "Aventure"},
-            {"text": "Un studio d'enregistrement de radio de nuit", "category": "Huis clos"},
-            {"text": "Une aire d'autoroute un dimanche soir", "category": "Quotidien"},
-            {"text": "Une fête foraine abandonnée sous la lune", "category": "Insolite"},
-            {"text": "Un radeau de sauvetage au milieu du Pacifique", "category": "Aventure"},
-            {"text": "Le bureau du proviseur d'un lycée", "category": "Huis clos"},
-            {"text": "Une laverie automatique à minuit", "category": "Quotidien"},
-            {"text": "Le fond d'une piscine olympique vide", "category": "Insolite"},
-            {"text": "Une forêt de bambous sous la neige", "category": "Aventure"}
-        ],
-        "eras": [
-            {"text": "La Préhistoire (-10 000)", "era": "Passé"},
-            {"text": "L'Antiquité romaine (Ier siècle)", "era": "Passé"},
-            {"text": "Le Moyen Âge féodal (XIIe siècle)", "era": "Passé"},
-            {"text": "La Renaissance italienne (XVe siècle)", "era": "Passé"},
-            {"text": "L'Époque victorienne (XIXe siècle)", "era": "Passé"},
-            {"text": "Les Années folles (1920)", "era": "Passé"},
-            {"text": "L'âge d'or du Disco (1970)", "era": "Passé"},
-            {"text": "L'ère Cyberpunk (2080)", "era": "Futur"},
-            {"text": "Le présent (2026)", "era": "Présent"},
-            {"text": "Le futur lointain (3050)", "era": "Futur"},
-            {"text": "L'époque de la ruée vers l'or (1849)", "era": "Passé"},
-            {"text": "La guerre de Cent Ans", "era": "Passé"},
-            {"text": "La Révolution française (1789)", "era": "Passé"},
-            {"text": "L'époque des samouraïs (Edo)", "era": "Passé"},
-            {"text": "Le premier pas sur la Lune (1969)", "era": "Passé"},
-            {"text": "La colonisation des astéroïdes (2150)", "era": "Futur"},
-            {"text": "La fin de l'Holocène (2050)", "era": "Futur"},
-            {"text": "L'empire d'Alexandre le Grand", "era": "Passé"},
-            {"text": "L'apogée de l'Égypte antique", "era": "Passé"},
-            {"text": "L'ère des dinosaures (-150M)", "era": "Passé"},
-            {"text": "L'an 4000 de notre ère", "era": "Futur"},
-            {"text": "La naissance d'Internet (1990)", "era": "Passé"},
-            {"text": "La Belle Époque (1900)", "era": "Passé"},
-            {"text": "L'époque coloniale américaine (1776)", "era": "Passé"},
-            {"text": "L'apocalypse des machines (2099)", "era": "Futur"},
-            {"text": "Le déclin de l'empire maya", "era": "Passé"},
-            {"text": "L'âge des Vikings (Xe siècle)", "era": "Passé"},
-            {"text": "Le siècle des Lumières (XVIIIe)", "era": "Passé"},
-            {"text": "La paix galactique (2999)", "era": "Futur"},
-            {"text": "Demain matin", "era": "Présent"}
-        ],
-        "themes": [
-            {"text": "Le dernier vol d'un oiseau en carton", "category": "Poétique"},
-            {"text": "Le secret chuchoté par la chaussette gauche", "category": "Drôle"},
-            {"text": "Une tasse de thé partagée avec le vent", "category": "Poétique"},
-            {"text": "La vengeance ridicule du canard en plastique", "category": "Drôle"},
-            {"text": "Le murmure des étoiles oubliées", "category": "Poétique"},
-            {"text": "La course-poursuite infernale en pantoufles", "category": "Drôle"},
-            {"text": "L'ombre d'un nuage sur un violon", "category": "Poétique"},
-            {"text": "Le jour où le grille-pain a exigé des vacances", "category": "Drôle"},
-            {"text": "Le collectionneur de reflets de lune", "category": "Poétique"},
-            {"text": "Un malentendu tragique au rayon des surgelés", "category": "Drôle"},
-            {"text": "La lettre d'amour écrite sur de la glace", "category": "Poétique"},
-            {"text": "Un complot international mené par des pigeons voyageurs", "category": "Drôle"},
-            {"text": "La mélodie secrète du phare abandonné", "category": "Poétique"},
-            {"text": "Le smartphone qui faisait une crise d'adolescence", "category": "Drôle"},
-            {"text": "Le voyage d'une goutte de pluie sur une vitre", "category": "Poétique"},
-            {"text": "Un entretien d'embauche pour devenir une porte qui grince", "category": "Drôle"},
-            {"text": "Le parfum de la nostalgie printanière", "category": "Poétique"},
-            {"text": "Une dispute philosophique devant un extincteur", "category": "Drôle"},
-            {"text": "Le poète qui écrivait avec de la rosée", "category": "Poétique"},
-            {"text": "La grand-mère qui piratait les feux d'artifice", "category": "Drôle"},
-            {"text": "Le chant des baleines sous le désert", "category": "Poétique"},
-            {"text": "Un astronaute poursuivi par sa belle-mère de l'espace", "category": "Drôle"},
-            {"text": "La valse lente des feuilles d'automne", "category": "Poétique"},
-            {"text": "La biscotte qui refusait de tomber du côté beurré", "category": "Drôle"},
-            {"text": "Le peintre qui dessinait le silence", "category": "Poétique"},
-            {"text": "Le concours mondial de la pire imitation de poule", "category": "Drôle"},
-            {"text": "Le château fort construit en souvenirs", "category": "Poétique"},
-            {"text": "Un pingouin perdu dans le métro parisien", "category": "Drôle"},
-            {"text": "La clé dorée qui n'ouvrait que les rêves", "category": "Poétique"},
-            {"text": "Le majordome qui servait du thé invisible", "category": "Drôle"}
-        ],
-        "scenarios": [
-            {"text": "Le dernier vol pour sauver le monde", "category": "Aventure"},
-            {"text": "Le parachutiste récalcitrant et sa peur du vide", "category": "Drôle"},
-            {"text": "Un héritage composé uniquement de chèvres naines", "category": "Drôle"},
-            {"text": "Coincés dans un ascenseur avec leur pire ennemi", "category": "Huis clos"},
-            {"text": "Restaurer un tableau inestimable avec du dentifrice", "category": "Drôle"},
-            {"text": "Un entretien pour le poste de directeur du vent", "category": "Insolite"},
-            {"text": "Un chevalier du Moyen Âge face à une machine à laver", "category": "Insolite"},
-            {"text": "Une rupture amoureuse devant la caissière fatiguée", "category": "Quotidien"},
-            {"text": "Un faux guide touristique qui improvise l'histoire de France", "category": "Drôle"},
-            {"text": "Deux espions qui oublient leur phrase de reconnaissance", "category": "Aventure"},
-            {"text": "Expliquer le concept de l'impôt sur le revenu à une momie", "category": "Insolite"},
-            {"text": "Découvrir que son grand-père était un pirate de jardin", "category": "Quotidien"},
-            {"text": "Un contrôle fiscal portant sur des dépenses en licornes", "category": "Drôle"},
-            {"text": "Une potion magique qui rend les gens trop polis", "category": "Insolite"},
-            {"text": "Un suspect qui ne répond qu'avec des proverbes absurdes", "category": "Huis clos"},
-            {"text": "Un duel de chefs cuisiniers avec des rations de survie", "category": "Quotidien"},
-            {"text": "Un astronaute tentant d'adopter un alien de compagnie", "category": "Aventure"},
-            {"text": "Deux inconnus se disputant la propriété d'un nuage", "category": "Poétique"},
-            {"text": "Faire passer un casting pour le rôle d'une feuille qui tombe", "category": "Poétique"},
-            {"text": "Une prophétie annonçant la fin du monde à cause d'une crêpe", "category": "Insolite"},
-            {"text": "Négocier un traité de paix avec des grimaces", "category": "Drôle"},
-            {"text": "Justifier 4 heures de retard par un sauvetage de chat", "category": "Quotidien"},
-            {"text": "Deux personnes coincées dans une cabine téléphonique", "category": "Huis clos"},
-            {"text": "Le psychiatre personnel d'une machine à café fatiguée", "category": "Insolite"},
-            {"text": "Une dispute d'héritage réglée par un chifoumi géant", "category": "Drôle"},
-            {"text": "Préparer un casse dans un salon de thé ultra-calme", "category": "Huis clos"},
-            {"text": "Un naufragé qui refuse d'être secouru sans son chapeau", "category": "Aventure"},
-            {"text": "L'ingénieur essayant de consoler une IA déprimée", "category": "Insolite"},
-            {"text": "Une vente aux enchères d'objets totalement invisibles", "category": "Drôle"},
-            {"text": "Un explorateur qui avoue n'avoir jamais quitté sa cave", "category": "Drôle"}
-        ]
+# URL de ton webhook n8n (à adapter avec ton vrai domaine ou IP de VPS)
+N8N_WEBHOOK_URL = os.getenv("N8N_POPULATE_URL", "https://n8n.eole.me/webhook/improv-regen")
+
+def fetch_and_populate():
+    print(f"📡 Connexion à n8n ({N8N_WEBHOOK_URL}) pour générer le lot d'improvisation...")
+    
+    # Corps de la requête pour guider n8n sur ce qu'on attend
+    payload = {
+        "count": 150,
+        "categories_required": ["scenarios", "categories", "themes", "echauffements"]
     }
-
-    # Ensure output directory exists
-    output_path = os.path.join("public", "data", "reservoir-config.json")
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-    print(f"[+] Reservoir config successfully populated at: {output_path}")
+    
+    try:
+        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=60)
+        response.raise_for_status()
+        
+        # On attend de n8n un JSON avec la structure exacte :
+        # { "scenarios": [...], "categories": [...], "themes": [...], "echauffements": [...] }
+        generated_data = response.json()
+        
+        # Validation stricte des clés pour ne pas casser le TypeScript de l'App
+        required_keys = {"scenarios", "categories", "themes", "echauffements"}
+        if not required_keys.issubset(generated_data.keys()):
+            raise ValueError(f"L'arnaque ! n8n a renvoyé des clés invalides. Clés reçues : {list(generated_data.keys())}")
+            
+        # Définition du chemin de sortie dans Next.js
+        output_path = os.path.join("public", "data", "reservoir-config.json")
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(generated_data, f, ensure_ascii=False, indent=2)
+            
+        print(f"✨ Réservoir statique de 150 entrées généré avec succès via n8n : {output_path}")
+        
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Erreur lors de la requête n8n : {e}")
+    except ValueError as e:
+        print(f"❌ Erreur de structure de données : {e}")
 
 if __name__ == "__main__":
-    populate()
+    fetch_and_populate()

@@ -11,9 +11,9 @@ interface GenericItem {
 }
 
 interface GenericGeneratorProps {
-  categoryKey: "emotions" | "locations" | "eras" | "themes" | "scenarios";
+  categoryKey: string;
   title: string;
-  pickItem: (category: "emotions" | "locations" | "eras" | "themes" | "scenarios") => any;
+  pickItem: (category: string, filter?: string) => Promise<any>;
   itemsPool: GenericItem[];
 }
 
@@ -23,10 +23,15 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
 
   // Pick initial item on mount
   useEffect(() => {
-    const initial = pickItem(categoryKey);
-    if (initial) {
-      setCurrentItem(initial);
-    }
+    let active = true;
+    pickItem(categoryKey).then((initial) => {
+      if (active && initial) {
+        setCurrentItem(initial);
+      }
+    });
+    return () => {
+      active = false;
+    };
   }, [categoryKey, pickItem]);
 
   const spinItem = () => {
@@ -41,19 +46,23 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
         setCurrentItem(randItem);
       }
       count++;
+    }, 80);
 
-      if (count > 10) {
+    pickItem(categoryKey)
+      .then((finalItem) => {
+        const minSpinTime = 10 * 80;
+        setTimeout(() => {
+          clearInterval(interval);
+          setIsSpinning(false);
+          setCurrentItem(finalItem || null);
+        }, Math.max(0, minSpinTime - count * 80));
+      })
+      .catch((err) => {
+        console.error(err);
         clearInterval(interval);
         setIsSpinning(false);
-        // land on actual value picked and removed from local storage buffer
-        const finalItem = pickItem(categoryKey);
-        if (finalItem) {
-          setCurrentItem(finalItem);
-        } else {
-          setCurrentItem(null);
-        }
-      }
-    }, 80);
+        setCurrentItem(null);
+      });
   };
 
   return (
