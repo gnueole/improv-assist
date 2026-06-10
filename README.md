@@ -103,10 +103,11 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 ## 📝 Changelog
 
 ### Version 0.3 BETA (1.0.0-beta.3)
-- **Robustesse n8n & Fallback automatique** : Résolution du bug de réponse vide (200 sans corps) lorsque le modèle Gemini est surchargé de requêtes (quota limité), en redirigeant le flux d'erreur du nœud Gemini vers le nœud de génération de repli (mock) via la configuration `continueErrorOutput` et un double port de connexion.
-- **Optimisation des performances** : Réduction de 50% de la taille du screenshot `images/improv-assist-beta2.jpg` pour un chargement plus rapide de la documentation.
-- **Formatage** : Présentation du tableau des fonctionnalités dans le `README.md` sous forme de tableau Markdown structuré.
-- **Refactoring & Modularité** : Découpage du hook complexe `useImprovBuffer` en sous-hooks modulaires (`useToast`, `useDevMode`) et fonctions utilitaires (`bufferUtils`), avec normalisation de tous les en-têtes de commentaires de métadonnées.
+- **Refactoring & Centralisation (React Context)** : Migration du buffer d'improvisation vers un Context Provider global (`ImprovBufferContext`) pour synchroniser les tirages entre tous les générateurs, éliminer les tirages doublons et éviter les requêtes n8n concurrentes. Découpage modulaire du hook en sous-hooks (`useToast`, `useDevMode`) et utilitaires (`bufferUtils`).
+- **Optimisation n8n & Réservoir de secours** : Extension du réservoir hors-ligne à **50 entrées par catégorie** (350 prompts au total) et sécurisation du workflow n8n via un double-port (succès/erreur) pour garantir le retour systématique du réservoir de secours lors des surcharges du modèle Gemini.
+- **Ajout d'échauffements & Descriptions** : Intégration de descriptions explicatives en français pour les exercices d'échauffement et les contraintes (catégories) de jeu, guidant l'utilisateur directement depuis l'interface.
+- **Ponçage des thèmes & Générateurs** : Enrichissement et affinage des listes de thèmes, époques, émotions et lieux pour maximiser la variété dramatique.
+- **Envoi de feedback & RGPD** : Sélecteur de note par glissement tactile/souris (1 à 5 étoiles) connecté à Notion, validation obligatoire du consentement RGPD et intégration d'un modal de politique de confidentialité.
 
 ### Version BETA 2 (1.0.0-beta.2)
 - **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
