@@ -19,7 +19,7 @@ DOCKER_DIR   := docker
 COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
 COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 
-.PHONY: help dev-up dev-down up down restart deploy
+.PHONY: help dev-up dev-down up down restart deploy deploy-delay
 
 # ==============================================================================
 # ℹ️ HELP MENU
@@ -35,6 +35,7 @@ help:
 	@echo ""
 	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - impro.eole.me):"
 	@echo "  make deploy        - Push config and pull immutable image from GHCR"
+	@echo "  make deploy-delay  - Wait 130s for GitHub Actions and then deploy"
 	@echo "======================================================================"
 
 # ==============================================================================
@@ -79,3 +80,8 @@ deploy:
 checklogs:
 	@echo "📟 Fetching real-time production logs from VPS [$(VPS_SSH)]..."
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && docker compose -f $$(basename $(COMPOSE_PROD)) logs -f"
+
+deploy-delay:
+	@echo "⏳ Waiting 130 seconds for GitHub Actions build to complete..."
+	sleep 130
+	$(MAKE) deploy
