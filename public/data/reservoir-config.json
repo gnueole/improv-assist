@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "text": "Ascenseur bloqué",
+      "text": "Ascenseur en panne",
       "category": "Huis clos"
     },
     {
@@ -9,32 +9,28 @@
       "category": "Quotidien"
     },
     {
-      "text": "Naufrage imminent",
+      "text": "Trésor perdu",
       "category": "Aventure"
     },
     {
-      "text": "Mariage annulé",
+      "text": "Chat qui parle",
       "category": "Insolite"
-    },
-    {
-      "text": "Cellule de prison",
-      "category": "Huis clos"
     },
     {
       "text": "File d'attente",
       "category": "Quotidien"
     },
     {
-      "text": "Jungle hostile",
+      "text": "Naufrage désertique",
       "category": "Aventure"
     },
     {
-      "text": "Objets parlants",
-      "category": "Insolite"
+      "text": "Grenier poussiéreux",
+      "category": "Huis clos"
     },
     {
-      "text": "Bunker souterrain",
-      "category": "Huis clos"
+      "text": "Duel de magiciens",
+      "category": "Insolite"
     },
     {
       "text": "Panne d'essence",
@@ -45,221 +41,211 @@
       "category": "Aventure"
     },
     {
+      "text": "Prisonnier volontaire",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Mariage annulé",
+      "category": "Quotidien"
+    },
+    {
       "text": "Voyage temporel",
       "category": "Insolite"
+    },
+    {
+      "text": "Jungle hostile",
+      "category": "Aventure"
     },
     {
       "text": "Cabine téléphonique",
       "category": "Huis clos"
     },
     {
-      "text": "Supermarché bondé",
+      "text": "Supermarché vide",
       "category": "Quotidien"
     },
     {
-      "text": "Désert de sel",
-      "category": "Aventure"
+      "text": "Invasion de clowns",
+      "category": "Insolite"
     },
     {
-      "text": "Duel de regards",
-      "category": "Insolite"
+      "text": "Vol de banque",
+      "category": "Aventure"
     },
     {
       "text": "Sous-marin percé",
       "category": "Huis clos"
     },
     {
-      "text": "Dîner de famille",
+      "text": "Déménagement difficile",
       "category": "Quotidien"
     },
     {
-      "text": "Chasse au trésor",
-      "category": "Aventure"
-    },
-    {
-      "text": "Cirque abandonné",
+      "text": "Objets vivants",
       "category": "Insolite"
     },
     {
-      "text": "Grenier poussiéreux",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Bureau de poste",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Espace infini",
+      "text": "Course poursuite",
       "category": "Aventure"
     },
     {
-      "text": "Miroir magique",
-      "category": "Insolite"
-    },
-    {
-      "text": "Confessionnal étroit",
+      "text": "Chambre forte",
       "category": "Huis clos"
     },
     {
-      "text": "Arrêt de bus",
+      "text": "Entretien d'embauche",
       "category": "Quotidien"
     },
     {
-      "text": "Volcan en éruption",
+      "text": "Planète inconnue",
+      "category": "Insolite"
+    },
+    {
+      "text": "Safari photo",
       "category": "Aventure"
     },
     {
-      "text": "Ombre rebelle",
-      "category": "Insolite"
-    },
-    {
-      "text": "Chambre d'hôtel",
+      "text": "Confessionnal",
       "category": "Huis clos"
     },
     {
-      "text": "Salon de coiffure",
+      "text": "Panne d'électricité",
       "category": "Quotidien"
+    },
+    {
+      "text": "Miroir maléfique",
+      "category": "Insolite"
+    },
+    {
+      "text": "Chasse au dragon",
+      "category": "Aventure"
     }
   ],
   "categories": [
     {
-      "text": "Western"
+      "text": "Sans paroles",
+      "description": "Jouer toute la scène sans dire un mot."
     },
     {
-      "text": "Comédie musicale"
+      "text": "Rimes",
+      "description": "Parler uniquement en faisant des rimes."
     },
     {
-      "text": "Film noir"
+      "text": "Chantée",
+      "description": "Chanter toutes ses répliques."
     },
     {
-      "text": "Science-fiction"
+      "text": "Western",
+      "description": "Adopter le style et l'accent des cow-boys."
     },
     {
-      "text": "Tragédie grecque"
+      "text": "Science-fiction",
+      "description": "Intégrer des éléments futuristes et technologiques."
     },
     {
-      "text": "Muet"
+      "text": "Film d'horreur",
+      "description": "Jouer avec une ambiance effrayante et tendue."
     },
     {
-      "text": "Vers rimés"
+      "text": "Comédie musicale",
+      "description": "Alterner entre dialogues, chants et danses."
     },
     {
-      "text": "Slow motion"
+      "text": "Doublage",
+      "description": "Deux acteurs jouent, deux autres font les voix."
     },
     {
-      "text": "Fast motion"
+      "text": "Abécédaire",
+      "description": "Chaque réplique commence par la lettre suivante de l'alphabet."
     },
     {
-      "text": "Horreur"
+      "text": "Sans les mains",
+      "description": "Garder les mains dans le dos tout le long."
     },
     {
-      "text": "Conte de fées"
+      "text": "Ralenti",
+      "description": "Effectuer tous les mouvements de manière très lente."
     },
     {
-      "text": "Documentaire animalier"
+      "text": "Accéléré",
+      "description": "Effectuer tous les mouvements de manière très rapide."
     },
     {
-      "text": "Shakespeare"
+      "text": "Film muet",
+      "description": "Utiliser une gestuelle exagérée sans aucun son."
     },
     {
-      "text": "Molière"
+      "text": "Tragédie grecque",
+      "description": "Adopter un ton solennel et dramatique."
     },
     {
-      "text": "Manga"
+      "text": "Dessin animé",
+      "description": "Jouer avec l'énergie et l'élasticité d'un cartoon."
     },
     {
-      "text": "Telenovela"
+      "text": "Interview",
+      "description": "La scène se déroule sous forme de questions-réponses."
     },
     {
-      "text": "Sans paroles"
+      "text": "Flashback",
+      "description": "Intégrer des retours dans le passé des personnages."
     },
     {
-      "text": "Doublage"
+      "text": "Narrateur",
+      "description": "Une voix extérieure commente et dirige l'action."
     },
     {
-      "text": "Changement de lieu"
+      "text": "Changement de style",
+      "description": "Changer de genre théâtral au signal de l'arbitre."
     },
     {
-      "text": "Émotion imposée"
+      "text": "Émotion imposée",
+      "description": "Changer d'humeur radicalement au signal."
     },
     {
-      "text": "Publicité"
+      "text": "Objets détournés",
+      "description": "Utiliser les accessoires pour une fonction différente."
     },
     {
-      "text": "Journal télévisé"
+      "text": "Mime",
+      "description": "Manipuler uniquement des objets invisibles."
     },
     {
-      "text": "Peplum"
+      "text": "Vers l'infini",
+      "description": "La scène doit se passer dans l'espace."
     },
     {
-      "text": "Espionnage"
+      "text": "Roman-photo",
+      "description": "S'immobiliser régulièrement pour créer des images fixes."
     },
     {
-      "text": "Médiéval"
+      "text": "Télé-achat",
+      "description": "Essayer de vendre un objet absurde au public."
     },
     {
-      "text": "Cyberpunk"
+      "text": "Doublage étranger",
+      "description": "Parler une langue inventée traduite par un autre."
     },
     {
-      "text": "Commedia dell'arte"
+      "text": "Film noir",
+      "description": "Ambiance détective privé et mystère des années 50."
     },
     {
-      "text": "Théâtre de l'absurde"
+      "text": "Peplum",
+      "description": "Jouer comme dans l'Antiquité romaine ou grecque."
     },
     {
-      "text": "Film d'action"
+      "text": "Sitcom",
+      "description": "Intégrer des rires enregistrés et des punchlines."
     },
     {
-      "text": "Roman d'amour"
+      "text": "Conte de fées",
+      "description": "Commencer par 'Il était une fois' avec magie."
     }
   ],
   "themes": [
     {
-      "text": "Étoile filante",
-      "category": "Poétique"
-    },
-    {
-      "text": "Chaussette perdue",
-      "category": "Drôle"
-    },
-    {
-      "text": "Secret de famille",
-      "category": "Libre"
-    },
-    {
-      "text": "Vent d'hiver",
-      "category": "Poétique"
-    },
-    {
-      "text": "Banane glissante",
-      "category": "Drôle"
-    },
-    {
-      "text": "Premier baiser",
-      "category": "Libre"
-    },
-    {
-      "text": "Lune rousse",
-      "category": "Poétique"
-    },
-    {
-      "text": "Perruque envolée",
-      "category": "Drôle"
-    },
-    {
-      "text": "Trahison amicale",
-      "category": "Libre"
-    },
-    {
-      "text": "Plume légère",
-      "category": "Poétique"
-    },
-    {
-      "text": "Gâteau raté",
-      "category": "Drôle"
-    },
-    {
-      "text": "Destin brisé",
+      "text": "Le dernier espoir",
       "category": "Libre"
     },
     {
@@ -267,27 +253,35 @@
       "category": "Poétique"
     },
     {
-      "text": "Chien savant",
+      "text": "Gâteau brûlé",
       "category": "Drôle"
     },
     {
-      "text": "Lettre anonyme",
+      "text": "Secret de famille",
       "category": "Libre"
     },
     {
-      "text": "Brume matinale",
+      "text": "Pluie d'étoiles",
       "category": "Poétique"
     },
     {
-      "text": "Clown triste",
+      "text": "Chaussette orpheline",
       "category": "Drôle"
     },
     {
-      "text": "Héritage mystérieux",
+      "text": "Ombre fugace",
+      "category": "Poétique"
+    },
+    {
+      "text": "Malentendu",
+      "category": "Drôle"
+    },
+    {
+      "text": "Destin croisé",
       "category": "Libre"
     },
     {
-      "text": "Silence d'or",
+      "text": "Murmure du vent",
       "category": "Poétique"
     },
     {
@@ -299,23 +293,35 @@
       "category": "Libre"
     },
     {
-      "text": "Horizon lointain",
+      "text": "Ciel d'encre",
       "category": "Poétique"
     },
     {
-      "text": "Dentier égaré",
+      "text": "Perruque envolée",
       "category": "Drôle"
     },
     {
-      "text": "Rencontre fortuite",
+      "text": "Nouveau départ",
       "category": "Libre"
     },
     {
-      "text": "Cœur de pierre",
+      "text": "Reflet d'eau",
       "category": "Poétique"
     },
     {
-      "text": "Voisin bruyant",
+      "text": "Dentier perdu",
+      "category": "Drôle"
+    },
+    {
+      "text": "Lettre oubliée",
+      "category": "Libre"
+    },
+    {
+      "text": "Chant d'oiseau",
+      "category": "Poétique"
+    },
+    {
+      "text": "Pizza froide",
       "category": "Drôle"
     },
     {
@@ -323,159 +329,388 @@
       "category": "Libre"
     },
     {
-      "text": "Murmure d'ange",
+      "text": "Brume matinale",
       "category": "Poétique"
     },
     {
-      "text": "Blague nulle",
+      "text": "Chute ridicule",
       "category": "Drôle"
     },
     {
-      "text": "Choix difficile",
+      "text": "Silence pesant",
+      "category": "Libre"
+    },
+    {
+      "text": "Éclat de lune",
+      "category": "Poétique"
+    },
+    {
+      "text": "Blague ratée",
+      "category": "Drôle"
+    },
+    {
+      "text": "Chemin de fer",
+      "category": "Libre"
+    },
+    {
+      "text": "Rêve éveillé",
+      "category": "Poétique"
+    },
+    {
+      "text": "Chat maladroit",
+      "category": "Drôle"
+    },
+    {
+      "text": "Horizon lointain",
       "category": "Libre"
     }
   ],
   "echauffements": [
     {
-      "text": "Zip Zap Boing",
-      "duration": "5 min",
-      "description": "Faire circuler l'énergie en cercle avec les commandes vocales Zip, Zap ou Boing."
+      "text": "Le Zip Zap",
+      "duration": "2 min",
+      "description": "Passer une impulsion sonore et gestuelle rapidement."
     },
     {
       "text": "Miroir",
+      "duration": "5 min",
+      "description": "Reproduire exactement les gestes de son partenaire."
+    },
+    {
+      "text": "Marche rythmée",
       "duration": "3 min",
-      "description": "Par deux, l'un imite exactement les mouvements de l'autre en simultané."
-    },
-    {
-      "text": "Marche neutre",
-      "duration": "5 min",
-      "description": "Marcher dans l'espace sans intention particulière puis incarner divers états suggérés."
-    },
-    {
-      "text": "Comptage collectif",
-      "duration": "2 min",
-      "description": "Compter collectivement jusqu'à 20 sans que deux personnes ne parlent en même temps."
-    },
-    {
-      "text": "Cadeau imaginaire",
-      "duration": "4 min",
-      "description": "S'offrir un objet invisible et imaginaire en mimant précisément sa taille et son poids."
-    },
-    {
-      "text": "Échauffement vocal",
-      "duration": "5 min",
-      "description": "Faire des vocalises, des virelangues et moduler le volume sonore collectivement."
+      "description": "Marcher dans l'espace selon des consignes d'humeur."
     },
     {
       "text": "Association d'idées",
-      "duration": "3 min",
-      "description": "Dire rapidement et sans réfléchir le premier mot qui vient après celui du voisin."
-    },
-    {
-      "text": "Statues musicales",
       "duration": "4 min",
-      "description": "Marcher en rythme et se figer instantanément dans une pose expressive quand le son s'arrête."
+      "description": "Dire instantanément le premier mot qui vient à l'esprit."
     },
     {
       "text": "Le chef d'orchestre",
       "duration": "5 min",
-      "description": "Un joueur dirige silencieusement le groupe qui imite ses gestes, un devineur doit trouver le chef."
+      "description": "Suivre les mouvements d'un leader sans qu'il soit repéré."
     },
     {
-      "text": "Oui et...",
-      "duration": "5 min",
-      "description": "Accepter chaque proposition de son partenaire en commençant ses phrases par 'Oui, et...'."
-    },
-    {
-      "text": "Le samouraï",
+      "text": "Comptage collectif",
       "duration": "3 min",
-      "description": "Faire circuler un cri et un geste de sabre virtuel avec rapidité et précision."
+      "description": "Compter jusqu'à 20 ensemble sans se couper la parole."
     },
     {
-      "text": "Émotions en chaîne",
+      "text": "Cadeau imaginaire",
       "duration": "4 min",
-      "description": "Faire passer une émotion physique de voisin en voisin tout autour du cercle."
+      "description": "Offrir et décrire un objet invisible à son voisin."
     },
     {
-      "text": "Tableau vivant",
+      "text": "Statues",
       "duration": "5 min",
-      "description": "Construire une scène figée en s'ajoutant un par un pour créer une image collective."
+      "description": "Se figer instantanément dans une pose au signal sonore."
     },
     {
-      "text": "Ping Pong verbal",
+      "text": "Échauffement vocal",
+      "duration": "3 min",
+      "description": "Pratiquer des gammes et des articulations complexes."
+    },
+    {
+      "text": "Le nœud humain",
+      "duration": "6 min",
+      "description": "Se démêler les bras sans lâcher les mains des autres."
+    },
+    {
+      "text": "Passation d'objet",
+      "duration": "4 min",
+      "description": "Transformer un objet imaginaire en un autre par le mime."
+    },
+    {
+      "text": "Duel de regards",
       "duration": "2 min",
-      "description": "S'envoyer un mot imaginaire avec un rythme soutenu sans temps mort."
+      "description": "Maintenir le contact visuel sans rire ni ciller."
     },
     {
-      "text": "Démarches variées",
+      "text": "La machine",
       "duration": "5 min",
-      "description": "Expérimenter différentes façons de marcher en déplaçant son centre de gravité."
-    },
-    {
-      "text": "Le traducteur",
-      "duration": "4 min",
-      "description": "Un joueur parle une langue imaginaire et un autre traduit simultanément ses propos."
-    },
-    {
-      "text": "Rythme frappé",
-      "duration": "3 min",
-      "description": "Reproduire en écho les rythmes frappés dans les mains par le meneur de jeu."
+      "description": "Créer un mécanisme humain avec sons et mouvements."
     },
     {
       "text": "Portrait chinois",
       "duration": "5 min",
-      "description": "Définir un personnage à travers une série de questions métaphoriques rapides."
+      "description": "Se définir rapidement par des images métaphoriques."
     },
     {
-      "text": "Course lente",
+      "text": "Le samouraï",
       "duration": "3 min",
-      "description": "Se déplacer au ralenti extrême en décomposant chaque mouvement avec précision."
+      "description": "Effectuer un cri et un geste tranchant coordonné."
     },
     {
-      "text": "Respiration profonde",
+      "text": "Marche aveugle",
+      "duration": "5 min",
+      "description": "Se laisser guider dans l'espace par la voix d'un partenaire."
+    },
+    {
+      "text": "Émotions en chaîne",
+      "duration": "4 min",
+      "description": "Transmettre une humeur précise à son voisin par le regard."
+    },
+    {
+      "text": "Le chef de file",
+      "duration": "3 min",
+      "description": "Imiter la démarche et le rythme de la personne devant."
+    },
+    {
+      "text": "Ping-pong verbal",
       "duration": "2 min",
-      "description": "Prendre conscience du souffle collectivement pour se détendre et se concentrer."
+      "description": "Répondre à un mot par un autre sans aucune hésitation."
+    },
+    {
+      "text": "Relaxation",
+      "duration": "5 min",
+      "description": "Détendre chaque muscle du corps par la respiration."
     }
   ],
   "emotions": [
-    { "text": "Joie exubérante", "category": "Positive" },
-    { "text": "Colère froide", "category": "Négative" },
-    { "text": "Tristesse infinie", "category": "Négative" },
-    { "text": "Peur panique", "category": "Négative" },
-    { "text": "Amour inconditionnel", "category": "Positive" },
-    { "text": "Jalousie maladive", "category": "Négative" },
-    { "text": "Fierté orgueilleuse", "category": "Positive" },
-    { "text": "Dégoût viscéral", "category": "Négative" },
-    { "text": "Excitation enfantine", "category": "Positive" },
-    { "text": "Indifférence totale", "category": "Neutre" },
-    { "text": "Cynisme mordant", "category": "Neutre" },
-    { "text": "Nostalgie mélancolique", "category": "Neutre" },
-    { "text": "Hystérie joyeuse", "category": "Positive" },
-    { "text": "Sérénité absolue", "category": "Positive" }
+    {
+      "text": "Joie",
+      "category": "Positive"
+    },
+    {
+      "text": "Colère",
+      "category": "Négative"
+    },
+    {
+      "text": "Tristesse",
+      "category": "Négative"
+    },
+    {
+      "text": "Peur",
+      "category": "Négative"
+    },
+    {
+      "text": "Surprise",
+      "category": "Neutre"
+    },
+    {
+      "text": "Dégoût",
+      "category": "Négative"
+    },
+    {
+      "text": "Amour",
+      "category": "Positive"
+    },
+    {
+      "text": "Jalousie",
+      "category": "Négative"
+    },
+    {
+      "text": "Fierté",
+      "category": "Positive"
+    },
+    {
+      "text": "Honte",
+      "category": "Négative"
+    },
+    {
+      "text": "Calme",
+      "category": "Positive"
+    },
+    {
+      "text": "Ennui",
+      "category": "Neutre"
+    },
+    {
+      "text": "Curiosité",
+      "category": "Positive"
+    },
+    {
+      "text": "Mépris",
+      "category": "Négative"
+    },
+    {
+      "text": "Espoir",
+      "category": "Positive"
+    },
+    {
+      "text": "Confusion",
+      "category": "Neutre"
+    },
+    {
+      "text": "Nostalgie",
+      "category": "Neutre"
+    },
+    {
+      "text": "Enthousiasme",
+      "category": "Positive"
+    },
+    {
+      "text": "Inquiétude",
+      "category": "Négative"
+    },
+    {
+      "text": "Indifférence",
+      "category": "Neutre"
+    }
   ],
   "locations": [
-    { "text": "Un sous-marin en panne à 4000m", "category": "Huis clos" },
-    { "text": "Une file d'attente chez le boulanger", "category": "Quotidien" },
-    { "text": "La surface hostile de Mars", "category": "Insolite" },
-    { "text": "Une cabane arboricole en pleine tempête", "category": "Aventure" },
-    { "text": "Le sommet brumeux du Mont Blanc", "category": "Aventure" },
-    { "text": "Un ascenseur bloqué au 80ème étage", "category": "Huis clos" },
-    { "text": "Un musée de cire au milieu de la nuit", "category": "Insolite" },
-    { "text": "Les coulisses d'un défilé de haute couture", "category": "Quotidien" },
-    { "text": "Une île déserte recouverte de brume", "category": "Aventure" },
-    { "text": "La salle d'attente des urgences vétérinaires", "category": "Quotidien" },
-    { "text": "Un bunker anti-atomique ultra-luxueux", "category": "Huis clos" }
+    {
+      "text": "Ascenseur",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Cuisine",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Île déserte",
+      "category": "Aventure"
+    },
+    {
+      "text": "Station spatiale",
+      "category": "Insolite"
+    },
+    {
+      "text": "Bureau",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Grotte sombre",
+      "category": "Aventure"
+    },
+    {
+      "text": "Cabine d'avion",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Château hanté",
+      "category": "Insolite"
+    },
+    {
+      "text": "Jardin public",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Sommet montagne",
+      "category": "Aventure"
+    },
+    {
+      "text": "Cellule prison",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Fond marin",
+      "category": "Insolite"
+    },
+    {
+      "text": "Salon de coiffure",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Jungle",
+      "category": "Aventure"
+    },
+    {
+      "text": "Coffre-fort",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Cirque",
+      "category": "Insolite"
+    },
+    {
+      "text": "Chambre",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Désert",
+      "category": "Aventure"
+    },
+    {
+      "text": "Placard",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Nuage",
+      "category": "Insolite"
+    }
   ],
   "eras": [
-    { "text": "La Préhistoire (-10 000)", "era": "Passé" },
-    { "text": "L'Antiquité romaine (Ier siècle)", "era": "Passé" },
-    { "text": "Le Moyen Âge féodal (XIIe siècle)", "era": "Passé" },
-    { "text": "La Renaissance italienne (XVe siècle)", "era": "Passé" },
-    { "text": "L'Époque victorienne (XIXe siècle)", "era": "Passé" },
-    { "text": "Les Années folles (1920)", "era": "Passé" },
-    { "text": "L'âge d'or du Disco (1970)", "era": "Passé" },
-    { "text": "L'ère Cyberpunk (2080)", "era": "Futur" },
-    { "text": "Le présent (2026)", "era": "Présent" },
-    { "text": "Le futur lointain (3050)", "era": "Futur" }
+    {
+      "text": "Préhistoire",
+      "era": "Passé"
+    },
+    {
+      "text": "Antiquité",
+      "era": "Passé"
+    },
+    {
+      "text": "Moyen Âge",
+      "era": "Passé"
+    },
+    {
+      "text": "Renaissance",
+      "era": "Passé"
+    },
+    {
+      "text": "Siècle Lumières",
+      "era": "Passé"
+    },
+    {
+      "text": "Belle Époque",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 20",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 80",
+      "era": "Passé"
+    },
+    {
+      "text": "Far West",
+      "era": "Passé"
+    },
+    {
+      "text": "Aujourd'hui",
+      "era": "Présent"
+    },
+    {
+      "text": "Maintenant",
+      "era": "Présent"
+    },
+    {
+      "text": "Époque actuelle",
+      "era": "Présent"
+    },
+    {
+      "text": "Temps réel",
+      "era": "Présent"
+    },
+    {
+      "text": "Futur proche",
+      "era": "Futur"
+    },
+    {
+      "text": "An 3000",
+      "era": "Futur"
+    },
+    {
+      "text": "Ère spatiale",
+      "era": "Futur"
+    },
+    {
+      "text": "Post-apocalyptique",
+      "era": "Futur"
+    },
+    {
+      "text": "Cyberpunk",
+      "era": "Futur"
+    },
+    {
+      "text": "Colonie martienne",
+      "era": "Futur"
+    },
+    {
+      "text": "Demain",
+      "era": "Futur"
+    }
   ]
 }

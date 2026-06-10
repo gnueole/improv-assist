@@ -51,6 +51,7 @@ export interface Scenario {
 export interface Category {
   text: string;
   category?: string;
+  description?: string;
 }
 
 export interface Echauffement {
