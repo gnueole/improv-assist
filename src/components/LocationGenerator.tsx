@@ -53,7 +53,7 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
   return (
     <div className="w-full flex flex-col items-center gap-6">
       {/* Category Filter */}
-      <div className="flex gap-2 p-1 bg-zinc-900 border border-zinc-800/80 rounded-full text-xs z-10">
+      <div className="flex gap-2 p-1 bg-zinc-900 border border-zinc-800/80 rounded-full text-sm z-10">
         {["All", "Huis clos", "Quotidien", "Aventure", "Insolite"].map((cat) => (
           <button
             key={cat}
@@ -71,13 +71,13 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
       <div className="generator-card">
         <div className="generator-card-inner">
           <div className={`transition-all duration-300 ${isSpinning ? "scale-90 blur-sm opacity-50" : "scale-100 opacity-100"}`}>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 block mb-3">
+            <span className="text-xs uppercase tracking-[0.2em] text-zinc-400 block mb-3">
               Lieu suggéré
             </span>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
               {currentLocation ? `"${currentLocation.text}"` : "Réservoir vide..."}
             </h3>
-            <div className="inline-block mt-4 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-xs text-zinc-300 font-light">
+            <div className="inline-block mt-4 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-sm text-zinc-300 font-light">
               Style : {currentLocation ? currentLocation.category : "-"}
             </div>
           </div>

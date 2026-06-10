@@ -78,24 +78,24 @@ export default function HiHaRules() {
             {/* Titre et Commande */}
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono px-2 py-0.5 bg-neutral-800 rounded text-neutral-400">
+                <span className="text-sm font-mono px-2 py-0.5 bg-neutral-800 rounded text-neutral-300">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h2 className="font-bold text-base text-white">{rule.name}</h2>
               </div>
-              <span className="text-xs font-bold font-mono px-2 py-1 bg-amber-950/40 text-amber-400 border border-amber-900/50 rounded-lg">
+              <span className="text-sm font-bold font-mono px-2 py-1 bg-amber-950/40 text-amber-400 border border-amber-900/50 rounded-lg">
                 {rule.command}
               </span>
             </div>
 
             {/* Corps */}
-            <div className="text-sm text-neutral-300 leading-relaxed">
-              <span className="text-neutral-500 font-medium block text-xs uppercase tracking-wider mb-0.5">Geste / Action</span>
+            <div className="text-base text-neutral-200 leading-relaxed">
+              <span className="text-neutral-400 font-semibold block text-sm uppercase tracking-wider mb-0.5">Geste / Action</span>
               {rule.action}
             </div>
 
             {/* Note / Piège évitant l'élimination */}
-            <div className="text-xs bg-neutral-950/60 text-neutral-400 p-2.5 rounded-lg border border-neutral-800/60 flex gap-2">
+            <div className="text-sm bg-neutral-950/60 text-neutral-300 p-2.5 rounded-lg border border-neutral-800/60 flex gap-2">
               <span className="text-amber-500 select-none">⚠️</span>
               <p className="italic">{rule.note}</p>
             </div>

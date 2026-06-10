@@ -32,26 +32,26 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
             Houba Houba !
           </h3>
           
-          <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-medium mb-4">
+          <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium mb-4">
             Version beta 1
           </span>
           
-          <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+          <p className="text-sm text-zinc-300 leading-relaxed mb-6">
             Houba Houba ! est le compagnon de scène ultime pour les comédiens d'improvisation théâtrale. Conçu pour générer des idées de scènes fluides et rapides.
           </p>
           
           {/* Metadata Block */}
-          <div className="w-full border-t border-zinc-800/80 pt-4 mb-6 text-xs text-zinc-400 flex flex-col gap-2">
+          <div className="w-full border-t border-zinc-800/80 pt-4 mb-6 text-sm text-zinc-300 flex flex-col gap-3">
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Création</span>
-              <div className="flex items-center gap-1.5 font-semibold text-zinc-300">
+              <div className="flex items-center gap-1.5 font-semibold text-zinc-200">
                 <span>Éole</span>
                 <span className="text-zinc-700 font-light">•</span>
                 <a 
                   href="https://www.instagram.com/eolewind" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-cyan-400 hover:underline flex items-center gap-1 text-xs font-semibold"
+                  className="text-cyan-400 hover:underline flex items-center gap-1 text-sm font-semibold"
                 >
                   <Instagram className="w-3.5 h-3.5 text-zinc-500" />
                   <span>@eolewind</span>
@@ -84,7 +84,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
               <span className="text-zinc-500">Copyright</span>
               <span className="text-zinc-300">© {new Date().getFullYear()} Éole</span>
             </div>
-            <div className="text-[10px] text-zinc-500 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
+            <div className="text-xs text-zinc-400 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
               EFIT® est une marque déposée.
             </div>
             <div className="flex justify-between items-center border-t border-zinc-800/80 pt-3 mt-1.5">
@@ -107,7 +107,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
           {/* Close button */}
           <button
             onClick={onClose}
-            className="w-full py-2.5 rounded-xl bg-zinc-100 hover:bg-white text-black text-xs font-semibold active:scale-95 transition-all"
+            className="w-full py-2.5 rounded-xl bg-zinc-100 hover:bg-white text-black text-sm font-semibold active:scale-95 transition-all"
           >
             Fermer
           </button>

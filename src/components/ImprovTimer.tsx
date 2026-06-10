@@ -190,7 +190,7 @@ export default function ImprovTimer() {
   if (!isMounted) {
     return (
       <div className="w-full flex items-center justify-center min-h-[300px]">
-        <div className="text-zinc-500 text-xs tracking-widest animate-pulse uppercase">Initialisation...</div>
+        <div className="text-zinc-500 text-sm tracking-widest animate-pulse uppercase">Initialisation...</div>
       </div>
     );
   }
@@ -207,7 +207,7 @@ export default function ImprovTimer() {
                 {timeLeft === 60 ? "⏱️" : "⚠️"}
               </div>
               <div className="text-left">
-                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Attention</p>
+                <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest">Attention</p>
                 <h4 className="text-sm font-black text-white uppercase tracking-wide">
                   {flashMessage}
                 </h4>
@@ -221,7 +221,7 @@ export default function ImprovTimer() {
       {/* Sound Toggle */}
       <button
         onClick={() => setSoundEnabled(!soundEnabled)}
-        className="px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs flex items-center gap-2 active:scale-95 transition-all hover:text-white"
+        className="px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-sm flex items-center gap-2 active:scale-95 transition-all hover:text-white"
       >
         {soundEnabled ? (
           <>
@@ -247,7 +247,7 @@ export default function ImprovTimer() {
           <div className="flex flex-col items-center select-none">
             {isFinished ? (
               <div className="animate-bounce">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-bold block mb-1">
+                <span className="text-xs uppercase tracking-[0.25em] text-purple-400 font-bold block mb-1">
                   Improvisation
                 </span>
                 <h3 className="text-4xl font-black tracking-tight text-white uppercase drop-shadow-[0_0_15px_rgba(112,0,255,0.6)]">
@@ -256,7 +256,7 @@ export default function ImprovTimer() {
               </div>
             ) : (
               <>
-                <span className={`text-[10px] uppercase tracking-[0.2em] block mb-2 transition-colors duration-300 ${isLowTime ? "text-red-400 font-bold" : "text-zinc-400"
+                <span className={`text-xs uppercase tracking-[0.2em] block mb-2 transition-colors duration-300 ${isLowTime ? "text-red-400 font-bold" : "text-zinc-400"
                   }`}>
                   {isRunning ? "Scène en cours..." : "Temps de scène cible"}
                 </span>
@@ -271,7 +271,7 @@ export default function ImprovTimer() {
                   {formatTime(timeLeft)}
                 </h3>
 
-                <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-medium">
+                <span className="text-xs uppercase tracking-widest text-zinc-500 font-medium">
                   {formatTime(targetDuration)} réglé
                 </span>
               </>
@@ -289,13 +289,13 @@ export default function ImprovTimer() {
             <div className="flex justify-center gap-4 w-full">
               <button
                 onClick={() => adjustTargetDuration(-30)}
-                className="flex-1 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 flex items-center justify-center gap-1 active:scale-95 transition-all"
+                className="flex-1 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-zinc-300 flex items-center justify-center gap-1 active:scale-95 transition-all"
               >
                 <Minus className="w-3 h-3" /> 30s
               </button>
               <button
                 onClick={() => adjustTargetDuration(30)}
-                className="flex-1 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 flex items-center justify-center gap-1 active:scale-95 transition-all"
+                className="flex-1 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-zinc-300 flex items-center justify-center gap-1 active:scale-95 transition-all"
               >
                 <Plus className="w-3 h-3" /> 30s
               </button>
@@ -305,7 +305,7 @@ export default function ImprovTimer() {
             {targetDuration !== BASE_DEFAULT && (
               <button
                 onClick={resetToStandard}
-                className="text-[10px] text-zinc-500 hover:text-zinc-300 underline transition-all focus:outline-none py-1"
+                className="text-xs text-zinc-500 hover:text-zinc-300 underline transition-all focus:outline-none py-1"
               >
                 Rétablir 2m30
               </button>

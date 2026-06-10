@@ -40,7 +40,7 @@ export default function ConstraintsView() {
           placeholder="Rechercher une contrainte..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-xs placeholder-zinc-500 focus:outline-none focus:border-zinc-700 transition-colors"
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 text-sm placeholder-zinc-500 focus:outline-none focus:border-zinc-700 transition-colors"
         />
       </div>
 
@@ -50,7 +50,7 @@ export default function ConstraintsView() {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-3 py-1 rounded-full text-[10px] font-medium transition-all shrink-0 border ${
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-all shrink-0 border ${
               selectedCategory === cat
                 ? "bg-zinc-100 text-black border-zinc-100 font-bold"
                 : "bg-zinc-900/60 text-zinc-400 border-zinc-800/80 hover:text-zinc-200"
@@ -71,17 +71,17 @@ export default function ConstraintsView() {
             >
               <div className="flex items-center justify-between">
                 <h4 className="font-bold text-sm text-zinc-100">{constraint.title}</h4>
-                <span className="px-2 py-0.5 rounded bg-zinc-850 border border-zinc-800 text-[9px] uppercase tracking-wider text-zinc-400 font-medium">
+                <span className="px-2 py-0.5 rounded bg-zinc-850 border border-zinc-800 text-xs uppercase tracking-wider text-zinc-400 font-medium">
                   {constraint.category}
                 </span>
               </div>
-              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+              <p className="text-sm text-zinc-300 font-light leading-relaxed">
                 {constraint.description}
               </p>
             </div>
           ))
         ) : (
-          <div className="text-center py-8 text-zinc-500 text-xs w-full">
+          <div className="text-center py-8 text-zinc-500 text-sm w-full">
             Aucune contrainte trouvée pour votre recherche.
           </div>
         )}

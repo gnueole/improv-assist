@@ -62,7 +62,7 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
   return (
     <div className="w-full flex flex-col items-center gap-6">
       {/* Category Filter */}
-      <div className="flex gap-2 p-1 bg-zinc-900 border border-zinc-800/80 rounded-full text-xs z-10">
+      <div className="flex gap-2 p-1 bg-zinc-900 border border-zinc-800/80 rounded-full text-sm z-10">
         {["All", "Positive", "Négative", "Neutre"].map((cat) => (
           <button
             key={cat}
@@ -83,20 +83,20 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
           <div className={`transition-all duration-300 flex flex-col items-center ${isSpinning ? "scale-90 blur-sm opacity-50" : "scale-100 opacity-100"}`}>
             
             {/* Giant Intensity Number */}
-            <div className="text-7xl font-black tracking-tight text-white mb-1 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] animate-pulse-slow">
+            <div className="text-7.5xl font-black tracking-tight text-white mb-1 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] animate-pulse-slow">
               {currentIntensity}
             </div>
-            <span className="text-[9px] uppercase tracking-[0.25em] text-zinc-500 font-bold block mb-4">
+            <span className="text-xs uppercase tracking-[0.25em] text-zinc-500 font-bold block mb-4">
               Niveau d'intensité / 10
             </span>
 
-            <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 block mb-1">
+            <span className="text-xs uppercase tracking-[0.2em] text-zinc-400 block mb-1">
               Émotion suggérée
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
               {currentEmotion ? currentEmotion.text : "Réservoir vide..."}
             </h3>
-            <div className="inline-block mt-3 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-[11px] text-zinc-300 font-light">
+            <div className="inline-block mt-3 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-xs text-zinc-300 font-light">
               Style : {currentEmotion ? currentEmotion.category : "-"}
             </div>
           </div>

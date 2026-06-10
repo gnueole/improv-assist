@@ -244,7 +244,7 @@ export default function Dashboard() {
         </section>
 
         {/* Dashboard Tile Grid */}
-        <section className="grid grid-cols-2 gap-3 max-w-xs md:max-w-sm mx-auto px-4 landscape:my-4">
+        <section className="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-0.5 landscape:my-4">
           {tiles.map((tile) => {
             const Icon = tile.icon;
             return (
@@ -258,12 +258,12 @@ export default function Dashboard() {
                     <Icon className="w-4 h-4 text-white/90 shrink-0" strokeWidth={2} />
                   </div>
                   <div>
-                    <h3 className="text-base md:text-sm font-semibold text-zinc-100 tracking-wide leading-snug">
+                    <h3 className="text-lg md:text-base font-semibold text-zinc-100 tracking-wide leading-snug">
                       <span className="break-words line-clamp-2 hyphens-auto">
                         {tile.title}
                       </span>
                     </h3>
-                    <p className="text-xs md:text-[10px] text-zinc-400 font-light mt-1">
+                    <p className="text-sm md:text-xs text-zinc-400 font-light mt-1">
                       {tile.subtitle}
                     </p>
                   </div>
@@ -277,7 +277,7 @@ export default function Dashboard() {
         {devMode && (
           <button
             onClick={openPrompt}
-            className="mx-auto mt-4 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] text-zinc-400 font-semibold active:scale-95 transition-all hover:text-white flex items-center gap-1.5 animate-fade-in"
+            className="mx-auto mt-4 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 font-semibold active:scale-95 transition-all hover:text-white flex items-center gap-1.5 animate-fade-in"
           >
             <Terminal className="w-3.5 h-3.5 text-cyan-400" />
             Consulter le Prompt Système
@@ -287,14 +287,14 @@ export default function Dashboard() {
         {/* Footer */}
         <footer className="dashboard-footer">
           <div>Houba Houba !</div>
-          <div className="text-[9px] text-zinc-700 font-light flex items-center gap-1.5 flex-wrap justify-center">
+          <div className="text-xs text-zinc-500 font-medium flex items-center gap-1.5 flex-wrap justify-center">
             <span>© {new Date().getFullYear()} Éole</span>
             <span>•</span>
             <a
               href="https://www.improvisation.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:underline hover:text-zinc-500 transition-colors"
+              className="hover:underline hover:text-zinc-400 transition-colors"
             >
               Rejoindre l'EFIT
             </a>
@@ -318,7 +318,7 @@ export default function Dashboard() {
             <span>Retour</span>
           </button>
 
-          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 z-30">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400 z-30">
             {activeTile?.title}
           </h2>
 
@@ -333,7 +333,7 @@ export default function Dashboard() {
         </div>
 
         {/* Detail Footer */}
-        <footer className="text-center text-[9px] text-zinc-700 tracking-wider">
+        <footer className="text-center text-xs text-zinc-500 tracking-wider">
           HOUBA HOUBA ! • CONSOLE D'OUTILS
         </footer>
       </div>

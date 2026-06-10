@@ -160,10 +160,10 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
     <div className="w-full h-full flex flex-col justify-between items-center gap-4">
       {/* Instructions */}
       <div className="text-center max-w-xs px-4">
-        <p className="text-xs text-zinc-400 leading-relaxed">
+        <p className="text-sm text-zinc-300 leading-relaxed">
           {touches.length === 0 
             ? "📱 Mobile : Posez plusieurs doigts sur l'écran.\n💻 PC : Cliquez à différents endroits pour ajouter des joueurs virtuels."
-            : `${touches.length} joueur${touches.length > 1 ? "s" : ""} actif${touches.length > 1 ? "s" : ""}`}
+            : `${touches.length} joueur${touches.length > 1 ? "s" : ""} active${touches.length > 1 ? "s" : ""}`}
         </p>
         
         {countdown !== null && (
@@ -173,7 +173,7 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
         )}
         
         {touchWinner && (
-          <div className="mt-2 text-xs font-semibold text-emerald-400 animate-pulse">
+          <div className="mt-2 text-sm font-semibold text-emerald-400 animate-pulse">
             🏆 Le joueur en surbrillance commence !
           </div>
         )}
@@ -189,9 +189,9 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
         className="w-full flex-1 max-h-[380px] min-h-[300px] border border-zinc-800/80 rounded-3xl bg-zinc-950/70 relative overflow-hidden cursor-crosshair select-none touch-none"
       >
         {touches.length === 0 && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-600 gap-3 pointer-events-none p-6 text-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-650 gap-3 pointer-events-none p-6 text-center">
             <Fingerprint className="w-12 h-12 stroke-[1] text-zinc-700 animate-pulse" />
-            <span className="text-xs">Zone multi-touch interactive</span>
+            <span className="text-sm">Zone multi-touch interactive</span>
           </div>
         )}
 
@@ -234,7 +234,7 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
       <div className="w-full max-w-sm flex gap-3">
         <button
           onClick={resetTouchSelector}
-          className="flex-1 py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 active:scale-95 transition-all text-xs font-semibold text-zinc-300 text-center"
+          className="flex-1 py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 active:scale-95 transition-all text-sm font-semibold text-zinc-300 text-center"
         >
           Réinitialiser
         </button>
@@ -262,7 +262,7 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
                 setIsCountingDown(false);
               }, 3000);
             }}
-            className="flex-1 py-3 px-4 rounded-xl bg-white text-black active:scale-95 transition-all text-xs font-bold text-center"
+            className="flex-1 py-3 px-4 rounded-xl bg-white text-black active:scale-95 transition-all text-sm font-bold text-center"
           >
             Tirer au sort !
           </button>
