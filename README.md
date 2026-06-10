@@ -23,14 +23,13 @@ The application is styled with a sleek dark aesthetic utilizing vibrant iridesce
 | **📦 Réservoir de Prompts (Data Pool)** | Pour éviter de tirer plusieurs fois les mêmes suggestions, les prompts sont piochés dans un réservoir local et consommés dynamiquement. Si le réservoir se vide, des données de repli sont utilisées. |
 | **🔄 Régénération par l'IA (Gemini via n8n)** | Permet de recharger le réservoir local avec de nouvelles idées générées par l'IA en cliquant sur les flèches de rotation en haut à droite. |
 | **🚦 Indicateur de connexion Gemini (n8n)** | Un voyant lumineux indique l'état de l'API. Si vous effectuez trop de recharges, vous consommerez tous les jetons (tokens) gratuits de l'API Gemini, ce qui provoquera une erreur (voyant **rouge**). |
-| **🔗 Chemins d'URL dynamiques** | Chaque tuile est associée à un sous-chemin d'URL dédié (ex: `/emotions`, `/timer`) pour un accès direct et un meilleur référencement. Des règles de réécriture (*rewrites*) Next.js empêchent les erreurs 404 lors du rafraîchissement d'une page. |
-| **🔍 Ajusteur de taille de texte** | Des boutons d'ajustement dynamique de taille de police (Standard, Grand, Très Grand) sont disponibles dans l'Aide avec mémorisation persistante dans le navigateur (`localStorage`). |
+
 
 ---
 
 ## ⚙️ Notion Synchronization
 
-Le cache local est généré en synchronisant les données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
+Le cache local est généré en synchronisant certaines données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
 ```bash
 node notion_fetch.js
 ```
@@ -40,8 +39,12 @@ node notion_fetch.js
 ## 🚀 Getting Started
 
 ### Prerequisites
+- Docker (testé avec WSL2)
 - Node.js (version 20+)
 - npm
+- Une Database (Notion ou autre) pour interfacer avec les prompts de l'application (optionnel).
+- Un compte n8n pour interfacer avec les prompts de l'application et l'IA et les envois d'emails (optionnel).
+- Une clé Gemini pour regénérer des prompts de remplacement (optionnel).
 
 ### Local Installation & Development
 
@@ -107,7 +110,7 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 - **Optimisation n8n & Réservoir de secours** : Extension du réservoir hors-ligne à **50 entrées par catégorie** (350 prompts au total) et sécurisation du workflow n8n via un double-port (succès/erreur) pour garantir le retour systématique du réservoir de secours lors des surcharges du modèle Gemini.
 - **Ajout d'échauffements & Descriptions** : Intégration de descriptions explicatives en français pour les exercices d'échauffement et les contraintes (catégories) de jeu, guidant l'utilisateur directement depuis l'interface.
 - **Ponçage des thèmes & Générateurs** : Enrichissement et affinage des listes de thèmes, époques, émotions et lieux pour maximiser la variété dramatique.
-- **Envoi de feedback & RGPD** : Sélecteur de note par glissement tactile/souris (1 à 5 étoiles) connecté à Notion, validation obligatoire du consentement RGPD et intégration d'un modal de politique de confidentialité.
+- **Envoi de feedback & RGPD** : Sélecteur de note par balayage/glissement tactile ou souris (1 à 5 étoiles) avec émoticônes dynamiques connecté à Notion, validation obligatoire du consentement RGPD et intégration d'un modal de politique de confidentialité.
 
 ### Version BETA 2 (1.0.0-beta.2)
 - **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
@@ -118,5 +121,5 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ### Version Beta 1 (1.0.0-beta.1)
 - **Privacy & RGPD** : Ajout d'un modal de politique de confidentialité conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
-- **Generateur de Feedback** : Sélecteur de note par balayage/glissement d'étoiles (1 à 5) avec retour textuel et émoticônes dynamiques.
-- **Optimisation PWA** : Intégration de redirections internes Next.js pour éviter les erreurs 404 lors du rafraîchissement d'URL.
+- **Chemins d'URL dynamiques & Routage** : Association de chaque tuile à un sous-chemin d'URL dédié (ex: `/emotions`, `/timer`) pour un accès direct, avec des règles de réécriture (*rewrites*) Next.js pour empêcher les erreurs 404 lors du rafraîchissement d'une page.
+- **Ajusteur de taille de texte** : Boutons d'ajustement dynamique de taille de police (Standard, Grand, Très Grand) dans l'Aide avec mémorisation persistante dans le `localStorage`.
