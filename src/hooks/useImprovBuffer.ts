@@ -202,7 +202,23 @@ export function useImprovBuffer(activeTileId: string | null) {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        let errorMsg = `HTTP error! Status: ${response.status}`;
+        try {
+          const errData = await response.json();
+          if (errData) {
+            const description = errData.errorDescription || errData.description;
+            const message = errData.errorMessage || errData.error?.message || errData.error;
+            
+            if (message && description) {
+              errorMsg = `${message} (${description})`;
+            } else if (message) {
+              errorMsg = message;
+            } else if (description) {
+              errorMsg = description;
+            }
+          }
+        } catch (_) {}
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
@@ -238,16 +254,21 @@ export function useImprovBuffer(activeTileId: string | null) {
       setN8nError(null);
       return picked;
     } catch (error) {
-      console.error(`[n8n Fallback Error] Failed to fetch single item for ${category}:`, error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      if (devMode) {
+        console.error(`[n8n Fallback Error Details] Failed to fetch single item for ${category}:`, error);
+      } else {
+        console.error(`[n8n Fallback Error] Failed to fetch single item for ${category}:`, errorMsg);
+      }
       setN8nStatus("red");
-      setN8nError(error instanceof Error ? error.message : String(error));
-      showToast("Erreur lors de la récupération n8n.");
+      setN8nError(errorMsg);
+      showToast(devMode ? `Erreur n8n: ${errorMsg}` : "Erreur lors de la récupération n8n.");
       return null;
     } finally {
       setIsLoading(false);
       setIsReloading(false);
     }
-  }, [showToast]);
+  }, [showToast, devMode]);
 
   return {
     buffer,

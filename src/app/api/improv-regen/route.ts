@@ -20,6 +20,20 @@ export async function POST(request: Request) {
     });
     
     if (!response.ok) {
+      let errorData: any = null;
+      try {
+        const text = await response.text();
+        if (text) {
+          errorData = JSON.parse(text);
+        }
+      } catch (e) {
+        // Not JSON
+      }
+
+      if (errorData) {
+        return NextResponse.json(errorData, { status: response.status });
+      }
+
       return NextResponse.json(
         { error: `n8n webhook returned status ${response.status}` },
         { status: response.status }
