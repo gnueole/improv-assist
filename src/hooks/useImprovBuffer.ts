@@ -2,7 +2,7 @@
 
 /**
  * @file useImprovBuffer.ts
- * @description React hook that manages the local prompts reservoir buffer and n8n sync states.
+ * @description React hook that coordinates local prompts reservoir buffer and n8n sync states.
  * @author Éole <hi@eole>
  * @creation-date 2026-06-11
  * @license MIT
@@ -10,80 +10,35 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { ImprovBuffer } from "@/types";
-import { EMOTIONS, LOCATIONS, ERAS } from "@/data/mockData";
+import { useDevMode } from "./useDevMode";
+import { useToast } from "./useToast";
+import { EMPTY_BUFFER, buildBufferFromData, isValidBuffer } from "@/utils/bufferUtils";
 
-const EMPTY_BUFFER: ImprovBuffer = {
-  scenarios: [],
-  categories: [],
-  themes: [],
-  echauffements: [],
-  emotions: [],
-  locations: [],
-  eras: [],
-  last_fetch: null
-};
+export function useImprovBuffer(activeTileId?: string | null) {
+  const { devMode, handleDevModeChange } = useDevMode();
+  const { toastMessage, showToast, setToastMessage } = useToast();
 
-/**
- * Helper to construct an ImprovBuffer object from raw JSON data,
- * falling back to static mock datasets when optional lists are empty.
- */
-function buildBufferFromData(data: any): ImprovBuffer {
-  return {
-    scenarios: data.scenarios || [],
-    categories: data.categories || [],
-    themes: data.themes || [],
-    echauffements: data.echauffements || [],
-    emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : EMOTIONS,
-    locations: (data.locations && data.locations.length > 0) ? data.locations : LOCATIONS,
-    eras: (data.eras && data.eras.length > 0) ? data.eras : ERAS,
-    last_fetch: Date.now()
-  };
-}
-
-export function useImprovBuffer(activeTileId: string | null) {
-  const [isRegenerating, setIsRegenerating] = useState(false);
+  const [isRegenerating] = useState(false); // Kept for interface compatibility
   const [isReloading, setIsReloading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [devMode, setDevMode] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [n8nStatus, setN8nStatus] = useState<"green" | "red">("green");
   const [n8nError, setN8nError] = useState<string | null>(null);
-  
   const [buffer, setBuffer] = useState<ImprovBuffer>(EMPTY_BUFFER);
-
-  const showToast = useCallback((message: string) => {
-    setToastMessage(message);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 4000);
-  }, []);
 
   // Initialize buffer from localStorage or fetch from public/data/reservoir-config.json
   useEffect(() => {
-    const savedDevMode = localStorage.getItem("dev_mode") === "true";
-    setDevMode(savedDevMode);
-
     const initialize = async () => {
-      const savedBuffer = localStorage.getItem("improv_buffer");
-      if (savedBuffer) {
-        try {
+      try {
+        const savedBuffer = localStorage.getItem("improv_buffer");
+        if (savedBuffer) {
           const parsed = JSON.parse(savedBuffer);
-          if (
-            parsed &&
-            Array.isArray(parsed.scenarios) &&
-            Array.isArray(parsed.categories) &&
-            Array.isArray(parsed.themes) &&
-            Array.isArray(parsed.echauffements) &&
-            Array.isArray(parsed.emotions) &&
-            Array.isArray(parsed.locations) &&
-            Array.isArray(parsed.eras)
-          ) {
+          if (isValidBuffer(parsed)) {
             setBuffer(parsed);
             return;
           }
-        } catch (e) {
-          console.error("Failed to parse improv_buffer from localStorage", e);
         }
+      } catch (e) {
+        console.error("Failed to parse improv_buffer from localStorage", e);
       }
 
       // Pre-fill from public/data/reservoir-config.json
@@ -101,11 +56,6 @@ export function useImprovBuffer(activeTileId: string | null) {
     };
 
     initialize();
-  }, []);
-
-  const handleDevModeChange = useCallback((val: boolean) => {
-    setDevMode(val);
-    localStorage.setItem("dev_mode", val ? "true" : "false");
   }, []);
 
   // Reload Reservoir: Reset local queues by re-fetching reservoir-config.json
@@ -144,14 +94,14 @@ export function useImprovBuffer(activeTileId: string | null) {
     }
 
     // 2. Fetch the current buffer
-    const saved = localStorage.getItem("improv_buffer");
     let currentBuffer = { ...EMPTY_BUFFER };
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem("improv_buffer");
+      if (saved) {
         currentBuffer = JSON.parse(saved);
-      } catch (e) {
-        console.error(e);
       }
+    } catch (e) {
+      console.error("Failed to read/parse improv_buffer for pickItem", e);
     }
 
     const queue = currentBuffer[category as keyof ImprovBuffer] as any[] || [];
