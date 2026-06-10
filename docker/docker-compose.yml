@@ -47,5 +47,3 @@ services:
 
 networks:
   eole_shared_network:
-    name: ${DOCKER_NETWORK_NAME}
-    external: ${DOCKER_NETWORK_EXTERNAL}

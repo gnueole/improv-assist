@@ -28,15 +28,11 @@ help:
 	@echo "======================================================================"
 	@echo "          🐸  HOUBA HOUBA ! — MAKEFILE CONFIGURATION  🐸"
 	@echo "======================================================================"
-	@echo "💻 LOCAL DEVELOPMENT (DEV MODE):"
-	@echo "  make dev-up        - Start local dev container with HMR (Port 3000)"
-	@echo "  make dev-down      - Stop local dev container"
+	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
+	@echo "  make up            - Start local dev environment with HMR (Port 3000)"
+	@echo "  make down          - Stop local dev environment"
 	@echo ""
-	@echo "📦 LOCAL PRODUCTION TEST:"
-	@echo "  make up            - Start production container locally"
-	@echo "  make down          - Stop production container locally"
-	@echo ""
-	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - BEHIND TRAEFIK):"
+	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - impro.eole.me):"
 	@echo "  make deploy        - Push config and pull immutable image from GHCR"
 	@echo "======================================================================"
 
@@ -55,13 +51,9 @@ dev-down:
 # ==============================================================================
 # 📦 PRODUCTION COMMANDS (LOCAL TEST)
 # ==============================================================================
-up:
-	@echo "📦 Starting production configuration locally..."
-	docker compose -f $(COMPOSE_PROD) --env-file .env up -d
+up: dev-up
 
-down:
-	@echo "🛑 Stopping local production container..."
-	docker compose -f $(COMPOSE_PROD) --env-file .env down
+down: dev-down
 
 # ==============================================================================
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
