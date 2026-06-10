@@ -29,7 +29,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+# Use a conditional wildcard copy to prevent build failures if public is missing
+COPY --from=builder /app/[p]ublic* ./public/
 
 # Set the correct permission for prerender cache
 RUN mkdir .next

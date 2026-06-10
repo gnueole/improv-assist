@@ -1,52 +1,78 @@
 # ==============================================================================
-# 🐸 HOUBA HOUBA ! — MOTEUR D'IMPROVISATION THÉÂTRALE
+# 🎭 HOUBA HOUBA ! — IMPROVISATION THEATER ENGINE
 # ==============================================================================
-# Description : Pilotage de l'environnement de développement local sous WSL.
-# Version     : 1.1.0
-# Équipe      : Éole Wind (EFIT)
+# Description : Local development management and automated VPS deployment.
+# Version     : 1.3.0
+# Author      : Éole Wind (EFIT)
 # ==============================================================================
 
-# ⚙️ CONFIGURATION INTERNE
-COMPOSE_DEV  := docker-compose.yml
-COMPOSE_PROD := docker-compose.prod.yml
+# ⚙️ INFRASTRUCTURE VARIABLES (SECURED)
+# Uses the local ~/.ssh/config host alias to avoid hardcoding credentials.
+VPS_SSH  := eole.me
+VPS_PATH := /home/eole/projects/jobby-md2html/efit-improv-prod
 
-# 🎯 CIBLES PRINCIPALES
-.PHONY: dev dev-build down clean logs help
+# 🛠️ LOCAL DOCKER CONFIGURATION
+DOCKER_DIR   := docker
+COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
+COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 
-# 🟢 DÉMARRAGE
-dev:
-	@echo "✨ Lancement de l'environnement de dev local..."
-	docker compose -f $(COMPOSE_DEV) up -d
-	@echo "🚀 Houba Houba ! est disponible en local."
+.PHONY: help dev-up dev-down up down deploy
 
-# 🛠️ RECOMPILATION LOCAL
-dev-build:
-	@echo "⚡ Reconstruction des couches Docker locales..."
-	docker compose -f $(COMPOSE_DEV) up -d --build
-
-# 🔴 ARRÊT
-down:
-	@echo "🛑 Arrêt des conteneurs locaux..."
-	docker compose -f $(COMPOSE_DEV) down
-
-# 🧹 NETTOYAGE PROFOND
-clean:
-	@echo "🧼 Purge complète : conteneurs, volumes et orphelins..."
-	docker compose -f $(COMPOSE_DEV) down -v --remove-orphans
-
-# 📋 LOGS STREAMING
-logs:
-	@echo "📟 Flux de logs du frontend (Ctrl+C pour quitter)..."
-	docker compose -f $(COMPOSE_DEV) logs -f
-
-# ℹ️ AIDE
+# ==============================================================================
+# ℹ️ HELP MENU
+# ==============================================================================
 help:
-	@echo "=================================================================="
-	@echo "💻 COMMANDES DISPONIBLES POUR LE DEV LOCAL :"
-	@echo "=================================================================="
-	@echo "  make dev        : Démarre l'application en arrière-plan"
-	@echo "  make dev-build  : Force la reconstruction du conteneur (ex: npm install)"
-	@echo "  make down       : Arrête les conteneurs"
-	@echo "  make clean      : Arrête et supprime TOUS les volumes locaux"
-	@echo "  make logs       : Affiche les logs du serveur Next.js en temps réel"
-	@echo "=================================================================="
+	@echo "======================================================================"
+	@echo "          🐸  HOUBA HOUBA ! — MAKEFILE CONFIGURATION  🐸"
+	@echo "======================================================================"
+	@echo "💻 LOCAL DEVELOPMENT (DEV MODE):"
+	@echo "  make dev-up        - Start local dev container with HMR (Port 3000)"
+	@echo "  make dev-down      - Stop local dev container"
+	@echo ""
+	@echo "📦 LOCAL PRODUCTION TEST:"
+	@echo "  make up            - Start production container locally"
+	@echo "  make down          - Stop production container locally"
+	@echo ""
+	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - BEHIND TRAEFIK):"
+	@echo "  make deploy        - Push config and pull immutable image from GHCR"
+	@echo "======================================================================"
+
+# ==============================================================================
+# 💻 DEVELOPMENT COMMANDS (LOCAL)
+# ==============================================================================
+dev-up:
+	@echo "✨ Starting local development environment..."
+	docker compose -f $(COMPOSE_DEV) --env-file .env up -d
+	@echo "🚀 Houba Houba ! is ready locally on port 3000."
+
+dev-down:
+	@echo "🛑 Stopping local development container..."
+	docker compose -f $(COMPOSE_DEV) --env-file .env down
+
+# ==============================================================================
+# 📦 PRODUCTION COMMANDS (LOCAL TEST)
+# ==============================================================================
+up:
+	@echo "📦 Starting production configuration locally..."
+	docker compose -f $(COMPOSE_PROD) --env-file .env up -d
+
+down:
+	@echo "🛑 Stopping local production container..."
+	docker compose -f $(COMPOSE_PROD) --env-file .env down
+
+# ==============================================================================
+# 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
+# ==============================================================================
+deploy:
+	@echo "🚀 Deploying Houba Houba ! to VPS Target [$(VPS_SSH)]..."
+	# 1. Ensure the remote deployment directory exists
+	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
+	# 2. SCP the production compose file and environment file
+	scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
+	scp $(DOCKER_DIR)/.env.prod $(VPS_SSH):$(VPS_PATH)/.env
+	# 3. Pull the immutable image from GHCR and recreate containers (NO local build)
+	@echo "📥 Pulling latest immutable image from GHCR..."
+	ssh $(VPS_SSH) "cd $(VPS_PATH) && \
+		docker compose -f docker-compose.prod.yml pull && \
+		docker compose -f docker-compose.prod.yml up -d --remove-orphans"
+	@echo "✅ Deployment successfully completed on production server !"

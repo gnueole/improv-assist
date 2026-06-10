@@ -254,8 +254,8 @@ export default function Dashboard() {
                 className="dashboard-tile"
               >
                 <div className="dashboard-tile-inner">
-                  <div className="dashboard-tile-icon-wrapper">
-                    <Icon className="dashboard-tile-icon" />
+                  <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center mb-2">
+                    <Icon className="w-3.5 h-3.5 text-white/90" />
                   </div>
                   <div>
                     <h3 className="dashboard-tile-title">

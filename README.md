@@ -6,6 +6,8 @@ The application is styled with a sleek dark aesthetic utilizing vibrant iridesce
 
 ---
 
+[![Build and Push Docker Image to GHCR](https://github.com/gnueole/improv-assist/actions/workflows/build-image.yml/badge.svg)](https://github.com/gnueole/improv-assist/actions/workflows/build-image.yml)
+
 ## 🌟 Key Features
 
 - **🎭 Générateur d'Émotions** : Instantly generates emotions or psychological states to inspire characters from a local cache.
