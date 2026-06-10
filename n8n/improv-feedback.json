@@ -1,0 +1,141 @@
+{
+  "name": "Improv-Feedback",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "improv-feedback",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "databaseId": {
+          "__rl": true,
+          "value": "37bee932-db12-80a5-9b76-f767836619f1",
+          "mode": "list",
+          "cachedResultName": "retour d’expérience"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Name|title",
+              "title": "={{ $json.body.name }}"
+            },
+            {
+              "key": "Type|rich_text",
+              "textContent": "={{ $json.body.type }}"
+            },
+            {
+              "key": "email|rich_text",
+              "textContent": "={{ $json.body.email || '' }}"
+            }
+          ]
+        },
+        "blockUi": {
+          "blocksValues": [
+            {
+              "type": "heading3",
+              "heading3": {
+                "richText": {
+                  "richTextValues": [
+                    {
+                      "text": "Commentaire / Message"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "paragraph",
+              "paragraph": {
+                "richText": {
+                  "richTextValues": [
+                    {
+                      "text": "={{ $json.body.comment }}"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "id": "notion-node",
+      "name": "Notion",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.1,
+      "position": [
+        480,
+        300
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "notion-api-creds-id",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true\n}",
+        "options": {}
+      },
+      "id": "respond-node",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        700,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "pinData": {}
+}
