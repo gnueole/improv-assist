@@ -60,7 +60,7 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
             <span className="text-xs uppercase tracking-[0.2em] text-zinc-400 block mb-3">
               Époque suggérée
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
+            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
               {currentEra ? currentEra.text : "Réservoir vide..."}
             </h3>
             <div className="inline-block mt-4 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-sm text-zinc-300 font-light">

@@ -93,7 +93,7 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
             <span className="text-xs uppercase tracking-[0.2em] text-zinc-400 block mb-1">
               Émotion suggérée
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
+            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent">
               {currentEmotion ? currentEmotion.text : "Réservoir vide..."}
             </h3>
             <div className="inline-block mt-3 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/30 text-xs text-zinc-300 font-light">
