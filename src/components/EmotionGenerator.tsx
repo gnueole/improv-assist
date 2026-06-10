@@ -83,7 +83,7 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
           <div className={`transition-all duration-300 flex flex-col items-center ${isSpinning ? "scale-90 blur-sm opacity-50" : "scale-100 opacity-100"}`}>
             
             {/* Giant Intensity Number */}
-            <div className="text-7.5xl font-black tracking-tight text-white mb-1 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] animate-pulse-slow">
+            <div className="text-8xl font-black tracking-tight text-white mb-1 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] animate-pulse-slow">
               {currentIntensity}
             </div>
             <span className="text-xs uppercase tracking-[0.25em] text-zinc-500 font-bold block mb-4">
