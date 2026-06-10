@@ -50,6 +50,41 @@ graph TD
 
 ---
 
+## 📂 Structure des Répertoires
+
+Le projet est organisé selon une structure modulaire séparant les configurations d'infrastructure, les scénarios d'automatisation, et le code source de l'application Next.js :
+
+* **`/docker`** : Contient les `Dockerfile` (dev et prod) et les configurations Docker Compose définissant les conteneurs et les variables d'environnement.
+* **`/images`** : Héberge les captures d'écran et ressources visuelles intégrées dans la documentation du projet.
+* **`/n8n`** : Versionne localement les workflows n8n (`improv-assist-baas.json` et `improv-feedback.json`) ainsi que les prompts système (`prompts/master.prompt`) pour assurer la cohérence entre les versions de code et les automatisations.
+* **`/public`** : Fichiers statiques servis directement par Next.js, y compris le cache local `/data/reservoir-config.json` généré par l'IA.
+* **`/scripts`** : Regroupe les outils utilitaires, notamment le script Python de peuplement du réservoir (`populate_reservoir.py`) et les scripts de validation.
+* **`/src`** : Code source principal de l'application :
+  * `app/` : Routes Next.js (pages de l'App Router et endpoints d'API proxifiés).
+  * `components/` : Composants UI réutilisables (générateurs, modaux, vues de paramétrage).
+  * `hooks/` : Hooks personnalisés gérant la logique d'état (`useImprovBuffer`, `useToast`, `useDevMode`).
+  * `types/` : Déclarations de types et interfaces TypeScript.
+  * `utils/` : Fonctions utilitaires partagées (`bufferUtils`).
+
+---
+
+## ⚖️ Choix Techniques et Justifications
+
+* **Next.js 15 & React 19** : Ce choix offre une infrastructure performante avec le rendu hybride (Static Site Generation côté serveur pour un affichage instantané et API Routes pour servir de passerelle proxy sécurisée). Les optimisations de React 19 améliorent la gestion du cycle de vie des états locaux.
+* **n8n comme BaaS (Backend-as-a-Service)** : L'utilisation de n8n évite d'avoir à coder, sécuriser et maintenir un serveur API traditionnel complexe (Express, Django). Les intégrations tierces (Google Gemini, Notion) sont implémentées visuellement sous forme de workflows versionnés et exportables en JSON.
+* **Double système de cache (Local & Distant)** : L'expérience sur scène requiert une réactivité instantanée et une tolérance totale aux pannes réseau. Les données sont donc pré-chargées localement (`reservoir-config.json` pour les générateurs, `notionConstraints.json` pour les contraintes) et synchronisées dans le `localStorage` du client.
+* **Web Audio API** : Le Timer de Scène génère des cloches et alertes sonores de manière synthétique à l'aide d'oscillateurs natifs du navigateur. Cela évite d'avoir à charger ou héberger des fichiers audio MP3 volumineux, réduisant le poids global de la PWA et garantissant son fonctionnement hors-ligne.
+
+---
+
+## 🧠 Défis Techniques Résolus
+
+* **Gestion de la Réponse Vide sur Surcharge IA** : Lorsque le modèle Gemini dépasse ses quotas gratuits (erreur 429), le nœud LangChain n8n renvoyait un tableau vide `[]`, ce qui court-circuitait le reste du workflow et renvoyait un code HTTP `200` vide, cassant le parsing JSON du client. Résolu en paramétrant le nœud Gemini sur `continueErrorOutput` et en connectant son port d'erreur au nœud de secours JavaScript pour renvoyer le réservoir d'improvisation de secours.
+* **Contournement des limitations de Quotas (Rate Limiting)** : La génération de 150 suggestions par l'IA consomme beaucoup de requêtes. La logique client (`useImprovBuffer.ts`) a été conçue pour consommer en priorité le réservoir local persistant, et ne solliciter le webhook n8n en temps réel que pour un seul élément à la fois en cas de réservoir complètement vide, minimisant drastiquement l'usage de jetons.
+* **Hydratation React en PWA et LocalStorage** : Le chargement d'états depuis le `localStorage` du navigateur pendant la phase d'initialisation provoquait des avertissements de divergence d'hydratation (le rendu serveur de Next.js différant du stockage local du client). Ce défi a été résolu en externalisant et en isolant les lectures de stockage dans des hooks secondaires (`useDevMode`, `useToast`) et en différant l'hydratation du buffer principal dans un `useEffect` exécuté uniquement côté client.
+
+---
+
 ## 💻 1. Couche Frontend (Client PWA)
 
 Le frontend est construit avec **Next.js 15 (App Router)** et **React 19**. Il est conçu pour être entièrement **mobile-first**, réactif, et installable en tant que **PWA** (Progressive Web App) pour un fonctionnement hors-ligne optimal.
