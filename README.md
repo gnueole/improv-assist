@@ -10,38 +10,21 @@ The application is styled with a sleek dark aesthetic utilizing vibrant iridesce
 
 ## 🌟 Key Features
 
-- **🎭 Générateur d'Émotions** : Instantly generates emotions or psychological states to inspire characters from a local cache.
-- **👆 Qui Commence ? (Multi-touch)** : A visual multitouch picker. Multiple users touch the screen simultaneously, and a random actor is selected to start the scene.
-- **📍 Suggestion de Lieu** : Randomizes locations to set the scene's context.
-- **🕰️ Suggestion d'Époque** : Provides time periods (past, future, or specific eras) for the staging.
-- **⏳ Timer de Scène** : A simple, intuitive timer configured for typical improv limits (e.g., 2m 30s) to keep track of performance length.
-- **⚡ Règles du Hi Ha (EFIT)** : Quick reference guide for the 10 game signals of the "Hi Ha" reflex game.
-- **📚 Contraintes & Docs** : Displays guidelines and game constraints cached directly from a shared Notion workspace.
-- **📦 LocalStorage Buffer** : Caches drawing pools locally to prevent duplicates. Items are selected and consumed dynamically. If any pool runs empty, replenishment is triggered.
-- **🔄 Webhook n8n Regeneration** : Auto or manual refresh of the item buffer through a POST request to `/webhook/improv-regen`. Under normal use, reload calls are rate-limited to once every 5 minutes.
-- **🛠️ Developer Mode** : A toggle inside the About modal enabling bypass of the 5-minute reload limit and rendering a "Consulter le Prompt Système" button to inspect the underlying Gemini prompt.
-- **📱 Popstate Gesture Support** : Deep navigation history synchronization using `window.history.pushState` and `popstate` to ensure that mobile back-swipe gestures close overlays (about, prompt, and loading screens) safely and intuitively.
-- **📶 Offline-ready PWA** : Employs service workers (`sw.js`) to cache assets and constraints so that the app remains fully functional in theaters or basement venues without internet access.
+- **🎭 Générateur d'Émotions** : Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de **1 à 10**.
+- **👆 Qui Commence ? (Multi-touch)** : Tirage au sort interactif pour désigner qui débute la scène. Posez jusqu'à 5 doigts sur l'écran. Après un décompte de 3 secondes, le vainqueur est choisi aléatoirement.
+- **📍 Suggestion de Lieu & Époque** : Suggestions instantanées de cadres physiques et de temporalités pour situer vos histoires.
+- **⏳ Timer de Scène** : Un chronomètre préréglé sur 2 minutes 30 secondes (durée standard d'improvisation) affichant un message de fin dynamique.
+- **⚡ Règles du Hi Ha (EFIT)** : Guide de référence rapide listant les 10 gestes et réflexes officiels du jeu d'échauffement collectif.
+- **📚 Contraintes & Docs** : Affiche les contraintes et guides d'improvisation récupérés directement depuis un espace de travail Notion partagé.
+- **📦 Réservoir de Prompts (Data Pool)** : Pour éviter de tirer plusieurs fois les mêmes suggestions, les prompts sont piochés dans un réservoir local et consommés dynamiquement. Si le réservoir se vide, des données de repli sont utilisées.
+- **🔄 Régénération par l'IA (Gemini via n8n)** : Permet de recharger le réservoir local avec de nouvelles idées générées par l'IA en cliquant sur les flèches de rotation en haut à droite.
+- **🚦 Indicateur de connexion Gemini (n8n)** : Un voyant lumineux indique l'état de l'API. Si vous effectuez trop de recharges, vous consommerez tous les jetons (tokens) gratuits de l'API Gemini, ce qui provoquera une erreur (voyant **rouge**).
 
 ---
 
 ## ⚙️ Notion Synchronization
 
-The application features a cache synchronization script (`notion_fetch.js`) that retrieves constraints and documents directly from Notion databases or pages, saving them to `src/data/notionConstraints.json` for offline usage.
-
-### Setup Notion Credentials
-Create a `.env` file in the root directory (based on `.env.example`) and configure your integration:
-
-```env
-NOTION_API_KEY="your-notion-integration-token"
-NOTION_DATABASE_ID="your-notion-database-or-page-id"
-```
-
-> [!IMPORTANT]
-> Ensure the target Notion database or page is shared with your integration (e.g. `n8n lab` or your bot name) by clicking on the `...` menu in Notion -> **Connections** -> **Add connections**.
-
-### Syncing Data
-To pull the latest constraints from Notion and compile the local cache:
+Le cache local est généré en synchronisant les données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
 ```bash
 node notion_fetch.js
 ```
@@ -77,29 +60,32 @@ node notion_fetch.js
 
 ## 🐳 Docker & Makefile
 
-The project is fully containerized and supports both local development under Hot Module Reloading (HMR) and deployment behind reverse proxies like Traefik.
+L'application est conteneurisée et gérée à l'aide d'un `Makefile` local et dans WSL.
 
-A `Makefile` is included to simplify Docker orchestration.
-
-| Command | Action |
+| Commande | Action |
 | :--- | :--- |
-| `make dev-up` | Start the local development container with HMR enabled (Port 3000) |
-| `make dev-down` | Stop the local development container |
-| `make up` | Start the optimized production container (VPS / Traefik-ready) |
-| `make down` | Stop the production container |
-| `make build-prod` | Force a complete, uncached rebuild of the production Docker image |
+| `make dev-up` | Démarre le conteneur de développement local avec HMR (Port 3000) |
+| `make dev-down` | Arrête le conteneur de développement local |
+| `make up` | Démarre la configuration de production localement |
+| `make down` | Arrête la configuration de production localement |
+| `make deploy` | Déploie automatiquement l'application sur le serveur VPS (mise en production) |
+| `make checklogs` | Affiche les journaux de production du VPS en temps réel |
+
+### Résolution d'erreur 504 (Passerelle Traefik)
+Si le VPS renvoie une erreur *504 Gateway Timeout*, reconnectez le réseau de Traefik au conteneur de l'application :
+```bash
+ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_traefik>"
+```
 
 ---
 
 ## 🛠️ Stack & Technologies
 
-- **Core**: Next.js 15 (App Router), React 19, TypeScript
-- **Styling**: Tailwind CSS 3, PostCSS, Autoprefixer
-- **Icons**: Lucide React
-- **PWA**: Service Worker caching
-- **Deployment**: Multi-stage Docker build producing a slim standalone Node.js server
+- **Frontend** : Next.js 15 (App Router), React 19, TypeScript
+- **Styling** : Tailwind CSS 3 (Grid responsive 2 colonnes avec tuiles carrées en Glassmorphism), PostCSS
+- **Icones** : Lucide React (normalisées en taille et épaisseur pour une parfaite cohérence visuelle)
+- **Déploiement** : Docker Standalone multi-stage via GHCR
 
 ---
 
 *EFIT® est une marque déposée. Tous droits réservés.*
-
