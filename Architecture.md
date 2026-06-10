@@ -12,7 +12,8 @@ L'application repose sur un modèle hybride découplant l'interface utilisateur,
 graph TD
     subgraph Client [Client PWA - Navigateur]
         UI[Dashboard / Générateurs] <--> Hook[useImprovBuffer]
-        Hook <--> LS[(LocalStorage Cache)]
+        Hook <--> Provider[ImprovBufferProvider]
+        Provider <--> LS[(LocalStorage Cache)]
         Audio[Web Audio API / Speech]
     end
 
@@ -34,9 +35,9 @@ graph TD
 
     %% Client links
     UI --> Audio
-    Hook --> R_Constraints
-    Hook --> R_Feedback
-    Hook --> R_Regen
+    Provider --> R_Constraints
+    Provider --> R_Feedback
+    Provider --> R_Regen
 
     %% API links
     R_Constraints -.-> Cache[(notionConstraints.json)]
@@ -62,7 +63,8 @@ Le projet est organisé selon une structure modulaire séparant les configuratio
 * **`/src`** : Code source principal de l'application :
   * `app/` : Routes Next.js (pages de l'App Router et endpoints d'API proxifiés).
   * `components/` : Composants UI réutilisables (générateurs, modaux, vues de paramétrage).
-  * `hooks/` : Hooks personnalisés gérant la logique d'état (`useImprovBuffer`, `useToast`, `useDevMode`).
+  * `context/` : Contextes React partagés ([ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx)) pour centraliser l'état global et les connexions n8n.
+  * `hooks/` : Hooks personnalisés gérant la logique d'état ([useImprovBuffer.ts](file:///c:/Projects/eole.me/improv-assist/src/hooks/useImprovBuffer.ts), `useDevMode`, `useToast`).
   * `types/` : Déclarations de types et interfaces TypeScript.
   * `utils/` : Fonctions utilitaires partagées (`bufferUtils`).
 
@@ -71,6 +73,7 @@ Le projet est organisé selon une structure modulaire séparant les configuratio
 ## ⚖️ Choix Techniques et Justifications
 
 * **Next.js 15 & React 19** : Ce choix offre une infrastructure performante avec le rendu hybride (Static Site Generation côté serveur pour un affichage instantané et API Routes pour servir de passerelle proxy sécurisée). Les optimisations de React 19 améliorent la gestion du cycle de vie des états locaux.
+* **Centralisation de l'état avec React Context** : Afin d'éviter la fragmentation de l'état du buffer d'improvisation entre les différents composants générateurs indépendants (ce qui causait des tirages dupliqués ou désynchronisés), nous avons introduit un contexte global ([ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx)). Toutes les opérations sur le réservoir (tirage, rechargement, synchronisation `localStorage`, bascules de secours vers n8n) passent par ce provider unique.
 * **n8n comme BaaS (Backend-as-a-Service)** : L'utilisation de n8n évite d'avoir à coder, sécuriser et maintenir un serveur API traditionnel complexe (Express, Django). Les intégrations tierces (Google Gemini, Notion) sont implémentées visuellement sous forme de workflows versionnés et exportables en JSON.
 * **Double système de cache (Local & Distant)** : L'expérience sur scène requiert une réactivité instantanée et une tolérance totale aux pannes réseau. Les données sont donc pré-chargées localement (`reservoir-config.json` pour les générateurs, `notionConstraints.json` pour les contraintes) et synchronisées dans le `localStorage` du client.
 * **Web Audio API** : Le Timer de Scène génère des cloches et alertes sonores de manière synthétique à l'aide d'oscillateurs natifs du navigateur. Cela évite d'avoir à charger ou héberger des fichiers audio MP3 volumineux, réduisant le poids global de la PWA et garantissant son fonctionnement hors-ligne.
@@ -91,7 +94,8 @@ Le frontend est construit avec **Next.js 15 (App Router)** et **React 19**. Il e
 
 ### Composants Clés
 * **[page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx)** : Orchestrateur central. Il gère l'état d'affichage du tableau de bord (grid de tuiles), l'ajustement dynamique de la taille du texte, l'historique virtuel de navigation, et l'affichage des modaux d'aide/RGPD.
-* **[useImprovBuffer.ts](file:///c:/Projects/eole.me/improv-assist/src/hooks/useImprovBuffer.ts)** : Hook personnalisé gérant le réservoir de prompts. Il stocke les listes dans le `localStorage` pour éviter la répétition des suggestions. En cas d'épuisement d'une catégorie, il lance une requête dynamique vers l'API.
+* **[ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx)** : Provider global qui encapsule la logique d'initialisation du buffer, le stockage local (`localStorage`), la mise à jour transactionnelle du pool de prompts et les appels vers l'API.
+* **[useImprovBuffer.ts](file:///c:/Projects/eole.me/improv-assist/src/hooks/useImprovBuffer.ts)** : Hook client personnalisé consommant le contexte partagé pour exposer l'état unifié du buffer et ses contrôles (tirage, rechargement, diagnostic d'erreurs n8n) à chaque tuile de génération.
 * **[ImprovTimer.tsx](file:///c:/Projects/eole.me/improv-assist/src/components/ImprovTimer.tsx)** : Chronomètre autonome utilisant la **Web Audio API** pour synthétiser des sons de cloche (sans charger de fichiers audio externes volumineux) et l'API de synthèse vocale du navigateur pour annoncer le temps.
 * **[WhoStarts.tsx](file:///c:/Projects/eole.me/improv-assist/src/components/WhoStarts.tsx)** : Outil de tirage au sort interactif exploitant les événements de contact multi-touch du navigateur (`PointerEvents`) avec retour visuel immédiat.
 
