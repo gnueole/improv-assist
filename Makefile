@@ -42,6 +42,7 @@ help:
 # ==============================================================================
 dev-up:
 	@echo "✨ Starting local development environment..."
+	-docker rm -f improv-assist-frontend-dev
 	docker compose -f $(COMPOSE_DEV) --env-file .env up -d
 	@echo "🚀 Houba Houba ! is ready locally on port 3000."
 
