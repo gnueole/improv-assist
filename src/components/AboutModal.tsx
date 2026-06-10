@@ -45,7 +45,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
           </p>
           
           {/* Metadata Block */}
-          <div className="w-full border-t border-zinc-800/80 pt-4 mb-6 text-sm text-zinc-300 flex flex-col gap-3">
+          <div className="w-full pt-2 mb-6 text-sm text-zinc-300 flex flex-col gap-3">
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Création</span>
               <div className="flex items-center gap-1.5 font-semibold text-zinc-200">
@@ -97,10 +97,10 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
                 Politique & RGPD
               </button>
             </div>
-            <div className="text-xs text-zinc-400 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
+            <div className="text-xs text-zinc-400 text-center pt-2 mt-1.5 font-light">
               Moteur d'improvisation théâtrale.
             </div>
-            <div className="flex justify-between items-center border-t border-zinc-800/80 pt-3 mt-1.5">
+            <div className="flex justify-between items-center pt-2 mt-1.5">
               <span className="text-zinc-500">Mode Développeur</span>
               <button
                 onClick={() => onDevModeChange(!devMode)}
