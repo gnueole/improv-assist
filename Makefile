@@ -4,6 +4,7 @@
 # Description : Local development management and automated VPS deployment.
 # Version     : 1.3.0
 # Author      : Éole Wind (EFIT)
+# Troubleshooting 504: ssh eole.me "docker network connect jobby-md2html_default <real_traefik_container_name>"
 # ==============================================================================
 
 # ⚙️ INFRASTRUCTURE VARIABLES (SECURED)
@@ -76,3 +77,7 @@ deploy:
 		docker compose -f docker-compose.prod.yml pull && \
 		docker compose -f docker-compose.prod.yml up -d --remove-orphans"
 	@echo "✅ Deployment successfully completed on production server !"
+
+checklogs:
+	@echo "📟 Fetching real-time production logs from VPS [$(VPS_SSH)]..."
+	ssh $(VPS_SSH) "cd $(VPS_PATH) && docker compose -f $$(basename $(COMPOSE_PROD)) logs -f"

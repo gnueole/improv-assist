@@ -2,11 +2,7 @@
 
 import React from "react";
 
-interface HiHaRulesProps {
-  onBack: () => void;
-}
-
-export default function HiHaRules({ onBack }: HiHaRulesProps) {
+export default function HiHaRules() {
   const rules = [
     {
       name: "Hi Ha (Hia)",
@@ -71,36 +67,9 @@ export default function HiHaRules({ onBack }: HiHaRulesProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col pb-10">
-      {/* Header fixe / Mobile friendly */}
-      <div className="sticky top-0 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800 px-4 py-4 flex items-center gap-4 z-10">
-        <button
-          onClick={onBack}
-          className="p-2 hover:bg-neutral-900 rounded-lg text-neutral-400 hover:text-white transition-colors"
-          aria-label="Retour au menu principal"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-        </button>
-        <div>
-          <h1 className="text-xl font-bold tracking-tight">Le Hi Ha</h1>
-          <p className="text-xs text-amber-500 font-medium">Les 10 Règles Officielles • EFIT</p>
-        </div>
-      </div>
-
+    <div className="w-full flex flex-col h-[calc(100vh-180px)] max-w-md mx-auto relative px-2">
       {/* Liste des Signes */}
-      <div className="flex-1 px-4 py-6 space-y-4 max-w-md mx-auto w-full">
+      <div className="flex-1 overflow-y-auto pr-1 pb-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-800 w-full">
         {rules.map((rule, index) => (
           <div
             key={index}

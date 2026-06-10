@@ -182,7 +182,7 @@ export default function Dashboard() {
       case "docs":
         return <DocsView />;
       case "hiha":
-        return <HiHaRules onBack={() => window.history.back()} />;
+        return <HiHaRules />;
       default:
         return null;
     }
@@ -244,26 +244,26 @@ export default function Dashboard() {
         </section>
 
         {/* Dashboard Tile Grid */}
-        <section className="dashboard-grid landscape:my-4">
+        <section className="grid grid-cols-2 gap-3 max-w-xs md:max-w-sm mx-auto px-4 landscape:my-4">
           {tiles.map((tile) => {
             const Icon = tile.icon;
             return (
               <button
                 key={tile.id}
                 onClick={() => handleSelectTile(tile.id)}
-                className="dashboard-tile"
+                className="dashboard-tile aspect-auto md:aspect-square"
               >
                 <div className="dashboard-tile-inner">
                   <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center mb-2">
                     <Icon className="w-3.5 h-3.5 text-white/90" />
                   </div>
                   <div>
-                    <h3 className="dashboard-tile-title">
+                    <h3 className="text-base md:text-sm font-semibold text-zinc-100 tracking-wide leading-snug">
                       <span className="break-words line-clamp-2 hyphens-auto">
                         {tile.title}
                       </span>
                     </h3>
-                    <p className="dashboard-tile-subtitle">
+                    <p className="text-sm md:text-xs text-zinc-400 font-light mt-1">
                       {tile.subtitle}
                     </p>
                   </div>

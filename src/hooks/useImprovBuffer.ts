@@ -94,9 +94,7 @@ export function useImprovBuffer(activeTileId: string | null) {
     }, "", "");
 
     const startTime = Date.now();
-    const webhookUrl = process.env.NODE_ENV === "development"
-      ? "https://n8n.eole.me/webhook/improv-regen"
-      : "/webhook/improv-regen";
+    const webhookUrl = "https://n8n.eole.me/webhook/improv-regen";
 
     console.log(`[Regen Diagnostics] Starting webhook call to: ${webhookUrl}`);
 

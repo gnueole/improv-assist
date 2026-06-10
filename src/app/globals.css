@@ -190,7 +190,6 @@ main {
   border-radius: 1rem; /* Proportional border radius for 123px */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  aspect-ratio: 1 / 1;
   text-align: left;
   outline: none;
   display: block;
@@ -205,12 +204,18 @@ main {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: calc(1rem - 1.5px);
-  padding: 0.75rem; /* Reduced for 123x123 size */
+  padding: 1rem; /* Breathes comfortably by default on mobile */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 0; /* Let aspect-ratio dictate height */
   height: 100%;
+}
+
+@media (min-width: 768px) {
+  .dashboard-tile-inner {
+    padding: 0.75rem;
+  }
 }
 
 .dashboard-tile-icon-wrapper {

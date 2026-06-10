@@ -18,6 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description: "Compagnon de scène ultime pour les comédiens d'improvisation théâtrale.",
     manifest: "/manifest.json",
+    icons: {
+      icon: "/favicon.svg",
+      apple: "/icon.svg",
+    },
     appleWebApp: {
       capable: true,
       statusBarStyle: "black-translucent",
