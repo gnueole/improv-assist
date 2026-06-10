@@ -103,23 +103,38 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ---
 
+## 📋 Wishlist / Todo
+
+Voici les fonctionnalités futures envisagées pour enrichir l'application :
+
+- [ ] **Mode Hors-ligne 100% autonome (Service Worker)** : Améliorer le cache de l'application pour un fonctionnement optimal sans connexion réseau via un Service Worker robuste.
+- [ ] **Import / Export de sets personnalisés** : Possibilité pour les troupes d'impro d'importer leurs propres fichiers de prompts au format JSON ou d'exporter le pool actuel.
+- [ ] **Historique de jeu & Historique des tirages** : Garder une trace locale (dans le `localStorage`) des 10 dernières improvisations jouées pour éviter les doublons absolus d'une séance sur l'autre.
+- [ ] **Timer avancé avec buzzer** : Ajouter des sons de buzzer de fin configurables, ainsi que la possibilité de régler le temps libre.
+- [ ] **Multilingue (FR / EN)** : Traduction complète de l'application pour l'usage dans des festivals ou ateliers internationaux.
+
+---
+
 ## 📝 Changelog
 
-### Version 0.3 BETA (1.0.0-beta.3)
+### Version 0.3 BETA (0.3-beta)
 - **Refactoring & Centralisation (React Context)** : Migration du buffer d'improvisation vers un Context Provider global (`ImprovBufferContext`) pour synchroniser les tirages entre tous les générateurs, éliminer les tirages doublons et éviter les requêtes n8n concurrentes. Découpage modulaire du hook en sous-hooks (`useToast`, `useDevMode`) et utilitaires (`bufferUtils`).
 - **Optimisation n8n & Réservoir de secours** : Extension du réservoir hors-ligne à **50 entrées par catégorie** (350 prompts au total) et sécurisation du workflow n8n via un double-port (succès/erreur) pour garantir le retour systématique du réservoir de secours lors des surcharges du modèle Gemini.
 - **Ajout d'échauffements & Descriptions** : Intégration de descriptions explicatives en français pour les exercices d'échauffement et les contraintes (catégories) de jeu, guidant l'utilisateur directement depuis l'interface.
 - **Ponçage des thèmes & Générateurs** : Enrichissement et affinage des listes de thèmes, époques, émotions et lieux pour maximiser la variété dramatique.
-- **Envoi de feedback & RGPD** : Sélecteur de note par balayage/glissement tactile ou souris (1 à 5 étoiles) avec émoticônes dynamiques connecté à Notion, validation obligatoire du consentement RGPD et intégration d'un modal de politique de confidentialité.
+- **Envoi de feedback & RGPD** : Sélecteur de note par balayage/glissement tactile ou souris (1 à 5 étoiles) avec émoticônes dynamiques connecté à Notion ou la base de votre choix (via n8n), validation obligatoire du consentement RGPD et intégration d'un modal de politique de confidentialité.
+- **Intégration de Feedback Email** : Mise en place d'un formulaire de feedback permettant aux utilisateurs de partager leurs expériences directement depuis l'application. Les données sont transmises via un workflow n8n qui envoie un email récapitulatif au propriétaire du site.
+- **Conditions générales d'utilisation** : Ajout d'un modal de conditions générales d'utilisation conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
 
-### Version BETA 2 (1.0.0-beta.2)
+### Version BETA 2 (0.2-beta)
 - **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
 - **Description des échauffements** : Ajout d'un champ description explicatif en français pour chaque exercice d'échauffement dans l'interface et le prompt système Gemini.
 - **Robustesse n8n & Notion** : Gestion proactive des échecs d'API Notion dans le workflow n8n (renvoi d'une erreur 500 explicite et propagation propre au client).
 - **Simplification Docker & Makefile** : Harmonisation des commandes de démarrage local (`make up` / `make down` / `make restart`) et isolation réseau locale complète pour éviter tout conflit de ports ou de réseaux Docker. Ajout de `make deploy-delay` pour automatiser l'attente du cycle de build CI/CD.
 - **Normalisation du code** : Ajout d'en-têtes de commentaires de métadonnées normalisés pour toutes les classes, interfaces et routes d'API de l'application.
 
-### Version Beta 1 (1.0.0-beta.1)
+### Version Beta 1 (0.1-beta)
+- Corrections de bugs.
 - **Privacy & RGPD** : Ajout d'un modal de politique de confidentialité conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
 - **Chemins d'URL dynamiques & Routage** : Association de chaque tuile à un sous-chemin d'URL dédié (ex: `/emotions`, `/timer`) pour un accès direct, avec des règles de réécriture (*rewrites*) Next.js pour empêcher les erreurs 404 lors du rafraîchissement d'une page.
 - **Ajusteur de taille de texte** : Boutons d'ajustement dynamique de taille de police (Standard, Grand, Très Grand) dans l'Aide avec mémorisation persistante dans le `localStorage`.
