@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { Sparkles, Instagram } from "lucide-react";
 
 interface AboutModalProps {
@@ -21,16 +21,88 @@ interface AboutModalProps {
 }
 
 export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, onOpenPrivacy }: AboutModalProps) {
+  const [isRinging, setIsRinging] = useState(false);
+
   if (!isOpen) return null;
+
+  const playDring = () => {
+    try {
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContextClass) return;
+      const ctx = new AudioContextClass();
+      
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      
+      osc1.type = "sine";
+      osc1.frequency.setValueAtTime(880, ctx.currentTime);
+      for (let i = 0; i < 10; i++) {
+        const time = ctx.currentTime + i * 0.1;
+        osc1.frequency.setValueAtTime(880 + (i % 2 === 0 ? 30 : -30), time);
+      }
+      
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(885, ctx.currentTime);
+      for (let i = 0; i < 10; i++) {
+        const time = ctx.currentTime + i * 0.1;
+        osc2.frequency.setValueAtTime(885 + (i % 2 === 0 ? -30 : 30), time);
+      }
+      
+      gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+      for (let i = 0; i < 10; i++) {
+        const time = ctx.currentTime + i * 0.1;
+        gainNode.gain.linearRampToValueAtTime(i % 2 === 0 ? 0.05 : 0.25, time);
+      }
+      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
+      
+      osc1.connect(gainNode);
+      osc2.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      
+      osc1.start();
+      osc2.start();
+      osc1.stop(ctx.currentTime + 1.0);
+      osc2.stop(ctx.currentTime + 1.0);
+    } catch (e) {
+      console.warn("AudioContext error:", e);
+    }
+  };
+
+  const handleIconClick = () => {
+    if (isRinging) return;
+    setIsRinging(true);
+    playDring();
+    setTimeout(() => {
+      setIsRinging(false);
+    }, 1000);
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-6 transition-all duration-300 animate-fade-in">
+      {isRinging && (
+        <style>{`
+          @keyframes dringPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+          }
+          .animate-dring {
+            animation: dringPulse 0.15s infinite ease-in-out;
+          }
+        `}</style>
+      )}
       <div className="irised-border-wrapper w-full max-w-sm">
         <div className="irised-border-inner p-6 flex flex-col justify-between items-center text-center">
           {/* Irised Icon Wrapper */}
-          <div className="w-12 h-12 rounded-full bg-irised-gradient irised-glow flex items-center justify-center mb-4">
+          <button 
+            onClick={handleIconClick}
+            className={`w-12 h-12 rounded-full bg-irised-gradient irised-glow flex items-center justify-center mb-4 active:scale-95 transition-all outline-none ${
+              isRinging ? "animate-dring" : ""
+            }`}
+            title="Easter Egg !"
+          >
             <Sparkles className="w-6 h-6 text-black" />
-          </div>
+          </button>
           
           <h3 className="text-xl font-bold tracking-wider text-zinc-100 uppercase mb-1">
             Houba Houba !
