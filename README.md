@@ -1,5 +1,7 @@
 # 🎭 Houba Houba !
 
+![Houba Houba ! — Moteur d'improvisation](images/improv-assist-beta2.jpg)
+
 `Houba Houba !` is a modern, mobile-first Progressive Web Application (PWA) designed to aid improv theater actors and referees during training, workshops, and matches. It provides utilities to randomize scene parameters, time improvisations, and consult game rules/constraints.
 
 The application is styled with a sleek dark aesthetic utilizing vibrant iridescent highlights and glassmorphism, tailored for mobile screens and immediate interaction.
@@ -19,7 +21,7 @@ The application is styled with a sleek dark aesthetic utilizing vibrant iridesce
 - **📦 Réservoir de Prompts (Data Pool)** : Pour éviter de tirer plusieurs fois les mêmes suggestions, les prompts sont piochés dans un réservoir local et consommés dynamiquement. Si le réservoir se vide, des données de repli sont utilisées.
 - **🔄 Régénération par l'IA (Gemini via n8n)** : Permet de recharger le réservoir local avec de nouvelles idées générées par l'IA en cliquant sur les flèches de rotation en haut à droite.
 - **🚦 Indicateur de connexion Gemini (n8n)** : Un voyant lumineux indique l'état de l'API. Si vous effectuez trop de recharges, vous consommerez tous les jetons (tokens) gratuits de l'API Gemini, ce qui provoquera une erreur (voyant **rouge**).
-- **🔗 Chemins d'URL dynamiques (Google Analytics)** : Chaque tuile est associée à un sous-chemin d'URL dédié (ex: `/emotions`, `/timer`) permettant de suivre précisément les consultations dans Google Analytics. Des règles de réécriture (*rewrites*) Next.js empêchent les erreurs 404 lors du rafraîchissement d'une page.
+- **🔗 Chemins d'URL dynamiques** : Chaque tuile est associée à un sous-chemin d'URL dédié (ex: `/emotions`, `/timer`) pour un accès direct et un meilleur référencement. Des règles de réécriture (*rewrites*) Next.js empêchent les erreurs 404 lors du rafraîchissement d'une page.
 - **🔍 Ajusteur de taille de texte** : Des boutons d'ajustement dynamique de taille de police (Standard, Grand, Très Grand) sont disponibles dans l'Aide avec mémorisation persistante dans le navigateur (`localStorage`).
 
 ---
