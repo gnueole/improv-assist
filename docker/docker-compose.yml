@@ -1,4 +1,4 @@
-name: efit-improv-dev
+name: improv-assist-dev
 
 services:
   # --- FRONTEND (Local Dev with HMR) ---

@@ -3,14 +3,14 @@
 # ==============================================================================
 # Description : Local development management and automated VPS deployment.
 # Version     : 1.3.0
-# Author      : Éole Wind (EFIT)
+# Author      : Éole Wind
 # Troubleshooting 504: ssh eole.me "docker network connect jobby-md2html_default <real_traefik_container_name>"
 # ==============================================================================
 
 # ⚙️ INFRASTRUCTURE VARIABLES (SECURED)
 # Uses the local ~/.ssh/config host alias to avoid hardcoding credentials.
 VPS_SSH  := eole.me
-VPS_PATH := /home/eole/projects/jobby-md2html/efit-improv-prod
+VPS_PATH := /home/eole/projects/jobby-md2html/improv-assist
 
 # 🛠️ LOCAL DOCKER CONFIGURATION
 DOCKER_DIR   := docker

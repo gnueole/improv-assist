@@ -1,4 +1,4 @@
-name: efit-improv-prod
+name: improv-assist
 
 services:
   improv-assist-frontend:

@@ -66,7 +66,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
                 rel="noopener noreferrer"
                 className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
               >
-                Rejoindre l'EFIT !
+                Improvisation.org
               </a>
             </div>
             <div className="flex justify-between items-center">
@@ -85,7 +85,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange }
               <span className="text-zinc-300">© {new Date().getFullYear()} Éole</span>
             </div>
             <div className="text-xs text-zinc-400 text-center border-t border-zinc-800/80 pt-2.5 mt-1.5 font-light">
-              EFIT® est une marque déposée.
+              Moteur d'improvisation théâtrale.
             </div>
             <div className="flex justify-between items-center border-t border-zinc-800/80 pt-3 mt-1.5">
               <span className="text-zinc-500">Mode Développeur</span>

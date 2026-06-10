@@ -39,7 +39,7 @@ import DocsView from "@/components/DocsView";
 import ConstraintsView from "@/components/ConstraintsView";
 import HiHaRules from "@/components/HiHaRules";
 
-const SYSTEM_PROMPT = `Tu es un assistant d'improvisation théâtrale pour l'EFIT. 
+const SYSTEM_PROMPT = `Tu es un assistant d'improvisation théâtrale. 
 Génère un fichier JSON structuré contenant 3 listes d'éléments inspirants pour alimenter des générateurs d'impro :
 
 1. "emotions" : 20 suggestions d'émotions/états d'esprit avec leur catégorie (Positive, Négative, Neutre).
@@ -79,7 +79,7 @@ export default function Dashboard() {
     { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
     { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
     { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
-    { id: "hiha", title: "Règles du Hi Ha (EFIT)", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" }
+    { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" }
   ];
 
   const activeTile = tiles.find(t => t.id === activeTileId);
@@ -327,7 +327,7 @@ export default function Dashboard() {
               rel="noopener noreferrer"
               className="hover:underline hover:text-zinc-400 transition-colors"
             >
-              Rejoindre l'EFIT
+              Improvisation.org
             </a>
           </div>
         </footer>

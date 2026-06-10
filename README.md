@@ -14,7 +14,7 @@ The application is styled with a sleek dark aesthetic utilizing vibrant iridesce
 - **👆 Qui Commence ? (Multi-touch)** : Tirage au sort interactif pour désigner qui débute la scène. Posez jusqu'à 5 doigts sur l'écran. Après un décompte de 3 secondes, le vainqueur est choisi aléatoirement.
 - **📍 Suggestion de Lieu & Époque** : Suggestions instantanées de cadres physiques et de temporalités pour situer vos histoires.
 - **⏳ Timer de Scène** : Un chronomètre préréglé sur 2 minutes 30 secondes (durée standard d'improvisation) affichant un message de fin dynamique.
-- **⚡ Règles du Hi Ha (EFIT)** : Guide de référence rapide listant les 10 gestes et réflexes officiels du jeu d'échauffement collectif.
+- **⚡ Règles du Hi Ha** : Guide de référence rapide listant les 10 gestes et réflexes officiels du jeu d'échauffement collectif.
 - **📚 Contraintes & Docs** : Affiche les contraintes et guides d'improvisation récupérés directement depuis un espace de travail Notion partagé.
 - **📦 Réservoir de Prompts (Data Pool)** : Pour éviter de tirer plusieurs fois les mêmes suggestions, les prompts sont piochés dans un réservoir local et consommés dynamiquement. Si le réservoir se vide, des données de repli sont utilisées.
 - **🔄 Régénération par l'IA (Gemini via n8n)** : Permet de recharger le réservoir local avec de nouvelles idées générées par l'IA en cliquant sur les flèches de rotation en haut à droite.
@@ -90,4 +90,4 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ---
 
-*EFIT® est une marque déposée. Tous droits réservés.*
+
