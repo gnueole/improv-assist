@@ -37,6 +37,28 @@ export default function DocsView() {
             </div>
           </div>
 
+          {/* Concept du Réservoir & IA */}
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-zinc-100 font-bold mb-2">
+              <span className="text-amber-400">⚡</span>
+              <span>Concept de Réservoir & IA</span>
+            </div>
+            <div className="space-y-2 text-zinc-400 leading-relaxed text-xs sm:text-sm">
+              <p>
+                Pour garantir des tirages uniques, chaque outil pioche dans un <strong>réservoir local (Data Pool)</strong>. Chaque suggestion obtenue est temporairement retirée de la liste afin d'<strong>éviter les doublons</strong>.
+              </p>
+              <p>
+                Le bouton de <strong>régénération par l'IA</strong> (flèches rotatives en haut à droite) permet de recharger ce réservoir avec de nouvelles idées fraîches générées par Gemini.
+              </p>
+              <div className="mt-3 p-3 bg-zinc-950/80 rounded-xl border border-zinc-800/50 text-[11px] space-y-1 text-zinc-400">
+                <span className="text-red-400 font-bold block mb-1">⚠️ Limite de jetons (Tokens) :</span>
+                <p>
+                  Ne rechargez pas le réservoir trop souvent ! Une utilisation excessive consommera l'intégralité des jetons gratuits de l'API, bloquant la génération (indiqué par le voyant de connexion <strong>rouge</strong>).
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Features list */}
           <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md space-y-4">
             <div className="flex items-center gap-2 text-zinc-100 font-bold border-b border-zinc-800 pb-2">
