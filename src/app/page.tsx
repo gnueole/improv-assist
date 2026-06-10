@@ -251,7 +251,7 @@ export default function Dashboard() {
               <button
                 key={tile.id}
                 onClick={() => handleSelectTile(tile.id)}
-                className="dashboard-tile aspect-auto md:aspect-square"
+                className="dashboard-tile aspect-square"
               >
                 <div className="dashboard-tile-inner">
                   <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center mb-2">
