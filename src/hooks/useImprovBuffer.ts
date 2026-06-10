@@ -17,6 +17,9 @@ export function useImprovBuffer(activeTileId: string | null) {
     categories: [],
     themes: [],
     echauffements: [],
+    emotions: [],
+    locations: [],
+    eras: [],
     last_fetch: null
   });
 
@@ -42,7 +45,10 @@ export function useImprovBuffer(activeTileId: string | null) {
             Array.isArray(parsed.scenarios) &&
             Array.isArray(parsed.categories) &&
             Array.isArray(parsed.themes) &&
-            Array.isArray(parsed.echauffements)
+            Array.isArray(parsed.echauffements) &&
+            Array.isArray(parsed.emotions) &&
+            Array.isArray(parsed.locations) &&
+            Array.isArray(parsed.eras)
           ) {
             setBuffer(parsed);
             return;
@@ -57,11 +63,15 @@ export function useImprovBuffer(activeTileId: string | null) {
         const response = await fetch("/data/reservoir-config.json");
         if (response.ok) {
           const data = await response.json();
+          const mock = require("@/data/mockData");
           const initialBuffer: ImprovBuffer = {
             scenarios: data.scenarios || [],
             categories: data.categories || [],
             themes: data.themes || [],
             echauffements: data.echauffements || [],
+            emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : mock.EMOTIONS,
+            locations: (data.locations && data.locations.length > 0) ? data.locations : mock.LOCATIONS,
+            eras: (data.eras && data.eras.length > 0) ? data.eras : mock.ERAS,
             last_fetch: Date.now()
           };
           setBuffer(initialBuffer);
@@ -90,11 +100,15 @@ export function useImprovBuffer(activeTileId: string | null) {
         throw new Error("Failed to load local reservoir-config.json");
       }
       const data = await response.json();
+      const mock = require("@/data/mockData");
       const newBuffer: ImprovBuffer = {
         scenarios: data.scenarios || [],
         categories: data.categories || [],
         themes: data.themes || [],
         echauffements: data.echauffements || [],
+        emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : mock.EMOTIONS,
+        locations: (data.locations && data.locations.length > 0) ? data.locations : mock.LOCATIONS,
+        eras: (data.eras && data.eras.length > 0) ? data.eras : mock.ERAS,
         last_fetch: Date.now()
       };
       setBuffer(newBuffer);
@@ -114,38 +128,10 @@ export function useImprovBuffer(activeTileId: string | null) {
   }, [showToast]);
 
   const pickItem = useCallback(async (category: string, filter?: string): Promise<any> => {
-    // 1. Check if the category is one of the 4 managed categories
-    const isManaged = ["scenarios", "categories", "themes", "echauffements"].includes(category);
+    // 1. Check if the category is one of the 7 managed categories
+    const isManaged = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"].includes(category);
     
     if (!isManaged) {
-      // Return a random item from static mockData
-      if (category === "emotions") {
-        const list = require("@/data/mockData").EMOTIONS;
-        let filtered = list;
-        if (filter && filter !== "All") {
-          filtered = list.filter((e: any) => e.category === filter);
-        }
-        if (filtered.length === 0) return null;
-        return filtered[Math.floor(Math.random() * filtered.length)];
-      }
-      if (category === "locations") {
-        const list = require("@/data/mockData").LOCATIONS;
-        let filtered = list;
-        if (filter && filter !== "All") {
-          filtered = list.filter((e: any) => e.category === filter);
-        }
-        if (filtered.length === 0) return null;
-        return filtered[Math.floor(Math.random() * filtered.length)];
-      }
-      if (category === "eras") {
-        const list = require("@/data/mockData").ERAS;
-        let filtered = list;
-        if (filter && filter !== "All") {
-          filtered = list.filter((e: any) => e.era === filter);
-        }
-        if (filtered.length === 0) return null;
-        return filtered[Math.floor(Math.random() * filtered.length)];
-      }
       return null;
     }
 
@@ -156,6 +142,9 @@ export function useImprovBuffer(activeTileId: string | null) {
       categories: [],
       themes: [],
       echauffements: [],
+      emotions: [],
+      locations: [],
+      eras: [],
       last_fetch: null
     };
     if (saved) {

@@ -25,7 +25,7 @@ def fetch_and_populate():
     # Corps de la requête pour guider n8n sur ce qu'on attend
     payload = {
         "count": 150,
-        "categories_required": ["scenarios", "categories", "themes", "echauffements"]
+        "categories_required": ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
     }
     
     try:
@@ -33,11 +33,11 @@ def fetch_and_populate():
         response.raise_for_status()
         
         # On attend de n8n un JSON avec la structure exacte :
-        # { "scenarios": [...], "categories": [...], "themes": [...], "echauffements": [...] }
+        # { "scenarios": [...], "categories": [...], "themes": [...], "echauffements": [...], "emotions": [...], "locations": [...], "eras": [...] }
         generated_data = response.json()
         
         # Validation stricte des clés pour ne pas casser le TypeScript de l'App
-        required_keys = {"scenarios", "categories", "themes", "echauffements"}
+        required_keys = {"scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"}
         if not required_keys.issubset(generated_data.keys()):
             raise ValueError(f"L'arnaque ! n8n a renvoyé des clés invalides. Clés reçues : {list(generated_data.keys())}")
             

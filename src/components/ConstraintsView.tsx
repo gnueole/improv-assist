@@ -9,21 +9,46 @@
  * @license MIT
  */
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
-import notionConstraints from "@/data/notionConstraints.json";
+import notionConstraintsStatic from "@/data/notionConstraints.json";
 
 export default function ConstraintsView() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Toutes");
+  const [constraints, setConstraints] = useState<any[]>(notionConstraintsStatic);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const categories = useMemo(() => {
-    const cats = new Set(notionConstraints.map((c) => c.category));
-    return ["Toutes", ...Array.from(cats)];
+  useEffect(() => {
+    let active = true;
+    fetch("/api/constraints")
+      .then((res) => {
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return res.json();
+      })
+      .then((data) => {
+        if (active && Array.isArray(data) && data.length > 0) {
+          setConstraints(data);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load constraints from API, using static cache:", err);
+      })
+      .finally(() => {
+        if (active) setIsLoading(false);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
+  const categories = useMemo(() => {
+    const cats = new Set(constraints.map((c) => c.category));
+    return ["Toutes", ...Array.from(cats)];
+  }, [constraints]);
+
   const filteredConstraints = useMemo(() => {
-    return notionConstraints.filter((c) => {
+    return constraints.filter((c) => {
       const matchesSearch =
         c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         c.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -31,7 +56,7 @@ export default function ConstraintsView() {
         selectedCategory === "Toutes" || c.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, constraints]);
 
   return (
     <div className="w-full flex flex-col h-[calc(100vh-180px)] max-w-md mx-auto relative px-2">

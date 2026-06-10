@@ -11,8 +11,13 @@
 
 import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
-import { ERAS } from "@/data/mockData";
+import { ERAS as fallbackEras } from "@/data/mockData";
+import reservoirPool from "../../public/data/reservoir-config.json";
 import { Era } from "@/types";
+
+const ERAS_POOL: Era[] = (reservoirPool && Array.isArray((reservoirPool as any).eras) && (reservoirPool as any).eras.length > 0)
+  ? (reservoirPool as any).eras
+  : fallbackEras;
 
 interface EraGeneratorProps {
   pickItem: (category: string, filter?: string) => Promise<any>;
@@ -40,7 +45,7 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
     setIsSpinning(true);
     let count = 0;
     const interval = setInterval(() => {
-      const rand = ERAS[Math.floor(Math.random() * ERAS.length)];
+      const rand = ERAS_POOL[Math.floor(Math.random() * ERAS_POOL.length)];
       setCurrentEra(rand);
       count++;
     }, 70);

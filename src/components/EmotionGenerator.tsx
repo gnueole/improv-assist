@@ -11,8 +11,13 @@
 
 import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
-import { EMOTIONS } from "@/data/mockData";
+import { EMOTIONS as fallbackEmotions } from "@/data/mockData";
+import reservoirPool from "../../public/data/reservoir-config.json";
 import { Emotion } from "@/types";
+
+const EMOTIONS_POOL: Emotion[] = (reservoirPool && Array.isArray((reservoirPool as any).emotions) && (reservoirPool as any).emotions.length > 0) 
+  ? (reservoirPool as any).emotions 
+  : fallbackEmotions;
 
 interface EmotionGeneratorProps {
   pickItem: (category: string, filter?: string) => Promise<any>;
@@ -44,8 +49,8 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
     let count = 0;
 
     const interval = setInterval(() => {
-      // Pour l'effet visuel de défilement, on pioche au hasard dans les données statiques
-      const randEmotion = EMOTIONS[Math.floor(Math.random() * EMOTIONS.length)];
+      // Pour l'effet visuel de défilement, on pioche au hasard dans le pool d'émotions
+      const randEmotion = EMOTIONS_POOL[Math.floor(Math.random() * EMOTIONS_POOL.length)];
       const randIntensity = Math.floor(Math.random() * 10) + 1;
       
       setCurrentEmotion(randEmotion);

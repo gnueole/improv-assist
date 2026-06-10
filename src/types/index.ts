@@ -56,5 +56,8 @@ export interface ImprovBuffer {
   categories: Category[];
   themes: Theme[];
   echauffements: Echauffement[];
+  emotions: Emotion[];
+  locations: Location[];
+  eras: Era[];
   last_fetch: number | null;
 }

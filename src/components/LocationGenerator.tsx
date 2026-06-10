@@ -11,8 +11,13 @@
 
 import React, { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
-import { LOCATIONS } from "@/data/mockData";
+import { LOCATIONS as fallbackLocations } from "@/data/mockData";
+import reservoirPool from "../../public/data/reservoir-config.json";
 import { Location } from "@/types";
+
+const LOCATIONS_POOL: Location[] = (reservoirPool && Array.isArray((reservoirPool as any).locations) && (reservoirPool as any).locations.length > 0)
+  ? (reservoirPool as any).locations
+  : fallbackLocations;
 
 interface LocationGeneratorProps {
   pickItem: (category: string, filter?: string) => Promise<any>;
@@ -42,7 +47,7 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
     let count = 0;
 
     const interval = setInterval(() => {
-      const rand = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
+      const rand = LOCATIONS_POOL[Math.floor(Math.random() * LOCATIONS_POOL.length)];
       setCurrentLocation(rand);
       count++;
     }, 70);
