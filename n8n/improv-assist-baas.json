@@ -50,7 +50,7 @@
         "messages": {
           "values": [
             {
-              "content": "Tu es un assistant d'improvisation théâtrale. \nCRITÈRE ABSOLU : Évite le surréalisme abstrait ou les métaphores d'objets (ex: évite 'la feuille de papier en colère'). Privilégie à 80% des situations ancrées, impliquant des relations humaines claires, des conflits du quotidien, des secrets, ou des enjeux forts entre des personnages identifiables. Le thème doit permettre aux comédiens de savoir immédiatement qui ils sont ou où ils se trouvent.\nGénère un fichier JSON structuré contenant les listes d'éléments inspirants suivantes pour alimenter des générateurs d'impro (fais en sorte que les textes soient très courts, 1 à 4 mots maximum par élément) :\n1. \"scenarios\" (50 éléments) : suggestions de situations de départ au format : { \"text\": string, \"category\": \"Huis clos\" | \"Quotidien\" | \"Aventure\" | \"Insolite\", \"brief\": string (une phrase courte en français expliquant le contexte ou l'enjeu du scénario) }\n2. \"categories\" (50 éléments) : suggestions de contraintes théâtrales au format : { \"text\": string, \"description\": string (une phrase courte en français expliquant la règle de la contrainte) }\n3. \"themes\" (50 éléments) : suggestions de thèmes au format : { \"text\": string, \"category\": \"Poétique\" | \"Drôle\" | \"Libre\" }\n4. \"echauffements\" (50 éléments) : suggestions d'exercices d'échauffement au format : { \"text\": string, \"duration\": string, \"description\": string (une phrase courte en français expliquant la règle de l'exercice) }\n5. \"emotions\" (50 éléments) : suggestions d'émotions au format : { \"text\": string, \"category\": \"Positive\" | \"Négative\" | \"Neutre\" }\n6. \"locations\" (50 éléments) : suggestions de lieux au format : { \"text\": string, \"category\": \"Huis clos\" | \"Quotidien\" | \"Aventure\" | \"Insolite\" }\n7. \"eras\" (50 éléments) : suggestions d'époques au format : { \"text\": string, \"era\": \"Passé\" | \"Présent\" | \"Futur\" }\n\nImportant : Ne renvoie rien d'autre que le JSON brut de cette structure (sans balises de code markdown ni texte d'explication)."
+              "content": "={{ $json.system_prompt }}"
             }
           ]
         },
@@ -89,6 +89,42 @@
       ],
       "id": "check-error-node",
       "name": "Check Error and Mock"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const token = $input.item.json.headers['x-n8n-token'] || $input.item.json.body?.token;\nconst vpsToken = $input.item.json.vps_token;\nif (token !== vpsToken) {\n  throw new Error(\"Unauthorized\");\n}\nreturn { json: { system_prompt: $input.item.json.body.system_prompt } };"
+      },
+      "id": "verify-token-node",
+      "name": "Verify Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        32,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": false,
+        "values": {
+          "string": [
+            {
+              "name": "vps_token",
+              "value": "={{ $env.X_N8N_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "load-token-node",
+      "name": "Load Token",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        208
+      ]
     }
   ],
   "connections": {
@@ -96,7 +132,7 @@
       "main": [
         [
           {
-            "node": "Message a model",
+            "node": "Load Token",
             "type": "main",
             "index": 0
           }
@@ -126,6 +162,28 @@
         [
           {
             "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Token": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Token": {
+      "main": [
+        [
+          {
+            "node": "Verify Token",
             "type": "main",
             "index": 0
           }
