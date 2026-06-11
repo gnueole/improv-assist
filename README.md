@@ -147,7 +147,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
   - Animaux 
   - Objets
   - Un grand mixer pour créer ses propres combinaisons les plus folles !
-
+- [ ] **Améliorations des notifications** : 
 - [ ] **Résilience Audio (Autoplay Policy)** : Déclencher explicitement `AudioContext.resume()` lors d'une interaction utilisateur directe (ex: au clic sur le bouton de démarrage) afin d'éviter le blocage automatique de l'audio synthétique par les navigateurs.
 - [ ] **Mode Hors-ligne 100% autonome (Service Worker / Next-PWA)** : Implémenter un Service Worker basé sur Next-PWA/Workbox pour mettre en cache les pages statiques et les fichiers de script (.js, .css) afin de permettre à l'application de s'ouvrir et de se recharger sans aucune connexion réseau.
 - [ ] **Ajout de nouvelles tuiles freemium/premium** : Pour financer l'application (voire la rendre pérenne), il faudrait ajouter de nouvelles tuiles personalisées payantes ou via un abonnement mensuel/annuel.
