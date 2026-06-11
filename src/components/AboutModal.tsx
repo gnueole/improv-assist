@@ -72,11 +72,21 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
       oscStrike.connect(strikeGain);
       strikeGain.connect(gongGain);
 
-      // Master volume and envelope (1.2s duration)
+      // Master volume and envelope (Two rings: 1.2s ring, 0.8s pause, 1.2s ring)
       masterGain.gain.setValueAtTime(0, ctx.currentTime);
+      
+      // Ring 1
       masterGain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 0.05);
       masterGain.gain.setValueAtTime(0.25, ctx.currentTime + 1.05);
       masterGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+      
+      // Pause
+      masterGain.gain.setValueAtTime(0, ctx.currentTime + 1.25);
+      
+      // Ring 2
+      masterGain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 2.05);
+      masterGain.gain.setValueAtTime(0.25, ctx.currentTime + 3.05);
+      masterGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.2);
 
       gongGain.connect(masterGain);
       masterGain.connect(ctx.destination);
@@ -88,15 +98,15 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
       lfo.start(ctx.currentTime);
 
       // Stop all nodes
-      osc1.stop(ctx.currentTime + 1.2);
-      osc2.stop(ctx.currentTime + 1.2);
-      oscStrike.stop(ctx.currentTime + 1.2);
-      lfo.stop(ctx.currentTime + 1.2);
+      osc1.stop(ctx.currentTime + 3.2);
+      osc2.stop(ctx.currentTime + 3.2);
+      oscStrike.stop(ctx.currentTime + 3.2);
+      lfo.stop(ctx.currentTime + 3.2);
 
       // Close context after playback completes to release resources
       setTimeout(() => {
         ctx.close().catch(() => {});
-      }, 1500);
+      }, 3500);
     } catch (e) {
       console.warn("AudioContext error:", e);
     }
@@ -108,7 +118,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
     playDring();
     setTimeout(() => {
       setIsRinging(false);
-    }, 1200);
+    }, 3200);
   };
 
   return (

@@ -27,7 +27,21 @@ def fetch_and_populate():
     }
     
     try:
-        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=120)
+        # Timeout de 12 secondes (10s pour n8n/Gemini + 2s de marge réseau)
+        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=12)
+        
+        # Si la requête échoue, on regarde s'il s'agit d'un timeout renvoyé par n8n (ex: 504)
+        if not response.ok:
+            try:
+                err_data = response.json()
+                if isinstance(err_data, dict):
+                    err_msg = err_data.get("error", "") or err_data.get("message", "")
+                    if "timeout" in err_msg.lower():
+                        print("❌ [Timeout] La génération de n8n a expiré (limite de 10s dépassée sur le modèle Gemini).")
+                        return
+            except Exception:
+                pass
+                
         response.raise_for_status()
         
         try:
@@ -51,6 +65,8 @@ def fetch_and_populate():
             
         print(f"✨ Réservoir statique de 350 entrées généré avec succès via n8n : {output_path}")
         
+    except requests.exceptions.Timeout:
+        print("❌ [Timeout] La requête vers n8n a expiré après 12 secondes (limite réseau).")
     except requests.exceptions.RequestException as e:
         print(f"❌ Erreur lors de la requête n8n : {e}")
     except ValueError as e:

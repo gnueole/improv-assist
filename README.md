@@ -42,6 +42,24 @@ node scripts/notion_fetch.js
 
 ---
 
+## 🔑 Gestion des Secrets avec Doppler
+
+L'application utilise **Doppler** pour gérer de manière sécurisée et centralisée toutes les variables d'environnement (secrets API, identifiants de suivi, etc.). Les secrets ne sont plus stockés en clair dans les fichiers du projet.
+
+### Configuration Initiale (pour les développeurs)
+1. **Installer la CLI Doppler** sur votre système ou dans votre environnement WSL.
+2. **S'authentifier** sur votre machine :
+   ```bash
+   doppler login
+   ```
+3. **Associer le projet** à votre espace de travail :
+   ```bash
+   doppler setup
+   ```
+   *(Sélectionnez le projet `eole-me` et la configuration de dev `dev_eole-me-impro` pour le développement local).*
+
+---
+
 ## 🚀 Démarrage Rapide
 
 ### Prérequis
@@ -85,11 +103,11 @@ L'application est entièrement conteneurisée et gérée de manière simplifiée
 
 | Commande | Action |
 | :--- | :--- |
-| `make up` | Démarre le conteneur de développement local avec HMR (Port 3000 - [http://localhost:3000](http://localhost:3000)) |
+| `make up` | Récupère dynamiquement les secrets de dev depuis Doppler et démarre le conteneur local avec HMR (Port 3000 - [http://localhost:3000](http://localhost:3000)) |
 | `make down` | Arrête le conteneur de développement local |
 | `make restart` | Redémarre l'environnement de développement local (down puis up) |
-| `make deploy` | Déploie automatiquement l'application sur le VPS de production |
-| `make deploy-delay` | Envoie les commits, attend 150 secondes pour laisser le temps à GitHub Actions de compiler, puis déploie |
+| `make deploy` | Récupère les secrets de production depuis Doppler, les transfère de manière sécurisée au VPS par SSH, puis déploie l'application |
+| `make deploy-delay` | Envoie les commits, attend 150 secondes pour laisser le temps à GitHub Actions de compiler, puis déploie avec les secrets Doppler |
 | `make checklogs` | Affiche les journaux de production du VPS en temps réel |
 
 ### Résolution d'erreur 504 (Passerelle Traefik)

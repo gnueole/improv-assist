@@ -117,8 +117,13 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
     } catch (error) {
       console.error("[Regen Diagnostics] Reload failed:", error);
       setN8nStatus("red");
-      setN8nError(error instanceof Error ? error.message : String(error));
-      showToast(force ? "Échec de la régénération via n8n." : "Erreur de rechargement.");
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      setN8nError(errorMsg);
+      if (errorMsg.includes("Timeout issued")) {
+        showToast("Le service de génération a expiré (Timeout). Veuillez réessayer.");
+      } else {
+        showToast(force ? "Échec de la régénération via n8n." : "Erreur de rechargement.");
+      }
     } finally {
       setIsReloading(false);
       setIsLoading(false);
@@ -237,7 +242,11 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       }
       setN8nStatus("red");
       setN8nError(errorMsg);
-      showToast(devMode ? `Erreur n8n: ${errorMsg}` : "Erreur lors de la récupération n8n.");
+      if (errorMsg.includes("Timeout issued")) {
+        showToast("Le service de génération a expiré (Timeout). Veuillez réessayer.");
+      } else {
+        showToast(devMode ? `Erreur n8n: ${errorMsg}` : "Erreur lors de la récupération n8n.");
+      }
       return null;
     } finally {
       setIsLoading(false);

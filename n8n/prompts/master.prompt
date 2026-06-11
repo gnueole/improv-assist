@@ -1,4 +1,6 @@
-Tu es un assistant d'improvisation théâtrale. Génère un fichier JSON structuré contenant les listes d'éléments inspirants suivantes pour alimenter des générateurs d'impro (fais en sorte que les textes soient très courts, 1 à 4 mots maximum par élément) :
+Tu es un assistant d'improvisation théâtrale. 
+CRITÈRE ABSOLU : Évite le surréalisme abstrait ou les métaphores d'objets (ex: évite 'la feuille de papier en colère'). Privilégie à 80% des situations ancrées, impliquant des relations humaines claires, des conflits du quotidien, des secrets, ou des enjeux forts entre des personnages identifiables. Le thème doit permettre aux comédiens de savoir immédiatement qui ils sont ou où ils se trouvent.
+Génère un fichier JSON structuré contenant les listes d'éléments inspirants suivantes pour alimenter des générateurs d'impro (fais en sorte que les textes soient très courts, 1 à 4 mots maximum par élément) :
 1. "scenarios" (50 éléments) : suggestions de situations de départ au format : { "text": string, "category": "Huis clos" | "Quotidien" | "Aventure" | "Insolite", "brief": string (une phrase courte en français expliquant le contexte ou l'enjeu du scénario) }
 2. "categories" (50 éléments) : suggestions de contraintes théâtrales au format : { "text": string, "description": string (une phrase courte en français expliquant la règle de la contrainte) }
 3. "themes" (50 éléments) : suggestions de thèmes au format : { "text": string, "category": "Poétique" | "Drôle" | "Libre" }

@@ -108,7 +108,7 @@ Pour sécuriser les clés d'intégration, contourner les restrictions de CORS et
 
 1. **`/api/constraints`** : Lit et sert le fichier de cache statique `notionConstraints.json` compilé localement.
 2. **`/api/feedback`** : Transmet les formulaires de retour utilisateur au webhook de n8n.
-3. **`/api/improv-regen`** : Transmet les demandes de génération de prompts en lot à l'automatisation n8n.
+3. **`/api/improv-regen`** : Transmet les demandes de génération de prompts en lot à l'automatisation n8n. Elle implémente une limite de temps stricte de 10 secondes (`AbortController`). En cas de dépassement, elle renvoie une réponse structurée de type 504 Gateway Timeout contenant `{ error: "Timeout issued (from Message a model)" }` que l'application client intercepte pour afficher un avertissement convivial.
 4. **Gestion du Routage Virtuel (PWA)** : Pour éviter les erreurs 404 lors du rafraîchissement d'un navigateur sur une tuile active (ex: `/emotions`, `/timer`), des règles de réécriture (*rewrites*) dynamiques sont définies dans `next.config.mjs`. Toutes les routes (à l'exception des ressources statiques, des API et des SVGs dynamiques comme `/favicon.svg`) sont redirigées de manière transparente à la racine (`/`) grâce à un motif de lookahead négatif : `/:path((?!_next|api|data|manifest\\.json|sw\\.js|favicon\\.svg|icon\\.svg).*$)`. Cela garantit que l'ajout ou la modification de tuiles sur le tableau de bord ne nécessite aucune mise à jour de configuration de routage.
 
 ---
@@ -124,8 +124,11 @@ L'intelligence métier et les enregistrements sont gérés par deux flux d'autom
 
 ### B. Flux d'IA & Génération (`Improv-Assist BaaS`)
 * **Déclencheur** : Webhook POST sur `/webhook/improv-regen`.
-* **Action** : Interroge le modèle **Gemini 2.5 Flash** (via LangChain) avec un prompt système structuré pour générer un lot complet d'idées d'improvisation au format JSON.
-* **Gestion d'Erreur** : En cas de panne ou de quota d'API dépassé, le flux bascule automatiquement vers un noeud de code JavaScript contenant un jeu complet de données de secours (*mock data*), garantissant que l'application reçoive toujours une réponse exploitable.
+* **Action** : Interroge le modèle **Gemini 3.5 Flash** (via LangChain) avec un prompt système structuré pour générer un lot complet d'idées d'improvisation au format JSON.
+* **Gestion d'Erreur & Timeouts** : 
+  - **Limites de Temps** : Le flux de travail complet est limité à 10 secondes au niveau des réglages n8n (`executionTimeout: 10`). De plus, le nœud Gemini possède un timeout spécifique de 9 secondes (`9000ms`).
+  - **Interception des échecs** : En cas de panne générale ou de quota d'API dépassé, le flux bascule automatiquement vers un nœud de code JavaScript (`Check Error and Mock`) contenant un réservoir complet de données de secours (*mock data*).
+  - **Interception des Timeouts** : Si l'erreur est identifiée comme un dépassement de temps, le nœud de secours renvoie directement une structure d'erreur spécifique `{ error: "Timeout issued (from Message a model)" }` au lieu des données simulées.
 
 ---
 
@@ -146,12 +149,16 @@ L'application utilise deux types de fichiers de données persistés localement :
 
 ## 🚀 5. Déploiement et Infrastructure
 
-L'infrastructure est entièrement conteneurisée à l'aide de Docker et automatisée par Makefile et GitHub Actions. Elle est composée de deux environnements distincts :
+L'infrastructure est entièrement conteneurisée à l'aide de Docker, sécurisée par le gestionnaire de secrets **Doppler**, et pilotée par le Makefile et GitHub Actions. Les secrets ne sont jamais écrits en clair dans le dépôt Git.
 
+* **Gestion des Secrets (Doppler)** :
+  - La CLI Doppler est installée localement et configurée sur le projet `eole-me`.
+  - **WSL / Localhost** : Lors de l'exécution de `make up`, le Makefile localise de manière robuste le binaire Doppler (`$(DOPPLER)`) et télécharge dynamiquement les secrets de la configuration `dev_eole-me-impro` vers un fichier `.env` local (gitignoré).
+  - **Production (VPS)** : Lors d'un déploiement (`make deploy`), les secrets de la configuration `prd_eole-me-impro` sont récupérés en direct depuis Doppler et diffusés via un tunnel SSH (`doppler secrets download ... | ssh ... "cat > .env"`) directement vers le serveur de production sans jamais transiter en clair par le système de fichiers local du développeur.
 * **WSL / Localhost** : Environnement de développement lancé via Docker Compose et géré localement à l'aide de raccourcis Makefile :
-  * `make up` : Lance le serveur Next.js en mode développement avec Hot Module Replacement (HMR) sur le port 3000.
+  * `make up` : Lance le serveur Next.js en mode développement avec Hot Module Replacement (HMR) sur le port 3000 après injection des secrets Doppler.
   * `make down` : Éteint le conteneur proprement.
   * `make restart` : Redémarre l'environnement.
 * **VPS (Production - impro.eole.me)** :
   * **CI/CD** : Chaque push sur la branche `main` déclenche un workflow GitHub Actions qui compile une image de production Docker immuable et la publie sur le registre GitHub Packages (GHCR).
-  * **Déploiement** : La commande `make deploy-delay` permet de pousser automatiquement les fichiers de configuration de production via SSH/SCP sur le VPS, d'attendre la fin de la compilation CI/CD, puis de recréer les conteneurs de production derrière le proxy inverse **Traefik**. (en production https://impro.eole.me seulement.)
+  * **Déploiement** : La commande `make deploy-delay` permet de diffuser les configurations et variables d'environnement de production en direct depuis Doppler via SSH sur le VPS, d'attendre la fin de la compilation CI/CD (150s), puis de recréer les conteneurs de production derrière le proxy inverse **Traefik** (uniquement pour https://impro.eole.me).

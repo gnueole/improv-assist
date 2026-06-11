@@ -55,13 +55,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const googleTagId = process.env.NEXT_PUBLIC_GA_ID || process.env.GOOGLE_TAG_ID;
-  const isGTM = googleTagId?.startsWith("GTM-");
+  const rawTagId = process.env.NEXT_PUBLIC_GA_ID || process.env.GOOGLE_TAG_ID || "";
+  const googleTagId = rawTagId.trim().replace(/^['"]|['"]$/g, "");
+  const isGTM = googleTagId.startsWith("GTM-");
+  const hasValidTag = googleTagId.length > 0;
 
   return (
     <html lang="fr" className={`${outfit.variable} h-full select-none`}>
       <body className="bg-black text-zinc-100 antialiased h-full overflow-hidden">
-        {googleTagId && (
+        {hasValidTag && (
           isGTM ? (
             <>
               {/* Google Tag Manager */}
