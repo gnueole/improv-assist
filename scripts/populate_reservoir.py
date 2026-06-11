@@ -99,55 +99,27 @@ def parse_prompt(category=None, count=350):
 
     return assembled
 
-def print_fancy_prompt(prompt):
-    inner_width = 80
-    border = "═" * inner_width
-    title = "COMPILED SYSTEM PROMPT"
-    padded_title = title.center(inner_width)
-    print(f"\n\033[94m╔{border}╗\033[0m")
-    print(f"\033[94m║\033[1;36m{padded_title}\033[94m║\033[0m")
-    print(f"\033[94m╠{border}╣\033[0m")
-    for paragraph in prompt.split("\n"):
-        if not paragraph.strip():
-            print(f"\033[94m║\033[0m{' ' * inner_width}\033[94m║\033[0m")
-        else:
-            wrapped = textwrap.wrap(paragraph, width=inner_width - 2)
-            for line in wrapped:
-                padded = f" {line}".ljust(inner_width)
-                print(f"\033[94m║\033[0m{padded}\033[94m║\033[0m")
-    print(f"\033[94m╚{border}╝\033[0m\n")
-
-def print_fancy_payload(url, headers, payload):
-    inner_width = 80
-    border = "═" * inner_width
-    title = "API REQUEST CONFIGURATION"
-    padded_title = title.center(inner_width)
-    print(f"\033[94m╔{border}╗\033[0m")
-    print(f"\033[94m║\033[1;36m{padded_title}\033[94m║\033[0m")
-    print(f"\033[94m╠{border}╣\033[0m")
+def print_verbose_info(prompt, url, headers, payload):
+    # Print compiled system prompt
+    print("\033[1;36m--- COMPILED SYSTEM PROMPT ---\033[0m", file=sys.stderr)
+    print(prompt, file=sys.stderr)
+    print("\033[1;36m------------------------------\033[0m\n", file=sys.stderr)
     
-    url_line = f" URL : {url}"
-    print(f"\033[94m║\033[0m{url_line.ljust(inner_width)}\033[94m║\033[0m")
+    # Print API request details
+    print("\033[1;36m--- API REQUEST CONFIGURATION ---\033[0m", file=sys.stderr)
+    print(f"\033[1;33mURL:\033[0m {url}", file=sys.stderr)
     
-    print(f"\033[94m║\033[0m{f' Headers :'.ljust(inner_width)}\033[94m║\033[0m")
-    
-    ct_line = f"   Content-Type: {headers.get('Content-Type')}"
-    print(f"\033[94m║\033[0m{ct_line.ljust(inner_width)}\033[94m║\033[0m")
-    
-    # Mask token for security
+    # Headers
+    print("\033[1;33mHeaders:\033[0m", file=sys.stderr)
+    print(f"  Content-Type: {headers.get('Content-Type')}", file=sys.stderr)
     token = headers.get("x-n8n-token", "")
     masked_token = f"{token[:6]}...{token[-6:]}" if len(token) > 12 else ("********" if token else "None")
-    tok_line = f"   x-n8n-token: {masked_token}"
-    print(f"\033[94m║\033[0m{tok_line.ljust(inner_width)}\033[94m║\033[0m")
+    print(f"  x-n8n-token: {masked_token}", file=sys.stderr)
     
-    print(f"\033[94m║\033[0m{f' Payload Body :'.ljust(inner_width)}\033[94m║\033[0m")
-    
-    body_summary = {k: v for k, v in payload.items() if k != "system_prompt"}
-    body_json = json.dumps(body_summary, indent=2)
-    for line in body_json.splitlines():
-        body_line = f"   {line}"
-        print(f"\033[94m║\033[0m{body_line.ljust(inner_width)}\033[94m║\033[0m")
-    print(f"\033[94m╚{border}╝\033[0m\n")
+    # Payload parameters (including the system_prompt)
+    print("\033[1;33mPayload Body:\033[0m", file=sys.stderr)
+    print(json.dumps(payload, indent=2, ensure_ascii=False), file=sys.stderr)
+    print("\033[1;36m---------------------------------\033[0m\n", file=sys.stderr)
 
 def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=False):
     # Determine what categories we are requesting
@@ -156,19 +128,17 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
     if category:
         categories_to_fetch = [category]
         count_to_request = 50
-        print(f"📡 Requesting regeneration of category: '{category}' (50 items)...")
+        print(f"📡 Requesting regeneration of category: '{category}' (50 items)...", file=sys.stderr)
     else:
         categories_to_fetch = all_categories
         count_to_request = 350
-        print(f"📡 Requesting full pool regeneration (350 items across 7 categories)...")
+        print(f"📡 Requesting full pool regeneration (350 items across 7 categories)...", file=sys.stderr)
 
     # Generate system prompt dynamically from master.prompt
     try:
         system_prompt = parse_prompt(category=category, count=count_to_request)
-        if verbose:
-            print_fancy_prompt(system_prompt)
     except Exception as e:
-        print(f"❌ Error parsing master.prompt: {e}")
+        print(f"❌ Error parsing master.prompt: {e}", file=sys.stderr)
         return
 
     # Request payload
@@ -187,10 +157,10 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
     }
 
     if verbose:
-        print_fancy_payload(N8N_WEBHOOK_URL, headers, payload)
+        print_verbose_info(system_prompt, N8N_WEBHOOK_URL, headers, payload)
 
     if dry_run:
-        print("ℹ️ [Dry Run] Request payload compiled successfully. Skipping API call.")
+        print("ℹ️ [Dry Run] Request payload compiled successfully. Skipping API call.", file=sys.stderr)
         return
 
     try:
@@ -204,7 +174,7 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
                 if isinstance(err_data, dict):
                     err_msg = err_data.get("error", "") or err_data.get("message", "")
                     if "timeout" in err_msg.lower():
-                        print("❌ [Timeout] n8n generation expired (limit reached on Gemini model).")
+                        print("❌ [Timeout] n8n generation expired (limit reached on Gemini model).", file=sys.stderr)
                         return
             except Exception:
                 pass
@@ -214,8 +184,8 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
         try:
             generated_data = response.json()
         except ValueError as json_err:
-            print(f"❌ Error parsing JSON from n8n. Status: {response.status_code}")
-            print(f"Response Content: {response.text}")
+            print(f"❌ Error parsing JSON from n8n. Status: {response.status_code}", file=sys.stderr)
+            print(f"Response Content: {response.text}", file=sys.stderr)
             raise json_err
 
         # Load existing config to merge changes
@@ -236,28 +206,28 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
         for key, value in generated_data.items():
             if key in all_categories:
                 existing_data[key] = value
-                print(f"✨ Category '{key}' updated with {len(value)} new items.")
+                print(f"✨ Category '{key}' updated with {len(value)} new items.", file=sys.stderr)
 
         # Write back to output config file
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(existing_data, f, ensure_ascii=False, indent=2)
 
-        print(f"✅ Static reservoir configuration successfully saved at: {output_path}")
+        print(f"✅ Static reservoir configuration successfully saved at: {output_path}", file=sys.stderr)
 
     except requests.exceptions.Timeout:
-        print("❌ [Timeout] Request to n8n expired (network limit reached).")
+        print("❌ [Timeout] Request to n8n expired (network limit reached).", file=sys.stderr)
     except requests.exceptions.RequestException as e:
-        print(f"❌ Request error communicating with n8n: {e}")
+        print(f"❌ Request error communicating with n8n: {e}", file=sys.stderr)
     except ValueError as e:
-        print(f"❌ Data structure validation error: {e}")
+        print(f"❌ Data structure validation error: {e}", file=sys.stderr)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Populate/Update the static reservoir triggers pool.")
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument("--type", type=str, choices=["scenarios", "categories", "themes", "echauffements", "mgt", "warmup", "emotions", "locations", "eras"], help="Only update a specific generator category ('mgt' and 'warmup' are aliases for 'echauffements')")
     group.add_argument("--all", action="store_true", help="Regenerate all generator categories")
-    parser.add_argument("--verbose", action="store_true", help="Print the compiled system prompt and API configuration to stdout in a styled layout")
+    parser.add_argument("--verbose", action="store_true", help="Print the compiled system prompt and API configuration to stderr")
     parser.add_argument("--dry-run", action="store_true", help="Perform a dry run: compile and display prompt/payload, but do not send the request or write to config")
 
     if len(sys.argv) == 1:
@@ -276,4 +246,4 @@ if __name__ == "__main__":
     try:
         fetch_and_populate(category=category, update_all=update_all, verbose=args.verbose, dry_run=args.dry_run)
     except KeyboardInterrupt:
-        print("\n🛑 Process interrupted by user. Exiting...")
+        print("\n🛑 Process interrupted by user. Exiting...", file=sys.stderr)
