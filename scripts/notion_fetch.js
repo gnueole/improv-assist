@@ -12,7 +12,7 @@ const https = require('https');
 
 // Helper to load .env secrets locally without dependencies
 function loadEnv() {
-  const envPath = path.join(__dirname, '.env');
+  const envPath = path.join(__dirname, '..', '.env');
   if (fs.existsSync(envPath)) {
     const lines = fs.readFileSync(envPath, 'utf-8').split('\n');
     for (const line of lines) {
@@ -31,7 +31,7 @@ loadEnv();
 
 const db_id = process.env.NOTION_DATABASE_ID || "829fdac6b063438382d47246c2f3c05e";
 const api_key = process.env.NOTION_API_KEY;
-const outputPath = path.join(__dirname, 'src', 'data', 'notionConstraints.json');
+const outputPath = path.join(__dirname, '..', 'src', 'data', 'notionConstraints.json');
 
 function makeRequest(url, method, headers, data) {
   return new Promise((resolve, reject) => {

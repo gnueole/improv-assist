@@ -93,12 +93,12 @@ if command -v python3 >/dev/null 2>&1; then
         log_warn "La bibliothèque Python 'requests' est manquante."
         if [ "$AUTO_INSTALL" = true ]; then
             log_info "Installation automatique des packages Python requis..."
-            pip3 install -r requirements.txt || pip install -r requirements.txt || log_warn "Échec de l'installation automatique. Lancez manuellement : pip install -r requirements.txt"
+            pip3 install -r scripts/requirements.txt || pip install -r scripts/requirements.txt || log_warn "Échec de l'installation automatique. Lancez manuellement : pip install -r scripts/requirements.txt"
         else
             read -p "Voulez-vous installer les dépendances Python (requests) maintenant ? [O/n] " -n 1 -r
             echo ""
             if [[ $REPLY =~ ^[Oo]$ ]] || [[ -z $REPLY ]]; then
-                pip3 install -r requirements.txt || pip install -r requirements.txt || log_warn "Échec de l'installation. Lancez manuellement : pip install -r requirements.txt"
+                pip3 install -r scripts/requirements.txt || pip install -r scripts/requirements.txt || log_warn "Échec de l'installation. Lancez manuellement : pip install -r scripts/requirements.txt"
             else
                 log_warn "Installation des dépendances Python ignorée."
             fi

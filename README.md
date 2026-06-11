@@ -6,7 +6,7 @@
 
 `Houba Houba !` est une Progressive Web Application (PWA) moderne et mobile-first conçue pour aider les comédiens et arbitres de théâtre d'improvisation lors des entraînements, ateliers et matchs. Elle fournit des outils pour tirer au sort des paramètres de scène, chronométrer les improvisations et consulter les règles et contraintes de jeu.
 
-L'application arbore un design sombre soigné, enrichi de reflets irisés vibrants et de glassmorphisme, adapté aux écrans mobiles pour une utilisation instantanée.
+L'application arbore un design sombre soigné, enrichi de reflets irisés vibrants et de glassmorphisme, adapté aux écrans mobiles pour une utilisation instantanée. 50 thèmes sont disponibles au lancement. Ils sont à usage unique : lorsque la file d'attente est vide, il faut régénérer les thèmes grâce au workflow n8n/Gemini ou en cliquant sur l'icône de rotation.
 
 ---
 
@@ -30,8 +30,6 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 | **📦 Réservoir de Prompts (Data Pool)** | Les suggestions sont piochées dans un réservoir local et consommées sans doublon. Si le réservoir se vide, 50 nouveaux items sont rechargés depuis n8n. |
 | **🔄 Régénération par l'IA (Gemini via n8n)** | Permet de recharger le cache local avec de nouveaux prompts générés à la volée par Gemini en cliquant sur l'icône de rotation. |
 | **🚦 Indicateur de connexion (n8n)** | Un voyant lumineux indique la disponibilité du service n8n/Gemini (vert/rouge) avec retour d'erreurs détaillé pour les développeurs. |
-| **⌨️ Raccourcis Clavier PC** | Navigation ultra-rapide au clavier (flèches directionnelles sur la grille, Échap pour reculer, raccourcis `g` pour régénérer, `m` pour retour, `h` pour HiHa, `?` pour l'aide). |
-
 
 ---
 
@@ -39,7 +37,7 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 
 Le cache local est généré en synchronisant certaines données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
 ```bash
-node notion_fetch.js
+node scripts/notion_fetch.js
 ```
 
 ---

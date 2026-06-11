@@ -135,7 +135,7 @@ L'application utilise deux types de fichiers de données persistés localement :
 
 1. **`notionConstraints.json`** : Contient le guide des contraintes d'impro théâtrale. Ce cache local est rafraîchi lors des phases de build ou par tâche périodique en exécutant le script d'intégration :
    ```bash
-   node notion_fetch.js
+   node scripts/notion_fetch.js
    ```
 2. **`reservoir-config.json`** : Réservoir de prompts utilisé par les générateurs hors-ligne. Il peut être régénéré en interrogeant l'IA via le script Python en environnement de développement :
    ```bash
