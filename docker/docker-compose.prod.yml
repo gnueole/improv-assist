@@ -13,6 +13,8 @@ services:
       - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
     networks:
       - eole_shared_network
+    extra_hosts:
+      - "n8n.eole.me:host-gateway"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.improv.rule=Host(`${APP_DOMAIN}`)"
