@@ -277,7 +277,7 @@ export default function Dashboard() {
 
       {/* 1. Main Dashboard Mode */}
       <div
-        className={`dashboard-container transition-all duration-500 ease-out z-10 ${activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4" : "opacity-100 scale-100"
+        className={`dashboard-container transition-all duration-500 ease-out z-10 ${activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4 invisible" : "opacity-100 scale-100"
           }`}
       >
         {/* Header */}
@@ -291,6 +291,11 @@ export default function Dashboard() {
             </h1>
           </div>
           <div className="flex items-center gap-2">
+            {devMode && (
+              <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mr-1 select-none animate-fade-in">
+                dev on
+              </span>
+            )}
             {/* Status Light */}
             <div
               className={`status-light ${n8nStatus}`}
@@ -417,8 +422,8 @@ export default function Dashboard() {
             {activeTile?.title}
           </h2>
 
-          <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center z-30">
-            {activeTile && React.createElement(activeTile.icon, { className: "w-4 h-4 text-zinc-300" })}
+          <div className="w-8 h-8 flex items-center justify-center text-zinc-500 z-30">
+            {activeTile && React.createElement(activeTile.icon, { className: "w-5 h-5" })}
           </div>
         </header>
 
