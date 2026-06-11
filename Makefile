@@ -55,8 +55,8 @@ dev-up:
 		echo "🔑 Downloading development secrets from Doppler ($(DOPPLER_PROJECT))..."; \
 		$(DOPPLER) secrets download --project $(DOPPLER_PROJECT) --config $(DOPPLER_CONFIG_DEV) --no-file --format env > .env; \
 	elif [ ! -f .env ]; then \
-		echo "❌ Error: .env file not found and Doppler CLI is not installed."; \
-		exit 1; \
+		echo "⚠️ Doppler CLI not found. Copying $(DOCKER_DIR)/.env.example as .env fallback..."; \
+		cp $(DOCKER_DIR)/.env.example .env; \
 	fi
 	docker compose -f $(COMPOSE_DEV) --env-file .env up -d
 	@echo "🚀 Houba Houba ! is ready locally at http://localhost:3000"

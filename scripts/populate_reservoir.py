@@ -27,8 +27,8 @@ def fetch_and_populate():
     }
     
     try:
-        # Timeout de 12 secondes (10s pour n8n/Gemini + 2s de marge réseau)
-        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=12)
+        # Timeout de 180 secondes validé pour laisser le temps à Gemini 2.5 Pro de générer les 350 items
+        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=180)
         
         # Si la requête échoue, on regarde s'il s'agit d'un timeout renvoyé par n8n (ex: 504)
         if not response.ok:

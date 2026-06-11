@@ -1,1515 +1,1515 @@
 {
   "scenarios": [
     {
-      "text": "Rupture devant une caissière fatiguée",
-      "category": "Quotidien",
-      "brief": "Un couple se sépare en plein règlement d'achats sous le regard blasé de l'employée."
-    },
-    {
-      "text": "Coincés dans un ascenseur bloqué",
+      "text": "Le testament caché",
       "category": "Huis clos",
-      "brief": "Deux inconnus aux tempéraments opposés doivent cohabiter le temps du dépannage."
+      "brief": "Deux frères découvrent un testament qui change tout dans le salon familial."
     },
     {
-      "text": "Deux espions oubliant leur mot de passe",
-      "category": "Aventure",
-      "brief": "Devant la porte blindée, l'infiltration est compromise par un trou de mémoire."
-    },
-    {
-      "text": "Un chevalier face à un lave-linge",
-      "category": "Insolite",
-      "brief": "Un guerrier médiéval prend l'électroménager moderne pour une créature démoniaque."
-    },
-    {
-      "text": "Entretien d'embauche pour être clown triste",
+      "text": "Rupture au restaurant",
       "category": "Quotidien",
-      "brief": "Le candidat tente de prouver que sa mélancolie est un atout artistique."
+      "brief": "Un couple tente de rompre discrètement dans un lieu très chic."
     },
     {
-      "text": "Une confession dans un confessionnal trop petit",
+      "text": "Ascenseur en panne",
       "category": "Huis clos",
-      "brief": "Un prêtre et un fidèle s'entassent dans un espace exigu pour un aveu embarrassant."
+      "brief": "Deux inconnus aux tempéraments opposés sont bloqués entre deux étages."
     },
     {
-      "text": "Négociation de rançon pour un doudou perdu",
-      "category": "Insolite",
-      "brief": "Un parent désespéré négocie avec un ravisseur exigeant des bonbons."
-    },
-    {
-      "text": "Le premier rendez-vous d'un vampire timide",
-      "category": "Insolite",
-      "brief": "Il tente de cacher sa nature tout en évitant le miroir et l'ail."
-    },
-    {
-      "text": "Deux alpinistes suspendus à un fil",
+      "text": "Le braquage raté",
       "category": "Aventure",
-      "brief": "En pleine paroi rocheuse, ils règlent un différend familial crucial."
+      "brief": "Des malfaiteurs débutants réalisent qu'ils ont oublié les sacs pour l'argent."
     },
     {
-      "text": "Un client mécontent dans un magasin de blagues",
+      "text": "Premier rendez-vous",
       "category": "Quotidien",
-      "brief": "Il veut se faire rembourser un coussin péteur défectueux."
+      "brief": "Deux personnes timides se rencontrent via une application de rencontre."
     },
     {
-      "text": "Un astronaute et un extraterrestre font du stop",
+      "text": "L'aveu tardif",
+      "category": "Quotidien",
+      "brief": "Un ami avoue un secret gardé depuis dix ans lors d'un dîner."
+    },
+    {
+      "text": "Naufrage imminent",
       "category": "Aventure",
-      "brief": "Sur le bord d'une route spatiale, ils cherchent à rejoindre la Terre."
+      "brief": "L'équipage d'un petit bateau doit décider qui prend le dernier gilet."
     },
     {
-      "text": "Deux statues de cire qui prennent vie la nuit",
+      "text": "Le licenciement",
+      "category": "Quotidien",
+      "brief": "Un patron doit renvoyer son meilleur ami pour sauver l'entreprise."
+    },
+    {
+      "text": "Voisins de palier",
+      "category": "Quotidien",
+      "brief": "Une dispute éclate à cause d'un bruit suspect venant de l'appartement d'à côté."
+    },
+    {
+      "text": "Le mariage annulé",
       "category": "Insolite",
-      "brief": "Elles en profitent pour régler leurs comptes historiques hors de leurs socles."
+      "brief": "La mariée refuse de dire oui devant l'autel sans donner d'explication."
     },
     {
-      "text": "Un contrôle fiscal surprise au pôle Nord",
-      "category": "Insolite",
-      "brief": "Un agent tatillon vérifie la comptabilité de l'usine de jouets des elfes."
-    },
-    {
-      "text": "Un chirurgien qui cherche ses clés dans le patient",
-      "category": "Insolite",
-      "brief": "Il tente de réparer son oubli avant la fin de l'anesthésie."
-    },
-    {
-      "text": "Perdus dans le labyrinthe d'un supermarché la nuit",
+      "text": "Interrogatoire tendu",
       "category": "Huis clos",
-      "brief": "Deux clients oubliés cherchent la sortie entre les rayons obscurs."
+      "brief": "Un inspecteur tente de faire craquer un suspect trop calme."
     },
     {
-      "text": "Deux enfants tentent d'acheter une voiture",
-      "category": "Quotidien",
-      "brief": "Armés d'une tirelire et d'un faux permis, ils négocient avec le vendeur."
-    },
-    {
-      "text": "Un cours de pilotage d'avion sans manuel",
-      "category": "Aventure",
-      "brief": "L'instructeur improvise les commandes en plein vol de démonstration."
-    },
-    {
-      "text": "Une dispute pour le dernier rouleau de papier toilette",
-      "category": "Quotidien",
-      "brief": "En pleine pénurie, deux clients ne lâchent pas le précieux sésame."
-    },
-    {
-      "text": "Un détective privé interroge son propre reflet",
+      "text": "Le colis mystère",
       "category": "Insolite",
-      "brief": "Persuadé d'avoir trouvé le coupable, il mène une confrontation interne."
+      "brief": "Un facteur livre un paquet qui émet un bruit de tic-tac."
     },
     {
-      "text": "Une première leçon de magie qui tourne mal",
+      "text": "Retrouvailles amères",
+      "category": "Quotidien",
+      "brief": "Deux anciens amants se croisent par hasard dans un supermarché."
+    },
+    {
+      "text": "Le dernier vol",
       "category": "Aventure",
-      "brief": "L'apprenti transforme accidentellement son maître en animal de compagnie."
+      "brief": "Un pilote annonce une panne moteur aux passagers en plein vol."
     },
     {
-      "text": "Coincés dans une cabine de téléphérique en panne",
+      "text": "Casting décisif",
+      "category": "Insolite",
+      "brief": "Deux acteurs se battent pour le rôle de leur vie devant un réalisateur muet."
+    },
+    {
+      "text": "La lettre d'amour",
+      "category": "Quotidien",
+      "brief": "Un enfant trouve une lettre d'amour adressée à sa mère par un inconnu."
+    },
+    {
+      "text": "Le secret d'État",
+      "category": "Aventure",
+      "brief": "Un espion doit transmettre un code à un contact qui ne le reconnaît pas."
+    },
+    {
+      "text": "Dîner de famille",
+      "category": "Quotidien",
+      "brief": "La tension monte quand le sujet de l'héritage est abordé."
+    },
+    {
+      "text": "Le procès",
       "category": "Huis clos",
-      "brief": "Le vertige et la promiscuité font grimper la tension entre les passagers."
+      "brief": "Un avocat défend un client qu'il sait coupable."
     },
     {
-      "text": "Un inventeur présente une machine à faire du vent",
-      "category": "Insolite",
-      "brief": "Le prototype s'emballe et menace de souffler le salon de présentation."
-    },
-    {
-      "text": "Un naufrage sur une île déserte minuscule",
+      "text": "La panne d'essence",
       "category": "Aventure",
-      "brief": "Deux rescapés doivent partager un espace de trois mètres carrés."
+      "brief": "Une voiture tombe en panne en pleine forêt la nuit."
     },
     {
-      "text": "Un client veut échanger son chien contre un chat",
+      "text": "Le nouveau voisin",
       "category": "Quotidien",
-      "brief": "Il explique au vendeur de l'animalerie les défauts logistiques de son canidé."
+      "brief": "Un homme suspect emménage avec des caisses très lourdes."
     },
     {
-      "text": "Un rendez-vous chez le dentiste des monstres",
+      "text": "L'examen final",
+      "category": "Quotidien",
+      "brief": "Un étudiant tente de tricher sous les yeux d'un surveillant sévère."
+    },
+    {
+      "text": "Le pacte secret",
       "category": "Insolite",
-      "brief": "Le praticien doit soigner la carie d'un loup-garou récalcitrant."
+      "brief": "Deux collègues jurent de ne jamais révéler ce qu'ils ont vu au bureau."
     },
     {
-      "text": "Deux fantômes discutent de l'inflation de l'ectoplasme",
-      "category": "Insolite",
-      "brief": "Ils constatent que hanter les maisons devient un luxe hors de prix."
-    },
-    {
-      "text": "Un braquage de banque avec une banane",
-      "category": "Aventure",
-      "brief": "Le malfaiteur tente de rester menaçant avec son fruit mûr."
-    },
-    {
-      "text": "Une demande en mariage pendant un séisme",
-      "category": "Aventure",
-      "brief": "Il cherche la bague alors que les murs s'écroulent autour d'eux."
-    },
-    {
-      "text": "Le réveil difficile d'un ours après l'hibernation",
+      "text": "La demande en mariage",
       "category": "Quotidien",
-      "brief": "Son voisin de tanière fait beaucoup trop de bruit avec sa tondeuse."
+      "brief": "Une demande en mariage qui tourne à la catastrophe publique."
     },
     {
-      "text": "Un critique gastronomique chez sa grand-mère",
-      "category": "Quotidien",
-      "brief": "Il doit noter son gigot dominical sans froisser l'amour familial."
-    },
-    {
-      "text": "Dans le ventre d'une baleine bavarde",
+      "text": "Le refuge de montagne",
       "category": "Huis clos",
-      "brief": "Deux marins avalés essaient de convaincre le cétacé de les recracher."
+      "brief": "Des randonneurs sont coincés par une tempête de neige."
     },
     {
-      "text": "Deux archivistes découvrent le secret de l'univers",
-      "category": "Aventure",
-      "brief": "La vérité est si absurde qu'ils hésitent à la classer ou à la brûler."
-    },
-    {
-      "text": "Un coiffeur pour chauves très pointilleux",
+      "text": "L'héritage empoisonné",
       "category": "Insolite",
-      "brief": "Il passe des heures à lustrer le crâne de son client méfiant."
+      "brief": "Une tante lègue une dette immense à son neveu préféré."
     },
     {
-      "text": "Un cours de yoga pour personnes colériques",
+      "text": "Le vol de bijoux",
+      "category": "Aventure",
+      "brief": "Un cambrioleur se fait surprendre par le propriétaire de la maison."
+    },
+    {
+      "text": "La promotion",
       "category": "Quotidien",
-      "brief": "Le professeur tente d'apaiser des élèves qui s'énervent à la moindre posture."
+      "brief": "Deux collègues attendent le résultat pour le même poste."
     },
     {
-      "text": "Une négociation de paix entre deux chats",
-      "category": "Insolite",
-      "brief": "Ils délimitent la frontière du canapé après des semaines de griffades."
-    },
-    {
-      "text": "Deux agents secrets déguisés en buisson",
-      "category": "Aventure",
-      "brief": "Ils découvrent qu'ils surveillent la même cible depuis le même jardin."
-    },
-    {
-      "text": "Une séance de spiritisme pour retrouver une chaussette",
-      "category": "Insolite",
-      "brief": "Les participants invoquent le fantôme de la machine à laver."
-    },
-    {
-      "text": "Un cosmonaute qui a oublié sa combinaison",
-      "category": "Aventure",
-      "brief": "Il réalise son oubli juste avant l'ouverture du sas de sortie."
-    },
-    {
-      "text": "Coincés sous une tente de camping sous la tempête",
+      "text": "Le confessionnal",
       "category": "Huis clos",
-      "brief": "L'eau monte et l'armature menace de céder à tout moment."
+      "brief": "Un homme avoue un crime qu'il n'a pas encore commis."
     },
     {
-      "text": "Le procès d'un écureuil accusé de vol de noisettes",
-      "category": "Insolite",
-      "brief": "Son avocat tente de plaider la clémence face au procureur hibou."
-    },
-    {
-      "text": "Une dispute entre un GPS et un conducteur",
+      "text": "Le départ définitif",
       "category": "Quotidien",
-      "brief": "La voix de synthèse refuse de recalculer l'itinéraire par fierté."
+      "brief": "Une fille annonce à son père qu'elle part vivre à l'étranger."
     },
     {
-      "text": "Deux plongeurs découvrent une boîte aux lettres sous l'eau",
+      "text": "L'accident de voiture",
+      "category": "Quotidien",
+      "brief": "Deux conducteurs se disputent sur le constat après un choc léger."
+    },
+    {
+      "text": "Le trésor caché",
       "category": "Aventure",
-      "brief": "Ils se demandent s'ils doivent y poster leur courrier de vacances."
+      "brief": "Des explorateurs trouvent un coffre mais n'ont pas la clé."
     },
     {
-      "text": "Un test d'orientation scolaire pour un futur super-vilain",
+      "text": "La trahison",
       "category": "Insolite",
-      "brief": "Le conseiller tente de canaliser ses ambitions destructrices vers des métiers stables."
+      "brief": "Un garde du corps décide de livrer son client à ses ennemis."
     },
     {
-      "text": "Un client veut acheter une œuvre d'art invisible",
+      "text": "Le premier jour",
       "category": "Quotidien",
-      "brief": "Le galeriste tente de justifier le prix exorbitant du vide."
+      "brief": "Un stagiaire maladroit rencontre le PDG tyrannique."
     },
     {
-      "text": "Coincés dans la caisse d'un camion de déménagement",
-      "category": "Huis clos",
-      "brief": "Deux passagers clandestins réalisent qu'ils ne connaissent pas la destination."
-    },
-    {
-      "text": "Un cours de cuisine où tout prend feu",
+      "text": "Le malentendu",
       "category": "Quotidien",
-      "brief": "Le chef insiste sur le fait que la carbonisation fait partie de la recette."
+      "brief": "Une personne prend un inconnu pour son médecin personnel."
     },
     {
-      "text": "Une rencontre fortuite au sommet de la Tour Eiffel",
+      "text": "La fuite",
       "category": "Aventure",
-      "brief": "Deux rivaux découvrent qu'ils ont tous deux un rendez-vous mystère au même endroit."
+      "brief": "Deux prisonniers s'évadent mais sont enchaînés l'un à l'autre."
     },
     {
-      "text": "Un horloger face au temps qui s'est arrêté",
-      "category": "Insolite",
-      "brief": "Les aiguilles figées le forcent à mener une enquête temporelle."
-    },
-    {
-      "text": "Dans une capsule spatiale en route vers le Soleil",
+      "text": "Le dernier repas",
       "category": "Huis clos",
-      "brief": "L'ordinateur de bord annonce une erreur de trajectoire irréversible."
+      "brief": "Un condamné demande une faveur insolite à son gardien."
     },
     {
-      "text": "Une discussion animée dans une file d'attente de cinéma",
+      "text": "Le mensonge",
       "category": "Quotidien",
-      "brief": "Deux cinéphiles débattent du spoil de la fin du film qu'ils vont voir."
+      "brief": "Une femme prétend être enceinte pour garder son compagnon."
+    },
+    {
+      "text": "La rencontre fortuite",
+      "category": "Insolite",
+      "brief": "Un homme croise son sosie parfait dans la rue."
+    },
+    {
+      "text": "Le chantage",
+      "category": "Huis clos",
+      "brief": "Une secrétaire menace de révéler les comptes cachés de son patron."
+    },
+    {
+      "text": "Le retour du héros",
+      "category": "Aventure",
+      "brief": "Un soldat revient de guerre et trouve sa maison occupée."
+    },
+    {
+      "text": "L'entretien d'embauche",
+      "category": "Quotidien",
+      "brief": "Le candidat réalise que le recruteur est son ex-petit ami."
+    },
+    {
+      "text": "Le pari risqué",
+      "category": "Insolite",
+      "brief": "Deux amis parient leur maison sur un match de tennis."
+    },
+    {
+      "text": "La dispute conjugale",
+      "category": "Quotidien",
+      "brief": "Un couple se dispute pour une broutille qui cache un gros problème."
+    },
+    {
+      "text": "Le témoin oculaire",
+      "category": "Aventure",
+      "brief": "Un passant voit un meurtre et doit se cacher immédiatement."
+    },
+    {
+      "text": "La chambre d'hôtel",
+      "category": "Huis clos",
+      "brief": "Un couple découvre que leur chambre est déjà occupée."
+    },
+    {
+      "text": "Le secret de famille",
+      "category": "Quotidien",
+      "brief": "Une grand-mère révèle l'identité du vrai père de son fils."
+    },
+    {
+      "text": "Le voyage scolaire",
+      "category": "Aventure",
+      "brief": "Un professeur perd un élève dans un musée immense."
+    },
+    {
+      "text": "La rupture de contrat",
+      "category": "Quotidien",
+      "brief": "Un agent sportif annonce à son joueur qu'il est viré."
+    },
+    {
+      "text": "Le dernier survivant",
+      "category": "Insolite",
+      "brief": "Deux personnes pensent être les seules rescapées d'un crash."
     }
   ],
   "categories": [
     {
-      "text": "À la manière de Molière",
-      "description": "Parler avec un langage soutenu et théâtral du XVIIe siècle."
+      "text": "Sans paroles",
+      "description": "L'improvisation doit se faire uniquement par le geste et le regard."
     },
     {
-      "text": "Sans paroles (mime)",
-      "description": "Jouer la scène entièrement en silence en utilisant le corps."
+      "text": "Rimes imposées",
+      "description": "Chaque réplique doit se terminer par une rime."
     },
     {
-      "text": "En rimes",
-      "description": "Chaque réplique doit rimer avec la précédente ou au sein de la tirade."
-    },
-    {
-      "text": "Comédie musicale",
-      "description": "Chanter et danser à intervalles réguliers durant l'improvisation."
-    },
-    {
-      "text": "Théâtre de boulevard",
-      "description": "Jeu énergique, quiproquos, portes qui claquent et exagération."
-    },
-    {
-      "text": "Film noir / Détective",
-      "description": "Ambiance mystérieuse, voix off dramatique et personnages cyniques."
+      "text": "Style Molière",
+      "description": "Les personnages parlent en vieux français avec emphase."
     },
     {
       "text": "Western",
-      "description": "Silences lourds, regards tendus, duels et accent du Far West."
+      "description": "L'ambiance et le ton doivent rappeler les films de cow-boys."
     },
     {
-      "text": "Science-fiction",
-      "description": "Intégrer des technologies imaginaires, des bruits de robots et un jargon futuriste."
-    },
-    {
-      "text": "Téléréalité",
-      "description": "Confessionnaux face caméra, drames superficiels et expressions clichés."
-    },
-    {
-      "text": "Dessin animé",
-      "description": "Mouvements exagérés, voix aiguës ou graves et lois de la physique bafouées."
-    },
-    {
-      "text": "Pièce de Shakespeare",
-      "description": "Tirades tragiques, trahisons, références au destin et poésie sombre."
-    },
-    {
-      "text": "Changement de rythme",
-      "description": "Changer de vitesse (ralenti, accéléré, pause) au signal des spectateurs."
-    },
-    {
-      "text": "Roman-photo",
-      "description": "Les joueurs se figent et disent à haute voix leurs pensées intimes."
-    },
-    {
-      "text": "Sans la lettre E",
-      "description": "Interdiction absolue de prononcer la lettre ou le son 'E'."
-    },
-    {
-      "text": "Abécédaire",
-      "description": "Chaque réplique commence par la lettre suivante de l'alphabet (A, B, C...)."
-    },
-    {
-      "text": "Doublage étranger",
-      "description": "Deux joueurs miment et parlent une langue imaginaire, deux autres traduisent."
-    },
-    {
-      "text": "Peplum",
-      "description": "Ambiance romaine ou grecque antique, toges imaginaires et grandeur tragique."
-    },
-    {
-      "text": "Mélo-drame",
-      "description": "Émotions poussées à l'extrême, larmes faciles et destins brisés."
+      "text": "Comédie musicale",
+      "description": "Les personnages doivent chanter et danser régulièrement."
     },
     {
       "text": "Film d'horreur",
-      "description": "Suspense, bruits suspects, peur panique et décisions absurdes."
+      "description": "L'histoire doit instaurer une ambiance de peur et de suspense."
     },
     {
-      "text": "Sans adjectif",
-      "description": "Interdiction d'utiliser le moindre adjectif qualificatif."
+      "text": "Doublage",
+      "description": "Deux acteurs jouent, deux autres font les voix derrière eux."
+    },
+    {
+      "text": "Ralenti",
+      "description": "Toute l'action doit être effectuée au ralenti extrême."
+    },
+    {
+      "text": "Accéléré",
+      "description": "Toute l'action doit être effectuée très rapidement."
+    },
+    {
+      "text": "Changement de langue",
+      "description": "L'arbitre siffle et les acteurs changent de langue imaginaire."
+    },
+    {
+      "text": "Abécédaire",
+      "description": "Chaque réplique commence par la lettre suivante de l'alphabet."
+    },
+    {
+      "text": "Émotion imposée",
+      "description": "L'arbitre annonce une émotion que les acteurs doivent adopter."
+    },
+    {
+      "text": "Sans les mains",
+      "description": "Les acteurs ne doivent jamais utiliser leurs mains pour agir."
+    },
+    {
+      "text": "Film noir",
+      "description": "Style détective privé des années 50 avec voix off."
+    },
+    {
+      "text": "Science-fiction",
+      "description": "L'histoire se déroule dans un futur technologique."
+    },
+    {
+      "text": "Peplum",
+      "description": "Style antiquité romaine ou grecque héroïque."
+    },
+    {
+      "text": "Théâtre de boulevard",
+      "description": "Quiproquos, portes qui claquent et amants cachés."
+    },
+    {
+      "text": "Documentaire animalier",
+      "description": "Un narrateur commente les actions des personnages comme des animaux."
+    },
+    {
+      "text": "Soap opera",
+      "description": "Jeu exagéré, drames familiaux et révélations chocs."
+    },
+    {
+      "text": "Conte de fées",
+      "description": "Utilisation de codes merveilleux et de morales."
+    },
+    {
+      "text": "Sans adjectifs",
+      "description": "Il est interdit d'utiliser le moindre adjectif qualificatif."
+    },
+    {
+      "text": "Polyglotte",
+      "description": "Chaque personnage parle une langue réelle différente."
+    },
+    {
+      "text": "Marionnettes",
+      "description": "Les acteurs bougent comme s'ils étaient manipulés par des fils."
+    },
+    {
+      "text": "Flashback",
+      "description": "Les acteurs doivent intégrer des retours dans le passé."
+    },
+    {
+      "text": "Interview",
+      "description": "Un personnage est interviewé par un journaliste invisible."
+    },
+    {
+      "text": "Bruitages extérieurs",
+      "description": "Un acteur sur le côté fait tous les bruits de la scène."
+    },
+    {
+      "text": "Changement de rôle",
+      "description": "Au coup de sifflet, les acteurs échangent leurs personnages."
+    },
+    {
+      "text": "Vers l'infini",
+      "description": "Chaque réplique doit être plus longue que la précédente."
+    },
+    {
+      "text": "Minimalisme",
+      "description": "Le moins de mouvements et de mots possibles."
+    },
+    {
+      "text": "Grand Guignol",
+      "description": "Jeu très expressif, sanglant et terrifiant."
+    },
+    {
+      "text": "Sitcom",
+      "description": "Présence de rires enregistrés imaginaires et de punchlines."
+    },
+    {
+      "text": "Tragédie grecque",
+      "description": "Destin fatal, chœur et langage soutenu."
+    },
+    {
+      "text": "Dessin animé",
+      "description": "Physique élastique et situations absurdes mais rythmées."
+    },
+    {
+      "text": "Monologue intérieur",
+      "description": "Les acteurs disent tout haut ce qu'ils pensent tout bas."
+    },
+    {
+      "text": "Sans verbes",
+      "description": "Il est interdit d'utiliser des verbes conjugués."
+    },
+    {
+      "text": "En rimes suivies",
+      "description": "Les répliques fonctionnent par paires de rimes."
+    },
+    {
+      "text": "Style Shakespeare",
+      "description": "Trahisons, royauté et lyrisme dramatique."
+    },
+    {
+      "text": "Publicité",
+      "description": "L'impro doit vendre un produit imaginaire à tout prix."
+    },
+    {
+      "text": "Caméra cachée",
+      "description": "Un personnage piège l'autre qui ne sait rien."
+    },
+    {
+      "text": "Sourd et muet",
+      "description": "Communication uniquement par signes inventés."
     },
     {
       "text": "Le mot imposé",
-      "description": "Chaque réplique doit intégrer un mot bizarre suggéré au départ."
+      "description": "L'arbitre donne un mot difficile à placer naturellement."
     },
     {
-      "text": "Télé-achat",
-      "description": "Présenter des objets ordinaires comme des révolutions technologiques indispensables."
+      "text": "La rumeur",
+      "description": "L'histoire se construit sur des non-dits et des secrets."
     },
     {
-      "text": "Jeu de cartes",
-      "description": "Chaque joueur adopte le comportement d'une carte de jeu (Roi, Valet, Joker...)."
+      "text": "Point de vue",
+      "description": "La même scène jouée selon deux perspectives différentes."
     },
     {
-      "text": "Conférence d'expert",
-      "description": "Expliquer un sujet absurde avec un sérieux académique absolu."
+      "text": "Inversion des statuts",
+      "description": "Le dominé devient le dominant en cours de scène."
     },
     {
-      "text": "La marionnette",
-      "description": "Un joueur bouge les membres de l'autre qui doit justifier ses postures."
+      "text": "Objets imaginaires",
+      "description": "Manipulation précise d'objets qui n'existent pas."
     },
     {
-      "text": "Censuré !",
-      "description": "Bip sonore imaginaire à chaque mot grossier ou inapproprié."
+      "text": "Le traducteur",
+      "description": "Un acteur parle une langue inconnue, l'autre traduit."
     },
     {
-      "text": "Changement d'humeur",
-      "description": "Changer d'émotion instantanément à chaque claquement de doigts."
+      "text": "La suite de...",
+      "description": "Reprendre une scène célèbre et inventer la suite."
     },
     {
-      "text": "Jeu de rimes AABB",
-      "description": "Suivre un schéma de rimes strict tout au long des échanges."
+      "text": "En chantant",
+      "description": "Toutes les paroles doivent être chantées sans exception."
     },
     {
-      "text": "Sans verbe",
-      "description": "Construire des phrases nominales uniquement."
+      "text": "Le narrateur",
+      "description": "Un narrateur impose des actions aux personnages."
     },
     {
-      "text": "Traduction simultanée",
-      "description": "Un joueur parle en jargon technique ou argot, l'autre traduit en français soutenu."
-    },
-    {
-      "text": "Sitcom américaine",
-      "description": "Rires enregistrés imaginaires, punchlines et pauses complices avec le public."
-    },
-    {
-      "text": "Opéra tragique",
-      "description": "Toutes les répliques doivent être chantées avec lyrisme."
-    },
-    {
-      "text": "Le monologue intérieur",
-      "description": "Exprimer à voix haute ses pensées cachées après chaque réplique."
-    },
-    {
-      "text": "La phrase finale imposée",
-      "description": "La scène doit obligatoirement se terminer par une phrase précise."
-    },
-    {
-      "text": "Langue inventée (Gromolo)",
-      "description": "S'exprimer uniquement dans un charabia expressif sans mots réels."
-    },
-    {
-      "text": "Le conte de fées",
-      "description": "Raconter et jouer une histoire morale avec princes, sorcières et magie."
-    },
-    {
-      "text": "Théâtre classique (Alexandrins)",
-      "description": "Parler en vers de 12 syllabes (ou essayer de s'en approcher)."
-    },
-    {
-      "text": "Cinéma muet",
-      "description": "Mimes expressifs, accompagnement musical imaginaire et cartons de texte parlés."
-    },
-    {
-      "text": "Publicité télévisée",
-      "description": "Scène coupée par des slogans publicitaires enthousiastes."
-    },
-    {
-      "text": "Le tribunal",
-      "description": "Chaque joueur tente d'accuser l'autre d'un crime ridicule avec des termes juridiques."
-    },
-    {
-      "text": "Le guide touristique",
-      "description": "Présenter le lieu comme une attraction touristique majeure."
-    },
-    {
-      "text": "La comédie italienne",
-      "description": "Parler fort, grands gestes, passion et accent chantant."
-    },
-    {
-      "text": "Le film d'action",
-      "description": "Cascades, explosions mimées, répliques percutantes et suspense insoutenable."
-    },
-    {
-      "text": "La bande-annonce",
-      "description": "Résumer une histoire fictive en voix off dramatique et scènes courtes."
-    },
-    {
-      "text": "Le jeu des questions",
-      "description": "Toutes les répliques doivent obligatoirement être des questions."
-    },
-    {
-      "text": "Le poète maudit",
-      "description": "S'exprimer avec mélancolie, métaphores sombres et désespoir lyrique."
-    },
-    {
-      "text": "La marionnette humaine",
-      "description": "Les mouvements d'un joueur sont dictés par les gestes d'un autre joueur."
-    },
-    {
-      "text": "Le documentaire animalier",
-      "description": "Un narrateur commente les actions des joueurs comme s'ils étaient des animaux sauvages."
-    },
-    {
-      "text": "La comédie romantique",
-      "description": "Rencontre fortuite, malentendus amoureux, déclaration et fin heureuse."
-    },
-    {
-      "text": "Le jeu vidéo",
-      "description": "Mouvements saccadés, temps de chargement, effets sonores et barres de vie imaginaires."
+      "text": "Zapping",
+      "description": "L'arbitre change de chaîne et de style instantanément."
     }
   ],
   "themes": [
     {
-      "text": "Le vol de l'oiseau en carton",
+      "text": "Le premier baiser",
       "category": "Poétique"
     },
     {
-      "text": "Le secret chuchoté par la chaussette",
-      "category": "Drôle"
-    },
-    {
-      "text": "La vengeance du canard en plastique",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le murmure des étoiles oubliées",
-      "category": "Poétique"
-    },
-    {
-      "text": "L'odeur de la pluie sur le béton chaud",
-      "category": "Poétique"
-    },
-    {
-      "text": "La révolte des machines à café",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le dictionnaire des mots perdus",
-      "category": "Poétique"
-    },
-    {
-      "text": "Un chewing-gum sous la table de négociation",
-      "category": "Drôle"
-    },
-    {
-      "text": "La mélodie du vieux radiateur",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le syndicat des super-héros fatigués",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le gardien des ombres perdues",
-      "category": "Poétique"
-    },
-    {
-      "text": "La complainte du grille-pain",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le dernier voyage d'un flocon de neige",
-      "category": "Poétique"
-    },
-    {
-      "text": "Une valse avec un balai",
+      "text": "La trahison",
       "category": "Libre"
     },
     {
-      "text": "Le mystère du slip manquant",
+      "text": "Un malentendu idiot",
       "category": "Drôle"
     },
     {
-      "text": "L'arbre qui parlait aux nuages",
+      "text": "L'adieu déchirant",
       "category": "Poétique"
     },
     {
-      "text": "Une tempête dans un verre d'eau",
+      "text": "Le secret de famille",
       "category": "Libre"
     },
     {
-      "text": "L'art de ne rien faire du tout",
+      "text": "Une gaffe monumentale",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le dernier espoir",
+      "category": "Poétique"
+    },
+    {
+      "text": "La vengeance",
       "category": "Libre"
     },
     {
-      "text": "Le parfum du temps qui passe",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le blues du poisson rouge",
+      "text": "Un quiproquo amoureux",
       "category": "Drôle"
     },
     {
-      "text": "Une clé qui n'ouvre aucune porte",
+      "text": "Le voyage intérieur",
+      "category": "Poétique"
+    },
+    {
+      "text": "L'ambition démesurée",
       "category": "Libre"
     },
     {
-      "text": "La danse des poussières dans le soleil",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le voleur de sourires",
-      "category": "Poétique"
-    },
-    {
-      "text": "L'invasion des nains de jardin",
+      "text": "Le ridicule tue",
       "category": "Drôle"
     },
     {
-      "text": "Un message dans une bouteille de ketchup",
-      "category": "Drôle"
-    },
-    {
-      "text": "L'homme qui mesurait le vent",
+      "text": "Sous les étoiles",
       "category": "Poétique"
     },
     {
-      "text": "Le congrès mondial des chats de gouttière",
-      "category": "Drôle"
-    },
-    {
-      "text": "Un escalier qui mène vers nulle part",
+      "text": "Le choix impossible",
       "category": "Libre"
+    },
+    {
+      "text": "Un dîner raté",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le temps qui passe",
+      "category": "Poétique"
+    },
+    {
+      "text": "La jalousie",
+      "category": "Libre"
+    },
+    {
+      "text": "Le menteur malgré lui",
+      "category": "Drôle"
+    },
+    {
+      "text": "Un parfum d'enfance",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le pouvoir",
+      "category": "Libre"
+    },
+    {
+      "text": "La maladresse",
+      "category": "Drôle"
     },
     {
       "text": "L'ombre d'un doute",
+      "category": "Poétique"
+    },
+    {
+      "text": "La survie",
       "category": "Libre"
     },
     {
-      "text": "Le secret du vieux phare abandonné",
+      "text": "Un voisin envahissant",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le silence",
       "category": "Poétique"
     },
     {
-      "text": "Une chaussette orpheline cherche son âme sœur",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le sommeil du volcan enrhumé",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le reflet qui refusait d'obéir",
-      "category": "Poétique"
-    },
-    {
-      "text": "Une discussion avec mon estomac",
-      "category": "Drôle"
-    },
-    {
-      "text": "La légende de la tarte aux pommes magique",
+      "text": "Le sacrifice",
       "category": "Libre"
     },
     {
-      "text": "Le murmure du vent dans les roseaux",
-      "category": "Poétique"
-    },
-    {
-      "text": "L'école des fantômes débutants",
+      "text": "Une peur absurde",
       "category": "Drôle"
     },
     {
-      "text": "Un grain de sable nostalgique",
+      "text": "L'horizon lointain",
       "category": "Poétique"
     },
     {
-      "text": "La grève des aiguilles de l'horloge",
+      "text": "La loyauté",
       "category": "Libre"
     },
     {
-      "text": "Le championnat du monde de sieste",
+      "text": "Le coup de foudre",
       "category": "Drôle"
     },
     {
-      "text": "La lune qui avait peur du noir",
+      "text": "Un rêve brisé",
       "category": "Poétique"
     },
     {
-      "text": "Une lettre d'amour écrite avec du fromage",
-      "category": "Drôle"
-    },
-    {
-      "text": "L'odyssée d'un grain de café",
+      "text": "La manipulation",
       "category": "Libre"
     },
     {
-      "text": "Le collectionneur de bruits de pas",
-      "category": "Poétique"
-    },
-    {
-      "text": "La colère de la feuille de papier froissée",
-      "category": "Poétique"
-    },
-    {
-      "text": "Un parapluie jaloux du soleil",
+      "text": "Le touriste perdu",
       "category": "Drôle"
     },
     {
-      "text": "La conspiration des feux rouges",
-      "category": "Drôle"
+      "text": "La mélancolie",
+      "category": "Poétique"
     },
     {
-      "text": "Le chemin le moins fréquenté",
+      "text": "Le pardon",
       "category": "Libre"
     },
     {
-      "text": "L'écho du silence",
+      "text": "Un cadeau empoisonné",
+      "category": "Drôle"
+    },
+    {
+      "text": "La lumière",
       "category": "Poétique"
     },
     {
-      "text": "Le dresseur de puces timide",
+      "text": "L'obsession",
+      "category": "Libre"
+    },
+    {
+      "text": "Le bricoleur du dimanche",
       "category": "Drôle"
+    },
+    {
+      "text": "L'éphémère",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le courage",
+      "category": "Libre"
+    },
+    {
+      "text": "Une situation gênante",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le souvenir",
+      "category": "Poétique"
+    },
+    {
+      "text": "La rivalité",
+      "category": "Libre"
+    },
+    {
+      "text": "Le faux expert",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le souffle",
+      "category": "Poétique"
+    },
+    {
+      "text": "L'injustice",
+      "category": "Libre"
+    },
+    {
+      "text": "Un rendez-vous manqué",
+      "category": "Drôle"
+    },
+    {
+      "text": "La solitude",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le destin",
+      "category": "Libre"
     }
   ],
   "echauffements": [
     {
-      "text": "Le jeu du miroir",
+      "text": "Le miroir",
+      "duration": "5 min",
+      "description": "Deux partenaires imitent les mouvements l'un de l'autre face à face."
+    },
+    {
+      "text": "Zip Zap Boing",
       "duration": "3 min",
-      "description": "Par deux, l'un imite exactement les mouvements de l'autre."
+      "description": "Faire circuler l'énergie en cercle avec des mots et gestes précis."
     },
     {
-      "text": "Association d'idées rapide",
-      "duration": "2 min",
-      "description": "Dire rapidement le premier mot qui vient après celui du voisin."
-    },
-    {
-      "text": "Le chef d'orchestre imaginaire",
+      "text": "Le chef d'orchestre",
       "duration": "5 min",
-      "description": "Un joueur dirige silencieusement le groupe qui imite ses gestes."
+      "description": "Un joueur dirige les sons et mouvements du groupe."
     },
     {
-      "text": "Le cadeau empoisonné",
+      "text": "L'objet imaginaire",
       "duration": "4 min",
-      "description": "S'offrir des objets imaginaires et justifier leur utilité loufoque."
+      "description": "Se passer un objet invisible qui change de forme et de poids."
     },
     {
-      "text": "La phrase mot à mot",
+      "text": "Le mot à mot",
       "duration": "5 min",
-      "description": "Construire une histoire en cercle, chaque joueur ne disant qu'un seul mot à la fois."
+      "description": "Construire une histoire à deux, un mot chacun à la fois."
     },
     {
-      "text": "Le chef trois têtes",
+      "text": "La marche des humeurs",
+      "duration": "6 min",
+      "description": "Marcher dans la pièce en changeant d'émotion au signal."
+    },
+    {
+      "text": "Le cadeau",
       "duration": "4 min",
-      "description": "Trois joueurs répondent aux questions en parlant en même temps ou mot à mot."
+      "description": "Offrir un cadeau imaginaire, le receveur décide de ce que c'est."
     },
     {
-      "text": "Le cri de la bête",
+      "text": "Le stop-go",
       "duration": "3 min",
-      "description": "Se passer un cri imaginaire en cercle en amplifiant le mouvement corporel."
+      "description": "Marcher et s'arrêter instantanément aux ordres inversés."
     },
     {
-      "text": "Le défilé de mode absurde",
+      "text": "L'alphabet",
       "duration": "5 min",
-      "description": "Chacun défile en décrivant les vêtements invisibles et ridicules de son voisin."
+      "description": "Discuter en commençant chaque phrase par la lettre suivante."
     },
     {
-      "text": "Le Zip Zap Boing",
-      "duration": "3 min",
-      "description": "Jeu de réflexe en cercle pour envoyer et bloquer l'énergie avec des sons précis."
+      "text": "Le portrait chinois",
+      "duration": "5 min",
+      "description": "Décrire son personnage à travers des métaphores rapides."
     },
     {
-      "text": "La marche des âges",
+      "text": "La machine",
+      "duration": "6 min",
+      "description": "Créer une machine humaine sonore et visuelle en s'ajoutant un par un."
+    },
+    {
+      "text": "Le samouraï",
       "duration": "4 min",
-      "description": "Se déplacer dans l'espace en adoptant différents âges (bébé, adulte pressé, centenaire)."
+      "description": "Jeu de réflexes et de cris pour travailler la réactivité."
     },
     {
-      "text": "Le zoom vocal",
+      "text": "L'écho",
       "duration": "3 min",
-      "description": "Produire des sons qui s'amplifient ou se réduisent selon la proximité des joueurs."
+      "description": "Répéter le dernier mot de son partenaire avant de répondre."
     },
     {
-      "text": "L'expert autoproclamé",
+      "text": "Le nœud humain",
       "duration": "5 min",
-      "description": "Répondre à des questions du public sur un thème inconnu avec une assurance totale."
+      "description": "Se démêler les mains sans les lâcher."
     },
     {
-      "text": "La rumeur publique",
+      "text": "Le traducteur",
       "duration": "5 min",
-      "description": "Se transmettre un secret à l'oreille, le dernier doit révéler la version déformée."
-    },
-    {
-      "text": "Le traducteur extraterrestre",
-      "duration": "4 min",
-      "description": "Un joueur parle en langue spatiale inventée, l'autre traduit au public."
-    },
-    {
-      "text": "Le tableau vivant",
-      "duration": "5 min",
-      "description": "Créer une scène figée en y ajoutant un joueur après l'autre selon un thème."
+      "description": "Un joueur parle en yaourt, l'autre traduit ses propos."
     },
     {
       "text": "La balle imaginaire",
       "duration": "3 min",
-      "description": "Se lancer une balle invisible en adaptant ses mouvements à sa taille et son poids changeants."
+      "description": "Lancer une balle invisible avec un son associé."
     },
     {
-      "text": "Le ping-pong des émotions",
+      "text": "Le mime à la chaîne",
+      "duration": "7 min",
+      "description": "Transmettre une action complexe par le mime uniquement."
+    },
+    {
+      "text": "Les statues",
       "duration": "4 min",
-      "description": "Échanger des répliques simples en changeant d'émotion à chaque renvoi."
+      "description": "Un joueur sculpte l'autre dans une position précise."
     },
     {
-      "text": "L'alphabet de l'impro",
+      "text": "Le cri de guerre",
+      "duration": "2 min",
+      "description": "Libérer la voix en poussant un cri collectif synchronisé."
+    },
+    {
+      "text": "Le ping-pong verbal",
+      "duration": "3 min",
+      "description": "S'envoyer des mots par association d'idées rapide."
+    },
+    {
+      "text": "La démarche",
       "duration": "5 min",
-      "description": "Faire une courte scène où chaque phrase commence par la lettre suivante de l'alphabet."
+      "description": "Imiter la démarche d'un autre joueur dans la pièce."
     },
     {
-      "text": "Le réveil du corps",
-      "duration": "3 min",
-      "description": "Étirements collectifs et tapotements pour stimuler l'énergie corporelle."
+      "text": "Le conteur",
+      "duration": "6 min",
+      "description": "Un joueur raconte une histoire, les autres la miment."
     },
     {
-      "text": "La chaise musicale des voix",
+      "text": "Le chef de file",
       "duration": "4 min",
-      "description": "Parler avec la voix du joueur précédent dès qu'on prend sa place."
+      "description": "Suivre le leader dans ses déplacements et gestes."
     },
     {
-      "text": "Le monologue en un souffle",
-      "duration": "3 min",
-      "description": "Parler sans s'arrêter tant qu'on a de l'air dans les poumons."
-    },
-    {
-      "text": "Les marionnettes à fils",
-      "duration": "4 min",
-      "description": "En binôme, l'un mime tirer des fils pour faire bouger son partenaire."
-    },
-    {
-      "text": "Le dictionnaire fou",
-      "duration": "4 min",
-      "description": "Inventer des définitions absurdes pour des mots inventés par le groupe."
-    },
-    {
-      "text": "La dispute silencieuse",
-      "duration": "3 min",
-      "description": "Se disputer intensément en n'utilisant que le regard et le mime."
-    },
-    {
-      "text": "Le jeu du détective",
+      "text": "L'interview express",
       "duration": "5 min",
-      "description": "Deviner le coupable et le crime grâce à des indices mimés par les autres."
+      "description": "Répondre du tac au tac à des questions personnelles."
     },
     {
-      "text": "Le cercle de rythme",
-      "duration": "3 min",
-      "description": "Créer une percussion corporelle collective en ajoutant son rythme propre."
+      "text": "Le ralenti",
+      "duration": "4 min",
+      "description": "Simuler un combat ou une action intense au ralenti."
     },
     {
-      "text": "L'ascenseur émotionnel",
+      "text": "Le changement",
       "duration": "5 min",
-      "description": "Jouer une scène où le niveau d'intensité émotionnelle monte de 1 à 10."
+      "description": "Refaire une mini-scène en changeant un détail à chaque fois."
     },
     {
-      "text": "Le conteur interrompu",
-      "duration": "4 min",
-      "description": "Raconter une histoire, le groupe crie 'MENTEUR !' et le conteur doit changer le fait."
-    },
-    {
-      "text": "La machine humaine",
+      "text": "La chaise musicale",
       "duration": "5 min",
-      "description": "Chaque joueur devient un rouage sonore et visuel d'une usine imaginaire."
+      "description": "Trouver une place assise en fonction de critères donnés."
     },
     {
-      "text": "Le mime de l'objet géant",
+      "text": "Le regard fixe",
       "duration": "3 min",
-      "description": "Passer un objet invisible qui grossit ou rétrécit à chaque transmission."
+      "description": "Maintenir le regard avec un partenaire sans rire."
     },
     {
-      "text": "La démarche partagée",
-      "duration": "3 min",
-      "description": "Imiter la démarche de la personne qui marche devant soi dans la pièce."
+      "text": "Le bruitage",
+      "duration": "4 min",
+      "description": "Un groupe fait l'ambiance sonore d'une forêt ou ville."
     },
     {
-      "text": "Le oui et en plus",
+      "text": "Le mime miroir",
       "duration": "5 min",
-      "description": "Accepter l'idée de son partenaire et y ajouter systématiquement une surenchère."
+      "description": "Reproduire exactement les expressions faciales de l'autre."
     },
     {
-      "text": "Le mot en boucle",
-      "duration": "3 min",
-      "description": "Répéter le dernier mot du partenaire en changeant son intention dramatique."
-    },
-    {
-      "text": "La pub flash",
-      "duration": "4 min",
-      "description": "Créer en 30 secondes un produit et son slogan pour convaincre le groupe."
-    },
-    {
-      "text": "La télépathie",
-      "duration": "4 min",
-      "description": "Trouver le même mot en même temps en partant de deux mots différents."
-    },
-    {
-      "text": "Le chef de tribu",
-      "duration": "4 min",
-      "description": "Suivre les intonations et mimiques du meneur du groupe sans décalage."
-    },
-    {
-      "text": "L'objet détourné",
+      "text": "La phrase imposée",
       "duration": "5 min",
-      "description": "Utiliser un vrai objet de manière totalement décalée (ex: une bouteille devient un télescope)."
+      "description": "Placer une phrase absurde dans une discussion normale."
     },
     {
-      "text": "Le tic de langage",
+      "text": "Le chef d'œuvre",
+      "duration": "6 min",
+      "description": "Plusieurs joueurs forment une statue représentant un concept."
+    },
+    {
+      "text": "Le télégramme",
       "duration": "4 min",
-      "description": "Jouer avec une manie verbale imposée par le partenaire."
-    },
-    {
-      "text": "Le photographe",
-      "duration": "4 min",
-      "description": "Créer une pose de groupe parfaite sur consigne du photographe imaginaire."
-    },
-    {
-      "text": "La course lente",
-      "duration": "3 min",
-      "description": "Faire une course de vitesse au ralenti extrême, le dernier arrivé gagne."
-    },
-    {
-      "text": "La phrase de trop",
-      "duration": "4 min",
-      "description": "Parler normalement jusqu'à ce qu'un mot déclenche une chanson."
+      "description": "Communiquer un message complexe en très peu de mots."
     },
     {
       "text": "La métamorphose",
-      "duration": "4 min",
-      "description": "Se transformer progressivement en un élément de la nature (eau, feu, arbre)."
-    },
-    {
-      "text": "Le chef d'orchestre de bruitages",
       "duration": "5 min",
-      "description": "Diriger un groupe pour créer l'ambiance sonore d'une forêt ou d'une usine."
+      "description": "Passer d'un animal à un humain progressivement."
     },
     {
-      "text": "Le doublage de film",
+      "text": "Le rythme",
+      "duration": "3 min",
+      "description": "Suivre un rythme frappé dans les mains par le groupe."
+    },
+    {
+      "text": "Le double",
+      "duration": "6 min",
+      "description": "Un joueur derrière l'autre fait ses bras."
+    },
+    {
+      "text": "L'émotion crescendo",
       "duration": "5 min",
-      "description": "Mimer une scène tandis que deux autres joueurs font les voix en direct."
+      "description": "Passer du calme à la colère extrême en une minute."
     },
     {
-      "text": "Le conteur fou",
-      "duration": "4 min",
-      "description": "Construire un conte où chaque joueur doit ajouter un animal absurde."
+      "text": "Le portrait",
+      "duration": "5 min",
+      "description": "Décrire physiquement un personnage imaginaire en détail."
     },
     {
       "text": "La marche aveugle",
       "duration": "4 min",
-      "description": "Se laisser guider par la voix de son partenaire les yeux fermés."
+      "description": "Se laisser guider par la voix d'un partenaire les yeux fermés."
     },
     {
-      "text": "Le vendeur de vent",
-      "duration": "4 min",
-      "description": "Essayer de vendre du vide avec des arguments ultra-précis."
-    },
-    {
-      "text": "L'écho corporel",
-      "duration": "3 min",
-      "description": "Reproduire instantanément la posture physique de son partenaire."
-    },
-    {
-      "text": "La tempête émotionnelle",
-      "duration": "4 min",
-      "description": "Passer du rire aux larmes au son d'un tambourin."
-    },
-    {
-      "text": "Le portrait craché",
+      "text": "Le mot interdit",
       "duration": "5 min",
-      "description": "Décrire un personnage fictif en détail pour que le partenaire l'incarne."
+      "description": "Discuter sans utiliser le mot 'oui' ou 'non'."
+    },
+    {
+      "text": "Le saut",
+      "duration": "2 min",
+      "description": "Sauter tous ensemble au même moment sans signal sonore."
+    },
+    {
+      "text": "La dispute",
+      "duration": "4 min",
+      "description": "Se disputer en utilisant uniquement des noms de fruits."
+    },
+    {
+      "text": "Le compliment",
+      "duration": "3 min",
+      "description": "Se faire des compliments sincères et rapides."
+    },
+    {
+      "text": "L'espace",
+      "duration": "5 min",
+      "description": "Définir un lieu par la manipulation d'objets invisibles."
+    },
+    {
+      "text": "Le secret",
+      "duration": "4 min",
+      "description": "Chuchoter un secret qui se transforme en circulant."
+    },
+    {
+      "text": "La marionnette",
+      "duration": "5 min",
+      "description": "Un joueur manipule les membres d'un autre."
+    },
+    {
+      "text": "Le flash info",
+      "duration": "6 min",
+      "description": "Présenter une nouvelle absurde avec sérieux."
+    },
+    {
+      "text": "Le mime d'objet",
+      "duration": "4 min",
+      "description": "Devenir soi-même un objet (chaise, table, porte)."
+    },
+    {
+      "text": "La chanson",
+      "duration": "5 min",
+      "description": "Inventer une chanson sur un thème donné par le public."
+    },
+    {
+      "text": "Le salut",
+      "duration": "2 min",
+      "description": "S'entraîner à saluer de différentes manières théâtrales."
     }
   ],
   "emotions": [
     {
-      "text": "Joie exubérante",
+      "text": "Joie",
       "category": "Positive"
     },
     {
-      "text": "Colère froide",
+      "text": "Colère",
       "category": "Négative"
     },
     {
-      "text": "Tristesse infinie",
+      "text": "Tristesse",
       "category": "Négative"
     },
     {
-      "text": "Sérénité absolue",
-      "category": "Positive"
-    },
-    {
-      "text": "Jalousie maladive",
+      "text": "Peur",
       "category": "Négative"
     },
     {
-      "text": "Fierté excessive",
-      "category": "Positive"
-    },
-    {
-      "text": "Ennui mortel",
+      "text": "Surprise",
       "category": "Neutre"
     },
     {
-      "text": "Mélancolie douce",
-      "category": "Neutre"
-    },
-    {
-      "text": "Peur panique",
+      "text": "Dégoût",
       "category": "Négative"
     },
     {
-      "text": "Curiosité enfantine",
-      "category": "Positive"
-    },
-    {
-      "text": "Dégoût profond",
+      "text": "Mépris",
       "category": "Négative"
     },
     {
-      "text": "Amour passionnel",
+      "text": "Enthousiasme",
       "category": "Positive"
     },
     {
-      "text": "Honte dévorante",
+      "text": "Mélancolie",
       "category": "Négative"
     },
     {
-      "text": "Nostalgie poignante",
-      "category": "Neutre"
+      "text": "Fierté",
+      "category": "Positive"
     },
     {
-      "text": "Impatience fébrile",
-      "category": "Neutre"
-    },
-    {
-      "text": "Frustration intense",
+      "text": "Honte",
       "category": "Négative"
     },
     {
-      "text": "Surprise totale",
-      "category": "Neutre"
-    },
-    {
-      "text": "Soulagement immense",
-      "category": "Positive"
-    },
-    {
-      "text": "Arrogance méprisante",
+      "text": "Jalousie",
       "category": "Négative"
     },
     {
-      "text": "Compassion sincère",
+      "text": "Amour",
       "category": "Positive"
     },
     {
-      "text": "Timidité maladive",
+      "text": "Indifférence",
       "category": "Neutre"
     },
     {
-      "text": "Panique incontrôlable",
+      "text": "Culpabilité",
       "category": "Négative"
     },
     {
-      "text": "Hystérie collective",
+      "text": "Sérénité",
       "category": "Positive"
     },
     {
-      "text": "Générosité naïve",
-      "category": "Positive"
-    },
-    {
-      "text": "Rancœur tenace",
+      "text": "Angoisse",
       "category": "Négative"
     },
     {
-      "text": "Optimisme béat",
+      "text": "Curiosité",
+      "category": "Neutre"
+    },
+    {
+      "text": "Admiration",
       "category": "Positive"
     },
     {
-      "text": "Méfiance paranoïaque",
+      "text": "Frustration",
       "category": "Négative"
     },
     {
-      "text": "Insouciance légère",
+      "text": "Gratitude",
       "category": "Positive"
     },
     {
-      "text": "Culpabilité rongeante",
+      "text": "Haine",
       "category": "Négative"
     },
     {
-      "text": "Enthousiasme débordant",
+      "text": "Espoir",
       "category": "Positive"
     },
     {
-      "text": "Indifférence glaciale",
+      "text": "Ennui",
       "category": "Neutre"
     },
     {
-      "text": "Cynisme désabusé",
+      "text": "Confusion",
       "category": "Neutre"
     },
     {
-      "text": "Egoïsme pur",
+      "text": "Euphorie",
+      "category": "Positive"
+    },
+    {
+      "text": "Nostalgie",
+      "category": "Neutre"
+    },
+    {
+      "text": "Panique",
       "category": "Négative"
     },
     {
-      "text": "Empathie chaleureuse",
+      "text": "Tendresse",
       "category": "Positive"
     },
     {
-      "text": "Désespoir sombre",
+      "text": "Amertume",
       "category": "Négative"
     },
     {
-      "text": "Euphorie passagère",
+      "text": "Soulagement",
       "category": "Positive"
     },
     {
-      "text": "Scepticisme poli",
-      "category": "Neutre"
-    },
-    {
-      "text": "Tendresse infinie",
-      "category": "Positive"
-    },
-    {
-      "text": "Rage folle",
+      "text": "Inquiétude",
       "category": "Négative"
     },
     {
-      "text": "Distraction rêveuse",
-      "category": "Neutre"
-    },
-    {
-      "text": "Obsession étrange",
-      "category": "Neutre"
-    },
-    {
-      "text": "Gratitude humble",
+      "text": "Compassion",
       "category": "Positive"
     },
     {
-      "text": "Amertume tenace",
+      "text": "Arrogance",
       "category": "Négative"
     },
     {
-      "text": "Curiosité scientifique",
-      "category": "Neutre"
-    },
-    {
-      "text": "Zèle agaçant",
-      "category": "Neutre"
-    },
-    {
-      "text": "Hésitation constante",
-      "category": "Neutre"
-    },
-    {
-      "text": "Fascination hypnotique",
+      "text": "Humilité",
       "category": "Positive"
     },
     {
-      "text": "Lassitude pesante",
+      "text": "Scepticisme",
       "category": "Neutre"
     },
     {
-      "text": "Cupidité sans borne",
+      "text": "Désespoir",
       "category": "Négative"
     },
     {
-      "text": "Bienveillance tranquille",
+      "text": "Satisfaction",
       "category": "Positive"
+    },
+    {
+      "text": "Rancœur",
+      "category": "Négative"
+    },
+    {
+      "text": "Émerveillement",
+      "category": "Positive"
+    },
+    {
+      "text": "Lassitude",
+      "category": "Négative"
+    },
+    {
+      "text": "Détermination",
+      "category": "Positive"
+    },
+    {
+      "text": "Gêne",
+      "category": "Négative"
+    },
+    {
+      "text": "Fascination",
+      "category": "Positive"
+    },
+    {
+      "text": "Irritation",
+      "category": "Négative"
+    },
+    {
+      "text": "Optimisme",
+      "category": "Positive"
+    },
+    {
+      "text": "Pessimisme",
+      "category": "Négative"
+    },
+    {
+      "text": "Calme",
+      "category": "Positive"
+    },
+    {
+      "text": "Terreur",
+      "category": "Négative"
+    },
+    {
+      "text": "Hésitation",
+      "category": "Neutre"
     }
   ],
   "locations": [
     {
-      "text": "Un sous-marin en panne",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une file d'attente",
+      "text": "Cuisine",
       "category": "Quotidien"
     },
     {
-      "text": "La surface hostile de Mars",
+      "text": "Ascenseur",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Sommet montagne",
+      "category": "Aventure"
+    },
+    {
+      "text": "Station spatiale",
       "category": "Insolite"
     },
     {
-      "text": "Un ascenseur de verre",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un salon de coiffure",
+      "text": "Bureau de poste",
       "category": "Quotidien"
     },
     {
-      "text": "Une jungle tropicale dense",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une île déserte minuscule",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une cabine téléphonique",
+      "text": "Cellule prison",
       "category": "Huis clos"
     },
     {
-      "text": "Un supermarché bondé",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Le sommet de l'Everest",
+      "text": "Jungle",
       "category": "Aventure"
     },
     {
-      "text": "Un laboratoire secret",
+      "text": "Sous-marin",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Supermarché",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Désert",
+      "category": "Aventure"
+    },
+    {
+      "text": "Phare isolé",
       "category": "Insolite"
     },
     {
-      "text": "Le fond d'un puits",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un guichet de gare",
+      "text": "Salle d'attente",
       "category": "Quotidien"
     },
     {
-      "text": "Un zeppelin en feu",
+      "text": "Banque",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Grotte",
       "category": "Aventure"
     },
     {
-      "text": "Un musée de cire la nuit",
+      "text": "Chambre d'hôtel",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Bateau pirate",
+      "category": "Aventure"
+    },
+    {
+      "text": "Cimetière",
       "category": "Insolite"
     },
     {
-      "text": "Un grenier poussiéreux",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un arrêt de bus sous la pluie",
+      "text": "Bibliothèque",
       "category": "Quotidien"
     },
     {
-      "text": "Une mine d'or abandonnée",
+      "text": "Grenier",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Île déserte",
       "category": "Aventure"
     },
     {
-      "text": "L'intérieur d'un volcan",
+      "text": "Coulisses théâtre",
       "category": "Insolite"
     },
     {
-      "text": "Une cabine de pilotage d'avion",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un bureau de poste",
+      "text": "Salon de coiffure",
       "category": "Quotidien"
     },
     {
-      "text": "Un navire pirate tempétueux",
+      "text": "Cabine téléphonique",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Forêt",
       "category": "Aventure"
     },
     {
-      "text": "Une bibliothèque silencieuse",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une boulangerie artisanale",
+      "text": "Musée",
       "category": "Quotidien"
     },
     {
-      "text": "Une station spatiale internationale",
+      "text": "Toit d'immeuble",
       "category": "Insolite"
     },
     {
-      "text": "Une cave à vin sombre",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une terrasse de café parisien",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un désert de sable brûlant",
+      "text": "Train",
       "category": "Aventure"
     },
     {
-      "text": "Le bureau d'un détective privé",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un cabinet dentaire moderne",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un temple maya enfoui",
-      "category": "Aventure"
-    },
-    {
-      "text": "Un nuage dans le ciel",
+      "text": "Laboratoire",
       "category": "Insolite"
     },
     {
-      "text": "Un sauna surchauffé",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une salle de classe d'examen",
+      "text": "Garage",
       "category": "Quotidien"
     },
     {
-      "text": "La cime d'un baobab géant",
+      "text": "Coffre-fort",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Château fort",
       "category": "Aventure"
     },
     {
-      "text": "Une usine de recyclage de robots",
+      "text": "Cirque",
       "category": "Insolite"
     },
     {
-      "text": "Un igloo au Groenland",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une cuisine de grand restaurant",
+      "text": "Restaurant",
       "category": "Quotidien"
     },
     {
-      "text": "Une banquise à la dérive",
+      "text": "Sauna",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Avion",
       "category": "Aventure"
     },
     {
-      "text": "Une fête foraine abandonnée",
+      "text": "Fête foraine",
       "category": "Insolite"
     },
     {
-      "text": "Un confessionnal d'église",
+      "text": "Jardin public",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Confessionnal",
       "category": "Huis clos"
     },
     {
-      "text": "Une laverie automatique",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Le Grand Canyon américain",
+      "text": "Mine d'or",
       "category": "Aventure"
     },
     {
-      "text": "La cour de récréation d'une école",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un nid d'aigle géant",
+      "text": "Vaisseau alien",
       "category": "Insolite"
     },
     {
-      "text": "Une montgolfière dans la brume",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une bijouterie de luxe",
+      "text": "Salle de classe",
       "category": "Quotidien"
     },
     {
-      "text": "Un coffre-fort géant ouvert",
+      "text": "Abri anti-atomique",
       "category": "Huis clos"
     },
     {
-      "text": "Un sous-sol de château médiéval",
+      "text": "Montgolfière",
+      "category": "Aventure"
+    },
+    {
+      "text": "Casino",
+      "category": "Insolite"
+    },
+    {
+      "text": "Boulangerie",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Plage",
+      "category": "Aventure"
+    },
+    {
+      "text": "Toilettes",
       "category": "Huis clos"
     },
     {
-      "text": "Un parc d'attraction futuriste",
+      "text": "Station-service",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Temple perdu",
+      "category": "Aventure"
+    },
+    {
+      "text": "Sous un pont",
       "category": "Insolite"
     }
   ],
   "eras": [
     {
-      "text": "La Préhistoire",
+      "text": "Préhistoire",
       "era": "Passé"
     },
     {
-      "text": "L'Antiquité romaine",
+      "text": "Antiquité",
       "era": "Passé"
     },
     {
-      "text": "Le présent",
+      "text": "Moyen Âge",
+      "era": "Passé"
+    },
+    {
+      "text": "Renaissance",
+      "era": "Passé"
+    },
+    {
+      "text": "Siècle Lumières",
+      "era": "Passé"
+    },
+    {
+      "text": "Révolution",
+      "era": "Passé"
+    },
+    {
+      "text": "Empire",
+      "era": "Passé"
+    },
+    {
+      "text": "Belle Époque",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 20",
+      "era": "Passé"
+    },
+    {
+      "text": "Seconde Guerre",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 50",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 60",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 70",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 80",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 90",
+      "era": "Passé"
+    },
+    {
+      "text": "Années 2000",
+      "era": "Passé"
+    },
+    {
+      "text": "Aujourd'hui",
       "era": "Présent"
     },
     {
-      "text": "L'ère Cyberpunk",
+      "text": "Demain",
       "era": "Futur"
     },
     {
-      "text": "Le Moyen Âge féodal",
-      "era": "Passé"
-    },
-    {
-      "text": "La Renaissance italienne",
-      "era": "Passé"
-    },
-    {
-      "text": "Les Années folles (1920)",
-      "era": "Passé"
-    },
-    {
-      "text": "Les années 80",
-      "era": "Passé"
-    },
-    {
-      "text": "L'an 3000",
+      "text": "Futur proche",
       "era": "Futur"
     },
     {
-      "text": "La ruée vers l'or (1849)",
+      "text": "An 3000",
+      "era": "Futur"
+    },
+    {
+      "text": "Ère spatiale",
+      "era": "Futur"
+    },
+    {
+      "text": "Post-apocalyptique",
+      "era": "Futur"
+    },
+    {
+      "text": "Cyberpunk",
+      "era": "Futur"
+    },
+    {
+      "text": "Colonisation Mars",
+      "era": "Futur"
+    },
+    {
+      "text": "Fin du monde",
+      "era": "Futur"
+    },
+    {
+      "text": "Âge de pierre",
       "era": "Passé"
     },
     {
-      "text": "La Révolution française",
+      "text": "Égypte ancienne",
       "era": "Passé"
     },
     {
-      "text": "L'époque victorienne",
+      "text": "Grèce antique",
       "era": "Passé"
     },
     {
-      "text": "Le début du XXIe siècle",
+      "text": "Rome antique",
+      "era": "Passé"
+    },
+    {
+      "text": "Vikings",
+      "era": "Passé"
+    },
+    {
+      "text": "Croisades",
+      "era": "Passé"
+    },
+    {
+      "text": "Far West",
+      "era": "Passé"
+    },
+    {
+      "text": "Guerre froide",
+      "era": "Passé"
+    },
+    {
+      "text": "Mai 68",
+      "era": "Passé"
+    },
+    {
+      "text": "Chute du mur",
+      "era": "Passé"
+    },
+    {
+      "text": "Ère victorienne",
+      "era": "Passé"
+    },
+    {
+      "text": "Temps modernes",
       "era": "Présent"
     },
     {
-      "text": "Le futur proche (2050)",
-      "era": "Futur"
-    },
-    {
-      "text": "L'ère des dinosaures",
-      "era": "Passé"
-    },
-    {
-      "text": "L'époque de Louis XIV",
-      "era": "Passé"
-    },
-    {
-      "text": "Les années 60 (Hippie)",
-      "era": "Passé"
-    },
-    {
-      "text": "L'ère des colonies spatiales",
-      "era": "Futur"
-    },
-    {
-      "text": "Le lointain futur glaciaire",
-      "era": "Futur"
-    },
-    {
-      "text": "L'époque de la piraterie",
-      "era": "Passé"
-    },
-    {
-      "text": "La Grèce antique",
-      "era": "Passé"
-    },
-    {
-      "text": "L'Égypte des pharaons",
-      "era": "Passé"
-    },
-    {
-      "text": "Les années 90 (Grunge)",
-      "era": "Passé"
-    },
-    {
-      "text": "L'ère post-apocalyptique",
-      "era": "Futur"
-    },
-    {
-      "text": "Le Siècle des Lumières",
-      "era": "Passé"
-    },
-    {
-      "text": "L'époque des samouraïs",
-      "era": "Passé"
-    },
-    {
-      "text": "Le Far West américain",
-      "era": "Passé"
-    },
-    {
-      "text": "Les années 50 (Rockabilly)",
-      "era": "Passé"
-    },
-    {
-      "text": "L'ère de l'intelligence artificielle",
+      "text": "Époque actuelle",
       "era": "Présent"
     },
     {
-      "text": "Le futur de la Singularité",
+      "text": "Futur lointain",
       "era": "Futur"
     },
     {
-      "text": "L'Empire aztèque",
+      "text": "Âge d'or",
       "era": "Passé"
     },
     {
-      "text": "La conquête spatiale (1969)",
+      "text": "Guerre de Cent Ans",
       "era": "Passé"
     },
     {
-      "text": "Le temps des vikings",
+      "text": "Découverte Amérique",
       "era": "Passé"
     },
     {
-      "text": "L'ère de la vapeur (Steampunk)",
+      "text": "Premier pas Lune",
       "era": "Passé"
     },
     {
-      "text": "Le monde d'après le réchauffement",
+      "text": "Invention Internet",
+      "era": "Passé"
+    },
+    {
+      "text": "Ère des robots",
       "era": "Futur"
     },
     {
-      "text": "L'an 10 000",
+      "text": "Voyage temporel",
       "era": "Futur"
     },
     {
-      "text": "L'ère néolithique",
-      "era": "Passé"
-    },
-    {
-      "text": "L'époque impressionniste",
-      "era": "Passé"
-    },
-    {
-      "text": "Le Premier Empire napoléonien",
-      "era": "Passé"
-    },
-    {
-      "text": "L'ère de la téléportation commune",
+      "text": "Utopie future",
       "era": "Futur"
     },
     {
-      "text": "Les années de la reconstruction (1950)",
-      "era": "Passé"
-    },
-    {
-      "text": "L'an 4000 (Empire galactique)",
+      "text": "Dystopie",
       "era": "Futur"
     },
     {
-      "text": "La Belle Époque",
-      "era": "Passé"
-    },
-    {
-      "text": "L'ère industrielle",
-      "era": "Passé"
-    },
-    {
-      "text": "L'époque de Jeanne d'Arc",
-      "era": "Passé"
-    },
-    {
-      "text": "Le milieu du Moyen Âge",
-      "era": "Passé"
-    },
-    {
-      "text": "Le futur de l'humanité sous l'océan",
+      "text": "Nouvelle ère",
       "era": "Futur"
     },
     {
-      "text": "L'époque coloniale",
-      "era": "Passé"
-    },
-    {
-      "text": "Le présent immédiat",
-      "era": "Présent"
-    },
-    {
-      "text": "La fin des temps terrestres",
+      "text": "Éternité",
       "era": "Futur"
     }
   ]

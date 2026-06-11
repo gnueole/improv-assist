@@ -117,59 +117,6 @@ export default function DocsView({ onOpenPrivacy }: DocsViewProps) {
             </div>
           </div>
 
-          {/* Raccourcis Clavier PC */}
-          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-zinc-100 font-bold mb-2">
-              <span className="text-cyan-400">⌨️</span>
-              <span>Raccourcis Clavier (PC)</span>
-            </div>
-            <p className="text-zinc-300 leading-relaxed mb-3">
-              Utilisez les raccourcis suivants sur ordinateur pour naviguer rapidement :
-            </p>
-            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-zinc-300 bg-zinc-950/80 p-3 rounded-xl border border-zinc-800/50 ${fonts.small} font-mono`}>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">← / → / ↑ / ↓</span>
-                <span className="text-right text-zinc-300">Naviguer</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">Espace / Entrée</span>
-                <span className="text-right text-zinc-300">Valider / Tirer</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">Échap / ←</span>
-                <span className="text-right text-zinc-300">Retour / Fermer</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">A / I</span>
-                <span className="text-right text-zinc-300">À propos</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">G</span>
-                <span className="text-right text-zinc-300">Régénérer</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">M</span>
-                <span className="text-right text-zinc-300">Formulaire retour</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">H</span>
-                <span className="text-right text-zinc-300">Règles Hi Ha</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">?</span>
-                <span className="text-right text-zinc-300">Aide & Guide</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">D</span>
-                <span className="text-right text-zinc-300">Mode DEV</span>
-              </div>
-              <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">P</span>
-                <span className="text-right text-zinc-300">Consulter Prompt</span>
-              </div>
-            </div>
-          </div>
-
           {/* Concept du Réservoir & IA */}
           <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
             <div className="flex items-center gap-2 text-zinc-100 font-bold mb-2">
@@ -305,11 +252,64 @@ export default function DocsView({ onOpenPrivacy }: DocsViewProps) {
             </button>
           </div>
 
+          {/* Raccourcis Clavier PC */}
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-zinc-100 font-bold mb-2">
+              <span className="text-cyan-400">⌨️</span>
+              <span>Raccourcis Clavier (PC)</span>
+            </div>
+            <p className="text-zinc-300 leading-relaxed mb-3">
+              Utilisez les raccourcis suivants sur ordinateur pour naviguer rapidement :
+            </p>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-zinc-300 bg-zinc-950/80 p-3 rounded-xl border border-zinc-800/50 ${fonts.small} font-mono`}>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">← / → / ↑ / ↓</span>
+                <span className="text-right text-zinc-300">Naviguer</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">Espace / Entrée</span>
+                <span className="text-right text-zinc-300">Valider / Tirer</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">Échap / ←</span>
+                <span className="text-right text-zinc-300">Retour / Fermer</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">A / I</span>
+                <span className="text-right text-zinc-300">À propos</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">G</span>
+                <span className="text-right text-zinc-300">Régénérer</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">M</span>
+                <span className="text-right text-zinc-300">Formulaire retour</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">H</span>
+                <span className="text-right text-zinc-300">Règles Hi Ha</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">?</span>
+                <span className="text-right text-zinc-300">Aide & Guide</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">D</span>
+                <span className="text-right text-zinc-300">Mode DEV</span>
+              </div>
+              <div className="flex justify-between border-b border-zinc-900 pb-1">
+                <span className="text-cyan-400">P</span>
+                <span className="text-right text-zinc-300">Consulter Prompt</span>
+              </div>
+            </div>
+          </div>
+
           {/* About / Credits */}
           <div className={`p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md flex items-start gap-3 text-zinc-300 leading-relaxed ${fonts.base}`}>
             <Info className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
             <div>
-              Conçu et optimisé par <strong>Éole</strong> pour les troupes de théâtre d'improvisation. Version active : 0.4 BETA. Tous droits réservés.
+              Conçu et optimisé par <strong>Éole</strong> pour les troupes de théâtre d'improvisation. Version active : 0.5 BETA. Tous droits réservés.
             </div>
           </div>
         </div>

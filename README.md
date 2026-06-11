@@ -147,6 +147,11 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ## 📝 Changelog
 
+### Version 0.5 BETA (0.5-beta / 1.0.0-beta.5) - 2026-06-11
+- **Migration vers Gemini 2.5 Pro** : Mise à niveau de l'intelligence artificielle et du modèle sous-jacent vers `gemini-2.5-pro` pour la génération du réservoir statique (350 prompts répartis en 7 catégories). Cette version apporte une plus grande cohérence dramatique en privilégiant des relations humaines ancrées avec des conflits et des enjeux clairs, tout en évitant le surréalisme abstrait d'objets.
+- **Résilience Doppler locale** : Amélioration du `Makefile` de développement. En l'absence de Doppler CLI installé en local, le script n'échoue plus avec une erreur bloquante et effectue automatiquement une copie de sauvegarde à partir de `docker/.env.example` vers `.env` pour lancer l'environnement.
+- **Timeout réseau adapté** : Validation d'un délai de timeout réseau prolongé à 180 secondes dans le script `populate_reservoir.py` afin de supporter le temps d'exécution accru requis par la complexité du modèle Gemini 2.5 Pro pour le lot complet de 350 items.
+
 ### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4) - 2026-06-11
 - **Restauration des retours Notion (Notion Feedback)** : Remplacement de l'ajout de blocs Notion bogué par un nœud standard `httpRequest` dans n8n. Reconfiguration de la structure des données pour ajouter de vrais en-têtes natifs Notion (`## Details`, `## Message`) et des puces de liste de type `bulleted_list_item` lors des envois de retours.
 - **Raccourcis clavier PC & Navigation de grille** : Ajout d'une gestion complète de navigation au clavier pour ordinateur :
