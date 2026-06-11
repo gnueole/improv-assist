@@ -127,6 +127,17 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ---
 
+## 🧠 Choix du Modèle d'IA (Gemini)
+
+La génération du réservoir de prompts (350 éléments répartis en 7 catégories) requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et respect de consignes complexes (priorité aux relations humaines vs surréalisme d'objets) :
+
+* **Gemini 2.5 Pro (`gemini-2.5-pro`) — Idéal pour la génération statique** : C'est le modèle utilisé par le script `populate_reservoir.py`. Il dispose d'une excellente capacité de raisonnement et évite les répétitions ou la fatigue créative sur les grands volumes.
+  * *Temps d'exécution moyen* : ~90 secondes (timeout de script validé à 180s).
+* **Gemini 2.5 Flash (`gemini-2.5-flash`) — Idéal pour le temps réel** : Recommandé pour les régénérations à la volée depuis la PWA (au clic sur le bouton de rafraîchissement). Sa rapidité évite de faire patienter l'utilisateur sur scène.
+  * *Temps d'exécution moyen* : ~5-10 secondes (limité par le timeout de proxy de 10s côté Next.js).
+
+---
+
 ## 📋 Wishlist / Todo
 
 Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'application :
