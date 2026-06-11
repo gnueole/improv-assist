@@ -132,21 +132,31 @@ export default function ImprovTimer() {
   const playBuzzerSound = () => {
     try {
       const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+      
+      const playTone = (freqStart: number, freqEnd: number, type: OscillatorType, delay: number) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc.type = type;
+        osc.frequency.setValueAtTime(freqStart, ctx.currentTime + delay);
+        osc.frequency.exponentialRampToValueAtTime(freqEnd, ctx.currentTime + delay + 0.8);
+        
+        gain.gain.setValueAtTime(0.01, ctx.currentTime + delay);
+        gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + delay + 0.05); // quick attack
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + delay + 0.8); // decay
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.8);
+      };
 
-      osc.type = "sawtooth";
-      osc.frequency.setValueAtTime(120, ctx.currentTime);
-      osc.frequency.linearRampToValueAtTime(80, ctx.currentTime + 0.8);
-
-      gain.gain.setValueAtTime(0.3, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start();
-      osc.stop(ctx.currentTime + 0.8);
+      // Play a rising arpeggio: C4 -> E4 -> G4 -> C5
+      playTone(261.63, 523.25, "sine", 0);      // C4 -> C5
+      playTone(329.63, 659.25, "triangle", 0.1); // E4 -> E5 (delayed 100ms)
+      playTone(392.00, 784.00, "sine", 0.2);     // G4 -> G5 (delayed 200ms)
+      playTone(523.25, 1046.50, "triangle", 0.3); // C5 -> C6 (delayed 300ms)
     } catch (e) {
       console.warn("AudioContext blocked or unsupported.", e);
     }
@@ -188,6 +198,7 @@ export default function ImprovTimer() {
 
   const isLowTime = timeLeft > 0 && timeLeft <= 30;
   const isUrgentTime = timeLeft > 0 && timeLeft <= 10;
+  const isPanicTime = timeLeft > 0 && timeLeft <= 5;
   const isFinished = timeLeft === 0;
 
   if (!isMounted) {
@@ -241,7 +252,9 @@ export default function ImprovTimer() {
 
       {/* Main Display Ring */}
       <div
-        className={`generator-card transition-all duration-300 ${isUrgentTime ? "animate-pulse" : ""}`}
+        className={`generator-card transition-all duration-300 ${
+          isPanicTime ? "animate-pulse shadow-[0_0_40px_rgba(255,50,50,0.6)]" : isUrgentTime ? "animate-pulse" : ""
+        }`}
       >
         <div className={`generator-card-inner transition-colors duration-300 ${
           isUrgentTime ? "urgent" : isLowTime ? "low-time" : isFinished ? "finished" : ""
@@ -264,13 +277,16 @@ export default function ImprovTimer() {
                   {isRunning ? "Scène en cours..." : "Temps de scène cible"}
                 </span>
 
-                {/* Big Time Display (Changes style at 30s remaining and animates at 10s) */}
-                <h3 className={`text-6xl sm:text-7xl tracking-tight mb-2 transition-all duration-300 tabular-nums ${isUrgentTime
-                  ? "text-red-500 font-black filter drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] animate-scale-urgent"
+                {/* Big Time Display (Changes style at 30s remaining and animates at 10s and 5s) */}
+                <h3 className={`text-6xl sm:text-7xl tracking-tight mb-2 transition-all duration-300 tabular-nums ${
+                  isPanicTime
+                  ? "text-red-100 font-black filter drop-shadow-[0_0_30px_rgba(255,50,50,1)] drop-shadow-[0_0_15px_rgba(255,255,255,0.95)] animate-scale-panic"
+                  : isUrgentTime
+                  ? "text-red-100 font-black filter drop-shadow-[0_0_25px_rgba(255,50,50,1)] drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-scale-urgent"
                   : isLowTime
-                  ? "text-red-500 font-black scale-105 filter drop-shadow-[0_0_15px_rgba(239,68,68,0.7)]"
-                  : "text-white font-medium"
-                  }`}>
+                  ? "text-red-100 font-black scale-105 filter drop-shadow-[0_0_20px_rgba(255,50,50,0.9)]"
+                  : "text-white font-medium filter drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                }`}>
                   {formatTime(timeLeft)}
                 </h3>
 

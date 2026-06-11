@@ -139,6 +139,22 @@ main {
   transform-origin: center;
 }
 
+/* Panic Timer Animation (<5s remaining) */
+@keyframes scale-panic {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.6);
+  }
+}
+
+.animate-scale-panic {
+  animation: scale-panic 0.4s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: center;
+}
+
 /* ==========================================
    Dashboard, Loader, Modals & Toast Styles
    ========================================== */

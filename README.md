@@ -125,6 +125,19 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ## 📝 Changelog
 
+### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4)
+- **Notion Feedback Restoration**: Switched block appending in n8n from the buggy native Notion node to a standard `httpRequest` node. Reconfigured the payload structure to append real, native Notion headers (`## Details`, `## Message`) and list items (`bulleted_list_item`) for feedback submissions.
+- **Generator Keyboard Shortcuts**: Added global Space and Enter keydown listeners on PC for all prompt generators (Emotions, Locations, Eras, and Generic) to trigger generation instantly, with automatic input fields bypass.
+- **Optimized Buffer Reloads**: Refactored the dynamic pool empty reload to fetch 50 new items from n8n and merge them back into the global prompts queue in `localStorage`, drastically reducing server hits and enabling instant offline navigation.
+- **Theatrical Timer Polish**:
+  - Replaced the timer's final buzzer downtone with a synthesized 4-stage ascending arpeggio chime ("uptone") using the Web Audio API.
+  - Made the timer text display glow like a bright neon light using high-contrast white-red dropshadow filters, ensuring perfect legibility on any gradient background.
+  - Added a fast-paced, massive bouncing scale animation (`scale-panic` up to 1.6x) for the critical final 5 seconds of the countdown.
+- **UI & UX Refinement**:
+  - Relocated the remaining prompt counters inside individual generator cards for cleaner aesthetics.
+  - Simplified the developer mode badge indicator text from "devMode" to "DEV".
+  - Bumped all modals, help views, and technical documentation references to Version 0.4 BETA.
+
 ### Version 0.3 BETA (0.3-beta)
 - **Refactoring & Centralisation (React Context)** : Migration du buffer d'improvisation vers un Context Provider global (`ImprovBufferContext`) pour synchroniser les tirages entre tous les générateurs, éliminer les tirages doublons et éviter les requêtes n8n concurrentes. Découpage modulaire du hook en sous-hooks (`useToast`, `useDevMode`) et utilitaires (`bufferUtils`).
 - **Optimisation n8n & Réservoir de secours** : Extension du réservoir hors-ligne à **50 entrées par catégorie** (350 prompts au total) et sécurisation du workflow n8n via un double-port (succès/erreur) pour garantir le retour systématique du réservoir de secours lors des surcharges du modèle Gemini.
