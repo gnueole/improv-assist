@@ -116,9 +116,15 @@ def print_verbose_info(prompt, url, headers, payload):
     masked_token = f"{token[:6]}...{token[-6:]}" if len(token) > 12 else ("********" if token else "None")
     print(f"  x-n8n-token: {masked_token}", file=sys.stderr)
     
-    # Payload parameters (including the system_prompt)
+    # Payload parameters (with system_prompt truncated for display readability)
+    display_payload = payload.copy()
+    if "system_prompt" in display_payload:
+        p = display_payload["system_prompt"]
+        if len(p) > 80:
+            display_payload["system_prompt"] = f"{p[:30]}... ({len(p)} chars) ...{p[-30:]}"
+
     print("\033[1;33mPayload Body:\033[0m", file=sys.stderr)
-    print(json.dumps(payload, indent=2, ensure_ascii=False), file=sys.stderr)
+    print(json.dumps(display_payload, indent=2, ensure_ascii=False), file=sys.stderr)
     print("\033[1;36m---------------------------------\033[0m\n", file=sys.stderr)
 
 def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=False):
