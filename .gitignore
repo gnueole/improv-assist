@@ -43,3 +43,8 @@ docker/.env.prod
 # TypeScript
 *.tsbuildinfo
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
