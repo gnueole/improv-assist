@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { RefreshCw, Clock, Tag } from "lucide-react";
 import { ImprovBufferContext } from "@/context/ImprovBufferContext";
 
@@ -49,7 +49,7 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
     };
   }, [categoryKey, pickItem]);
 
-  const spinItem = () => {
+  const spinItem = useCallback(() => {
     if (isSpinning) return;
     setIsSpinning(true);
     let count = 0;
@@ -78,7 +78,30 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
         setIsSpinning(false);
         setCurrentItem(null);
       });
-  };
+  }, [isSpinning, categoryKey, itemsPool, pickItem]);
+
+  // Keyboard shortcut listener (Space/Enter to trigger generation)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        (activeEl.tagName === "INPUT" ||
+          activeEl.tagName === "TEXTAREA" ||
+          activeEl.getAttribute("contenteditable") === "true")
+      ) {
+        return;
+      }
+      if (e.code === "Space" || e.code === "Enter") {
+        e.preventDefault();
+        spinItem();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [spinItem]);
 
   return (
     <div className="w-full flex flex-col items-center gap-6 animate-fade-in">

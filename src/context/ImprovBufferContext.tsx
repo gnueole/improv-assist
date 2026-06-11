@@ -173,7 +173,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category, count: 1 })
+        body: JSON.stringify({ category, count: 50 })
       });
 
       if (!response.ok) {
@@ -197,33 +197,34 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       }
 
       const data = await response.json();
+      const fetchedBuffer = buildBufferFromData(data);
+      const categoryQueue = (fetchedBuffer[category as keyof ImprovBuffer] || []) as any[];
       
-      let picked: any = null;
-      if (data) {
-        if (typeof data === "string") {
-          picked = { text: data };
-        } else if (Array.isArray(data)) {
-          picked = data[0];
-        } else if (typeof data === "object") {
-          if (data.text) {
-            picked = data;
-          } else if (Array.isArray(data[category]) && data[category].length > 0) {
-            picked = data[category][0];
-          } else {
-            const firstKey = Object.keys(data)[0];
-            if (firstKey && Array.isArray(data[firstKey]) && data[firstKey].length > 0) {
-              picked = data[firstKey][0];
-            } else {
-              picked = data;
-            }
-          }
-        }
+      if (categoryQueue.length === 0) {
+        throw new Error("n8n webhook did not return any items for category: " + category);
       }
 
-      if (!picked || !picked.text) {
-        throw new Error("Invalid response structure from n8n webhook");
+      // Pick the first item
+      const picked = categoryQueue[0];
+      
+      // Remove the picked item from the queue
+      const remainingNewItems = categoryQueue.slice(1);
+
+      // Merge into currentBuffer
+      const mergedBuffer = { ...currentBuffer };
+      for (const cat of ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]) {
+        const existingQueue = (currentBuffer[cat as keyof ImprovBuffer] || []) as any[];
+        const newItems = (cat === category ? remainingNewItems : (fetchedBuffer[cat as keyof ImprovBuffer] || [])) as any[];
+        // Avoid duplicate items
+        const filteredNew = newItems.filter(
+          (newItem: any) => !existingQueue.some((existingItem: any) => existingItem.text === newItem.text)
+        );
+        mergedBuffer[cat as keyof ImprovBuffer] = [...existingQueue, ...filteredNew] as any;
       }
 
+      setBuffer(mergedBuffer);
+      localStorage.setItem("improv_buffer", JSON.stringify(mergedBuffer));
+      
       setN8nStatus("green");
       setN8nError(null);
       return picked;

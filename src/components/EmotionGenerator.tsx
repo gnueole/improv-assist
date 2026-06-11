@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { RefreshCw } from "lucide-react";
 import { EMOTIONS as fallbackEmotions } from "@/data/mockData";
 import reservoirPool from "../../public/data/reservoir-config.json";
@@ -48,7 +48,7 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
     };
   }, []);
 
-  const spinEmotion = () => {
+  const spinEmotion = useCallback(() => {
     if (isSpinning) return;
     setIsSpinning(true);
     let count = 0;
@@ -83,7 +83,30 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
         setIsSpinning(false);
         setCurrentEmotion(null);
       });
-  };
+  }, [isSpinning, emotionCategory, pickItem]);
+
+  // Keyboard shortcut listener (Space/Enter to trigger generation)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        (activeEl.tagName === "INPUT" ||
+          activeEl.tagName === "TEXTAREA" ||
+          activeEl.getAttribute("contenteditable") === "true")
+      ) {
+        return;
+      }
+      if (e.code === "Space" || e.code === "Enter") {
+        e.preventDefault();
+        spinEmotion();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [spinEmotion]);
 
   return (
     <div className="w-full flex flex-col items-center gap-6">

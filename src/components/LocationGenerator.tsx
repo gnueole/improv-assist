@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { RefreshCw } from "lucide-react";
 import { LOCATIONS as fallbackLocations } from "@/data/mockData";
 import reservoirPool from "../../public/data/reservoir-config.json";
@@ -46,7 +46,7 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
     };
   }, []);
 
-  const spinLocation = () => {
+  const spinLocation = useCallback(() => {
     if (isSpinning) return;
     setIsSpinning(true);
     let count = 0;
@@ -72,7 +72,30 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
         setIsSpinning(false);
         setCurrentLocation(null);
       });
-  };
+  }, [isSpinning, locationCategory, pickItem]);
+
+  // Keyboard shortcut listener (Space/Enter to trigger generation)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        (activeEl.tagName === "INPUT" ||
+          activeEl.tagName === "TEXTAREA" ||
+          activeEl.getAttribute("contenteditable") === "true")
+      ) {
+        return;
+      }
+      if (e.code === "Space" || e.code === "Enter") {
+        e.preventDefault();
+        spinLocation();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [spinLocation]);
 
   return (
     <div className="w-full flex flex-col items-center gap-6">

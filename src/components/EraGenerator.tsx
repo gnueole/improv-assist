@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { RefreshCw } from "lucide-react";
 import { ERAS as fallbackEras } from "@/data/mockData";
 import reservoirPool from "../../public/data/reservoir-config.json";
@@ -45,7 +45,7 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
     };
   }, []);
 
-  const spinEra = () => {
+  const spinEra = useCallback(() => {
     if (isSpinning) return;
     setIsSpinning(true);
     let count = 0;
@@ -70,7 +70,30 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
         setIsSpinning(false);
         setCurrentEra(null);
       });
-  };
+  }, [isSpinning, pickItem]);
+
+  // Keyboard shortcut listener (Space/Enter to trigger generation)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        (activeEl.tagName === "INPUT" ||
+          activeEl.tagName === "TEXTAREA" ||
+          activeEl.getAttribute("contenteditable") === "true")
+      ) {
+        return;
+      }
+      if (e.code === "Space" || e.code === "Enter") {
+        e.preventDefault();
+        spinEra();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [spinEra]);
 
   return (
     <div className="w-full flex flex-col items-center gap-6">
