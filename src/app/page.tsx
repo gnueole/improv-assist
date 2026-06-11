@@ -62,7 +62,7 @@ const tiles: Tile[] = [
   { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400" },
   { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
   { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
-  { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
+  { id: "docs", title: "Aide & Guide", subtitle: "Aide à propos de l'application", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
   { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
   { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
 ];
@@ -191,7 +191,7 @@ export default function Dashboard() {
         }
       } else {
         const path = window.location.pathname.replace(/^\//, "");
-        const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback", "characters"];
+        const validTileIds = ["emotions", "who_starts", "themes", "timer", "scenarios", "locations", "eras", "characters", "constraints", "echauffements", "docs", "hiha", "feedback"];
         const nextActive = validTileIds.includes(path) ? path : null;
         setActiveTileId(nextActive);
         if (nextActive) {
@@ -214,7 +214,7 @@ export default function Dashboard() {
   // Initial load pathname detection
   useEffect(() => {
     const path = window.location.pathname.replace(/^\//, "");
-    const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback", "characters"];
+    const validTileIds = ["emotions", "who_starts", "themes", "timer", "scenarios", "locations", "eras", "characters", "constraints", "echauffements", "docs", "hiha", "feedback"];
     if (validTileIds.includes(path)) {
       setActiveTileId(path);
       const idx = tiles.findIndex(t => t.id === path);
