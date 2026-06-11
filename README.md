@@ -125,14 +125,16 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ## 📝 Changelog
 
-### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4)
-- **Notion Feedback Restoration**: Switched block appending in n8n from the buggy native Notion node to a standard `httpRequest` node. Reconfigured the payload structure to append real, native Notion headers (`## Details`, `## Message`) and list items (`bulleted_list_item`) for feedback submissions.
+### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4) - 2026-06-11
+- **[n8n] Notion Feedback Restoration**: Switched block appending in n8n from the buggy native Notion node to a standard `httpRequest` node. Reconfigured the payload structure to append real, native Notion headers (`## Details`, `## Message`) and list items (`bulleted_list_item`) for feedback submissions.
 - **PC Keyboard Shortcuts & Grid Navigation**: Added full keyboard navigation controls on PC:
   - Arrow keys (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`) to navigate between tiles on the dashboard grid, utilizing a focused scale-up and glowing iridescent drop-shadow effect.
-  - `Enter` or `Space` to open the currently focused dashboard tile.
+  - `Enter` or `Space` to open the currently focused dashboard tile or spin the generator.
   - `ArrowRight` / `ArrowDown` to transition to the next tile's detail page, and `ArrowUp` to go to the previous tile.
-  - `ArrowLeft` to navigate back to the dashboard or close any active modal.
-  - Key `a` to toggle the About modal, and Key `r` to trigger the whole-reservoir API/cache regeneration.
+  - `ArrowLeft` / `Escape` / `Esc` to navigate back to the dashboard or close any active modal.
+  - Key `a` or `i` to toggle the About modal, and Key `r` to trigger the whole-reservoir API/cache regeneration.
+  - Key `m` to directly open the Feedback/Retour panel, Key `h` for the HiHa rules panel, and `?` to open the Help & Guide panel.
+  - Key `d` to toggle Developer Mode on/off, and Key `p` to inspect the system prompt in Dev Mode.
   - Integrated smart active-element detection to automatically bypass shortcuts when typing inside form fields.
 - **Optimized Buffer Reloads**: Refactored the dynamic pool empty reload to fetch 50 new items from n8n and merge them back into the global prompts queue in `localStorage`, drastically reducing server hits and enabling instant offline navigation.
 - **Theatrical Timer Polish**:
@@ -144,7 +146,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
   - Simplified the developer mode badge indicator text from "devMode" to "DEV".
   - Bumped all modals, help views, and technical documentation references to Version 0.4 BETA.
 
-### Version 0.3 BETA (0.3-beta)
+### Version 0.3 BETA (0.3-beta) - 2026-06-10
 - **Refactoring & Centralisation (React Context)** : Migration du buffer d'improvisation vers un Context Provider global (`ImprovBufferContext`) pour synchroniser les tirages entre tous les générateurs, éliminer les tirages doublons et éviter les requêtes n8n concurrentes. Découpage modulaire du hook en sous-hooks (`useToast`, `useDevMode`) et utilitaires (`bufferUtils`).
 - **Optimisation n8n & Réservoir de secours** : Extension du réservoir hors-ligne à **50 entrées par catégorie** (350 prompts au total) et sécurisation du workflow n8n via un double-port (succès/erreur) pour garantir le retour systématique du réservoir de secours lors des surcharges du modèle Gemini.
 - **Ajout d'échauffements & Descriptions** : Intégration de descriptions explicatives en français pour les exercices d'échauffement et les contraintes (catégories) de jeu, guidant l'utilisateur directement depuis l'interface.
@@ -153,7 +155,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 - **Intégration de Feedback Email** : Mise en place d'un formulaire de feedback permettant aux utilisateurs de partager leurs expériences directement depuis l'application. Les données sont transmises via un workflow n8n qui envoie un email récapitulatif au propriétaire du site.
 - **Conditions générales d'utilisation** : Ajout d'un modal de conditions générales d'utilisation conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
 
-### Version BETA 2 (0.2-beta)
+### Version BETA 2 (0.2-beta) - 2026-06-09
 - **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
 - **Description des échauffements** : Ajout d'un champ description explicatif en français pour chaque exercice d'échauffement dans l'interface et le prompt système Gemini.
 - **Robustesse n8n & Notion** : Gestion proactive des échecs d'API Notion dans le workflow n8n (renvoi d'une erreur 500 explicite et propagation propre au client).

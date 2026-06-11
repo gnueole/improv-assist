@@ -256,8 +256,8 @@ export default function Dashboard() {
       // Check key (case insensitive for letters)
       const key = e.key.toLowerCase();
 
-      // 1. Modals & Detail Navigation (Back / Left Arrow)
-      if (e.key === "ArrowLeft") {
+      // 1. Modals & Detail Navigation (Back / Left Arrow / Escape)
+      if (e.key === "ArrowLeft" || e.key === "Escape" || e.key === "Esc") {
         if (isPrivacyOpen) {
           e.preventDefault();
           setIsPrivacyOpen(false);
@@ -280,8 +280,8 @@ export default function Dashboard() {
         }
       }
 
-      // 2. "a" is About Modal toggle
-      if (key === "a") {
+      // 2. "a" or "i" is About Modal toggle
+      if (key === "a" || key === "i") {
         e.preventDefault();
         if (isAboutOpen) {
           closeAbout();
@@ -300,7 +300,57 @@ export default function Dashboard() {
         return;
       }
 
-      // 4. Arrow navigation
+      // 4. "m" is Feedback panel shortcut
+      if (key === "m") {
+        e.preventDefault();
+        setIsPrivacyOpen(false);
+        setIsAboutOpen(false);
+        setIsPromptOpen(false);
+        handleSelectTile("feedback");
+        return;
+      }
+
+      // 5. "h" is HiHa rules shortcut
+      if (key === "h") {
+        e.preventDefault();
+        setIsPrivacyOpen(false);
+        setIsAboutOpen(false);
+        setIsPromptOpen(false);
+        handleSelectTile("hiha");
+        return;
+      }
+
+      // 6. "d" is Dev Mode toggle
+      if (key === "d") {
+        e.preventDefault();
+        handleDevModeChange(!devMode);
+        return;
+      }
+
+      // 7. "p" is Prompt Modal toggle (in Dev Mode only)
+      if (key === "p") {
+        e.preventDefault();
+        if (isPromptOpen) {
+          closePrompt();
+        } else if (devMode) {
+          setIsPrivacyOpen(false);
+          setIsAboutOpen(false);
+          openPrompt();
+        }
+        return;
+      }
+
+      // 8. "?" is Help & Guide panel shortcut
+      if (e.key === "?") {
+        e.preventDefault();
+        setIsPrivacyOpen(false);
+        setIsAboutOpen(false);
+        setIsPromptOpen(false);
+        handleSelectTile("docs");
+        return;
+      }
+
+      // 9. Arrow navigation
       if (activeTileId === null) {
         // Dashboard mode: navigate tiles in grid
         if (isAboutOpen || isPromptOpen || isPrivacyOpen) return;
@@ -370,7 +420,8 @@ export default function Dashboard() {
     closeAbout,
     closePrompt,
     handleBackToDashboard,
-    handleSelectTile
+    handleSelectTile,
+    handleDevModeChange
   ]);
 
   const renderActiveComponent = () => {

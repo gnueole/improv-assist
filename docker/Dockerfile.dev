@@ -1,7 +1,7 @@
 FROM node:20-alpine
 
-# Fix system vulnerabilities (CVEs)
-RUN apk update && apk upgrade --no-cache
+# Fix system vulnerabilities (CVEs) and update npm to latest
+RUN apk update && apk upgrade --no-cache && npm install -g npm@latest
 
 WORKDIR /app
 
