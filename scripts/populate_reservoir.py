@@ -14,6 +14,7 @@ import json
 import requests
 import argparse
 import sys
+import textwrap
 
 # Resolving directories relative to script path
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -106,8 +107,14 @@ def print_fancy_prompt(prompt):
     print(f"\n\033[94m╔{border}╗\033[0m")
     print(f"\033[94m║\033[1;36m{padded_title}\033[94m║\033[0m")
     print(f"\033[94m╠{border}╣\033[0m")
-    for line in prompt.splitlines():
-        print(f"\033[94m║\033[0m {line}")
+    for paragraph in prompt.split("\n"):
+        if not paragraph.strip():
+            print(f"\033[94m║\033[0m{' ' * inner_width}\033[94m║\033[0m")
+        else:
+            wrapped = textwrap.wrap(paragraph, width=inner_width - 2)
+            for line in wrapped:
+                padded = f" {line}".ljust(inner_width)
+                print(f"\033[94m║\033[0m{padded}\033[94m║\033[0m")
     print(f"\033[94m╚{border}╝\033[0m\n")
 
 def print_fancy_payload(url, headers, payload):
@@ -118,22 +125,28 @@ def print_fancy_payload(url, headers, payload):
     print(f"\033[94m╔{border}╗\033[0m")
     print(f"\033[94m║\033[1;36m{padded_title}\033[94m║\033[0m")
     print(f"\033[94m╠{border}╣\033[0m")
-    print(f"\033[94m║\033[1;33m URL :\033[0m {url}")
+    
+    url_line = f" URL : {url}"
+    print(f"\033[94m║\033[0m{url_line.ljust(inner_width)}\033[94m║\033[0m")
+    
+    print(f"\033[94m║\033[0m{f' Headers :'.ljust(inner_width)}\033[94m║\033[0m")
+    
+    ct_line = f"   Content-Type: {headers.get('Content-Type')}"
+    print(f"\033[94m║\033[0m{ct_line.ljust(inner_width)}\033[94m║\033[0m")
     
     # Mask token for security
     token = headers.get("x-n8n-token", "")
     masked_token = f"{token[:6]}...{token[-6:]}" if len(token) > 12 else ("********" if token else "None")
+    tok_line = f"   x-n8n-token: {masked_token}"
+    print(f"\033[94m║\033[0m{tok_line.ljust(inner_width)}\033[94m║\033[0m")
     
-    print(f"\033[94m║\033[1;33m Headers :\033[0m")
-    print(f"\033[94m║\033[0m   Content-Type: {headers.get('Content-Type')}")
-    print(f"\033[94m║\033[0m   x-n8n-token: {masked_token}")
+    print(f"\033[94m║\033[0m{f' Payload Body :'.ljust(inner_width)}\033[94m║\033[0m")
     
-    print(f"\033[94m║\033[1;33m Payload Body :\033[0m")
-    # Prettify payload JSON, excluding system_prompt for brevity
     body_summary = {k: v for k, v in payload.items() if k != "system_prompt"}
     body_json = json.dumps(body_summary, indent=2)
     for line in body_json.splitlines():
-        print(f"\033[94m║\033[0m   {line}")
+        body_line = f"   {line}"
+        print(f"\033[94m║\033[0m{body_line.ljust(inner_width)}\033[94m║\033[0m")
     print(f"\033[94m╚{border}╝\033[0m\n")
 
 def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=False):
