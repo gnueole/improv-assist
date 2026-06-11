@@ -73,6 +73,7 @@ export default function Dashboard() {
 
   // Expose functions & state from hook
   const {
+    buffer,              // Shared global buffer state containing suggestion queues
     isRegenerating,      // Legacy loading state maintained for compatibility
     isReloading,         // True when resetting/reloading the local reservoir pool
     isLoading,           // General loading indicator for async operations
@@ -326,12 +327,28 @@ export default function Dashboard() {
         <section className="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-0.5 landscape:my-4">
           {tiles.map((tile) => {
             const Icon = tile.icon;
+            
+            // Get count for devMode display
+            let suggestionCount: number | null = null;
+            if (devMode && buffer) {
+              if (tile.id === "eras") suggestionCount = buffer.eras?.length ?? 0;
+              else if (tile.id === "locations") suggestionCount = buffer.locations?.length ?? 0;
+              else if (tile.id === "emotions") suggestionCount = buffer.emotions?.length ?? 0;
+              else if (tile.id === "scenarios") suggestionCount = buffer.scenarios?.length ?? 0;
+              else if (tile.id === "themes") suggestionCount = buffer.themes?.length ?? 0;
+            }
+
             return (
               <button
                 key={tile.id}
                 onClick={() => handleSelectTile(tile.id)}
                 className="dashboard-tile aspect-square"
               >
+                {suggestionCount !== null && (
+                  <span className="absolute top-2.5 right-2.5 text-[9px] font-mono text-zinc-500/80 bg-zinc-950/40 px-1.5 py-0.5 rounded border border-zinc-800/30 select-none z-10 animate-fade-in" title="Suggestions restantes">
+                    {suggestionCount}
+                  </span>
+                )}
                 <div className="dashboard-tile-inner">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-2.5 shrink-0">
                     <Icon className="w-5 h-5 text-white/90 shrink-0" strokeWidth={2} />
