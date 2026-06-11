@@ -63,7 +63,7 @@ function parsePrompt(category?: string, count: number = 350): string {
     const secContent = sectionsStr[category].replace("{{count}}", count.toString());
     return `${basePrompt}\n\n${secContent}\n\n${footerPrompt}`;
   } else {
-    const allSections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"];
+    const allSections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
     const allSectionsContent = allSections.map((secName) => {
       const secBody = sectionsStr[secName] || "";
       const itemsCount = Math.floor(count / allSections.length) || 50;
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       categoriesRequired = categoriesRequired.map((c: string) => (c === "mgt" || c === "warmup") ? "echauffements" : c);
     }
     
-    const count = body.count || (category ? 50 : 350);
+    const count = body.count || (category ? 50 : 400);
     
     // Parse system prompt dynamically from master.prompt
     let systemPrompt: string;

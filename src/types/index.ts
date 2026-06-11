@@ -62,6 +62,13 @@ export interface Echauffement {
   description?: string;
 }
 
+export interface Character {
+  text: string;
+  age: string;
+  accessory: string;
+  gesture: string;
+}
+
 export interface ImprovBuffer {
   scenarios: Scenario[];
   categories: Category[];
@@ -70,5 +77,6 @@ export interface ImprovBuffer {
   emotions: Emotion[];
   locations: Location[];
   eras: Era[];
+  characters: Character[];
   last_fetch: number | null;
 }

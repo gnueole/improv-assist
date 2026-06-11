@@ -89,7 +89,7 @@ def parse_prompt(category=None, count=350):
         assembled = f"{base_str}\n\n{sec_content}\n\n{footer_str}"
     else:
         all_sections_content = []
-        ordered_sections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
+        ordered_sections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"]
         for name in ordered_sections:
             if name in sections_str_dict:
                 items_count = count // len(ordered_sections) if count else 50
@@ -129,7 +129,7 @@ def print_verbose_info(prompt, url, headers, payload):
 
 def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=False):
     # Determine what categories we are requesting
-    all_categories = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
+    all_categories = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"]
     
     if category:
         categories_to_fetch = [category]
@@ -137,8 +137,8 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
         print(f"📡 Requesting regeneration of category: '{category}' (50 items)...", file=sys.stderr)
     else:
         categories_to_fetch = all_categories
-        count_to_request = 350
-        print(f"📡 Requesting full pool regeneration (350 items across 7 categories)...", file=sys.stderr)
+        count_to_request = 400
+        print(f"📡 Requesting full pool regeneration (400 items across 8 categories)...", file=sys.stderr)
 
     # Generate system prompt dynamically from master.prompt
     try:
@@ -231,7 +231,7 @@ def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=F
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Populate/Update the static reservoir triggers pool.")
     group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument("--type", type=str, choices=["scenarios", "categories", "themes", "echauffements", "mgt", "warmup", "emotions", "locations", "eras"], help="Only update a specific generator category ('mgt' and 'warmup' are aliases for 'echauffements')")
+    group.add_argument("--type", type=str, choices=["scenarios", "categories", "themes", "echauffements", "mgt", "warmup", "emotions", "locations", "eras", "characters"], help="Only update a specific generator category ('mgt' and 'warmup' are aliases for 'echauffements')")
     group.add_argument("--all", action="store_true", help="Regenerate all generator categories")
     parser.add_argument("--verbose", action="store_true", help="Print the compiled system prompt and API configuration to stderr")
     parser.add_argument("--dry-run", action="store_true", help="Perform a dry run: compile and display prompt/payload, but do not send the request or write to config")

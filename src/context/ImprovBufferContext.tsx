@@ -21,7 +21,7 @@ interface ImprovBufferContextType {
   isLoading: boolean;
   devMode: boolean;
   toastMessage: string | null;
-  triggerRegen: (force?: boolean) => Promise<void>;
+  triggerRegen: (force?: boolean, category?: string) => Promise<void>;
   pickItem: (category: string, filter?: string) => Promise<any>;
   showToast: (msg: string) => void;
   setToastMessage: (msg: string | null) => void;
@@ -77,42 +77,86 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
   }, []);
 
   // Reload Reservoir: Reset local queues by re-fetching reservoir-config.json
-  const triggerRegen = useCallback(async (force: boolean = false) => {
+  // Reload Reservoir: Reset local queues by re-fetching reservoir-config.json
+  const triggerRegen = useCallback(async (force: boolean = false, category?: string) => {
     setIsReloading(true);
     setIsLoading(true);
     try {
       if (force) {
-        showToast("Régénération du réservoir en cours via n8n & Gemini (1 à 2 minutes)...");
+        showToast(category 
+          ? `Régénération de la catégorie '${category}' via n8n...`
+          : "Régénération du réservoir en cours via n8n & Gemini (1 à 2 minutes)..."
+        );
+        
+        const payload: Record<string, any> = {
+          count: category ? 50 : 400
+        };
+        if (category) {
+          payload.category = category;
+        } else {
+          payload.categories_required = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+        }
+
         const response = await fetch("/api/improv-regen", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            count: 350,
-            categories_required: ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
-          })
+          body: JSON.stringify(payload)
         });
         if (!response.ok) {
           throw new Error("Erreur de communication avec le serveur de génération");
         }
         const data = await response.json();
-        const newBuffer = buildBufferFromData(data);
-        setBuffer(newBuffer);
-        localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+        
+        let currentBuffer = { ...EMPTY_BUFFER };
+        try {
+          const saved = localStorage.getItem("improv_buffer");
+          if (saved) currentBuffer = JSON.parse(saved);
+        } catch (e) {}
+
+        const fetchedBuffer = buildBufferFromData(data);
+        const mergedBuffer = { ...currentBuffer };
+        
+        const catsToUpdate = category ? [category] : ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+        for (const cat of catsToUpdate) {
+          mergedBuffer[cat as keyof ImprovBuffer] = fetchedBuffer[cat as keyof ImprovBuffer] as any;
+        }
+        
+        setBuffer(mergedBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(mergedBuffer));
         setN8nStatus("green");
         setN8nError(null);
-        showToast("Réservoir régénéré avec succès depuis n8n !");
+        showToast(category 
+          ? `Catégorie '${category}' régénérée avec succès !`
+          : "Réservoir régénéré avec succès depuis n8n !"
+        );
       } else {
         const response = await fetch("/data/reservoir-config.json");
         if (!response.ok) {
           throw new Error("Failed to load local reservoir-config.json");
         }
         const data = await response.json();
-        const newBuffer = buildBufferFromData(data);
-        setBuffer(newBuffer);
-        localStorage.setItem("improv_buffer", JSON.stringify(newBuffer));
+        const localBuffer = buildBufferFromData(data);
+        
+        let currentBuffer = { ...EMPTY_BUFFER };
+        try {
+          const saved = localStorage.getItem("improv_buffer");
+          if (saved) currentBuffer = JSON.parse(saved);
+        } catch (e) {}
+
+        const mergedBuffer = { ...currentBuffer };
+        const catsToUpdate = category ? [category] : ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+        for (const cat of catsToUpdate) {
+          mergedBuffer[cat as keyof ImprovBuffer] = localBuffer[cat as keyof ImprovBuffer] as any;
+        }
+
+        setBuffer(mergedBuffer);
+        localStorage.setItem("improv_buffer", JSON.stringify(mergedBuffer));
         setN8nStatus("green");
         setN8nError(null);
-        showToast("Réservoir rechargé depuis le pool local.");
+        showToast(category 
+          ? `Catégorie '${category}' rechargée.`
+          : "Réservoir rechargé depuis le pool local."
+        );
       }
     } catch (error) {
       console.error("[Regen Diagnostics] Reload failed:", error);
@@ -131,7 +175,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
   }, [showToast]);
 
   const pickItem = useCallback(async (category: string, filter?: string): Promise<any> => {
-    const isManaged = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"].includes(category);
+    const isManaged = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"].includes(category);
     
     if (!isManaged) {
       return null;
@@ -217,7 +261,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
 
       // Merge into currentBuffer
       const mergedBuffer = { ...currentBuffer };
-      for (const cat of ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]) {
+      for (const cat of ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"]) {
         const existingQueue = (currentBuffer[cat as keyof ImprovBuffer] || []) as any[];
         const newItems = (cat === category ? remainingNewItems : (fetchedBuffer[cat as keyof ImprovBuffer] || [])) as any[];
         // Avoid duplicate items

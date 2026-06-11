@@ -1512,5 +1512,307 @@
       "text": "La fin des temps terrestres",
       "era": "Futur"
     }
+  ],
+  "characters": [
+    {
+      "text": "Détective désabusé",
+      "age": "environ 50 ans",
+      "accessory": "une loupe de poche",
+      "gesture": "ajuste sans cesse son chapeau"
+    },
+    {
+      "text": "Vendeur de tapis pressé",
+      "age": "environ 30 ans",
+      "accessory": "un mètre ruban enroulé",
+      "gesture": "se frotte nerveusement les mains"
+    },
+    {
+      "text": "Professeur distrait",
+      "age": "60 ans",
+      "accessory": "des lunettes sur le bout du nez",
+      "gesture": "cherche partout ses affaires"
+    },
+    {
+      "text": "Bourgeois snob",
+      "age": "45 ans",
+      "accessory": "un éventail en soie",
+      "gesture": "parle le menton levé"
+    },
+    {
+      "text": "Artiste incompris",
+      "age": "25 ans",
+      "accessory": "un pinceau derrière l'oreille",
+      "gesture": "soupire de manière théâtrale"
+    },
+    {
+      "text": "Médecin militaire",
+      "age": "40 ans",
+      "accessory": "un stéthoscope en métal",
+      "gesture": "se tient très droit en marchant"
+    },
+    {
+      "text": "Pirate fatigué",
+      "age": "55 ans",
+      "accessory": "une longue-vue",
+      "gesture": "boite légèrement de la jambe droite"
+    },
+    {
+      "text": "Espion gaffeur",
+      "age": "35 ans",
+      "accessory": "un journal avec deux trous",
+      "gesture": "regarde constamment derrière son épaule"
+    },
+    {
+      "text": "Garçon de café survolté",
+      "age": "22 ans",
+      "accessory": "un plateau invisible",
+      "gesture": "essuie sans cesse un verre imaginaire"
+    },
+    {
+      "text": "Guide de musée ennuyé",
+      "age": "50 ans",
+      "accessory": "un parapluie fermé",
+      "gesture": "baille discrètement à chaque phrase"
+    },
+    {
+      "text": "Chef cuisinier colérique",
+      "age": "45 ans",
+      "accessory": "une cuillère en bois",
+      "gesture": "tape sur les surfaces pour insister"
+    },
+    {
+      "text": "Concierge curieuse",
+      "age": "65 ans",
+      "accessory": "un trousseau de clés bruyant",
+      "gesture": "écoute aux portes imaginaires"
+    },
+    {
+      "text": "Dompteur de fauves peureux",
+      "age": "28 ans",
+      "accessory": "un fouet miniature",
+      "gesture": "sursaute au moindre bruit"
+    },
+    {
+      "text": "Astronaute nostalgique",
+      "age": "38 ans",
+      "accessory": "un casque de moto",
+      "gesture": "regarde le plafond comme si c'était l'espace"
+    },
+    {
+      "text": "Aventurier d'appartement",
+      "age": "30 ans",
+      "accessory": "une boussole de poche",
+      "gesture": "consulte sa boussole à chaque pas"
+    },
+    {
+      "text": "Chimiste fou",
+      "age": "70 ans",
+      "accessory": "une fiole vide",
+      "gesture": "ricane après chaque explication"
+    },
+    {
+      "text": "Mime bavard",
+      "age": "24 ans",
+      "accessory": "des gants blancs",
+      "gesture": "fait des gestes amples puis s'excuse de parler"
+    },
+    {
+      "text": "Horloger maniaque",
+      "age": "58 ans",
+      "accessory": "une pince fine",
+      "gesture": "nettoie ses lunettes toutes les minutes"
+    },
+    {
+      "text": "Magicien raté",
+      "age": "32 ans",
+      "accessory": "un jeu de cartes abîmé",
+      "gesture": "fait tomber ses accessoires"
+    },
+    {
+      "text": "Boxeur poète",
+      "age": "29 ans",
+      "accessory": "des bandages aux mains",
+      "gesture": "récite des vers en boxant l'air"
+    },
+    {
+      "text": "Bibliothécaire autoritaire",
+      "age": "62 ans",
+      "accessory": "une règle en bois",
+      "gesture": "fait 'chut' en levant l'index"
+    },
+    {
+      "text": "Journaliste à potins",
+      "age": "27 ans",
+      "accessory": "un carnet à spirales",
+      "gesture": "écrit frénétiquement en murmurant"
+    },
+    {
+      "text": "Jardinier zen",
+      "age": "52 ans",
+      "accessory": "un sécateur rouillé",
+      "gesture": "caresse doucement les plantes invisibles"
+    },
+    {
+      "text": "Cow-boy allergique",
+      "age": "33 ans",
+      "accessory": "un lasso en corde",
+      "gesture": "éternue avant de parler"
+    },
+    {
+      "text": "Facteur pressé",
+      "age": "42 ans",
+      "accessory": "une sacoche en cuir",
+      "gesture": "regarde sa montre toutes les dix secondes"
+    },
+    {
+      "text": "Clerc de notaire endormi",
+      "age": "48 ans",
+      "accessory": "une pile de dossiers",
+      "gesture": "lutte constamment contre le sommeil"
+    },
+    {
+      "text": "Clown triste",
+      "age": "35 ans",
+      "accessory": "un nez rouge en mousse",
+      "gesture": "essuie une larme imaginaire"
+    },
+    {
+      "text": "Styliste excentrique",
+      "age": "29 ans",
+      "accessory": "une paire de ciseaux",
+      "gesture": "mesure les vêtements des autres du regard"
+    },
+    {
+      "text": "Inventeur de génie incompris",
+      "age": "41 ans",
+      "accessory": "une clé à molette",
+      "gesture": "manipule un objet invisible"
+    },
+    {
+      "text": "Pilote d'avion stressé",
+      "age": "36 ans",
+      "accessory": "des lunettes d'aviateur",
+      "gesture": "transpire abondamment"
+    },
+    {
+      "text": "Pêcheur philosophe",
+      "age": "63 ans",
+      "accessory": "une canne à pêche télescopique",
+      "gesture": "regarde l'horizon en hochant la tête"
+    },
+    {
+      "text": "Touriste perdu",
+      "age": "24 ans",
+      "accessory": "un plan papier froissé",
+      "gesture": "tourne le plan dans tous les sens"
+    },
+    {
+      "text": "Archéologue passionné",
+      "age": "47 ans",
+      "accessory": "un pinceau de fouille",
+      "gesture": "époussette la poussière sur les autres"
+    },
+    {
+      "text": "Super-héros à la retraite",
+      "age": "66 ans",
+      "accessory": "une cape trop petite",
+      "gesture": "se frotte le bas du dos en grimaçant"
+    },
+    {
+      "text": "Voyageur temporel désorienté",
+      "age": "31 ans",
+      "accessory": "une montre à gousset",
+      "gesture": "demande sans cesse l'année en cours"
+    },
+    {
+      "text": "Coach de vie survolté",
+      "age": "28 ans",
+      "accessory": "une gourde d'eau",
+      "gesture": "fait des grands gestes d'encouragement"
+    },
+    {
+      "text": "Roi sans royaume",
+      "age": "72 ans",
+      "accessory": "une couronne en carton",
+      "gesture": "salue majestueusement le vide"
+    },
+    {
+      "text": "Ramoneur joyeux",
+      "age": "19 ans",
+      "accessory": "une brosse à suie",
+      "gesture": "sifflote un air gai en travaillant"
+    },
+    {
+      "text": "Banquier avare",
+      "age": "54 ans",
+      "accessory": "une calculatrice",
+      "gesture": "compte ses doigts frénétiquement"
+    },
+    {
+      "text": "Photographe de mode snob",
+      "age": "33 ans",
+      "accessory": "un appareil photo suspendu",
+      "gesture": "cadre les visages avec ses mains"
+    },
+    {
+      "text": "Marionnettiste mélancolique",
+      "age": "46 ans",
+      "accessory": "une marionnette à gaine",
+      "gesture": "fait parler sa marionnette à sa place"
+    },
+    {
+      "text": "Chef de chantier autoritaire",
+      "age": "49 ans",
+      "accessory": "un plan de chantier enroulé",
+      "gesture": "crie ses instructions"
+    },
+    {
+      "text": "Musicien sans instrument",
+      "age": "25 ans",
+      "accessory": "une baguette de chef",
+      "gesture": "fredonne le rythme en permanence"
+    },
+    {
+      "text": "Sommelier prétentieux",
+      "age": "51 ans",
+      "accessory": "un verre à pied vide",
+      "gesture": "hume l'air en fermant les yeux"
+    },
+    {
+      "text": "Standardiste débordée",
+      "age": "23 ans",
+      "accessory": "un casque audio",
+      "gesture": "parle à plusieurs personnes en même temps"
+    },
+    {
+      "text": "Cireur de chaussures bavard",
+      "age": "57 ans",
+      "accessory": "un chiffon",
+      "gesture": "frotte les pieds de ses interlocuteurs"
+    },
+    {
+      "text": "Acteur shakespearien tragique",
+      "age": "39 ans",
+      "accessory": "un crâne en plastique",
+      "gesture": "récite ses répliques avec emphase"
+    },
+    {
+      "text": "Apiculteur distrait",
+      "age": "43 ans",
+      "accessory": "une grille de protection",
+      "gesture": "chasse les abeilles invisibles de son visage"
+    },
+    {
+      "text": "Arbitre de catch tatillon",
+      "age": "44 ans",
+      "accessory": "un sifflet",
+      "gesture": "sépare les gens qui discutent de trop près"
+    },
+    {
+      "text": "Geek surexcité",
+      "age": "21 ans",
+      "accessory": "une console portable",
+      "gesture": "parle extrêmement vite avec un jargon technique"
+    }
   ]
 }

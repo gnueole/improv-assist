@@ -24,7 +24,8 @@ import {
   HelpCircle,    // Help & Guide Modal
   Terminal,      // Dev Prompt Inspector Trigger
   RotateCw,      // Reservoir Regeneration Button
-  MessageSquare  // Feedback & Ideas Form
+  MessageSquare, // Feedback & Ideas Form
+  User           // Characters Icon
 } from "lucide-react";
 
 import { Tile } from "@/types";
@@ -45,6 +46,7 @@ import ConstraintsView from "@/components/ConstraintsView";
 import HiHaRules from "@/components/HiHaRules";
 import GenericGenerator from "@/components/GenericGenerator";
 import FeedbackView from "@/components/FeedbackView";
+import CharacterGenerator from "@/components/CharacterGenerator";
 
 import reservoirPool from "../../public/data/reservoir-config.json";
 
@@ -61,7 +63,8 @@ const tiles: Tile[] = [
   { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
   { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
   { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
-  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
+  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" },
+  { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400" }
 ];
 
 export default function Dashboard() {
@@ -188,7 +191,7 @@ export default function Dashboard() {
         }
       } else {
         const path = window.location.pathname.replace(/^\//, "");
-        const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback"];
+        const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback", "characters"];
         const nextActive = validTileIds.includes(path) ? path : null;
         setActiveTileId(nextActive);
         if (nextActive) {
@@ -211,7 +214,7 @@ export default function Dashboard() {
   // Initial load pathname detection
   useEffect(() => {
     const path = window.location.pathname.replace(/^\//, "");
-    const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback"];
+    const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback", "characters"];
     if (validTileIds.includes(path)) {
       setActiveTileId(path);
       const idx = tiles.findIndex(t => t.id === path);
@@ -357,16 +360,16 @@ export default function Dashboard() {
 
         if (e.key === "ArrowUp") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev - 2 + 12) % 12);
+          setFocusedTileIndex((prev) => (prev - 2 + 13) % 13);
         } else if (e.key === "ArrowDown") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev + 2) % 12);
+          setFocusedTileIndex((prev) => (prev + 2) % 13);
         } else if (e.key === "ArrowLeft") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev - 1 + 12) % 12);
+          setFocusedTileIndex((prev) => (prev - 1 + 13) % 13);
         } else if (e.key === "ArrowRight") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev + 1) % 12);
+          setFocusedTileIndex((prev) => (prev + 1) % 13);
         } else if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           handleSelectTile(tiles[focusedTileIndex].id);
@@ -469,6 +472,13 @@ export default function Dashboard() {
             itemsPool={reservoirPool.echauffements || []}
           />
         );
+      case "characters":
+        return (
+          <CharacterGenerator
+            pickItem={pickItem}
+            itemsPool={reservoirPool.characters || []}
+          />
+        );
       case "feedback":
         return <FeedbackView showToast={showToast} onOpenPrivacy={() => setIsPrivacyOpen(true)} />;
       default:
@@ -548,6 +558,7 @@ export default function Dashboard() {
               else if (tile.id === "emotions") suggestionCount = buffer.emotions?.length ?? 0;
               else if (tile.id === "scenarios") suggestionCount = buffer.scenarios?.length ?? 0;
               else if (tile.id === "themes") suggestionCount = buffer.themes?.length ?? 0;
+              else if (tile.id === "characters") suggestionCount = buffer.characters?.length ?? 0;
             }
 
             return (
@@ -555,15 +566,15 @@ export default function Dashboard() {
                 key={tile.id}
                 onClick={() => handleSelectTile(tile.id)}
                 onMouseEnter={() => setFocusedTileIndex(index)}
-                className={`dashboard-tile aspect-square ${focusedTileIndex === index ? "focused" : ""}`}
+                className={`dashboard-tile relative ${tile.id === "characters" ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""}`}
               >
                 {suggestionCount !== null && (
                   <span className="absolute top-2.5 right-2.5 text-[9px] font-mono text-zinc-500/80 bg-zinc-950/40 px-1.5 py-0.5 rounded border border-zinc-800/30 select-none z-10 animate-fade-in" title="Suggestions restantes">
                     {suggestionCount}
                   </span>
                 )}
-                <div className="dashboard-tile-inner">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-2.5 shrink-0">
+                <div className={`dashboard-tile-inner ${tile.id === "characters" ? "flex-row items-center gap-4 text-left" : "flex-col"}`}>
+                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${tile.id === "characters" ? "mb-0" : "mb-2.5"}`}>
                     <Icon className="w-5 h-5 text-white/90 shrink-0" strokeWidth={2} />
                   </div>
                   <div>
@@ -644,9 +655,9 @@ export default function Dashboard() {
               title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion 🧠 Opérationnelle"}
             />
             <button
-              onClick={() => triggerRegen(devMode)}
+              onClick={() => triggerRegen(devMode, activeTileId || undefined)}
               className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
-              title="Régénérer le réservoir"
+              title="Régénérer cette catégorie"
             >
               <RotateCw className="w-3.5 h-3.5" />
             </button>
@@ -666,8 +677,12 @@ export default function Dashboard() {
         </div>
 
         {/* Detail Footer */}
-        <footer className="text-center text-xs text-zinc-500 tracking-wider">
-          HOUBA HOUBA ! • CONSOLE D'OUTILS
+        <footer className="text-center py-4 border-t border-zinc-900/60 w-full flex items-center justify-center gap-2 select-none shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />
+          <span className="text-[10px] font-bold tracking-[0.25em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-500 via-zinc-400 to-zinc-500">
+            Console d'outils d'improvisation
+          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />
         </footer>
       </div>
 

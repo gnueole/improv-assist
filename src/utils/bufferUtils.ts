@@ -7,7 +7,7 @@
  */
 
 import { ImprovBuffer } from "@/types";
-import { EMOTIONS, LOCATIONS, ERAS } from "@/data/mockData";
+import { EMOTIONS, LOCATIONS, ERAS, CHARACTERS } from "@/data/mockData";
 
 export const EMPTY_BUFFER: ImprovBuffer = {
   scenarios: [],
@@ -17,6 +17,7 @@ export const EMPTY_BUFFER: ImprovBuffer = {
   emotions: [],
   locations: [],
   eras: [],
+  characters: [],
   last_fetch: null
 };
 
@@ -33,6 +34,7 @@ export function buildBufferFromData(data: any): ImprovBuffer {
     emotions: (data.emotions && data.emotions.length > 0) ? data.emotions : EMOTIONS,
     locations: (data.locations && data.locations.length > 0) ? data.locations : LOCATIONS,
     eras: (data.eras && data.eras.length > 0) ? data.eras : ERAS,
+    characters: (data.characters && data.characters.length > 0) ? data.characters : CHARACTERS,
     last_fetch: Date.now()
   };
 }
@@ -50,6 +52,7 @@ export function isValidBuffer(parsed: any): boolean {
     Array.isArray(parsed.echauffements) &&
     Array.isArray(parsed.emotions) &&
     Array.isArray(parsed.locations) &&
-    Array.isArray(parsed.eras)
+    Array.isArray(parsed.eras) &&
+    Array.isArray(parsed.characters)
   );
 }
