@@ -180,7 +180,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
             <div className="flex justify-between items-center">
               <span className="text-zinc-500">Code Source</span>
               <a
-                href="https://github.com/gnueole/eoleme-infra"
+                href="https://github.com/gnueole/improv-assist"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-cyan-400 hover:underline flex items-center gap-1"
