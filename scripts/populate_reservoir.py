@@ -110,7 +110,33 @@ def print_fancy_prompt(prompt):
         print(f"\033[94m║\033[0m {line}")
     print(f"\033[94m╚{border}╝\033[0m\n")
 
-def fetch_and_populate(category=None, update_all=False, verbose=False):
+def print_fancy_payload(url, headers, payload):
+    inner_width = 80
+    border = "═" * inner_width
+    title = "API REQUEST CONFIGURATION"
+    padded_title = title.center(inner_width)
+    print(f"\033[94m╔{border}╗\033[0m")
+    print(f"\033[94m║\033[1;36m{padded_title}\033[94m║\033[0m")
+    print(f"\033[94m╠{border}╣\033[0m")
+    print(f"\033[94m║\033[1;33m URL :\033[0m {url}")
+    
+    # Mask token for security
+    token = headers.get("x-n8n-token", "")
+    masked_token = f"{token[:6]}...{token[-6:]}" if len(token) > 12 else ("********" if token else "None")
+    
+    print(f"\033[94m║\033[1;33m Headers :\033[0m")
+    print(f"\033[94m║\033[0m   Content-Type: {headers.get('Content-Type')}")
+    print(f"\033[94m║\033[0m   x-n8n-token: {masked_token}")
+    
+    print(f"\033[94m║\033[1;33m Payload Body :\033[0m")
+    # Prettify payload JSON, excluding system_prompt for brevity
+    body_summary = {k: v for k, v in payload.items() if k != "system_prompt"}
+    body_json = json.dumps(body_summary, indent=2)
+    for line in body_json.splitlines():
+        print(f"\033[94m║\033[0m   {line}")
+    print(f"\033[94m╚{border}╝\033[0m\n")
+
+def fetch_and_populate(category=None, update_all=False, verbose=False, dry_run=False):
     # Determine what categories we are requesting
     all_categories = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
     
@@ -146,6 +172,13 @@ def fetch_and_populate(category=None, update_all=False, verbose=False):
         "Content-Type": "application/json",
         "x-n8n-token": X_N8N_TOKEN
     }
+
+    if verbose:
+        print_fancy_payload(N8N_WEBHOOK_URL, headers, payload)
+
+    if dry_run:
+        print("ℹ️ [Dry Run] Request payload compiled successfully. Skipping API call.")
+        return
 
     try:
         # Timeout of 180s to let Gemini 2.5 Pro complete the generation run
@@ -211,7 +244,8 @@ if __name__ == "__main__":
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument("--type", type=str, choices=["scenarios", "categories", "themes", "echauffements", "mgt", "warmup", "emotions", "locations", "eras"], help="Only update a specific generator category ('mgt' and 'warmup' are aliases for 'echauffements')")
     group.add_argument("--all", action="store_true", help="Regenerate all generator categories")
-    parser.add_argument("--verbose", action="store_true", help="Print the compiled system prompt to stdout in a styled layout")
+    parser.add_argument("--verbose", action="store_true", help="Print the compiled system prompt and API configuration to stdout in a styled layout")
+    parser.add_argument("--dry-run", action="store_true", help="Perform a dry run: compile and display prompt/payload, but do not send the request or write to config")
 
     if len(sys.argv) == 1:
         parser.print_help()
@@ -227,6 +261,6 @@ if __name__ == "__main__":
         category = "echauffements"
 
     try:
-        fetch_and_populate(category=category, update_all=update_all, verbose=args.verbose)
+        fetch_and_populate(category=category, update_all=update_all, verbose=args.verbose, dry_run=args.dry_run)
     except KeyboardInterrupt:
         print("\n🛑 Process interrupted by user. Exiting...")
