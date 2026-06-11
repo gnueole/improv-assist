@@ -35,7 +35,7 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 
 ---
 
-## ⚙️ Notion Synchronization
+## ⚙️ Synchronisation Notion
 
 Le cache local est généré en synchronisant certaines données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
 ```bash
@@ -44,30 +44,30 @@ node notion_fetch.js
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Démarrage Rapide
 
-### Prerequisites
+### Prérequis
 - Docker (testé avec WSL2)
 - Node.js (version 20+)
 - npm
-- Une Database (Notion ou autre) pour interfacer avec les prompts de l'application (optionnel).
-- Un compte n8n pour interfacer avec les prompts de l'application et l'IA et les envois d'emails (optionnel).
-- Une clé Gemini pour regénérer des prompts de remplacement (optionnel).
+- Une base de données (Notion ou autre) pour interfacer avec les prompts de l'application (optionnel).
+- Un compte n8n pour interfacer avec les prompts de l'application, l'IA et les envois d'emails (optionnel).
+- Une clé Gemini pour régénérer des prompts de remplacement (optionnel).
 
-### Local Installation & Development
+### Installation & Développement Local
 
-1. **Install dependencies**:
+1. **Installer les dépendances** :
    ```bash
    npm install
    ```
 
-2. **Run the development server**:
+2. **Lancer le serveur de développement** :
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+   Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-3. **Build and Start Production Bundle**:
+3. **Compiler et démarrer le bundle de production** :
    ```bash
    npm run build
    npm start
@@ -132,25 +132,25 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 ## 📝 Changelog
 
 ### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4) - 2026-06-11
-- **[n8n] Notion Feedback Restoration**: Switched block appending in n8n from the buggy native Notion node to a standard `httpRequest` node. Reconfigured the payload structure to append real, native Notion headers (`## Details`, `## Message`) and list items (`bulleted_list_item`) for feedback submissions.
-- **PC Keyboard Shortcuts & Grid Navigation**: Added full keyboard navigation controls on PC:
-  - Arrow keys (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`) to navigate between tiles on the dashboard grid, utilizing a focused scale-up and glowing iridescent drop-shadow effect.
-  - `Enter` or `Space` to open the currently focused dashboard tile or spin the generator.
-  - `ArrowRight` / `ArrowDown` to transition to the next tile's detail page, and `ArrowUp` to go to the previous tile.
-  - `ArrowLeft` / `Escape` / `Esc` to navigate back to the dashboard or close any active modal.
-  - Key `a` or `i` to toggle the About modal, and Key `g` to trigger the whole-reservoir API/cache regeneration.
-  - Key `m` to directly open the Feedback/Retour panel, Key `h` for the HiHa rules panel, and `?` to open the Help & Guide panel.
-  - Key `d` to toggle Developer Mode on/off, and Key `p` to inspect the system prompt in Dev Mode.
-  - Integrated smart active-element detection to automatically bypass shortcuts when typing inside form fields.
-- **Optimized Buffer Reloads**: Refactored the dynamic pool empty reload to fetch 50 new items from n8n and merge them back into the global prompts queue in `localStorage`, drastically reducing server hits and enabling instant offline navigation.
-- **Theatrical Timer Polish**:
-  - Replaced the timer's final buzzer downtone with a synthesized 4-stage ascending arpeggio chime ("uptone") using the Web Audio API.
-  - Made the timer text display glow like a bright neon light using high-contrast white-red dropshadow filters, ensuring perfect legibility on any gradient background.
-  - Added a fast-paced, massive bouncing scale animation (`scale-panic` up to 1.6x) for the critical final 5 seconds of the countdown.
-- **UI & UX Refinement**:
-  - Relocated the remaining prompt counters inside individual generator cards for cleaner aesthetics.
-  - Simplified the developer mode badge indicator text from "devMode" to "DEV".
-  - Bumped all modals, help views, and technical documentation references to Version 0.4 BETA.
+- **Restauration des retours Notion (Notion Feedback)** : Remplacement de l'ajout de blocs Notion bogué par un nœud standard `httpRequest` dans n8n. Reconfiguration de la structure des données pour ajouter de vrais en-têtes natifs Notion (`## Details`, `## Message`) et des puces de liste de type `bulleted_list_item` lors des envois de retours.
+- **Raccourcis clavier PC & Navigation de grille** : Ajout d'une gestion complète de navigation au clavier pour ordinateur :
+  - Flèches directionnelles (`Haut`, `Bas`, `Gauche`, `Droite`) pour naviguer entre les tuiles de la grille du tableau de bord avec un effet visuel d'échelle et une lueur irisée réactive.
+  - Touches `Entrée` ou `Espace` pour ouvrir la tuile sélectionnée ou lancer le tirage dans les générateurs.
+  - Flèches `Droite` / `Bas` pour passer au générateur suivant depuis une vue de détail, et `Haut` pour aller au précédent.
+  - Flèches `Gauche` / `Échap` / `Esc` pour retourner au tableau de bord ou fermer tout modal actif.
+  - Touches `a` ou `i` pour afficher/masquer le modal À propos, et touche `g` pour régénérer le réservoir de prompts.
+  - Touche `m` pour ouvrir directement le formulaire de retours (Feedback), touche `h` pour les règles du HiHa, et `?` pour afficher le Guide d'aide.
+  - Touche `d` pour activer/désactiver le mode développeur, et touche `p` pour inspecter le prompt système Gemini en mode DEV.
+  - Contournement intelligent pour désactiver automatiquement les raccourcis lorsque l'utilisateur tape du texte dans un formulaire.
+- **Recharges optimisées du réservoir** : Refonte de la recharge lorsque le réservoir est vide pour récupérer 50 nouveaux éléments depuis n8n d'un coup et les fusionner dans la file d'attente globale en `localStorage`, évitant ainsi des requêtes n8n réseau répétitives et garantissant une utilisation hors-ligne fluide.
+- **Amélioration du Timer Théâtral** :
+  - Remplacement du buzzer final descendant par un carillon arpège ascendant synthétisé en 4 étapes ("uptone") grâce à l'API Web Audio.
+  - Ajout d'un effet de lueur néon haute visibilité sur l'affichage du temps (lueur rouge intense les 30 dernières secondes, doublée les 5 dernières secondes) pour une parfaite lisibilité sur tous les gradients.
+  - Intégration d'une animation dynamique de rebond prononcé (`scale-panic` jusqu'à 1,6x) durant le compte à rebours critique des 5 dernières secondes.
+- **Polissage UI & UX** :
+  - Déplacement des compteurs de suggestions restantes à l'intérieur des cartes de générateurs pour un rendu épuré.
+  - Simplification du badge d'activation du mode développeur de "devMode" en "DEV".
+  - Mise à jour globale de toutes les mentions de version vers la version 0.4 BETA dans les fenêtres modales, la section d'aide et les documentations techniques.
 
 ### Version 0.3 BETA (0.3-beta) - 2026-06-10
 - **Refactoring & Centralisation (React Context)** : Migration du buffer d'improvisation vers un Context Provider global (`ImprovBufferContext`) pour synchroniser les tirages entre tous les générateurs, éliminer les tirages doublons et éviter les requêtes n8n concurrentes. Découpage modulaire du hook en sous-hooks (`useToast`, `useDevMode`) et utilitaires (`bufferUtils`).
