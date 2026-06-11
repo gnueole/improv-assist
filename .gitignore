@@ -39,3 +39,7 @@ ehthumbs.db
 
 # Production secrets
 docker/.env.prod
+
+# TypeScript
+*.tsbuildinfo
+
