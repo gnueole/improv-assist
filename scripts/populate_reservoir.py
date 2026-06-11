@@ -98,7 +98,19 @@ def parse_prompt(category=None, count=350):
 
     return assembled
 
-def fetch_and_populate(category=None, update_all=False):
+def print_fancy_prompt(prompt):
+    inner_width = 80
+    border = "═" * inner_width
+    title = "COMPILED SYSTEM PROMPT"
+    padded_title = title.center(inner_width)
+    print(f"\n\033[94m╔{border}╗\033[0m")
+    print(f"\033[94m║\033[1;36m{padded_title}\033[94m║\033[0m")
+    print(f"\033[94m╠{border}╣\033[0m")
+    for line in prompt.splitlines():
+        print(f"\033[94m║\033[0m {line}")
+    print(f"\033[94m╚{border}╝\033[0m\n")
+
+def fetch_and_populate(category=None, update_all=False, verbose=False):
     # Determine what categories we are requesting
     all_categories = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras"]
     
@@ -114,6 +126,8 @@ def fetch_and_populate(category=None, update_all=False):
     # Generate system prompt dynamically from master.prompt
     try:
         system_prompt = parse_prompt(category=category, count=count_to_request)
+        if verbose:
+            print_fancy_prompt(system_prompt)
     except Exception as e:
         print(f"❌ Error parsing master.prompt: {e}")
         return
@@ -197,6 +211,7 @@ if __name__ == "__main__":
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument("--type", type=str, choices=["scenarios", "categories", "themes", "echauffements", "mgt", "warmup", "emotions", "locations", "eras"], help="Only update a specific generator category ('mgt' and 'warmup' are aliases for 'echauffements')")
     group.add_argument("--all", action="store_true", help="Regenerate all generator categories")
+    parser.add_argument("--verbose", action="store_true", help="Print the compiled system prompt to stdout in a styled layout")
 
     if len(sys.argv) == 1:
         parser.print_help()
@@ -212,6 +227,6 @@ if __name__ == "__main__":
         category = "echauffements"
 
     try:
-        fetch_and_populate(category=category, update_all=update_all)
+        fetch_and_populate(category=category, update_all=update_all, verbose=args.verbose)
     except KeyboardInterrupt:
         print("\n🛑 Process interrupted by user. Exiting...")
