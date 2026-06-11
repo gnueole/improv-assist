@@ -9,11 +9,12 @@
  * @license MIT
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { RefreshCw } from "lucide-react";
 import { EMOTIONS as fallbackEmotions } from "@/data/mockData";
 import reservoirPool from "../../public/data/reservoir-config.json";
 import { Emotion } from "@/types";
+import { ImprovBufferContext } from "@/context/ImprovBufferContext";
 
 const EMOTIONS_POOL: Emotion[] = (reservoirPool && Array.isArray((reservoirPool as any).emotions) && (reservoirPool as any).emotions.length > 0) 
   ? (reservoirPool as any).emotions 
@@ -28,6 +29,10 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
   const [currentIntensity, setCurrentIntensity] = useState<number>(5);
   const [emotionCategory, setEmotionCategory] = useState<string>("All");
   const [isSpinning, setIsSpinning] = useState(false);
+
+  const context = useContext(ImprovBufferContext);
+  const devMode = context?.devMode ?? false;
+  const remainingCount = context?.buffer?.emotions?.length ?? 0;
 
   // Piocher une émotion initiale au montage
   useEffect(() => {
@@ -96,6 +101,12 @@ export default function EmotionGenerator({ pickItem }: EmotionGeneratorProps) {
           </button>
         ))}
       </div>
+
+      {devMode && (
+        <span className="text-[10px] font-mono text-zinc-500 lowercase select-none animate-fade-in -mt-2 -mb-2">
+          ({remainingCount} suggestions restantes)
+        </span>
+      )}
 
       {/* Display Card */}
       <div className="generator-card">

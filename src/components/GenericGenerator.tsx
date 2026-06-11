@@ -8,8 +8,9 @@
  * @license MIT
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { RefreshCw, Clock, Tag } from "lucide-react";
+import { ImprovBufferContext } from "@/context/ImprovBufferContext";
 
 interface GenericItem {
   id?: string;
@@ -30,6 +31,10 @@ interface GenericGeneratorProps {
 export default function GenericGenerator({ categoryKey, title, pickItem, itemsPool }: GenericGeneratorProps) {
   const [currentItem, setCurrentItem] = useState<GenericItem | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
+
+  const context = useContext(ImprovBufferContext);
+  const devMode = context?.devMode ?? false;
+  const remainingCount = context?.buffer ? (context.buffer[categoryKey as keyof typeof context.buffer] as any[])?.length ?? 0 : 0;
 
   // Pick initial item on mount
   useEffect(() => {
@@ -83,6 +88,12 @@ export default function GenericGenerator({ categoryKey, title, pickItem, itemsPo
           Générateur de {title}
         </h3>
       </div>
+
+      {devMode && (
+        <span className="text-[10px] font-mono text-zinc-500 lowercase select-none animate-fade-in -mt-2 -mb-2">
+          ({remainingCount} suggestions restantes)
+        </span>
+      )}
 
       {/* Display Card */}
       <div className="generator-card w-full max-w-sm">

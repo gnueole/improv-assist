@@ -9,11 +9,12 @@
  * @license MIT
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { RefreshCw } from "lucide-react";
 import { LOCATIONS as fallbackLocations } from "@/data/mockData";
 import reservoirPool from "../../public/data/reservoir-config.json";
 import { Location } from "@/types";
+import { ImprovBufferContext } from "@/context/ImprovBufferContext";
 
 const LOCATIONS_POOL: Location[] = (reservoirPool && Array.isArray((reservoirPool as any).locations) && (reservoirPool as any).locations.length > 0)
   ? (reservoirPool as any).locations
@@ -27,6 +28,10 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
   const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
   const [locationCategory, setLocationCategory] = useState<string>("All");
   const [isSpinning, setIsSpinning] = useState(false);
+
+  const context = useContext(ImprovBufferContext);
+  const devMode = context?.devMode ?? false;
+  const remainingCount = context?.buffer?.locations?.length ?? 0;
 
   // Piocher un lieu initial au montage
   useEffect(() => {
@@ -85,6 +90,12 @@ export default function LocationGenerator({ pickItem }: LocationGeneratorProps) 
           </button>
         ))}
       </div>
+
+      {devMode && (
+        <span className="text-[10px] font-mono text-zinc-500 lowercase select-none animate-fade-in -mt-2 -mb-2">
+          ({remainingCount} suggestions restantes)
+        </span>
+      )}
 
       {/* Display Box */}
       <div className="generator-card">

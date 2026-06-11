@@ -9,11 +9,12 @@
  * @license MIT
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { RefreshCw } from "lucide-react";
 import { ERAS as fallbackEras } from "@/data/mockData";
 import reservoirPool from "../../public/data/reservoir-config.json";
 import { Era } from "@/types";
+import { ImprovBufferContext } from "@/context/ImprovBufferContext";
 
 const ERAS_POOL: Era[] = (reservoirPool && Array.isArray((reservoirPool as any).eras) && (reservoirPool as any).eras.length > 0)
   ? (reservoirPool as any).eras
@@ -26,6 +27,10 @@ interface EraGeneratorProps {
 export default function EraGenerator({ pickItem }: EraGeneratorProps) {
   const [currentEra, setCurrentEra] = useState<Era | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
+
+  const context = useContext(ImprovBufferContext);
+  const devMode = context?.devMode ?? false;
+  const remainingCount = context?.buffer?.eras?.length ?? 0;
 
   // Piocher une époque initiale au montage
   useEffect(() => {
@@ -71,6 +76,12 @@ export default function EraGenerator({ pickItem }: EraGeneratorProps) {
     <div className="w-full flex flex-col items-center gap-6">
       {/* Visual top accent spacing */}
       <div className="w-full max-w-[200px] border-b border-zinc-800/80 mb-2"></div>
+
+      {devMode && (
+        <span className="text-[10px] font-mono text-zinc-500 lowercase select-none animate-fade-in -mt-2 -mb-2">
+          ({remainingCount} suggestions restantes)
+        </span>
+      )}
 
       {/* Display Box */}
       <div className="generator-card">

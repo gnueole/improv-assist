@@ -293,7 +293,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-2">
             {devMode && (
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mr-1 select-none animate-fade-in">
-                dev on
+                dev
               </span>
             )}
             {/* Status Light */}
@@ -422,17 +422,12 @@ export default function Dashboard() {
             <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-zinc-400 truncate w-full">
               {activeTile?.title}
             </h2>
-            {devMode && activeTileId && ["emotions", "locations", "eras", "themes", "scenarios", "echauffements"].includes(activeTileId) && (
-              <span className="text-[9px] sm:text-[10px] font-mono text-zinc-500 mt-0.5 normal-case tracking-normal animate-fade-in select-none">
-                ({Array.isArray(buffer[activeTileId as keyof typeof buffer]) ? (buffer[activeTileId as keyof typeof buffer] as any[]).length : 0} suggestions restantes)
-              </span>
-            )}
           </div>
 
           <div className="flex items-center gap-1.5 z-30 shrink-0">
             {devMode && (
               <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mr-0.5 select-none animate-fade-in">
-                dev on
+                dev
               </span>
             )}
             {/* Status Light */}
