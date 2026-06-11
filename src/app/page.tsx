@@ -9,7 +9,7 @@
  * @license MIT
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Smile,         // Emotions Generator
   Fingerprint,   // Who Starts? (Multi-touch)
@@ -48,12 +48,29 @@ import FeedbackView from "@/components/FeedbackView";
 
 import reservoirPool from "../../public/data/reservoir-config.json";
 
+// Symmetrical layout with 11 items grid (2 columns on mobile, 3 columns on desktop)
+const tiles: Tile[] = [
+  { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500" },
+  { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500" },
+  { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400" },
+  { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
+  { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500" },
+  { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
+  { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
+  { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
+  { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
+  { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
+  { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
+  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
+];
+
 export default function Dashboard() {
   const [activeTileId, setActiveTileId] = useState<string | null>(null);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [systemPrompt, setSystemPrompt] = useState<string>("Chargement du prompt...");
+  const [focusedTileIndex, setFocusedTileIndex] = useState<number>(0);
 
   // Fetch master.prompt dynamically when prompt modal is opened
   useEffect(() => {
@@ -87,37 +104,25 @@ export default function Dashboard() {
     n8nError             // Details of the last n8n sync/connection error
   } = useImprovBuffer(activeTileId);
 
-  // Symmetrical layout with 11 items grid (2 columns on mobile, 3 columns on desktop)
-  const tiles: Tile[] = [
-    { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500" },
-    { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500" },
-    { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400" },
-    { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
-    { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500" },
-    { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
-    { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
-    { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
-    { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
-    { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
-    { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
-    { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
-  ];
-
   const activeTile = tiles.find(t => t.id === activeTileId);
 
   // Tile Selection History Navigation
-  const handleSelectTile = (id: string) => {
+  const handleSelectTile = useCallback((id: string) => {
     setActiveTileId(id);
+    const idx = tiles.findIndex(t => t.id === id);
+    if (idx !== -1) {
+      setFocusedTileIndex(idx);
+    }
     window.history.pushState({
       activeTileId: id,
       isAboutOpen: false,
       isPromptOpen: false,
       isRegenerating: false
     }, "", `/${id}`);
-  };
+  }, []);
 
   // Modals History Open/Close Actions
-  const openAbout = () => {
+  const openAbout = useCallback(() => {
     setIsAboutOpen(true);
     window.history.pushState({
       activeTileId,
@@ -125,17 +130,17 @@ export default function Dashboard() {
       isPromptOpen: false,
       isRegenerating: false
     }, "", activeTileId ? `/${activeTileId}` : "/");
-  };
+  }, [activeTileId]);
 
-  const closeAbout = () => {
+  const closeAbout = useCallback(() => {
     if (window.history.state?.isAboutOpen) {
       window.history.back();
     } else {
       setIsAboutOpen(false);
     }
-  };
+  }, []);
 
-  const openPrompt = () => {
+  const openPrompt = useCallback(() => {
     setIsPromptOpen(true);
     window.history.pushState({
       activeTileId,
@@ -143,17 +148,17 @@ export default function Dashboard() {
       isPromptOpen: true,
       isRegenerating: false
     }, "", activeTileId ? `/${activeTileId}` : "/");
-  };
+  }, [activeTileId]);
 
-  const closePrompt = () => {
+  const closePrompt = useCallback(() => {
     if (window.history.state?.isPromptOpen) {
       window.history.back();
     } else {
       setIsPromptOpen(false);
     }
-  };
+  }, []);
 
-  const handleBackToDashboard = () => {
+  const handleBackToDashboard = useCallback(() => {
     if (window.history.state === null || window.history.state?.activeTileId === undefined) {
       setActiveTileId(null);
       window.history.pushState({
@@ -165,7 +170,7 @@ export default function Dashboard() {
     } else {
       window.history.back();
     }
-  };
+  }, []);
 
   // Handle browser back swipe/button
   useEffect(() => {
@@ -175,10 +180,23 @@ export default function Dashboard() {
         setActiveTileId(state.activeTileId !== undefined ? state.activeTileId : null);
         setIsAboutOpen(!!state.isAboutOpen);
         setIsPromptOpen(!!state.isPromptOpen);
+        if (state.activeTileId) {
+          const idx = tiles.findIndex(t => t.id === state.activeTileId);
+          if (idx !== -1) {
+            setFocusedTileIndex(idx);
+          }
+        }
       } else {
         const path = window.location.pathname.replace(/^\//, "");
         const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback"];
-        setActiveTileId(validTileIds.includes(path) ? path : null);
+        const nextActive = validTileIds.includes(path) ? path : null;
+        setActiveTileId(nextActive);
+        if (nextActive) {
+          const idx = tiles.findIndex(t => t.id === nextActive);
+          if (idx !== -1) {
+            setFocusedTileIndex(idx);
+          }
+        }
         setIsAboutOpen(false);
         setIsPromptOpen(false);
       }
@@ -196,6 +214,10 @@ export default function Dashboard() {
     const validTileIds = ["emotions", "who_starts", "themes", "scenarios", "locations", "eras", "timer", "constraints", "docs", "hiha", "echauffements", "feedback"];
     if (validTileIds.includes(path)) {
       setActiveTileId(path);
+      const idx = tiles.findIndex(t => t.id === path);
+      if (idx !== -1) {
+        setFocusedTileIndex(idx);
+      }
       window.history.replaceState({
         activeTileId: path,
         isAboutOpen: false,
@@ -216,6 +238,140 @@ export default function Dashboard() {
       });
     }
   }, []);
+
+  // Global keyboard shortcuts on PC
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Bypass shortcuts if the user is typing in any input field
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        (activeEl.tagName === "INPUT" ||
+          activeEl.tagName === "TEXTAREA" ||
+          activeEl.getAttribute("contenteditable") === "true")
+      ) {
+        return;
+      }
+
+      // Check key (case insensitive for letters)
+      const key = e.key.toLowerCase();
+
+      // 1. Modals & Detail Navigation (Back / Left Arrow)
+      if (e.key === "ArrowLeft") {
+        if (isPrivacyOpen) {
+          e.preventDefault();
+          setIsPrivacyOpen(false);
+          return;
+        }
+        if (isAboutOpen) {
+          e.preventDefault();
+          closeAbout();
+          return;
+        }
+        if (isPromptOpen) {
+          e.preventDefault();
+          closePrompt();
+          return;
+        }
+        if (activeTileId !== null) {
+          e.preventDefault();
+          handleBackToDashboard();
+          return;
+        }
+      }
+
+      // 2. "a" is About Modal toggle
+      if (key === "a") {
+        e.preventDefault();
+        if (isAboutOpen) {
+          closeAbout();
+        } else {
+          setIsPrivacyOpen(false);
+          setIsPromptOpen(false);
+          openAbout();
+        }
+        return;
+      }
+
+      // 3. "r" is Regen trigger
+      if (key === "r") {
+        e.preventDefault();
+        triggerRegen(devMode);
+        return;
+      }
+
+      // 4. Arrow navigation
+      if (activeTileId === null) {
+        // Dashboard mode: navigate tiles in grid
+        if (isAboutOpen || isPromptOpen || isPrivacyOpen) return;
+
+        if (e.key === "ArrowUp") {
+          e.preventDefault();
+          setFocusedTileIndex((prev) => (prev - 2 + 12) % 12);
+        } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          setFocusedTileIndex((prev) => (prev + 2) % 12);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          setFocusedTileIndex((prev) => (prev - 1 + 12) % 12);
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          setFocusedTileIndex((prev) => (prev + 1) % 12);
+        } else if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleSelectTile(tiles[focusedTileIndex].id);
+        }
+      } else {
+        // Detail view mode: go from tile to tile with arrows (Right/Down = next, Up = prev)
+        if (isAboutOpen || isPromptOpen || isPrivacyOpen) return;
+
+        const currentIdx = tiles.findIndex((t) => t.id === activeTileId);
+        if (currentIdx !== -1) {
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+            e.preventDefault();
+            const nextIdx = (currentIdx + 1) % tiles.length;
+            setActiveTileId(tiles[nextIdx].id);
+            setFocusedTileIndex(nextIdx);
+            window.history.replaceState({
+              activeTileId: tiles[nextIdx].id,
+              isAboutOpen: false,
+              isPromptOpen: false,
+              isRegenerating: false
+            }, "", `/${tiles[nextIdx].id}`);
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            const prevIdx = (currentIdx - 1 + tiles.length) % tiles.length;
+            setActiveTileId(tiles[prevIdx].id);
+            setFocusedTileIndex(prevIdx);
+            window.history.replaceState({
+              activeTileId: tiles[prevIdx].id,
+              isAboutOpen: false,
+              isPromptOpen: false,
+              isRegenerating: false
+            }, "", `/${tiles[prevIdx].id}`);
+          }
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [
+    activeTileId,
+    isAboutOpen,
+    isPromptOpen,
+    isPrivacyOpen,
+    focusedTileIndex,
+    devMode,
+    triggerRegen,
+    openAbout,
+    closeAbout,
+    closePrompt,
+    handleBackToDashboard,
+    handleSelectTile
+  ]);
 
   const renderActiveComponent = () => {
     switch (activeTileId) {
@@ -330,7 +486,7 @@ export default function Dashboard() {
 
         {/* Dashboard Tile Grid */}
         <section className="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-0.5 landscape:my-4">
-          {tiles.map((tile) => {
+          {tiles.map((tile, index) => {
             const Icon = tile.icon;
             
             // Get count for devMode display
@@ -347,7 +503,8 @@ export default function Dashboard() {
               <button
                 key={tile.id}
                 onClick={() => handleSelectTile(tile.id)}
-                className="dashboard-tile aspect-square"
+                onMouseEnter={() => setFocusedTileIndex(index)}
+                className={`dashboard-tile aspect-square ${focusedTileIndex === index ? "focused" : ""}`}
               >
                 {suggestionCount !== null && (
                   <span className="absolute top-2.5 right-2.5 text-[9px] font-mono text-zinc-500/80 bg-zinc-950/40 px-1.5 py-0.5 rounded border border-zinc-800/30 select-none z-10 animate-fade-in" title="Suggestions restantes">

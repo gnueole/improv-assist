@@ -127,7 +127,13 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4)
 - **Notion Feedback Restoration**: Switched block appending in n8n from the buggy native Notion node to a standard `httpRequest` node. Reconfigured the payload structure to append real, native Notion headers (`## Details`, `## Message`) and list items (`bulleted_list_item`) for feedback submissions.
-- **Generator Keyboard Shortcuts**: Added global Space and Enter keydown listeners on PC for all prompt generators (Emotions, Locations, Eras, and Generic) to trigger generation instantly, with automatic input fields bypass.
+- **PC Keyboard Shortcuts & Grid Navigation**: Added full keyboard navigation controls on PC:
+  - Arrow keys (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`) to navigate between tiles on the dashboard grid, utilizing a focused scale-up and glowing iridescent drop-shadow effect.
+  - `Enter` or `Space` to open the currently focused dashboard tile.
+  - `ArrowRight` / `ArrowDown` to transition to the next tile's detail page, and `ArrowUp` to go to the previous tile.
+  - `ArrowLeft` to navigate back to the dashboard or close any active modal.
+  - Key `a` to toggle the About modal, and Key `r` to trigger the whole-reservoir API/cache regeneration.
+  - Integrated smart active-element detection to automatically bypass shortcuts when typing inside form fields.
 - **Optimized Buffer Reloads**: Refactored the dynamic pool empty reload to fetch 50 new items from n8n and merge them back into the global prompts queue in `localStorage`, drastically reducing server hits and enabling instant offline navigation.
 - **Theatrical Timer Polish**:
   - Replaced the timer's final buzzer downtone with a synthesized 4-stage ascending arpeggio chime ("uptone") using the Web Audio API.
