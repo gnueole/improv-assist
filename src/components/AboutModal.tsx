@@ -34,37 +34,69 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
 
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
-      const gainNode = ctx.createGain();
+      const oscStrike = ctx.createOscillator();
+      const lfo = ctx.createOscillator();
+      
+      const gongGain = ctx.createGain();
+      const lfoGain = ctx.createGain();
+      const masterGain = ctx.createGain();
 
+      // Vintage telephone frequencies (minor third + metallic strike)
       osc1.type = "sine";
-      osc1.frequency.setValueAtTime(880, ctx.currentTime);
-      for (let i = 0; i < 10; i++) {
-        const time = ctx.currentTime + i * 0.1;
-        osc1.frequency.setValueAtTime(880 + (i % 2 === 0 ? 30 : -30), time);
-      }
+      osc1.frequency.setValueAtTime(698, ctx.currentTime); // F5
 
       osc2.type = "sine";
-      osc2.frequency.setValueAtTime(885, ctx.currentTime);
-      for (let i = 0; i < 10; i++) {
-        const time = ctx.currentTime + i * 0.1;
-        osc2.frequency.setValueAtTime(885 + (i % 2 === 0 ? -30 : 30), time);
-      }
+      osc2.frequency.setValueAtTime(830, ctx.currentTime); // Ab5
 
-      gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
-      for (let i = 0; i < 10; i++) {
-        const time = ctx.currentTime + i * 0.1;
-        gainNode.gain.linearRampToValueAtTime(i % 2 === 0 ? 0.05 : 0.25, time);
-      }
-      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
+      oscStrike.type = "triangle";
+      oscStrike.frequency.setValueAtTime(1396, ctx.currentTime); // Higher harmonic for metallic clank
 
-      osc1.connect(gainNode);
-      osc2.connect(gainNode);
-      gainNode.connect(ctx.destination);
+      // Modulate the gong gain with a 16Hz square LFO to simulate the clapper trill
+      lfo.type = "square";
+      lfo.frequency.setValueAtTime(16, ctx.currentTime);
+      lfoGain.gain.setValueAtTime(0.5, ctx.currentTime);
+      
+      gongGain.gain.setValueAtTime(0.5, ctx.currentTime);
 
-      osc1.start();
-      osc2.start();
-      osc1.stop(ctx.currentTime + 1.0);
-      osc2.stop(ctx.currentTime + 1.0);
+      // Connect LFO modulation
+      lfo.connect(lfoGain);
+      lfoGain.connect(gongGain.gain);
+
+      // Connect oscillators to gong gain
+      osc1.connect(gongGain);
+      osc2.connect(gongGain);
+      
+      // Let the metallic strike be slightly lower and also modulated
+      const strikeGain = ctx.createGain();
+      strikeGain.gain.setValueAtTime(0.3, ctx.currentTime);
+      oscStrike.connect(strikeGain);
+      strikeGain.connect(gongGain);
+
+      // Master volume and envelope (1.2s duration)
+      masterGain.gain.setValueAtTime(0, ctx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 0.05);
+      masterGain.gain.setValueAtTime(0.25, ctx.currentTime + 1.05);
+      masterGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+
+      gongGain.connect(masterGain);
+      masterGain.connect(ctx.destination);
+
+      // Start all nodes
+      osc1.start(ctx.currentTime);
+      osc2.start(ctx.currentTime);
+      oscStrike.start(ctx.currentTime);
+      lfo.start(ctx.currentTime);
+
+      // Stop all nodes
+      osc1.stop(ctx.currentTime + 1.2);
+      osc2.stop(ctx.currentTime + 1.2);
+      oscStrike.stop(ctx.currentTime + 1.2);
+      lfo.stop(ctx.currentTime + 1.2);
+
+      // Close context after playback completes to release resources
+      setTimeout(() => {
+        ctx.close().catch(() => {});
+      }, 1500);
     } catch (e) {
       console.warn("AudioContext error:", e);
     }
@@ -76,7 +108,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
     playDring();
     setTimeout(() => {
       setIsRinging(false);
-    }, 1000);
+    }, 1200);
   };
 
   return (
