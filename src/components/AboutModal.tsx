@@ -151,7 +151,7 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
           </h3>
 
           <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium mb-4">
-            Version 0.5 BETA
+            Version 0.6 BETA
           </span>
 
           <p className="text-sm text-zinc-300 leading-relaxed mb-6">

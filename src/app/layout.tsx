@@ -61,8 +61,8 @@ export default function RootLayout({
   const hasValidTag = googleTagId.length > 0;
 
   return (
-    <html lang="fr" className={`${outfit.variable} h-full select-none`}>
-      <body className="bg-black text-zinc-100 antialiased h-full overflow-hidden">
+    <html lang="fr" className={`${outfit.variable} h-full select-none`} suppressHydrationWarning>
+      <body className="bg-black text-zinc-100 antialiased h-full overflow-hidden" suppressHydrationWarning>
         {hasValidTag && (
           isGTM ? (
             <>

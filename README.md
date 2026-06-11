@@ -23,6 +23,7 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 | **🎬 Scénarios** | Fournit des situations de départ et intrigues scénarisées avec des explications et briefs pour lancer la scène. |
 | **📍 Suggestion de Lieu** | Suggestions créatives instantanées de cadres physiques pour planter le décor de vos scènes. |
 | **🕰️ Suggestion d'Époque** | Suggestions instantanées de temporalités (Moyen Âge, futur, années 80) pour situer vos histoires. |
+| **👤 Personnages** | Suggestions d'archétypes dramatiques avec âge suggéré, accessoire à mimer et comportement corporel/tic. |
 | **📚 Contraintes d'Impro** | Affiche les contraintes et règles théâtrales issues de l'espace de travail Notion de la troupe. |
 | **🤸 Échauffements** | Liste d'exercices collectifs ou individuels avec des descriptions et conseils pour se préparer au jeu. |
 | **⚡ Règles du Hi Ha** | Guide de référence rapide listant les gestes officiels du jeu d'échauffement collectif Hi Ha. |
@@ -129,7 +130,7 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ## 🧠 Choix du Modèle d'IA (Gemini)
 
-La génération du réservoir de prompts (350 éléments répartis en 7 catégories) requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et respect de consignes complexes (priorité aux relations humaines vs surréalisme d'objets) :
+La génération du réservoir de prompts (400 éléments répartis en 8 catégories) requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et respect de consignes complexes (priorité aux relations humaines vs surréalisme d'objets) :
 
 * **Gemini 2.5 Pro (`gemini-2.5-pro`) — Idéal pour la génération statique** : C'est le modèle utilisé par le script `populate_reservoir.py`. Il dispose d'une excellente capacité de raisonnement et évite les répétitions ou la fatigue créative sur les grands volumes.
   * *Temps d'exécution moyen* : ~90 secondes (timeout de script validé à 180s).
@@ -158,6 +159,11 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 ---
 
 ## 📝 Changelog
+
+### Version 0.6 BETA (0.6-beta / 1.0.0-beta.6) - 2026-06-12
+- **Générateur de Personnages** : Ajout d'une nouvelle catégorie et d'un écran dédié pour suggérer des archétypes de personnages avec un âge, un accessoire à mimer et un comportement corporel ou tic physique.
+- **Footer de détail inspirant** : Remplacement de l'ancienne mention technique du footer *"Console d'outils d'improvisation"* par le plus poétique *"Compagnon d'Inspiration"* dans les vues de détail.
+- **Refonte visuelle de la grille** : Déplacement de la tuile des Personnages avant celle des Contraintes et élargissement de la tuile de Retours & Idées sous forme de bannière large en bas de grille.
 
 ### Version 0.5 BETA (0.5-beta / 1.0.0-beta.5) - 2026-06-11
 - **Migration vers Gemini 2.5 Pro** : Mise à niveau de l'intelligence artificielle et du modèle sous-jacent vers `gemini-2.5-pro` pour la génération du réservoir statique (350 prompts répartis en 7 catégories). Cette version apporte une plus grande cohérence dramatique en privilégiant des relations humaines ancrées avec des conflits et des enjeux clairs, tout en évitant le surréalisme abstrait d'objets.

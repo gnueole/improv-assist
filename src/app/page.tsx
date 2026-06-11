@@ -677,12 +677,17 @@ export default function Dashboard() {
         </div>
 
         {/* Detail Footer */}
-        <footer className="text-center py-4 border-t border-zinc-900/60 w-full flex items-center justify-center gap-2 select-none shrink-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />
-          <span className="text-[10px] font-bold tracking-[0.25em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-500 via-zinc-400 to-zinc-500">
-            Console d'outils d'improvisation
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />
+        <footer className="text-center py-4 border-t border-zinc-900/60 w-full flex flex-col items-center justify-center gap-1 select-none shrink-0">
+          <div className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-zinc-300">
+            Houba Houba !
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />
+            <span className="text-[10px] font-bold tracking-[0.25em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-500 via-zinc-400 to-zinc-500">
+              Compagnon d'Inspiration
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />
+          </div>
         </footer>
       </div>
 

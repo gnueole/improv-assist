@@ -97,6 +97,7 @@ Le frontend est construit avec **Next.js 15 (App Router)** et **React 19**. Il e
 * **[page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx)** : Orchestrateur central. Il gère l'état d'affichage du tableau de bord (grid de tuiles), l'ajustement dynamique de la taille du texte, l'historique virtuel de navigation, et l'affichage des modaux d'aide/RGPD.
 * **[ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx)** : Provider global qui encapsule la logique d'initialisation du buffer, le stockage local (`localStorage`), la mise à jour transactionnelle du pool de prompts et les appels vers l'API.
 * **[useImprovBuffer.ts](file:///c:/Projects/eole.me/improv-assist/src/hooks/useImprovBuffer.ts)** : Hook client personnalisé consommant le contexte partagé pour exposer l'état unifié du buffer et ses contrôles (tirage, rechargement, diagnostic d'erreurs n8n) à chaque tuile de génération.
+* **[CharacterGenerator.tsx](file:///c:/Projects/eole.me/improv-assist/src/components/CharacterGenerator.tsx)** : Générateur dédié affichant des archétypes de personnages avec âge suggéré, accessoire à mimer, et attitude corporelle/tic physique.
 * **[ImprovTimer.tsx](file:///c:/Projects/eole.me/improv-assist/src/components/ImprovTimer.tsx)** : Chronomètre autonome utilisant la **Web Audio API** pour synthétiser des sons de cloche (sans charger de fichiers audio externes volumineux) et l'API de synthèse vocale du navigateur pour annoncer le temps.
 * **[WhoStarts.tsx](file:///c:/Projects/eole.me/improv-assist/src/components/WhoStarts.tsx)** : Outil de tirage au sort interactif exploitant les événements de contact multi-touch du navigateur (`PointerEvents`) avec retour visuel immédiat.
 
@@ -126,7 +127,7 @@ L'intelligence métier et les enregistrements sont gérés par deux flux d'autom
 * **Déclencheur** : Webhook POST sur `/webhook/improv-regen`.
 * **Action** : Interroge le modèle **Gemini 2.5 Pro** (via LangChain) avec un prompt système structuré pour générer un lot complet d'idées d'improvisation au format JSON.
 * **Gestion d'Erreur & Timeouts** : 
-  - **Limites de Temps** : Afin de s'adapter aux ~90 secondes requises par la complexité de `gemini-2.5-pro` pour générer 350 items de haute qualité, les limites de temps n8n (`executionTimeout`) ont été désactivées. 
+  - **Limites de Temps** : Afin de s'adapter aux ~90 secondes requises par la complexité de `gemini-2.5-pro` pour générer 400 items de haute qualité, les limites de temps n8n (`executionTimeout`) ont été désactivées. 
   - **Gestion des Timeouts** : La route API proxy `/api/improv-regen` côté client impose une limite de temps stricte de 10 secondes pour garantir la réactivité sur scène de la PWA (renvoyant une structure `{ error: "Timeout issued (from Message a model)" }` interceptée par l'application). En revanche, le script d'initialisation hors-ligne `populate_reservoir.py` utilise un timeout de 180 secondes pour permettre au modèle de terminer l'ensemble de son travail de génération.
   - **Interception des échecs** : En cas de panne générale ou de quota d'API dépassé, le flux bascule automatiquement vers un nœud de code JavaScript (`Check Error and Mock`) contenant un réservoir complet de données de secours (*mock data*).
 

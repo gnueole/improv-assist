@@ -9,6 +9,49 @@
   "nodes": [
     {
       "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "databaseId": {
+          "__rl": true,
+          "value": "37bee932-db12-80a5-9b76-f767836619f1",
+          "mode": "list",
+          "cachedResultName": "retour d’expérience"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Name|title",
+              "title": "={{ '[Regen] ' + ($json.body.category || 'all') }}"
+            },
+            {
+              "key": "Type|select",
+              "selectValue": "Observation"
+            },
+            {
+              "key": "score|number",
+              "numberValue": "={{ Number($json.body.count || 0) }}"
+            }
+          ]
+        }
+      },
+      "id": "notion-log-node",
+      "name": "Log to Notion",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.1,
+      "position": [
+        -112,
+        400
+      ],
+      "onError": "continue",
+      "credentials": {
+        "notionApi": {
+          "id": "notion-api-creds-id",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
         "httpMethod": "POST",
         "path": "improv-regen",
         "responseMode": "responseNode",
@@ -327,6 +370,11 @@
           [
             {
               "node": "Message a model",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Log to Notion",
               "type": "main",
               "index": 0
             }

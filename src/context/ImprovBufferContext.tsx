@@ -13,6 +13,7 @@ import { ImprovBuffer } from "@/types";
 import { useDevMode } from "@/hooks/useDevMode";
 import { useToast } from "@/hooks/useToast";
 import { EMPTY_BUFFER, buildBufferFromData, isValidBuffer } from "@/utils/bufferUtils";
+import { trackWorkflowTrigger } from "@/utils/analytics";
 
 interface ImprovBufferContextType {
   buffer: ImprovBuffer;
@@ -83,6 +84,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
     setIsLoading(true);
     try {
       if (force) {
+        trackWorkflowTrigger(category, true);
         showToast(category 
           ? `Régénération de la catégorie '${category}' via n8n...`
           : "Régénération du réservoir en cours via n8n & Gemini (1 à 2 minutes)..."
@@ -217,6 +219,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
     setIsReloading(true);
     showToast(`Réservoir vide pour ${category}. Récupération d'un nouvel élément via n8n...`);
 
+    trackWorkflowTrigger(category, false);
     const apiUrl = "/api/improv-regen";
     try {
       const response = await fetch(apiUrl, {
