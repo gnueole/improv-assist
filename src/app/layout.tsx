@@ -55,7 +55,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const rawTagId = process.env.NEXT_PUBLIC_GA_ID || process.env.GOOGLE_TAG_ID || "";
+  const rawTagId = process.env.NEXT_PUBLIC_GA_ID || "";
   const googleTagId = rawTagId.trim().replace(/^['"]|['"]$/g, "");
   const isGTM = googleTagId.startsWith("GTM-");
   const hasValidTag = googleTagId.length > 0;
