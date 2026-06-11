@@ -56,8 +56,10 @@ def fetch_and_populate():
         if not required_keys.issubset(generated_data.keys()):
             raise ValueError(f"L'arnaque ! n8n a renvoyé des clés invalides. Clés reçues : {list(generated_data.keys())}")
             
-        # Définition du chemin de sortie dans Next.js
-        output_path = os.path.join("public", "data", "reservoir-config.json")
+        # Définition du chemin de sortie dans Next.js (résolu de manière robuste par rapport à la racine)
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(script_dir)
+        output_path = os.path.join(project_root, "public", "data", "reservoir-config.json")
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         
         with open(output_path, "w", encoding="utf-8") as f:
