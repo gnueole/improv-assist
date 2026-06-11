@@ -506,7 +506,7 @@ export default function Dashboard() {
             {/* Status Light */}
             <div
               className={`status-light ${n8nStatus}`}
-              title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion n8n opérationnelle"}
+              title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion 🧠 Opérationnelle"}
             />
             <button
               onClick={() => triggerRegen(devMode)}
@@ -641,7 +641,7 @@ export default function Dashboard() {
             {/* Status Light */}
             <div
               className={`status-light ${n8nStatus}`}
-              title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion n8n opérationnelle"}
+              title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion 🧠 Opérationnelle"}
             />
             <button
               onClick={() => triggerRegen(devMode)}
