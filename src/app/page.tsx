@@ -74,6 +74,7 @@ export default function Dashboard() {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [systemPrompt, setSystemPrompt] = useState<string>("Chargement du prompt...");
   const [focusedTileIndex, setFocusedTileIndex] = useState<number>(0);
+  const [showFeedbackToast, setShowFeedbackToast] = useState(false);
 
   // Fetch master.prompt dynamically when prompt modal is opened
   useEffect(() => {
@@ -122,6 +123,44 @@ export default function Dashboard() {
       isPromptOpen: false,
       isRegenerating: false
     }, "", `/${id}`);
+  }, []);
+
+  const dismissFeedbackToast = useCallback(() => {
+    localStorage.setItem("feedback_prompt_dismissed", "true");
+    setShowFeedbackToast(false);
+  }, []);
+
+  const handleFeedbackClick = useCallback(() => {
+    localStorage.setItem("feedback_prompt_dismissed", "true");
+    setShowFeedbackToast(false);
+    handleSelectTile("feedback");
+  }, [handleSelectTile]);
+
+  // Track usage time for feedback toast
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const dismissed = localStorage.getItem("feedback_prompt_dismissed");
+    if (dismissed === "true") return;
+
+    let sessionStart = sessionStorage.getItem("app_session_start");
+    if (!sessionStart) {
+      sessionStart = Date.now().toString();
+      sessionStorage.setItem("app_session_start", sessionStart);
+    }
+
+    const startTime = parseInt(sessionStart, 10);
+    const targetTime = 20 * 60 * 1000; // 20 minutes
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const testFeedback = urlParams.get("test_feedback") === "true";
+    const delay = testFeedback ? 5000 : Math.max(0, targetTime - (Date.now() - startTime));
+
+    const timer = setTimeout(() => {
+      setShowFeedbackToast(true);
+    }, delay);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Modals History Open/Close Actions
@@ -718,6 +757,40 @@ export default function Dashboard() {
         isOpen={isPrivacyOpen}
         onClose={() => setIsPrivacyOpen(false)}
       />
+
+      {/* Toast Alert */}
+      <ToastAlert message={toastMessage} />
+
+      {/* Feedback Toast Banner */}
+      {showFeedbackToast && (
+        <div className="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 p-[1.5px] rounded-2xl bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-600 shadow-2xl animate-toast select-none">
+          <div className="bg-zinc-950/95 backdrop-blur-md p-4 rounded-[14px] flex items-start justify-between gap-3 text-zinc-100">
+            <div className="flex-1">
+              <h4 className="text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 uppercase tracking-widest mb-1.5">
+                Votre avis compte ! 🌟
+              </h4>
+              <p className="text-xs text-zinc-300 leading-relaxed font-light">
+                Vous utilisez l'application depuis un moment. Avez-vous des suggestions pour l'améliorer ?
+              </p>
+              <button
+                onClick={handleFeedbackClick}
+                className="mt-3 px-3 py-1.5 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-[9px] font-extrabold uppercase tracking-wider rounded-lg transition-all active:scale-95 shadow-md shadow-cyan-950/30"
+              >
+                Donner mon avis
+              </button>
+            </div>
+            <button
+              onClick={dismissFeedbackToast}
+              className="text-zinc-500 hover:text-zinc-300 transition-colors p-1"
+              aria-label="Fermer"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
     </main>
   );
