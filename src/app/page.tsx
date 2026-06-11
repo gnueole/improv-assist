@@ -293,8 +293,8 @@ export default function Dashboard() {
         return;
       }
 
-      // 3. "r" is Regen trigger
-      if (key === "r") {
+      // 3. "g" is Regen trigger
+      if (key === "g") {
         e.preventDefault();
         triggerRegen(devMode);
         return;

@@ -132,7 +132,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
   - `Enter` or `Space` to open the currently focused dashboard tile or spin the generator.
   - `ArrowRight` / `ArrowDown` to transition to the next tile's detail page, and `ArrowUp` to go to the previous tile.
   - `ArrowLeft` / `Escape` / `Esc` to navigate back to the dashboard or close any active modal.
-  - Key `a` or `i` to toggle the About modal, and Key `r` to trigger the whole-reservoir API/cache regeneration.
+  - Key `a` or `i` to toggle the About modal, and Key `g` to trigger the whole-reservoir API/cache regeneration.
   - Key `m` to directly open the Feedback/Retour panel, Key `h` for the HiHa rules panel, and `?` to open the Help & Guide panel.
   - Key `d` to toggle Developer Mode on/off, and Key `p` to inspect the system prompt in Dev Mode.
   - Integrated smart active-element detection to automatically bypass shortcuts when typing inside form fields.

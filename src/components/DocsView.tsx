@@ -144,7 +144,7 @@ export default function DocsView({ onOpenPrivacy }: DocsViewProps) {
                 <span className="text-right text-zinc-300">À propos</span>
               </div>
               <div className="flex justify-between border-b border-zinc-900 pb-1">
-                <span className="text-cyan-400">R</span>
+                <span className="text-cyan-400">G</span>
                 <span className="text-right text-zinc-300">Régénérer</span>
               </div>
               <div className="flex justify-between border-b border-zinc-900 pb-1">
