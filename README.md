@@ -147,7 +147,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
   - Animaux 
   - Objets
   - Un grand mixer pour créer ses propres combinaisons les plus folles !
-- [ ] **Améliorations des notifications** : toaster feedback
+- [x] **Améliorations des notifications** : Toaster de feedback après 20 min d'utilisation
 - [ ] **Résilience Audio (Autoplay Policy)** : Déclencher explicitement `AudioContext.resume()` lors d'une interaction utilisateur directe (ex: au clic sur le bouton de démarrage) afin d'éviter le blocage automatique de l'audio synthétique par les navigateurs.
 - [ ] **Mode Hors-ligne 100% autonome (Service Worker / Next-PWA)** : Implémenter un Service Worker basé sur Next-PWA/Workbox pour mettre en cache les pages statiques et les fichiers de script (.js, .css) afin de permettre à l'application de s'ouvrir et de se recharger sans aucune connexion réseau.
 - [ ] **Ajout de nouvelles tuiles freemium/premium** : Pour financer l'application (voire la rendre pérenne), il faudrait ajouter de nouvelles tuiles personalisées payantes ou via un abonnement mensuel/annuel.
@@ -164,6 +164,13 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 - **Générateur de Personnages** : Ajout d'une nouvelle catégorie et d'un écran dédié pour suggérer des archétypes de personnages avec un âge, un accessoire à mimer et un comportement corporel ou tic physique.
 - **Footer de détail inspirant** : Remplacement de l'ancienne mention technique du footer *"Console d'outils d'improvisation"* par le plus poétique *"Compagnon d'Inspiration"* dans les vues de détail.
 - **Refonte visuelle de la grille** : Déplacement de la tuile des Personnages avant celle des Contraintes et élargissement de la tuile de Retours & Idées sous forme de bannière large en bas de grille.
+- **Amélioration des retours & Télémétrie** :
+  - Intégration de Google Analytics (GA4) et Google Tag Manager (GTM) via `dataLayer.push` pour remonter les événements `workflow_trigger` (avec catégorie et statut forcé) lors des rechargements.
+  - Logging asynchrone en parallèle vers la base de données de retours d'expérience sur Notion via un nouveau nœud dans le workflow n8n (`Log to Notion`), créant des pages typées "Observation" et préfixées par `[Regen]`.
+- **Toaster d'évaluation (Feedback Prompt)** :
+  - Intégration d'une bannière de feedback ("Votre avis compte !") apparaissant automatiquement après 20 minutes d'utilisation cumulée par session (suivi via `sessionStorage`).
+  - Toast esthétique et entièrement dismissable (bouton de fermeture et action "Donner mon avis" redirigeant vers l'onglet Feedback), mémorisant le choix dans `localStorage` pour éviter tout rappel importun.
+  - Prise en charge du paramètre d'URL de test `?test_feedback=true` pour forcer l'apparition du toaster après 5 secondes.
 
 ### Version 0.5 BETA (0.5-beta / 1.0.0-beta.5) - 2026-06-11
 - **Migration vers Gemini 2.5 Pro** : Mise à niveau de l'intelligence artificielle et du modèle sous-jacent vers `gemini-2.5-pro` pour la génération du réservoir statique (350 prompts répartis en 7 catégories). Cette version apporte une plus grande cohérence dramatique en privilégiant des relations humaines ancrées avec des conflits et des enjeux clairs, tout en évitant le surréalisme abstrait d'objets.
