@@ -59,12 +59,12 @@ const tiles: Tile[] = [
   { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500" },
   { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
   { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
+  { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400" },
   { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
   { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
   { id: "docs", title: "Aide & Guide", subtitle: "Conseils & PWA hors-ligne", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
   { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
-  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" },
-  { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400" }
+  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
 ];
 
 export default function Dashboard() {
@@ -566,15 +566,15 @@ export default function Dashboard() {
                 key={tile.id}
                 onClick={() => handleSelectTile(tile.id)}
                 onMouseEnter={() => setFocusedTileIndex(index)}
-                className={`dashboard-tile relative ${tile.id === "characters" ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""}`}
+                className={`dashboard-tile relative ${tile.id === "feedback" ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""}`}
               >
                 {suggestionCount !== null && (
                   <span className="absolute top-2.5 right-2.5 text-[9px] font-mono text-zinc-500/80 bg-zinc-950/40 px-1.5 py-0.5 rounded border border-zinc-800/30 select-none z-10 animate-fade-in" title="Suggestions restantes">
                     {suggestionCount}
                   </span>
                 )}
-                <div className={`dashboard-tile-inner ${tile.id === "characters" ? "flex-row items-center gap-4 text-left" : "flex-col"}`}>
-                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${tile.id === "characters" ? "mb-0" : "mb-2.5"}`}>
+                <div className={`dashboard-tile-inner ${tile.id === "feedback" ? "flex-row items-center gap-4 text-left" : "flex-col"}`}>
+                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${tile.id === "feedback" ? "mb-0" : "mb-2.5"}`}>
                     <Icon className="w-5 h-5 text-white/90 shrink-0" strokeWidth={2} />
                   </div>
                   <div>
