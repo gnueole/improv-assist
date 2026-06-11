@@ -14,18 +14,10 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: "/index.html", destination: "/" },
-      { source: "/emotions", destination: "/" },
-      { source: "/who_starts", destination: "/" },
-      { source: "/locations", destination: "/" },
-      { source: "/eras", destination: "/" },
-      { source: "/timer", destination: "/" },
-      { source: "/constraints", destination: "/" },
-      { source: "/docs", destination: "/" },
-      { source: "/hiha", destination: "/" },
-      { source: "/themes", destination: "/" },
-      { source: "/scenarios", destination: "/" },
-      { source: "/echauffements", destination: "/" },
-      { source: "/feedback", destination: "/" },
+      {
+        source: "/:path((?!_next|api|data|manifest\\.json|sw\\.js|favicon\\.svg|icon\\.svg).*$)",
+        destination: "/",
+      },
     ];
   },
   // Allow running inside docker HMR with specific web socket port/host if needed

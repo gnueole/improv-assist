@@ -11,16 +11,16 @@ L'application repose sur un modèle hybride découplant l'interface utilisateur,
 ```mermaid
 graph TD
     subgraph Client [Client PWA - Navigateur]
-        UI[Dashboard / Générateurs] <--> Hook[useImprovBuffer]
+        UI["Dashboard / Générateurs"] <--> Hook[useImprovBuffer]
         Hook <--> Provider[ImprovBufferProvider]
         Provider <--> LS[(LocalStorage Cache)]
-        Audio[Web Audio API / Speech]
+        Audio["Web Audio API / Speech"]
     end
 
     subgraph API [Next.js API Routes]
-        R_Feedback[/api/feedback]
-        R_Regen[/api/improv-regen]
-        R_Constraints[/api/constraints]
+        R_Feedback["/api/feedback"]
+        R_Regen["/api/improv-regen"]
+        R_Constraints["/api/constraints"]
     end
 
     subgraph BaaS [Automatisation - n8n]
@@ -102,13 +102,14 @@ Le frontend est construit avec **Next.js 15 (App Router)** et **React 19**. Il e
 
 ---
 
-## 🚦 2. Couche Proxy API (Next.js API Routes)
+## 🚦 2. Couche Proxy API & Configuration de Routage (Next.js)
 
-Pour sécuriser les clés d'intégration et contourner les restrictions de CORS, l'application Next.js fait office de proxy d'API intermédiaire :
+Pour sécuriser les clés d'intégration, contourner les restrictions de CORS et assurer la fluidité de la PWA, Next.js sert de proxy d'API intermédiaire et gère le routage virtuel :
 
 1. **`/api/constraints`** : Lit et sert le fichier de cache statique `notionConstraints.json` compilé localement.
 2. **`/api/feedback`** : Transmet les formulaires de retour utilisateur au webhook de n8n.
 3. **`/api/improv-regen`** : Transmet les demandes de génération de prompts en lot à l'automatisation n8n.
+4. **Gestion du Routage Virtuel (PWA)** : Pour éviter les erreurs 404 lors du rafraîchissement d'un navigateur sur une tuile active (ex: `/emotions`, `/timer`), des règles de réécriture (*rewrites*) dynamiques sont définies dans `next.config.mjs`. Toutes les routes (à l'exception des ressources statiques, des API et des SVGs dynamiques comme `/favicon.svg`) sont redirigées de manière transparente à la racine (`/`) grâce à un motif de lookahead négatif : `/:path((?!_next|api|data|manifest\\.json|sw\\.js|favicon\\.svg|icon\\.svg).*$)`. Cela garantit que l'ajout ou la modification de tuiles sur le tableau de bord ne nécessite aucune mise à jour de configuration de routage.
 
 ---
 
