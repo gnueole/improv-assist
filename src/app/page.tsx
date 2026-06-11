@@ -409,21 +409,51 @@ export default function Dashboard() {
           }`}
       >
         {/* Detail Header */}
-        <header className="flex items-center justify-between pt-safe">
+        <header className="flex items-center justify-between pt-safe gap-2">
           <button
             onClick={handleBackToDashboard}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 active:scale-95 transition-all text-xs z-30"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 active:scale-95 transition-all text-xs z-30 shrink-0"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Retour</span>
           </button>
 
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400 z-30">
-            {activeTile?.title}
-          </h2>
+          <div className="flex flex-col items-center text-center z-30 mx-2 flex-1 min-w-0">
+            <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-zinc-400 truncate w-full">
+              {activeTile?.title}
+            </h2>
+            {devMode && activeTileId && ["emotions", "locations", "eras", "themes", "scenarios", "echauffements"].includes(activeTileId) && (
+              <span className="text-[9px] sm:text-[10px] font-mono text-zinc-500 mt-0.5 normal-case tracking-normal animate-fade-in select-none">
+                ({Array.isArray(buffer[activeTileId as keyof typeof buffer]) ? (buffer[activeTileId as keyof typeof buffer] as any[]).length : 0} suggestions restantes)
+              </span>
+            )}
+          </div>
 
-          <div className="w-8 h-8 flex items-center justify-center text-zinc-500 z-30">
-            {activeTile && React.createElement(activeTile.icon, { className: "w-5 h-5" })}
+          <div className="flex items-center gap-1.5 z-30 shrink-0">
+            {devMode && (
+              <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest mr-0.5 select-none animate-fade-in">
+                dev on
+              </span>
+            )}
+            {/* Status Light */}
+            <div
+              className={`status-light ${n8nStatus}`}
+              title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion n8n opérationnelle"}
+            />
+            <button
+              onClick={() => triggerRegen(devMode)}
+              className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
+              title="Régénérer le réservoir"
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={openAbout}
+              className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
+              title="À propos"
+            >
+              <Info className="w-3.5 h-3.5" />
+            </button>
           </div>
         </header>
 
