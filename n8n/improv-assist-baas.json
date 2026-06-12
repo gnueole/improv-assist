@@ -26,6 +26,10 @@
             {
               "key": "date|date",
               "date": "={{ $now.format('yyyy-MM-dd') }}"
+            },
+            {
+              "key": "Type|select",
+              "selectValue": "={{ $json.body.category || 'all' }}"
             }
           ]
         }
