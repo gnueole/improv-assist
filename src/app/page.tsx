@@ -784,7 +784,7 @@ export default function Dashboard() {
         </div>
 
         {/* Dashboard Tile Grid */}
-        <section className="flex-1 grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-6 pb-6 landscape:my-4">
+        <section className="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-6 pb-6 landscape:my-4">
           {renderedTiles.map((tile, index) => {
             const Icon = tile.icon;
             
