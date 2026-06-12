@@ -23,10 +23,23 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = isDev 
     ? "Houba Houba ! [DEV] • Moteur d'improvisation" 
     : "Houba Houba ! • Moteur d'improvisation";
+  const description = "Le compagnon de scène ultime pour les comédiens de théâtre d'improvisation. Générez instantanément des idées de thèmes, émotions, époques, personnages, lieux, échauffements et contraintes.";
+  
   return {
     title,
-    description: "Compagnon de scène ultime pour les comédiens d'improvisation théâtrale.",
+    description,
     manifest: "/manifest.json",
+    keywords: [
+      "improvisation", 
+      "théâtre d'impro", 
+      "générateur d'improvisation", 
+      "moteur d'impro", 
+      "exercices d'impro", 
+      "idées de scènes", 
+      "outils de théâtre", 
+      "échauffements improvisation", 
+      "scénarios impro"
+    ],
     icons: {
       icon: "/favicon.svg",
       apple: "/icon.svg",
@@ -35,6 +48,30 @@ export async function generateMetadata(): Promise<Metadata> {
       capable: true,
       statusBarStyle: "black-translucent",
       title,
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://eole.me/improv-assist",
+      siteName: "Houba Houba !",
+      locale: "fr_FR",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   };
 }
@@ -60,9 +97,27 @@ export default function RootLayout({
   const isGTM = googleTagId.startsWith("GTM-");
   const hasValidTag = googleTagId.length > 0;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Houba Houba !",
+    "operatingSystem": "All",
+    "applicationCategory": "EntertainmentApplication",
+    "description": "Le compagnon de scène ultime pour les comédiens de théâtre d'improvisation.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  };
+
   return (
     <html lang="fr" className={`${outfit.variable} h-full select-none`} suppressHydrationWarning>
       <body className="bg-black text-zinc-100 antialiased h-full overflow-hidden" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {hasValidTag && (
           isGTM ? (
             <>
