@@ -577,5 +577,21 @@ main {
   }
 }
 
+/* Back navigation tile differentiation */
+.dashboard-tile.back-tile {
+  background: linear-gradient(180deg, #3f3f46 0%, #18181b 100%) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-tile.back-tile:focus-visible,
+.dashboard-tile.back-tile.focused {
+  box-shadow: 0 0 15px rgba(113, 113, 122, 0.4), 0 0 25px rgba(63, 63, 70, 0.2) !important;
+}
+
+.back-tile-inner {
+  background-color: rgba(18, 18, 18, 0.85) !important;
+}
+
+
 
 

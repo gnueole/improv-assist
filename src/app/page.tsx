@@ -808,7 +808,7 @@ export default function Dashboard() {
                 key={tile.id}
                 onClick={() => handleSelectTile(tile)}
                 onMouseEnter={() => setFocusedTileIndex(index)}
-                className={`dashboard-tile relative ${isFeedback ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""}`}
+                className={`dashboard-tile relative ${isFeedback ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""} ${isBack ? "back-tile" : ""}`}
               >
                 {suggestionCount !== null && (
                   <span className="absolute top-2.5 right-2.5 text-[9px] font-mono text-zinc-500/80 bg-zinc-950/40 px-1.5 py-0.5 rounded border border-zinc-800/30 select-none z-10 animate-fade-in" title="Suggestions restantes">
@@ -820,17 +820,17 @@ export default function Dashboard() {
                     Menu
                   </span>
                 )}
-                <div className={`dashboard-tile-inner ${isFeedback ? "flex-row items-center gap-4 text-left" : "flex-col"}`}>
-                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${isFeedback ? "mb-0" : "mb-2.5"} ${isBack ? "bg-zinc-800/50" : ""}`}>
-                    <Icon className="w-5 h-5 text-white/90 shrink-0" strokeWidth={2} />
+                <div className={`dashboard-tile-inner ${isFeedback ? "flex-row items-center gap-4 text-left" : "flex-col"} ${isBack ? "back-tile-inner" : ""}`}>
+                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${isFeedback ? "mb-0" : "mb-2.5"} ${isBack ? "bg-zinc-800/60" : ""}`}>
+                    <Icon className={`w-5 h-5 text-white/90 shrink-0 ${isBack ? "text-zinc-300" : ""}`} strokeWidth={2} />
                   </div>
                   <div>
-                    <h3 className="text-lg md:text-base font-semibold text-zinc-100 tracking-wide leading-snug">
+                    <h3 className={`text-lg md:text-base font-semibold text-zinc-100 tracking-wide leading-snug ${isBack ? "text-zinc-300" : ""}`}>
                       <span className="break-words line-clamp-2 hyphens-auto">
                         {tile.title}
                       </span>
                     </h3>
-                    <p className="text-sm md:text-xs text-zinc-400 font-light mt-1">
+                    <p className={`text-sm md:text-xs text-zinc-400 font-light mt-1 ${isBack ? "text-zinc-500" : ""}`}>
                       {tile.subtitle}
                     </p>
                   </div>
