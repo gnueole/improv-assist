@@ -23,6 +23,7 @@ export default function ImprovTimer() {
   const [isMounted, setIsMounted] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   // Initialize from LocalStorage after hydration
   useEffect(() => {
@@ -131,9 +132,18 @@ export default function ImprovTimer() {
 
   const playBuzzerSound = () => {
     try {
-      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      let ctx = audioContextRef.current;
+      if (!ctx) {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        ctx = new AudioContextClass();
+        audioContextRef.current = ctx;
+      }
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
       
       const playTone = (freqStart: number, freqEnd: number, type: OscillatorType, delay: number) => {
+        if (!ctx) return;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         
@@ -163,6 +173,22 @@ export default function ImprovTimer() {
   };
 
   const toggleTimer = () => {
+    // Resume or create AudioContext on user interaction to bypass autoplay block
+    if (typeof window !== "undefined" && soundEnabled) {
+      try {
+        if (!audioContextRef.current) {
+          const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+          if (AudioContextClass) {
+            audioContextRef.current = new AudioContextClass();
+          }
+        }
+        if (audioContextRef.current && audioContextRef.current.state === "suspended") {
+          audioContextRef.current.resume();
+        }
+      } catch (e) {
+        console.warn("Failed to initialize or resume AudioContext", e);
+      }
+    }
     setIsRunning(!isRunning);
   };
 

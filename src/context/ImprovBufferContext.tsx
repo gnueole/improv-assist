@@ -201,8 +201,30 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
     }
 
     if (filteredQueue.length > 0) {
-      const randomIndex = Math.floor(Math.random() * filteredQueue.length);
-      const picked = filteredQueue[randomIndex];
+      let history: string[] = [];
+      try {
+        const storedHistory = localStorage.getItem("improv_history");
+        if (storedHistory) {
+          history = JSON.parse(storedHistory);
+          if (!Array.isArray(history)) history = [];
+        }
+      } catch (e) {}
+
+      // Try to find options not in the history of last 10 draws
+      let availableOptions = filteredQueue.filter((item: any) => !history.includes(item.text));
+      if (availableOptions.length === 0) {
+        availableOptions = filteredQueue;
+      }
+
+      const randomIndex = Math.floor(Math.random() * availableOptions.length);
+      const picked = availableOptions[randomIndex];
+
+      // Add to history
+      history.push(picked.text);
+      if (history.length > 10) {
+        history.shift();
+      }
+      localStorage.setItem("improv_history", JSON.stringify(history));
 
       const updatedQueue = queue.filter((item: any) => item.text !== picked.text);
       const updatedBuffer = {
@@ -258,6 +280,22 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
 
       // Pick the first item
       const picked = categoryQueue[0];
+
+      // Add to history
+      let history: string[] = [];
+      try {
+        const storedHistory = localStorage.getItem("improv_history");
+        if (storedHistory) {
+          history = JSON.parse(storedHistory);
+          if (!Array.isArray(history)) history = [];
+        }
+      } catch (e) {}
+
+      history.push(picked.text);
+      if (history.length > 10) {
+        history.shift();
+      }
+      localStorage.setItem("improv_history", JSON.stringify(history));
       
       // Remove the picked item from the queue
       const remainingNewItems = categoryQueue.slice(1);
