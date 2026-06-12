@@ -215,7 +215,7 @@ export default function WhoStarts({ onBack }: WhoStartsProps) {
                 left: t.x, 
                 top: t.y,
                 opacity: isLoser ? 0.15 : 1,
-                scale: isWinner ? 1.4 : 1
+                scale: isWinner ? 2.5 : 1
               }}
             >
               {/* Interactive pulse */}

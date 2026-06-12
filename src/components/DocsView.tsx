@@ -11,13 +11,15 @@
 
 import React, { useState, useEffect } from "react";
 import { SlidersHorizontal, Info, Download, Type, ShieldCheck } from "lucide-react";
+import { Tile } from "@/types";
 
 interface DocsViewProps {
   onOpenPrivacy: () => void;
   onOpenAbout: () => void;
+  tiles: Tile[];
 }
 
-export default function DocsView({ onOpenPrivacy, onOpenAbout }: DocsViewProps) {
+export default function DocsView({ onOpenPrivacy, onOpenAbout, tiles }: DocsViewProps) {
   const [textScale, setTextScale] = useState<number>(0);
 
   useEffect(() => {
@@ -147,93 +149,24 @@ export default function DocsView({ onOpenPrivacy, onOpenAbout }: DocsViewProps) 
               <span>Fonctionnalités incluses</span>
             </div>
 
-            {/* Feature 1 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-                Générateur d'Émotions
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de <strong>1 à 10</strong>. Ce niveau de performance pousse les acteurs à nuancer ou à exagérer leur état psychologique.
-              </p>
-            </div>
+            {tiles
+              .filter((tile) => tile.helpDescription)
+              .map((tile) => {
+                const firstColor = tile.color.split(" ")[0] || "from-purple-400";
+                const bgClass = firstColor.replace("from-", "bg-");
 
-            {/* Feature 2 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
-                Qui Commence ? (Multi-touch)
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Idéal pour désigner l'initiateur d'une scène. Posez jusqu'à 5 doigts sur l'écran. Après 3 secondes de décompte, le gagnant s'affiche en vert vif avec un effet haptique.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                Suggestions de Lieu & Époque
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Des idées créatives instantanées pour planter le décor physique (salon de coiffure, sous-marin) et temporel (Moyen Âge, an 3000, années 80) de vos histoires.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Timer de Scène
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Un chronomètre préréglé sur 2 minutes 30 secondes (durée standard d'improvisation). Lorsque le temps est écoulé, le message dynamique <strong>« Hey ! Impro ! »</strong> signale la fin.
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-                Thèmes d'Impro
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Une sélection de sujets courts poétiques ou comiques pour servir de fil conducteur ou d'inspiration pour vos improvisations.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-                Scénarios
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Des situations de départ et intrigues dramatiques ou comiques pour amorcer les scènes avec un enjeu immédiat.
-              </p>
-            </div>
-
-            {/* Feature 7 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                Échauffements
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Des exercices de préparation physique, mentale et vocale pour se mettre en condition de jeu individuellement ou collectivement.
-              </p>
-            </div>
-
-            {/* Feature 8 */}
-            <div className="space-y-1">
-              <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Retour & Idées
-              </h4>
-              <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
-                Un formulaire de feedback direct permettant aux utilisateurs d'envoyer des demandes, suggestions ou observations pour améliorer l'application.
-              </p>
-            </div>
+                return (
+                  <div key={tile.id} className="space-y-1">
+                    <h4 className="font-semibold text-zinc-200 flex items-center gap-1.5">
+                      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${bgClass}`}></span>
+                      {tile.title}
+                    </h4>
+                    <p className={`text-zinc-300 pl-3.5 leading-normal ${fonts.base}`}>
+                      {tile.helpDescription}
+                    </p>
+                  </div>
+                );
+              })}
           </div>
 
           {/* GDPR / Privacy card */}

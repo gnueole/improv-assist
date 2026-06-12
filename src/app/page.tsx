@@ -63,27 +63,157 @@ const tiles: Tile[] = [
   { id: "warmup", title: "S'échauffer", subtitle: "Exercices et contraintes...", icon: Zap, color: "from-amber-500 to-orange-600", isDir: true },
 
   // Incarner submenu
-  { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500", menu: "incarnate", keywords: ["emotions", "émotion", "colère", "joie", "tristesse", "sensation", "sentiment", "incarner", "jeu"] },
-  { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400", menu: "incarnate", keywords: ["personnage", "avatar", "rôle", "archétype", "âge", "accessoire", "attitude", "incarner"] },
-  { id: "animals", title: "Animaux", subtitle: "Animaux insolites", icon: PawPrint, color: "from-green-400 to-emerald-600", menu: "incarnate", keywords: ["animaux", "animal", "bête", "faune", "cri", "incarner", "sauvage", "domestique"] },
-  { id: "objects", title: "Objets", subtitle: "Objets à incarner ou utiliser", icon: Package, color: "from-orange-400 to-amber-500", menu: "incarnate", keywords: ["objets", "objet", "chose", "accessoire", "truc", "outil", "matériel", "incarner"] },
+  {
+    id: "emotions",
+    title: "Générateur d'Émotions",
+    subtitle: "Sensation à incarner",
+    icon: Smile,
+    color: "from-cyan-400 to-purple-500",
+    menu: "incarnate",
+    keywords: ["emotions", "émotion", "colère", "joie", "tristesse", "sensation", "sentiment", "incarner", "jeu"],
+    helpDescription: <span>Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de <strong>1 à 10</strong>. Ce niveau de performance pousse les acteurs à nuancer ou à exagérer leur état psychologique.</span>
+  },
+  {
+    id: "characters",
+    title: "Personnages",
+    subtitle: "Âge, accessoire & attitude",
+    icon: User,
+    color: "from-purple-500 to-cyan-400",
+    menu: "incarnate",
+    keywords: ["personnage", "avatar", "rôle", "archétype", "âge", "accessoire", "attitude", "incarner"],
+    helpDescription: <span>Suggère un personnage aléatoire avec un <strong>âge</strong>, un <strong>accessoire</strong> et une <strong>attitude</strong> pour guider rapidement l'interprétation.</span>
+  },
+  {
+    id: "animals",
+    title: "Animaux",
+    subtitle: "Animaux insolites",
+    icon: PawPrint,
+    color: "from-green-400 to-emerald-600",
+    menu: "incarnate",
+    keywords: ["animaux", "animal", "bête", "faune", "cri", "incarner", "sauvage", "domestique"],
+    helpDescription: <span>Suggère un animal insolite à <strong>incarner</strong> ou pour inspirer une posture physique et un comportement de jeu originaux.</span>
+  },
+  {
+    id: "objects",
+    title: "Objets",
+    subtitle: "Objets à incarner ou utiliser",
+    icon: Package,
+    color: "from-orange-400 to-amber-500",
+    menu: "incarnate",
+    keywords: ["objets", "objet", "chose", "accessoire", "truc", "outil", "matériel", "incarner"],
+    helpDescription: <span>Suggère un objet du quotidien à <strong>utiliser</strong> sur scène, à <strong>détourner</strong> ou à <strong>incarner</strong> directement.</span>
+  },
 
   // Inspiration submenu
-  { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500", menu: "inspiration", keywords: ["scenarios", "scénario", "situation", "histoire", "contexte", "brief", "départ", "inspiration"] },
-  { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400", menu: "inspiration", keywords: ["lieux", "lieu", "endroit", "cadre", "décor", "pièce", "pays", "inspiration"] },
-  { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400", menu: "inspiration", keywords: ["époques", "époque", "temps", "futur", "passé", "siècle", "temporalité", "inspiration"] },
-  { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400", menu: "inspiration", keywords: ["thèmes", "thème", "sujet", "titre", "idée", "inspiration"] },
+  {
+    id: "scenarios",
+    title: "Scénarios",
+    subtitle: "Situations de départ",
+    icon: BookOpen,
+    color: "from-yellow-400 to-green-500",
+    menu: "inspiration",
+    keywords: ["scenarios", "scénario", "situation", "histoire", "contexte", "brief", "départ", "inspiration"],
+    helpDescription: <span>Des situations de départ et intrigues dramatiques ou comiques pour amorcer les scènes avec un <strong>enjeu immédiat</strong>.</span>
+  },
+  {
+    id: "locations",
+    title: "Suggestion de Lieu",
+    subtitle: "Cadre de l'impro",
+    icon: MapPin,
+    color: "from-pink-500 to-yellow-400",
+    menu: "inspiration",
+    keywords: ["lieux", "lieu", "endroit", "cadre", "décor", "pièce", "pays", "inspiration"],
+    helpDescription: <span>Des idées créatives instantanées pour planter le <strong>décor physique</strong> (salon de coiffure, sous-marin, etc.) de vos histoires.</span>
+  },
+  {
+    id: "eras",
+    title: "Suggestion d'Époque",
+    subtitle: "Temporalité de la scène",
+    icon: Clock,
+    color: "from-yellow-400 to-cyan-400",
+    menu: "inspiration",
+    keywords: ["époques", "époque", "temps", "futur", "passé", "siècle", "temporalité", "inspiration"],
+    helpDescription: <span>Des repères temporels (Moyen Âge, an 3000, années 80) pour situer l'action et la <strong>temporalité</strong> de l'improvisation.</span>
+  },
+  {
+    id: "themes",
+    title: "Thèmes d'Impro",
+    subtitle: "Sujets & idées d'histoires",
+    icon: Sparkles,
+    color: "from-indigo-400 to-cyan-400",
+    menu: "inspiration",
+    keywords: ["thèmes", "thème", "sujet", "titre", "idée", "inspiration"],
+    helpDescription: <span>Une sélection de sujets courts poétiques ou comiques pour servir de <strong>fil conducteur</strong> ou d'inspiration pour vos improvisations.</span>
+  },
 
   // Warmup submenu
-  { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600", menu: "warmup", keywords: ["échauffements", "échauffement", "exercice", "préparation", "groupe", "corps", "voix", "s'échauffer"] },
-  { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400", menu: "warmup", keywords: ["contraintes", "contrainte", "règle", "défi", "difficulté", "limite", "s'échauffer"] },
-  { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600", menu: "warmup", keywords: ["hiha", "hi ha", "jeu", "réflexe", "rythme", "bruit", "s'échauffer"] },
+  {
+    id: "echauffements",
+    title: "Échauffements",
+    subtitle: "Exercices de préparation",
+    icon: Zap,
+    color: "from-amber-500 to-orange-600",
+    menu: "warmup",
+    keywords: ["échauffements", "échauffement", "exercice", "préparation", "groupe", "corps", "voix", "s'échauffer"],
+    helpDescription: <span>Des exercices de préparation physique, mentale et vocale pour se mettre en condition de jeu individuellement ou collectivement.</span>
+  },
+  {
+    id: "constraints",
+    title: "Contraintes d'Impro",
+    subtitle: "Explorer les contraintes",
+    icon: BookOpen,
+    color: "from-purple-500 to-cyan-400",
+    menu: "warmup",
+    keywords: ["contraintes", "contrainte", "règle", "défi", "difficulté", "limite", "s'échauffer"],
+    helpDescription: <span>Des contraintes de jeu (sans verbe, en rimes, etc.) pour pimenter vos improvisations et forcer la créativité.</span>
+  },
+  {
+    id: "hiha",
+    title: "Règles du Hi Ha",
+    subtitle: "Signes & réflexes collectifs",
+    icon: Zap,
+    color: "from-amber-500 to-orange-600",
+    menu: "warmup",
+    keywords: ["hiha", "hi ha", "jeu", "réflexe", "rythme", "bruit", "s'échauffer"],
+    helpDescription: <span>Les règles et gestes du célèbre jeu d'échauffement collectif Hi Ha, idéal pour travailler le <strong>rythme</strong> et la <strong>concentration</strong>.</span>
+  },
 
   // Root utilities (always visible at root level)
-  { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500", keywords: ["qui commence", "commencer", "début", "premier", "tirage", "tactile", "touch", "jeu"] },
-  { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500", keywords: ["timer", "temps", "chronomètre", "durée", "scène", "jeu", "cloche", "buzzer"] },
-  { id: "docs", title: "Aide & Guide", subtitle: "Aide à propos de l'application", icon: HelpCircle, color: "from-pink-500 to-yellow-400", keywords: ["aide", "guide", "à propos", "documentation", "règles", "mentions", "infos"] },
-  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500", keywords: ["retour", "avis", "feedback", "idée", "suggestion", "bug", "amélioration", "message"] }
+  {
+    id: "who_starts",
+    title: "Qui Commence ?",
+    subtitle: "Tirage multi-touch",
+    icon: Fingerprint,
+    color: "from-purple-500 to-pink-500",
+    keywords: ["qui commence", "commencer", "début", "premier", "tirage", "tactile", "touch", "jeu"],
+    helpDescription: <span>Idéal pour désigner l'initiateur d'une scène. Posez jusqu'à 5 doigts sur l'écran. Après 3 secondes de décompte, le gagnant s'affiche en vert vif avec un effet haptique.</span>
+  },
+  {
+    id: "timer",
+    title: "Timer de Scène",
+    subtitle: "Lancer l'impro (2m30s)",
+    icon: Hourglass,
+    color: "from-cyan-400 to-pink-500",
+    keywords: ["timer", "temps", "chronomètre", "durée", "scène", "jeu", "cloche", "buzzer"],
+    helpDescription: <span>Un chronomètre préréglé sur <strong>2 minutes 30 secondes</strong> (durée standard d'improvisation). Lorsque le temps est écoulé, le message dynamique « Hey ! Impro ! » signale la fin.</span>
+  },
+  {
+    id: "docs",
+    title: "Aide & Guide",
+    subtitle: "Aide à propos de l'application",
+    icon: HelpCircle,
+    color: "from-pink-500 to-yellow-400",
+    keywords: ["aide", "guide", "à propos", "documentation", "règles", "mentions", "infos"]
+  },
+  {
+    id: "feedback",
+    title: "Retour & Idées",
+    subtitle: "Envoyer vos suggestions",
+    icon: MessageSquare,
+    color: "from-cyan-400 to-indigo-500",
+    keywords: ["retour", "avis", "feedback", "idée", "suggestion", "bug", "amélioration", "message"],
+    helpDescription: <span>Un formulaire de feedback direct permettant aux utilisateurs d'envoyer des demandes, suggestions ou observations pour améliorer l'application.</span>
+  }
 ];
 
 export default function Dashboard() {
@@ -612,6 +742,7 @@ export default function Dashboard() {
           <DocsView
             onOpenPrivacy={() => setIsPrivacyOpen(true)}
             onOpenAbout={openAbout}
+            tiles={tiles}
           />
         );
       case "hiha":
@@ -746,26 +877,26 @@ export default function Dashboard() {
                   setSearchQuery("");
                 }
               }}
-              className={`w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all ${
+              className={`w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all ${
                 isSearchOpen ? "text-purple-400 border-purple-500/30" : "text-zinc-400 hover:text-white"
               }`}
               title="Rechercher un outil"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-5 h-5" />
             </button>
             <button
               onClick={() => triggerRegen(devMode)}
-              className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
+              className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="Générer 500 suggestions neuves via l'IA (Gemini) dans le réservoir local"
             >
-              <RotateCw className="w-4 h-4" />
+              <RotateCw className="w-5 h-5" />
             </button>
             <button
               onClick={openAbout}
-              className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
+              className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="À propos"
             >
-              <Info className="w-4 h-4" />
+              <Info className="w-5 h-5" />
             </button>
           </div>
         </header>
@@ -940,17 +1071,17 @@ export default function Dashboard() {
             />
             <button
               onClick={() => triggerRegen(devMode, activeTileId || undefined)}
-              className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
+              className="w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="Générer 50 suggestions neuves via l'IA (Gemini) pour cette catégorie"
             >
-              <RotateCw className="w-3.5 h-3.5" />
+              <RotateCw className="w-4 h-4" />
             </button>
             <button
               onClick={openAbout}
-              className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
+              className="w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="À propos"
             >
-              <Info className="w-3.5 h-3.5" />
+              <Info className="w-4 h-4" />
             </button>
           </div>
         </header>

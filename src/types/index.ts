@@ -17,6 +17,7 @@ export interface Tile {
   menu?: string;
   keywords?: string[];
   isDir?: boolean;
+  helpDescription?: React.ReactNode;
 }
 
 export interface TouchPoint {
