@@ -763,7 +763,7 @@ export default function Dashboard() {
 
       {/* Feedback Toast Banner */}
       {showFeedbackToast && (
-        <div className="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 p-[1.5px] rounded-2xl bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-600 shadow-2xl animate-toast select-none">
+        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:bottom-4 md:w-96 z-50 p-[1.5px] rounded-2xl bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-600 shadow-2xl animate-toast-up select-none">
           <div className="bg-zinc-950/95 backdrop-blur-md p-4 rounded-[14px] flex items-start justify-between gap-3 text-zinc-100">
             <div className="flex-1">
               <h4 className="text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 uppercase tracking-widest mb-1.5">
