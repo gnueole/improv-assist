@@ -89,6 +89,7 @@ export default function Dashboard() {
   const [activeTileId, setActiveTileId] = useState<string | null>(null);
   const [currentMenuId, setCurrentMenuId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
@@ -375,6 +376,7 @@ export default function Dashboard() {
         e.preventDefault();
         searchInputRef.current?.blur();
         setSearchQuery("");
+        setIsSearchOpen(false);
         return;
       }
 
@@ -388,7 +390,8 @@ export default function Dashboard() {
       // 1. Focus Search Bar on '/'
       if (e.key === "/" && activeTileId === null) {
         e.preventDefault();
-        searchInputRef.current?.focus();
+        setIsSearchOpen(true);
+        setTimeout(() => searchInputRef.current?.focus(), 50);
         return;
       }
 
@@ -561,6 +564,7 @@ export default function Dashboard() {
     isPrivacyOpen,
     focusedTileIndex,
     devMode,
+    isSearchOpen,
     triggerRegen,
     openAbout,
     closeAbout,
@@ -726,10 +730,27 @@ export default function Dashboard() {
               className={`status-light ${n8nStatus}`}
               title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion 🧠 Opérationnelle"}
             />
+            {/* Search Button */}
+            <button
+              onClick={() => {
+                setIsSearchOpen(prev => !prev);
+                if (!isSearchOpen) {
+                  setTimeout(() => searchInputRef.current?.focus(), 50);
+                } else {
+                  setSearchQuery("");
+                }
+              }}
+              className={`w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all ${
+                isSearchOpen ? "text-purple-400 border-purple-500/30" : "text-zinc-400 hover:text-white"
+              }`}
+              title="Rechercher un outil"
+            >
+              <Search className="w-4 h-4" />
+            </button>
             <button
               onClick={() => triggerRegen(devMode)}
               className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
-              title="Régénérer le réservoir"
+              title="Générer 500 suggestions neuves via l'IA (Gemini) dans le réservoir local"
             >
               <RotateCw className="w-4 h-4" />
             </button>
@@ -753,35 +774,37 @@ export default function Dashboard() {
           </p>
         </section>
 
-        {/* Spotlight-style Search Bar (Only visible on root or search active) */}
-        <div className="relative max-w-md w-full mx-auto mb-5 px-6 shrink-0">
-          <div className="relative flex items-center bg-zinc-900/60 backdrop-blur-md border border-zinc-800 rounded-xl focus-within:border-zinc-700 focus-within:ring-2 focus-within:ring-purple-500/20 transition-all duration-300">
-            <Search className="w-4 h-4 text-zinc-500 ml-3 shrink-0" />
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Rechercher un outil... (Appuyez sur /)"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent border-none outline-none text-zinc-100 text-sm py-2.5 pl-2 pr-10 placeholder-zinc-500 focus:ring-0"
-            />
-            {searchQuery ? (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 p-1 rounded-full text-zinc-500 hover:text-zinc-300 transition-colors"
-                title="Vider la recherche"
-              >
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            ) : (
-              <kbd className="absolute right-3 px-1.5 py-0.5 rounded border border-zinc-800 text-[10px] font-mono text-zinc-500 bg-zinc-950/60 select-none">
-                /
-              </kbd>
-            )}
+        {/* Spotlight-style Search Bar (Only visible when toggled open) */}
+        {isSearchOpen && (
+          <div className="relative max-w-md w-full mx-auto mb-5 px-6 shrink-0 animate-fade-in">
+            <div className="relative flex items-center bg-zinc-900/60 backdrop-blur-md border border-zinc-800 rounded-xl focus-within:border-zinc-700 focus-within:ring-2 focus-within:ring-purple-500/20 transition-all duration-300">
+              <Search className="w-4 h-4 text-zinc-500 ml-3 shrink-0" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Rechercher un outil..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-transparent border-none outline-none text-zinc-100 text-sm py-2.5 pl-2 pr-10 placeholder-zinc-500 focus:ring-0"
+              />
+              {searchQuery ? (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 p-1 rounded-full text-zinc-500 hover:text-zinc-300 transition-colors"
+                  title="Vider la recherche"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              ) : (
+                <kbd className="absolute right-3 px-1.5 py-0.5 rounded border border-zinc-800 text-[10px] font-mono text-zinc-500 bg-zinc-950/60 select-none">
+                  /
+                </kbd>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Dashboard Tile Grid */}
         <section className="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-6 pb-6 landscape:my-4">
@@ -911,7 +934,7 @@ export default function Dashboard() {
             <button
               onClick={() => triggerRegen(devMode, activeTileId || undefined)}
               className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
-              title="Régénérer cette catégorie"
+              title="Générer 50 suggestions neuves via l'IA (Gemini) pour cette catégorie"
             >
               <RotateCw className="w-3.5 h-3.5" />
             </button>
