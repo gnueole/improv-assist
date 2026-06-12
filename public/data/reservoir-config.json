@@ -1814,5 +1814,89 @@
       "accessory": "une console portable",
       "gesture": "parle extrêmement vite avec un jargon technique"
     }
+  ],
+  "animals": [
+    {
+      "text": "Un lion végétarien",
+      "category": "Sauvage"
+    },
+    {
+      "text": "Un paresseux pressé",
+      "category": "Sauvage"
+    },
+    {
+      "text": "Un caniche philosophe",
+      "category": "Domestique"
+    },
+    {
+      "text": "Un pigeon agent secret",
+      "category": "Urbain"
+    },
+    {
+      "text": "Un requin ayant le mal de mer",
+      "category": "Aquatique"
+    },
+    {
+      "text": "Un caméléon qui n'arrive pas à choisir sa couleur",
+      "category": "Sauvage"
+    },
+    {
+      "text": "Un chat snob et manipulateur",
+      "category": "Domestique"
+    },
+    {
+      "text": "Un moustique syndicaliste",
+      "category": "Insecte"
+    },
+    {
+      "text": "Un pingouin qui rêve de voler",
+      "category": "Polaire"
+    },
+    {
+      "text": "Un écureuil amnésique",
+      "category": "Sauvage"
+    }
+  ],
+  "objects": [
+    {
+      "text": "Un parapluie percé",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une brosse à dents connectée bavarde",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un grille-pain jaloux de la bouilloire",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une clé USB contenant le secret de l'univers",
+      "category": "Technologie"
+    },
+    {
+      "text": "Une chaussette orpheline et révoltée",
+      "category": "Vêtement"
+    },
+    {
+      "text": "Un miroir menteur et flatteur",
+      "category": "Insolite"
+    },
+    {
+      "text": "Un stylo qui n'écrit que des vérités blessantes",
+      "category": "Outil"
+    },
+    {
+      "text": "Un réveil-matin sadique",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un chapeau melon magique",
+      "category": "Vêtement"
+    },
+    {
+      "text": "Une bouteille jetée à la mer sans message",
+      "category": "Insolite"
+    }
   ]
 }

@@ -63,7 +63,7 @@ function parsePrompt(category?: string, count: number = 350): string {
     const secContent = sectionsStr[category].replace("{{count}}", count.toString());
     return `${basePrompt}\n\n${secContent}\n\n${footerPrompt}`;
   } else {
-    const allSections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+    const allSections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"];
     const allSectionsContent = allSections.map((secName) => {
       const secBody = sectionsStr[secName] || "";
       const itemsCount = Math.floor(count / allSections.length) || 50;

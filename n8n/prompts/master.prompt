@@ -46,6 +46,16 @@ Génère un fichier JSON structuré contenant les listes d'éléments inspirants
 8. "characters" ({{count}} éléments) : suggestions de personnages/archétypes dramatiques au format : { "text": string (le nom de l'archétype, ex: "Médecin militaire"), "age": string (ex: "environ 40 ans" ou "Adolescent"), "accessory": string (un accessoire physique suggéré à mimer ou utiliser, ex: "une montre à gousset"), "gesture": string (un comportement corporel ou tic physique suggéré, ex: "se frotte nerveusement les mains") }
 
 # ==============================================================================
+# SECTION animals
+# ==============================================================================
+9. "animals" ({{count}} éléments) : suggestions d'animaux (avec une touche insolite ou un adjectif amusant) au format : { "text": string (ex: "Un caniche philosophe"), "category": "Sauvage" | "Domestique" | "Aquatique" | "Urbain" | "Insecte" | "Polaire" }
+
+# ==============================================================================
+# SECTION objects
+# ==============================================================================
+10. "objects" ({{count}} éléments) : suggestions d'objets (insolites, du quotidien, technologiques, vêtements, outils) au format : { "text": string (ex: "Un parapluie percé" ou "Une brosse à dents bavarde"), "category": "Quotidien" | "Insolite" | "Technologie" | "Vêtement" | "Outil" }
+
+# ==============================================================================
 # FOOTER
 # ==============================================================================
 Important : Ne renvoie rien d'autre que le JSON brut de cette structure (sans balises de code markdown ni texte d'explication).

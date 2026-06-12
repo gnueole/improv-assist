@@ -6,13 +6,16 @@
  * @license MIT
  */
 
-import { Emotion, Location, Era, Character } from "@/types";
+import { Emotion, Location, Era, Character, Animal, ObjectItem } from "@/types";
 import reservoirData from "../../public/data/reservoir-config.json";
 
 export const EMOTIONS: Emotion[] = (reservoirData as any).emotions || [];
 export const LOCATIONS: Location[] = (reservoirData as any).locations || [];
 export const ERAS: Era[] = (reservoirData as any).eras || [];
 export const CHARACTERS: Character[] = (reservoirData as any).characters || [];
+export const ANIMALS: Animal[] = (reservoirData as any).animals || [];
+export const OBJECTS: ObjectItem[] = (reservoirData as any).objects || [];
+
 
 export const PRESET_COLORS: string[] = [
   "rgba(6, 182, 212, 0.8)", // Cyan

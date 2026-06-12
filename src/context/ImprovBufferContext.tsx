@@ -96,7 +96,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
         if (category) {
           payload.category = category;
         } else {
-          payload.categories_required = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+          payload.categories_required = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"];
         }
 
         const response = await fetch("/api/improv-regen", {
@@ -118,7 +118,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
         const fetchedBuffer = buildBufferFromData(data);
         const mergedBuffer = { ...currentBuffer };
         
-        const catsToUpdate = category ? [category] : ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+        const catsToUpdate = category ? [category] : ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"];
         for (const cat of catsToUpdate) {
           mergedBuffer[cat as keyof ImprovBuffer] = fetchedBuffer[cat as keyof ImprovBuffer] as any;
         }
@@ -146,7 +146,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
         } catch (e) {}
 
         const mergedBuffer = { ...currentBuffer };
-        const catsToUpdate = category ? [category] : ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"];
+        const catsToUpdate = category ? [category] : ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"];
         for (const cat of catsToUpdate) {
           mergedBuffer[cat as keyof ImprovBuffer] = localBuffer[cat as keyof ImprovBuffer] as any;
         }
@@ -177,7 +177,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
   }, [showToast]);
 
   const pickItem = useCallback(async (category: string, filter?: string): Promise<any> => {
-    const isManaged = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"].includes(category);
+    const isManaged = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"].includes(category);
     
     if (!isManaged) {
       return null;
@@ -302,7 +302,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
 
       // Merge into currentBuffer
       const mergedBuffer = { ...currentBuffer };
-      for (const cat of ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters"]) {
+      for (const cat of ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"]) {
         const existingQueue = (currentBuffer[cat as keyof ImprovBuffer] || []) as any[];
         const newItems = (cat === category ? remainingNewItems : (fetchedBuffer[cat as keyof ImprovBuffer] || [])) as any[];
         // Avoid duplicate items

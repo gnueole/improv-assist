@@ -14,8 +14,6 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 
 ## 🌟 Key Features
 
-| Fonctionnalité | Description |
-| :--- | :--- |
 | **🎭 Générateur d'Émotions** | Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de **1 à 10**. |
 | **👆 Qui Commence ? (Multi-touch)** | Tirage au sort interactif pour désigner qui débute la scène. Posez jusqu'à 5 doigts sur l'écran. Après un décompte de 3 secondes, le vainqueur est choisi aléatoirement. |
 | **✨ Thèmes d'Impro** | Suggère des sujets de jeu et des idées d'histoires poétiques ou comiques. |
@@ -24,6 +22,9 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 | **📍 Suggestion de Lieu** | Suggestions créatives instantanées de cadres physiques pour planter le décor de vos scènes. |
 | **🕰️ Suggestion d'Époque** | Suggestions instantanées de temporalités (Moyen Âge, futur, années 80) pour situer vos histoires. |
 | **👤 Personnages** | Suggestions d'archétypes dramatiques avec âge suggéré, accessoire à mimer et comportement corporel/tic. |
+| **🐰 Animaux** | Suggère un animal (sauvage, domestique, polaire, etc.) avec une touche insolite ou un adjectif amusant. |
+| **📦 Objets** | Suggère un objet insolite ou du quotidien (outil, vêtement, technologie, etc.) à incarner ou utiliser. |
+| **🔍 Recherche & Submenus** | Restructuration du dashboard en sous-menus thématiques (*Incarner*, *Inspiration*, *S'échauffer*) avec barre de recherche Spotlight globale (raccourci `/`). |
 | **📚 Contraintes d'Impro** | Affiche les contraintes et règles théâtrales issues de l'espace de travail Notion de la troupe. |
 | **🤸 Échauffements** | Liste d'exercices collectifs ou individuels avec des descriptions et conseils pour se préparer au jeu. |
 | **⚡ Règles du Hi Ha** | Guide de référence rapide listant les gestes officiels du jeu d'échauffement collectif Hi Ha. |
@@ -130,7 +131,7 @@ ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_trae
 
 ## 🧠 Choix du Modèle d'IA (Gemini)
 
-La génération du réservoir de prompts (400 éléments répartis en 8 catégories) requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et respect de consignes complexes (priorité aux relations humaines vs surréalisme d'objets) :
+La génération du réservoir de prompts (500 éléments répartis en 10 catégories) requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et respect de consignes complexes (priorité aux relations humaines vs surréalisme d'objets) :
 
 * **Gemini 2.5 Pro (`gemini-2.5-pro`) — Idéal pour la génération statique** : C'est le modèle utilisé par le script `populate_reservoir.py`. Il dispose d'une excellente capacité de raisonnement et évite les répétitions ou la fatigue créative sur les grands volumes.
   * *Temps d'exécution moyen* : ~90 secondes (timeout de script validé à 180s).
@@ -142,17 +143,17 @@ La génération du réservoir de prompts (400 éléments répartis en 8 catégor
 ## 📋 Wishlist / Todo
 
 Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'application :
-- [ ] **Idées de tuiles à rajouter** : 
+- [x] **Idées de tuiles à rajouter** : 
   - Personnas avec tips et variantes
   - Animaux 
   - Objets
   - Un grand mixer pour créer ses propres combinaisons les plus folles !
 - [x] **Améliorations des notifications** : Toaster de feedback après 20 min d'utilisation
-- [ ] **Résilience Audio (Autoplay Policy)** : Déclencher explicitement `AudioContext.resume()` lors d'une interaction utilisateur directe (ex: au clic sur le bouton de démarrage) afin d'éviter le blocage automatique de l'audio synthétique par les navigateurs.
+- [x] **Résilience Audio (Autoplay Policy)** : Déclencher explicitement `AudioContext.resume()` lors d'une interaction utilisateur directe (ex: au clic sur le bouton de démarrage) afin d'éviter le blocage automatique de l'audio synthétique par les navigateurs.
 - [ ] **Mode Hors-ligne 100% autonome (Service Worker / Next-PWA)** : Implémenter un Service Worker basé sur Next-PWA/Workbox pour mettre en cache les pages statiques et les fichiers de script (.js, .css) afin de permettre à l'application de s'ouvrir et de se recharger sans aucune connexion réseau.
 - [ ] **Ajout de nouvelles tuiles freemium/premium** : Pour financer l'application (voire la rendre pérenne), il faudrait ajouter de nouvelles tuiles personalisées payantes ou via un abonnement mensuel/annuel.
 - [ ] **Application MOBILE** : Développer une application mobile pour Android et iOS. Cela permettrait d'avoir des notifications push, des widgets, etc.
-- [ ] **Historique de jeu & Historique des tirages** : Garder une trace locale (dans le `localStorage`) des 10 dernières improvisations jouées pour éviter les doublons absolus d'une séance sur l'autre.
+- [x] **Historique de jeu & Historique des tirages** : Garder une trace locale (dans le `localStorage` sous `improv_history`) des 10 dernières suggestions tirées pour éviter les doublons absolus à court terme.
 - [ ] **Timer avancé avec buzzer** : Ajouter des sons de buzzer de fin configurables, ainsi que la possibilité de régler le temps libre.
 - [ ] **Multilingue (FR / EN)** : Traduction complète de l'application pour l'usage dans des festivals ou ateliers internationaux.
 
@@ -161,16 +162,23 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 ## 📝 Changelog
 
 ### Version 0.6 BETA (0.6-beta / 1.0.0-beta.6) - 2026-06-12
-- **Générateur de Personnages** : Ajout d'une nouvelle catégorie et d'un écran dédié pour suggérer des archétypes de personnages avec un âge, un accessoire à mimer et un comportement corporel ou tic physique.
-- **Footer de détail inspirant** : Remplacement de l'ancienne mention technique du footer *"Console d'outils d'improvisation"* par le plus poétique *"Compagnon d'Inspiration"* dans les vues de détail.
-- **Refonte visuelle de la grille** : Déplacement de la tuile des Personnages avant celle des Contraintes et élargissement de la tuile de Retours & Idées sous forme de bannière large en bas de grille.
+- **Restructuration du Tableau de Bord (Submenus)** : Restructuration de la grille plate de tuiles en un menu hiérarchique regroupé par dossiers thématiques :
+  - **Incarner** : Emotions, Personnages, Animaux, Objets
+  - **Inspiration** : Scénarios, Lieux, Époques, Thèmes
+  - **S'échauffer** : Échauffements, Contraintes, Règles du Hi Ha
+  - Les utilitaires essentiels (*Timer de scène*, *Qui commence*, *Aide*, *Retour*) restent accessibles au premier niveau.
+- **Barre de Recherche Spotlight** : Intégration d'une barre de filtrage réactive en haut du tableau de bord.
+  - La saisie d'un terme aplatit instantanément l'arborescence pour afficher directement les cartes feuilles correspondantes.
+  - Raccourci clavier `/` pour focaliser la recherche et touche `Échap` pour vider et fermer.
+- **Nouveaux Générateurs d'Inspiration** :
+  - **Animaux** : Suggestion d'animaux insolites (ex: *Un pigeon agent secret*).
+  - **Objets** : Suggestion d'objets du quotidien ou insolites (ex: *Une brosse à dents bavarde*).
+- **Historique Anti-Doublons** : Sauvegarde des 10 derniers tirages dans le `localStorage` sous `improv_history` pour interdire les tirages identiques consécutifs à court terme.
+- **Contournement Autoplay (Scene Timer)** : Initialisation et reprise forcée de l'instance d'audios Web Audio `AudioContext` lors du clic initial utilisateur de démarrage pour court-circuiter le blocage d'autoplay des navigateurs mobiles.
+- **Positionnement du Toaster de Feedback** : Repositionnement du toaster d'invitation aux retours en bas à droite de l'écran avec une animation de glissement vertical ascendante (`animate-toast-up`) pour plus de discrétion.
 - **Amélioration des retours & Télémétrie** :
   - Intégration de Google Analytics (GA4) et Google Tag Manager (GTM) via `dataLayer.push` pour remonter les événements `workflow_trigger` (avec catégorie et statut forcé) lors des rechargements.
   - Logging asynchrone en parallèle vers la base de données de retours d'expérience sur Notion via un nouveau nœud dans le workflow n8n (`Log to Notion`), créant des pages typées "Observation" et préfixées par `[Regen]`.
-- **Toaster d'évaluation (Feedback Prompt)** :
-  - Intégration d'une bannière de feedback ("Votre avis compte !") apparaissant automatiquement après 20 minutes d'utilisation cumulée par session (suivi via `sessionStorage`).
-  - Toast esthétique et entièrement dismissable (bouton de fermeture et action "Donner mon avis" redirigeant vers l'onglet Feedback), mémorisant le choix dans `localStorage` pour éviter tout rappel importun.
-  - Prise en charge du paramètre d'URL de test `?test_feedback=true` pour forcer l'apparition du toaster après 5 secondes.
 
 ### Version 0.5 BETA (0.5-beta / 1.0.0-beta.5) - 2026-06-11
 - **Migration vers Gemini 2.5 Pro** : Mise à niveau de l'intelligence artificielle et du modèle sous-jacent vers `gemini-2.5-pro` pour la génération du réservoir statique (350 prompts répartis en 7 catégories). Cette version apporte une plus grande cohérence dramatique en privilégiant des relations humaines ancrées avec des conflits et des enjeux clairs, tout en évitant le surréalisme abstrait d'objets.

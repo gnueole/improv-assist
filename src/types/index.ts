@@ -14,6 +14,9 @@ export interface Tile {
   subtitle: string;
   icon: React.ComponentType<any>;
   color: string;
+  menu?: string;
+  keywords?: string[];
+  isDir?: boolean;
 }
 
 export interface TouchPoint {
@@ -69,6 +72,16 @@ export interface Character {
   gesture: string;
 }
 
+export interface Animal {
+  text: string;
+  category?: string;
+}
+
+export interface ObjectItem {
+  text: string;
+  category?: string;
+}
+
 export interface ImprovBuffer {
   scenarios: Scenario[];
   categories: Category[];
@@ -78,5 +91,8 @@ export interface ImprovBuffer {
   locations: Location[];
   eras: Era[];
   characters: Character[];
+  animals: Animal[];
+  objects: ObjectItem[];
   last_fetch: number | null;
 }
+

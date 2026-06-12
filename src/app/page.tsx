@@ -2,14 +2,15 @@
 
 /**
  * @file page.tsx
- * @description Main app orchestrator / home dashboard page. Features a balanced 10-item grid of tiles, 
- * handles active tile navigation, virtual history states, and mounts generator components.
+ * @description Main app orchestrator / home dashboard page. Features a nested menu hierarchy,
+ * a Spotlight-style search bar, handles active tile navigation, virtual history states, 
+ * and mounts generator components including the new Animaux and Objets generators.
  * @author Éole <hi@eole>
  * @creation-date $Creation Date$
  * @license MIT
  */
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   Smile,         // Emotions Generator
   Fingerprint,   // Who Starts? (Multi-touch)
@@ -25,7 +26,10 @@ import {
   Terminal,      // Dev Prompt Inspector Trigger
   RotateCw,      // Reservoir Regeneration Button
   MessageSquare, // Feedback & Ideas Form
-  User           // Characters Icon
+  User,          // Characters Icon
+  PawPrint,      // Animals Icon
+  Package,       // Objects Icon
+  Search         // Search Icon
 } from "lucide-react";
 
 import { Tile } from "@/types";
@@ -50,31 +54,49 @@ import CharacterGenerator from "@/components/CharacterGenerator";
 
 import reservoirPool from "../../public/data/reservoir-config.json";
 
-// Symmetrical layout with 11 items grid (2 columns on mobile, 3 columns on desktop)
+// Nested structure with parent directories and leaf nodes
 const tiles: Tile[] = [
-  { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500" },
-  { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500" },
-  { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400" },
-  { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500" },
-  { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500" },
-  { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400" },
-  { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400" },
-  { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400" },
-  { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400" },
-  { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600" },
-  { id: "docs", title: "Aide & Guide", subtitle: "Aide à propos de l'application", icon: HelpCircle, color: "from-pink-500 to-yellow-400" },
-  { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600" },
-  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500" }
+  // Directories
+  { id: "incarnate", title: "Incarner", subtitle: "Personnages, émotions...", icon: User, color: "from-purple-500 to-indigo-500", isDir: true },
+  { id: "inspiration", title: "Inspiration", subtitle: "Thèmes, lieux, scénarios...", icon: Sparkles, color: "from-indigo-400 to-cyan-400", isDir: true },
+  { id: "warmup", title: "S'échauffer", subtitle: "Exercices et contraintes...", icon: Zap, color: "from-amber-500 to-orange-600", isDir: true },
+
+  // Incarner submenu
+  { id: "emotions", title: "Générateur d'Émotions", subtitle: "Sensation à incarner", icon: Smile, color: "from-cyan-400 to-purple-500", menu: "incarnate", keywords: ["emotions", "émotion", "colère", "joie", "tristesse", "sensation", "sentiment", "incarner", "jeu"] },
+  { id: "characters", title: "Personnages", subtitle: "Âge, accessoire & attitude", icon: User, color: "from-purple-500 to-cyan-400", menu: "incarnate", keywords: ["personnage", "avatar", "rôle", "archétype", "âge", "accessoire", "attitude", "incarner"] },
+  { id: "animals", title: "Animaux", subtitle: "Animaux insolites", icon: PawPrint, color: "from-green-400 to-emerald-600", menu: "incarnate", keywords: ["animaux", "animal", "bête", "faune", "cri", "incarner", "sauvage", "domestique"] },
+  { id: "objects", title: "Objets", subtitle: "Objets à incarner ou utiliser", icon: Package, color: "from-orange-400 to-amber-500", menu: "incarnate", keywords: ["objets", "objet", "chose", "accessoire", "truc", "outil", "matériel", "incarner"] },
+
+  // Inspiration submenu
+  { id: "scenarios", title: "Scénarios", subtitle: "Situations de départ", icon: BookOpen, color: "from-yellow-400 to-green-500", menu: "inspiration", keywords: ["scenarios", "scénario", "situation", "histoire", "contexte", "brief", "départ", "inspiration"] },
+  { id: "locations", title: "Suggestion de Lieu", subtitle: "Cadre de l'impro", icon: MapPin, color: "from-pink-500 to-yellow-400", menu: "inspiration", keywords: ["lieux", "lieu", "endroit", "cadre", "décor", "pièce", "pays", "inspiration"] },
+  { id: "eras", title: "Suggestion d'Époque", subtitle: "Temporalité de la scène", icon: Clock, color: "from-yellow-400 to-cyan-400", menu: "inspiration", keywords: ["époques", "époque", "temps", "futur", "passé", "siècle", "temporalité", "inspiration"] },
+  { id: "themes", title: "Thèmes d'Impro", subtitle: "Sujets & idées d'histoires", icon: Sparkles, color: "from-indigo-400 to-cyan-400", menu: "inspiration", keywords: ["thèmes", "thème", "sujet", "titre", "idée", "inspiration"] },
+
+  // Warmup submenu
+  { id: "echauffements", title: "Échauffements", subtitle: "Exercices de préparation", icon: Zap, color: "from-amber-500 to-orange-600", menu: "warmup", keywords: ["échauffements", "échauffement", "exercice", "préparation", "groupe", "corps", "voix", "s'échauffer"] },
+  { id: "constraints", title: "Contraintes d'Impro", subtitle: "Explorer les contraintes", icon: BookOpen, color: "from-purple-500 to-cyan-400", menu: "warmup", keywords: ["contraintes", "contrainte", "règle", "défi", "difficulté", "limite", "s'échauffer"] },
+  { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600", menu: "warmup", keywords: ["hiha", "hi ha", "jeu", "réflexe", "rythme", "bruit", "s'échauffer"] },
+
+  // Root utilities (always visible at root level)
+  { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500", keywords: ["timer", "temps", "chronomètre", "durée", "scène", "jeu", "cloche", "buzzer"] },
+  { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500", keywords: ["qui commence", "commencer", "début", "premier", "tirage", "tactile", "touch", "jeu"] },
+  { id: "docs", title: "Aide & Guide", subtitle: "Aide à propos de l'application", icon: HelpCircle, color: "from-pink-500 to-yellow-400", keywords: ["aide", "guide", "à propos", "documentation", "règles", "mentions", "infos"] },
+  { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500", keywords: ["retour", "avis", "feedback", "idée", "suggestion", "bug", "amélioration", "message"] }
 ];
 
 export default function Dashboard() {
   const [activeTileId, setActiveTileId] = useState<string | null>(null);
+  const [currentMenuId, setCurrentMenuId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isPromptOpen, setIsPromptOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [systemPrompt, setSystemPrompt] = useState<string>("Chargement du prompt...");
   const [focusedTileIndex, setFocusedTileIndex] = useState<number>(0);
   const [showFeedbackToast, setShowFeedbackToast] = useState(false);
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch master.prompt dynamically when prompt modal is opened
   useEffect(() => {
@@ -110,20 +132,68 @@ export default function Dashboard() {
 
   const activeTile = tiles.find(t => t.id === activeTileId);
 
-  // Tile Selection History Navigation
-  const handleSelectTile = useCallback((id: string) => {
-    setActiveTileId(id);
-    const idx = tiles.findIndex(t => t.id === id);
-    if (idx !== -1) {
-      setFocusedTileIndex(idx);
+  // Filter visible tiles dynamically based on submenu state and search query
+  const searchNormalized = searchQuery.trim().toLowerCase();
+  const renderedTiles = (() => {
+    if (searchNormalized !== "") {
+      // Bypasses the submenu hierarchy and flattens all leaf node cards matching the query
+      return tiles.filter(t => 
+        !t.isDir && 
+        (t.title.toLowerCase().includes(searchNormalized) ||
+         t.subtitle.toLowerCase().includes(searchNormalized) ||
+         (t.keywords && t.keywords.some(k => k.toLowerCase().includes(searchNormalized))))
+      );
     }
-    window.history.pushState({
-      activeTileId: id,
-      isAboutOpen: false,
-      isPromptOpen: false,
-      isRegenerating: false
-    }, "", `/${id}`);
-  }, []);
+    
+    // Normal submenu structure
+    const baseTiles = tiles.filter(t => t.menu === (currentMenuId || undefined));
+    if (currentMenuId) {
+      // Insert a dynamic 'Retour' tile at index 0 inside submenus
+      const backTile: Tile = {
+        id: "back_to_root",
+        title: "Retour",
+        subtitle: "Menu principal",
+        icon: ChevronLeft,
+        color: "from-zinc-700 to-zinc-800"
+      };
+      return [backTile, ...baseTiles];
+    }
+    return baseTiles;
+  })();
+
+  // Tile Selection History Navigation
+  const handleSelectTile = useCallback((tile: Tile) => {
+    if (tile.isDir) {
+      setCurrentMenuId(tile.id);
+      setFocusedTileIndex(0);
+      window.history.pushState({
+        activeTileId: null,
+        currentMenuId: tile.id,
+        isAboutOpen: false,
+        isPromptOpen: false,
+        isRegenerating: false
+      }, "", `/${tile.id}`);
+    } else if (tile.id === "back_to_root") {
+      setCurrentMenuId(null);
+      setFocusedTileIndex(0);
+      window.history.pushState({
+        activeTileId: null,
+        currentMenuId: null,
+        isAboutOpen: false,
+        isPromptOpen: false,
+        isRegenerating: false
+      }, "", "/");
+    } else {
+      setActiveTileId(tile.id);
+      window.history.pushState({
+        activeTileId: tile.id,
+        currentMenuId: currentMenuId,
+        isAboutOpen: false,
+        isPromptOpen: false,
+        isRegenerating: false
+      }, "", `/${tile.id}`);
+    }
+  }, [currentMenuId]);
 
   const dismissFeedbackToast = useCallback(() => {
     localStorage.setItem("feedback_prompt_dismissed", "true");
@@ -133,7 +203,8 @@ export default function Dashboard() {
   const handleFeedbackClick = useCallback(() => {
     localStorage.setItem("feedback_prompt_dismissed", "true");
     setShowFeedbackToast(false);
-    handleSelectTile("feedback");
+    const feedbackTile = tiles.find(t => t.id === "feedback");
+    if (feedbackTile) handleSelectTile(feedbackTile);
   }, [handleSelectTile]);
 
   // Track usage time for feedback toast
@@ -168,11 +239,12 @@ export default function Dashboard() {
     setIsAboutOpen(true);
     window.history.pushState({
       activeTileId,
+      currentMenuId,
       isAboutOpen: true,
       isPromptOpen: false,
       isRegenerating: false
-    }, "", activeTileId ? `/${activeTileId}` : "/");
-  }, [activeTileId]);
+    }, "", activeTileId ? `/${activeTileId}` : (currentMenuId ? `/${currentMenuId}` : "/"));
+  }, [activeTileId, currentMenuId]);
 
   const closeAbout = useCallback(() => {
     if (window.history.state?.isAboutOpen) {
@@ -186,11 +258,12 @@ export default function Dashboard() {
     setIsPromptOpen(true);
     window.history.pushState({
       activeTileId,
+      currentMenuId,
       isAboutOpen: false,
       isPromptOpen: true,
       isRegenerating: false
-    }, "", activeTileId ? `/${activeTileId}` : "/");
-  }, [activeTileId]);
+    }, "", activeTileId ? `/${activeTileId}` : (currentMenuId ? `/${currentMenuId}` : "/"));
+  }, [activeTileId, currentMenuId]);
 
   const closePrompt = useCallback(() => {
     if (window.history.state?.isPromptOpen) {
@@ -205,14 +278,15 @@ export default function Dashboard() {
       setActiveTileId(null);
       window.history.pushState({
         activeTileId: null,
+        currentMenuId: currentMenuId,
         isAboutOpen: false,
         isPromptOpen: false,
         isRegenerating: false
-      }, "", "/");
+      }, "", currentMenuId ? `/${currentMenuId}` : "/");
     } else {
       window.history.back();
     }
-  }, []);
+  }, [currentMenuId]);
 
   // Handle browser back swipe/button
   useEffect(() => {
@@ -220,24 +294,29 @@ export default function Dashboard() {
       const state = event.state;
       if (state && typeof state === "object") {
         setActiveTileId(state.activeTileId !== undefined ? state.activeTileId : null);
+        setCurrentMenuId(state.currentMenuId !== undefined ? state.currentMenuId : null);
         setIsAboutOpen(!!state.isAboutOpen);
         setIsPromptOpen(!!state.isPromptOpen);
         if (state.activeTileId) {
-          const idx = tiles.findIndex(t => t.id === state.activeTileId);
+          const leafTiles = tiles.filter(t => !t.isDir);
+          const idx = leafTiles.findIndex(t => t.id === state.activeTileId);
           if (idx !== -1) {
             setFocusedTileIndex(idx);
           }
         }
       } else {
         const path = window.location.pathname.replace(/^\//, "");
-        const validTileIds = ["emotions", "who_starts", "themes", "timer", "scenarios", "locations", "eras", "characters", "constraints", "echauffements", "docs", "hiha", "feedback"];
-        const nextActive = validTileIds.includes(path) ? path : null;
-        setActiveTileId(nextActive);
-        if (nextActive) {
-          const idx = tiles.findIndex(t => t.id === nextActive);
-          if (idx !== -1) {
-            setFocusedTileIndex(idx);
-          }
+        const validTileIds = ["emotions", "who_starts", "themes", "timer", "scenarios", "locations", "eras", "characters", "constraints", "echauffements", "docs", "hiha", "feedback", "animals", "objects"];
+        const validDirs = ["incarnate", "inspiration", "warmup"];
+        if (validTileIds.includes(path)) {
+          setActiveTileId(path);
+          setCurrentMenuId(tiles.find(t => t.id === path)?.menu || null);
+        } else if (validDirs.includes(path)) {
+          setActiveTileId(null);
+          setCurrentMenuId(path);
+        } else {
+          setActiveTileId(null);
+          setCurrentMenuId(null);
         }
         setIsAboutOpen(false);
         setIsPromptOpen(false);
@@ -253,15 +332,25 @@ export default function Dashboard() {
   // Initial load pathname detection
   useEffect(() => {
     const path = window.location.pathname.replace(/^\//, "");
-    const validTileIds = ["emotions", "who_starts", "themes", "timer", "scenarios", "locations", "eras", "characters", "constraints", "echauffements", "docs", "hiha", "feedback"];
+    const validTileIds = ["emotions", "who_starts", "themes", "timer", "scenarios", "locations", "eras", "characters", "constraints", "echauffements", "docs", "hiha", "feedback", "animals", "objects"];
+    const validDirs = ["incarnate", "inspiration", "warmup"];
     if (validTileIds.includes(path)) {
       setActiveTileId(path);
-      const idx = tiles.findIndex(t => t.id === path);
-      if (idx !== -1) {
-        setFocusedTileIndex(idx);
-      }
+      const menuId = tiles.find(t => t.id === path)?.menu || null;
+      setCurrentMenuId(menuId);
       window.history.replaceState({
         activeTileId: path,
+        currentMenuId: menuId,
+        isAboutOpen: false,
+        isPromptOpen: false,
+        isRegenerating: false
+      }, "", `/${path}`);
+    } else if (validDirs.includes(path)) {
+      setActiveTileId(null);
+      setCurrentMenuId(path);
+      window.history.replaceState({
+        activeTileId: null,
+        currentMenuId: path,
         isAboutOpen: false,
         isPromptOpen: false,
         isRegenerating: false
@@ -284,21 +373,37 @@ export default function Dashboard() {
   // Global keyboard shortcuts on PC
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Bypass shortcuts if the user is typing in any input field
+      // Bypass shortcuts if the user is typing in any input field (except Esc to blur)
       const activeEl = document.activeElement;
-      if (
-        activeEl &&
-        (activeEl.tagName === "INPUT" ||
-          activeEl.tagName === "TEXTAREA" ||
-          activeEl.getAttribute("contenteditable") === "true")
-      ) {
+      const isTyping = activeEl && (
+        activeEl.tagName === "INPUT" ||
+        activeEl.tagName === "TEXTAREA" ||
+        activeEl.getAttribute("contenteditable") === "true"
+      );
+
+      // Esc logic for search bar focus escape
+      if ((e.key === "Escape" || e.key === "Esc") && activeEl === searchInputRef.current) {
+        e.preventDefault();
+        searchInputRef.current?.blur();
+        setSearchQuery("");
+        return;
+      }
+
+      if (isTyping) {
         return;
       }
 
       // Check key (case insensitive for letters)
       const key = e.key.toLowerCase();
 
-      // 1. Modals & Detail Navigation (Back / Left Arrow / Escape)
+      // 1. Focus Search Bar on '/'
+      if (e.key === "/" && activeTileId === null) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        return;
+      }
+
+      // 2. Modals & Detail Navigation (Back / Left Arrow / Escape)
       if (e.key === "ArrowLeft" || e.key === "Escape" || e.key === "Esc") {
         if (isPrivacyOpen) {
           e.preventDefault();
@@ -322,7 +427,7 @@ export default function Dashboard() {
         }
       }
 
-      // 2. "a" or "i" is About Modal toggle
+      // 3. "a" or "i" is About Modal toggle
       if (key === "a" || key === "i") {
         e.preventDefault();
         if (isAboutOpen) {
@@ -335,41 +440,43 @@ export default function Dashboard() {
         return;
       }
 
-      // 3. "g" is Regen trigger
+      // 4. "g" is Regen trigger
       if (key === "g") {
         e.preventDefault();
         triggerRegen(devMode);
         return;
       }
 
-      // 4. "m" is Feedback panel shortcut
+      // 5. "m" is Feedback panel shortcut
       if (key === "m") {
         e.preventDefault();
         setIsPrivacyOpen(false);
         setIsAboutOpen(false);
         setIsPromptOpen(false);
-        handleSelectTile("feedback");
+        const feedbackTile = tiles.find(t => t.id === "feedback");
+        if (feedbackTile) handleSelectTile(feedbackTile);
         return;
       }
 
-      // 5. "h" is HiHa rules shortcut
+      // 6. "h" is HiHa rules shortcut
       if (key === "h") {
         e.preventDefault();
         setIsPrivacyOpen(false);
         setIsAboutOpen(false);
         setIsPromptOpen(false);
-        handleSelectTile("hiha");
+        const hihaTile = tiles.find(t => t.id === "hiha");
+        if (hihaTile) handleSelectTile(hihaTile);
         return;
       }
 
-      // 6. "d" is Dev Mode toggle
+      // 7. "d" is Dev Mode toggle
       if (key === "d") {
         e.preventDefault();
         handleDevModeChange(!devMode);
         return;
       }
 
-      // 7. "p" is Prompt Modal toggle (in Dev Mode only)
+      // 8. "p" is Prompt Modal toggle (in Dev Mode only)
       if (key === "p") {
         e.preventDefault();
         if (isPromptOpen) {
@@ -382,65 +489,71 @@ export default function Dashboard() {
         return;
       }
 
-      // 8. "?" is Help & Guide panel shortcut
+      // 9. "?" is Help & Guide panel shortcut
       if (e.key === "?") {
         e.preventDefault();
         setIsPrivacyOpen(false);
         setIsAboutOpen(false);
         setIsPromptOpen(false);
-        handleSelectTile("docs");
+        const docsTile = tiles.find(t => t.id === "docs");
+        if (docsTile) handleSelectTile(docsTile);
         return;
       }
 
-      // 9. Arrow navigation
+      // 10. Arrow grid/navigation
       if (activeTileId === null) {
-        // Dashboard mode: navigate tiles in grid
-        if (isAboutOpen || isPromptOpen || isPrivacyOpen) return;
+        // Dashboard mode: navigate renderedTiles in grid
+        if (isAboutOpen || isPromptOpen || isPrivacyOpen || renderedTiles.length === 0) return;
 
         if (e.key === "ArrowUp") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev - 2 + 13) % 13);
+          setFocusedTileIndex((prev) => (prev - 2 + renderedTiles.length) % renderedTiles.length);
         } else if (e.key === "ArrowDown") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev + 2) % 13);
+          setFocusedTileIndex((prev) => (prev + 2) % renderedTiles.length);
         } else if (e.key === "ArrowLeft") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev - 1 + 13) % 13);
+          setFocusedTileIndex((prev) => (prev - 1 + renderedTiles.length) % renderedTiles.length);
         } else if (e.key === "ArrowRight") {
           e.preventDefault();
-          setFocusedTileIndex((prev) => (prev + 1) % 13);
+          setFocusedTileIndex((prev) => (prev + 1) % renderedTiles.length);
         } else if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          handleSelectTile(tiles[focusedTileIndex].id);
+          if (renderedTiles[focusedTileIndex]) {
+            handleSelectTile(renderedTiles[focusedTileIndex]);
+          }
         }
       } else {
-        // Detail view mode: go from tile to tile with arrows (Right/Down = next, Up = prev)
+        // Detail view mode: navigate only leaf tiles with arrows
         if (isAboutOpen || isPromptOpen || isPrivacyOpen) return;
 
-        const currentIdx = tiles.findIndex((t) => t.id === activeTileId);
+        const leafTiles = tiles.filter(t => !t.isDir);
+        const currentIdx = leafTiles.findIndex((t) => t.id === activeTileId);
         if (currentIdx !== -1) {
           if (e.key === "ArrowRight" || e.key === "ArrowDown") {
             e.preventDefault();
-            const nextIdx = (currentIdx + 1) % tiles.length;
-            setActiveTileId(tiles[nextIdx].id);
+            const nextIdx = (currentIdx + 1) % leafTiles.length;
+            setActiveTileId(leafTiles[nextIdx].id);
             setFocusedTileIndex(nextIdx);
             window.history.replaceState({
-              activeTileId: tiles[nextIdx].id,
+              activeTileId: leafTiles[nextIdx].id,
+              currentMenuId: leafTiles[nextIdx].menu || null,
               isAboutOpen: false,
               isPromptOpen: false,
               isRegenerating: false
-            }, "", `/${tiles[nextIdx].id}`);
-          } else if (e.key === "ArrowUp") {
+            }, "", `/${leafTiles[nextIdx].id}`);
+          } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
             e.preventDefault();
-            const prevIdx = (currentIdx - 1 + tiles.length) % tiles.length;
-            setActiveTileId(tiles[prevIdx].id);
+            const prevIdx = (currentIdx - 1 + leafTiles.length) % leafTiles.length;
+            setActiveTileId(leafTiles[prevIdx].id);
             setFocusedTileIndex(prevIdx);
             window.history.replaceState({
-              activeTileId: tiles[prevIdx].id,
+              activeTileId: leafTiles[prevIdx].id,
+              currentMenuId: leafTiles[prevIdx].menu || null,
               isAboutOpen: false,
               isPromptOpen: false,
               isRegenerating: false
-            }, "", `/${tiles[prevIdx].id}`);
+            }, "", `/${leafTiles[prevIdx].id}`);
           }
         }
       }
@@ -452,6 +565,8 @@ export default function Dashboard() {
     };
   }, [
     activeTileId,
+    currentMenuId,
+    renderedTiles,
     isAboutOpen,
     isPromptOpen,
     isPrivacyOpen,
@@ -518,12 +633,64 @@ export default function Dashboard() {
             itemsPool={reservoirPool.characters || []}
           />
         );
+      case "animals":
+        return (
+          <GenericGenerator
+            categoryKey="animals"
+            title="Animaux"
+            pickItem={pickItem}
+            itemsPool={(reservoirPool as any).animals || []}
+          />
+        );
+      case "objects":
+        return (
+          <GenericGenerator
+            categoryKey="objects"
+            title="Objets"
+            pickItem={pickItem}
+            itemsPool={(reservoirPool as any).objects || []}
+          />
+        );
       case "feedback":
         return <FeedbackView showToast={showToast} onOpenPrivacy={() => setIsPrivacyOpen(true)} />;
       default:
         return null;
     }
   };
+
+  // Determine dynamic Hero section header text based on submenu state
+  const getHeroText = () => {
+    if (searchQuery.trim() !== "") {
+      return {
+        title: "Recherche",
+        subtitle: `Résultats pour "${searchQuery}"`
+      };
+    }
+    switch (currentMenuId) {
+      case "incarnate":
+        return {
+          title: "Incarner",
+          subtitle: "Donnez vie à vos personnages, émotions, animaux ou objets."
+        };
+      case "inspiration":
+        return {
+          title: "Inspiration",
+          subtitle: "Explorez des thèmes, des lieux, des époques ou des scénarios."
+        };
+      case "warmup":
+        return {
+          title: "S'échauffer",
+          subtitle: "Échauffements physiques, contraintes de jeu et règles collectives."
+        };
+      default:
+        return {
+          title: "Prêt pour l'impro ?",
+          subtitle: "Choisissez un outil pour propulser votre prochaine scène théâtrale."
+        };
+    }
+  };
+
+  const heroText = getHeroText();
 
   return (
     <main className="relative h-full w-full overflow-hidden bg-black flex flex-col justify-between">
@@ -533,11 +700,12 @@ export default function Dashboard() {
 
       {/* 1. Main Dashboard Mode */}
       <div
-        className={`dashboard-container transition-all duration-500 ease-out z-10 ${activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4 invisible" : "opacity-100 scale-100"
-          }`}
+        className={`dashboard-container transition-all duration-500 ease-out z-10 flex flex-col h-full overflow-y-auto ${
+          activeTileId !== null ? "opacity-0 scale-95 pointer-events-none translate-y-4 invisible" : "opacity-100 scale-100"
+        }`}
       >
         {/* Header */}
-        <header className="dashboard-header">
+        <header className="dashboard-header shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-irised-gradient irised-glow animate-pulse-slow flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-black" />
@@ -575,18 +743,48 @@ export default function Dashboard() {
         </header>
 
         {/* Hero Section */}
-        <section className="dashboard-hero">
+        <section className="dashboard-hero shrink-0">
           <h2 className="text-3xl font-extrabold tracking-tight mb-2 bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">
-            Prêt pour l'impro ?
+            {heroText.title}
           </h2>
           <p className="text-zinc-500 text-sm">
-            Choisissez un outil pour propulser votre prochaine scène théâtrale.
+            {heroText.subtitle}
           </p>
         </section>
 
+        {/* Spotlight-style Search Bar (Only visible on root or search active) */}
+        <div className="relative max-w-md w-full mx-auto mb-5 px-6 shrink-0">
+          <div className="relative flex items-center bg-zinc-900/60 backdrop-blur-md border border-zinc-800 rounded-xl focus-within:border-zinc-700 focus-within:ring-2 focus-within:ring-purple-500/20 transition-all duration-300">
+            <Search className="w-4 h-4 text-zinc-500 ml-3 shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Rechercher un outil... (Appuyez sur /)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-transparent border-none outline-none text-zinc-100 text-sm py-2.5 pl-2 pr-10 placeholder-zinc-500 focus:ring-0"
+            />
+            {searchQuery ? (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 p-1 rounded-full text-zinc-500 hover:text-zinc-300 transition-colors"
+                title="Vider la recherche"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            ) : (
+              <kbd className="absolute right-3 px-1.5 py-0.5 rounded border border-zinc-800 text-[10px] font-mono text-zinc-500 bg-zinc-950/60 select-none">
+                /
+              </kbd>
+            )}
+          </div>
+        </div>
+
         {/* Dashboard Tile Grid */}
-        <section className="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-0.5 landscape:my-4">
-          {tiles.map((tile, index) => {
+        <section className="flex-1 grid grid-cols-2 gap-3 w-full max-w-md md:max-w-sm mx-auto px-6 pb-6 landscape:my-4">
+          {renderedTiles.map((tile, index) => {
             const Icon = tile.icon;
             
             // Get count for devMode display
@@ -598,22 +796,32 @@ export default function Dashboard() {
               else if (tile.id === "scenarios") suggestionCount = buffer.scenarios?.length ?? 0;
               else if (tile.id === "themes") suggestionCount = buffer.themes?.length ?? 0;
               else if (tile.id === "characters") suggestionCount = buffer.characters?.length ?? 0;
+              else if (tile.id === "animals") suggestionCount = buffer.animals?.length ?? 0;
+              else if (tile.id === "objects") suggestionCount = buffer.objects?.length ?? 0;
             }
+
+            const isFeedback = tile.id === "feedback";
+            const isBack = tile.id === "back_to_root";
 
             return (
               <button
                 key={tile.id}
-                onClick={() => handleSelectTile(tile.id)}
+                onClick={() => handleSelectTile(tile)}
                 onMouseEnter={() => setFocusedTileIndex(index)}
-                className={`dashboard-tile relative ${tile.id === "feedback" ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""}`}
+                className={`dashboard-tile relative ${isFeedback ? "col-span-2 min-h-[96px]" : "aspect-square"} ${focusedTileIndex === index ? "focused" : ""}`}
               >
                 {suggestionCount !== null && (
                   <span className="absolute top-2.5 right-2.5 text-[9px] font-mono text-zinc-500/80 bg-zinc-950/40 px-1.5 py-0.5 rounded border border-zinc-800/30 select-none z-10 animate-fade-in" title="Suggestions restantes">
                     {suggestionCount}
                   </span>
                 )}
-                <div className={`dashboard-tile-inner ${tile.id === "feedback" ? "flex-row items-center gap-4 text-left" : "flex-col"}`}>
-                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${tile.id === "feedback" ? "mb-0" : "mb-2.5"}`}>
+                {tile.isDir && (
+                  <span className="absolute top-2.5 right-2.5 text-[8px] font-extrabold uppercase tracking-wider text-purple-400 bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-800/30 select-none z-10">
+                    Menu
+                  </span>
+                )}
+                <div className={`dashboard-tile-inner ${isFeedback ? "flex-row items-center gap-4 text-left" : "flex-col"}`}>
+                  <div className={`w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 ${isFeedback ? "mb-0" : "mb-2.5"} ${isBack ? "bg-zinc-800/50" : ""}`}>
                     <Icon className="w-5 h-5 text-white/90 shrink-0" strokeWidth={2} />
                   </div>
                   <div>
@@ -630,13 +838,18 @@ export default function Dashboard() {
               </button>
             );
           })}
+          {renderedTiles.length === 0 && (
+            <div className="col-span-2 py-8 text-center text-zinc-500 text-sm">
+              Aucun outil ne correspond à votre recherche.
+            </div>
+          )}
         </section>
 
         {/* Dev Prompt Inspector Button */}
         {devMode && (
           <button
             onClick={openPrompt}
-            className="mx-auto mt-4 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 font-semibold active:scale-95 transition-all hover:text-white flex items-center gap-1.5 animate-fade-in"
+            className="mx-auto my-4 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 font-semibold active:scale-95 transition-all hover:text-white flex items-center gap-1.5 animate-fade-in shrink-0"
           >
             <Terminal className="w-3.5 h-3.5 text-cyan-400" />
             Consulter le Prompt Système
@@ -644,7 +857,7 @@ export default function Dashboard() {
         )}
 
         {/* Footer */}
-        <footer className="dashboard-footer">
+        <footer className="dashboard-footer shrink-0">
           <div>Houba Houba !</div>
           <div className="text-xs text-zinc-500 font-medium flex items-center gap-1.5 flex-wrap justify-center">
             <span>© {new Date().getFullYear()} Éole</span>
@@ -663,8 +876,9 @@ export default function Dashboard() {
 
       {/* 2. Fullscreen Detail Views */}
       <div
-        className={`absolute inset-0 bg-black flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-in-out z-20 ${activeTileId === null ? "opacity-0 scale-105 pointer-events-none translate-y-4" : "opacity-100 scale-100"
-          }`}
+        className={`absolute inset-0 bg-black flex flex-col justify-between p-6 pb-8 transition-all duration-500 ease-in-out z-20 ${
+          activeTileId === null ? "opacity-0 scale-105 pointer-events-none translate-y-4" : "opacity-100 scale-100"
+        }`}
       >
         {/* Detail Header */}
         <header className="flex items-center justify-between pt-safe gap-2">
