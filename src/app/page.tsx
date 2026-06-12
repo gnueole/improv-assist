@@ -29,7 +29,8 @@ import {
   User,          // Characters Icon
   PawPrint,      // Animals Icon
   Package,       // Objects Icon
-  Search         // Search Icon
+  Search,        // Search Icon
+  Folder         // Folder Icon
 } from "lucide-react";
 
 import { Tile } from "@/types";
@@ -79,8 +80,8 @@ const tiles: Tile[] = [
   { id: "hiha", title: "Règles du Hi Ha", subtitle: "Signes & réflexes collectifs", icon: Zap, color: "from-amber-500 to-orange-600", menu: "warmup", keywords: ["hiha", "hi ha", "jeu", "réflexe", "rythme", "bruit", "s'échauffer"] },
 
   // Root utilities (always visible at root level)
-  { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500", keywords: ["timer", "temps", "chronomètre", "durée", "scène", "jeu", "cloche", "buzzer"] },
   { id: "who_starts", title: "Qui Commence ?", subtitle: "Tirage multi-touch", icon: Fingerprint, color: "from-purple-500 to-pink-500", keywords: ["qui commence", "commencer", "début", "premier", "tirage", "tactile", "touch", "jeu"] },
+  { id: "timer", title: "Timer de Scène", subtitle: "Lancer l'impro (2m30s)", icon: Hourglass, color: "from-cyan-400 to-pink-500", keywords: ["timer", "temps", "chronomètre", "durée", "scène", "jeu", "cloche", "buzzer"] },
   { id: "docs", title: "Aide & Guide", subtitle: "Aide à propos de l'application", icon: HelpCircle, color: "from-pink-500 to-yellow-400", keywords: ["aide", "guide", "à propos", "documentation", "règles", "mentions", "infos"] },
   { id: "feedback", title: "Retour & Idées", subtitle: "Envoyer vos suggestions", icon: MessageSquare, color: "from-cyan-400 to-indigo-500", keywords: ["retour", "avis", "feedback", "idée", "suggestion", "bug", "amélioration", "message"] }
 ];
@@ -607,7 +608,12 @@ export default function Dashboard() {
       case "constraints":
         return <ConstraintsView />;
       case "docs":
-        return <DocsView onOpenPrivacy={() => setIsPrivacyOpen(true)} />;
+        return (
+          <DocsView
+            onOpenPrivacy={() => setIsPrivacyOpen(true)}
+            onOpenAbout={openAbout}
+          />
+        );
       case "hiha":
         return <HiHaRules />;
       case "echauffements":
@@ -840,8 +846,9 @@ export default function Dashboard() {
                   </span>
                 )}
                 {tile.isDir && (
-                  <span className="absolute top-2.5 right-2.5 text-[8px] font-extrabold uppercase tracking-wider text-purple-400 bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-800/30 select-none z-10">
-                    Menu
+                  <span className="absolute top-2.5 right-2.5 text-[8px] font-extrabold uppercase tracking-wider text-purple-400 bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-800/30 select-none z-10 flex items-center gap-1">
+                    <Folder className="w-2.5 h-2.5" />
+                    <span>Dossier</span>
                   </span>
                 )}
                 <div className={`dashboard-tile-inner ${isFeedback ? "flex-row items-center gap-4 text-left" : "flex-col"} ${isBack ? "back-tile-inner" : ""}`}>
