@@ -147,17 +147,6 @@ export default function Dashboard() {
     
     // Normal submenu structure
     const baseTiles = tiles.filter(t => t.menu === (currentMenuId || undefined));
-    if (currentMenuId) {
-      // Insert a dynamic 'Retour' tile at index 0 inside submenus
-      const backTile: Tile = {
-        id: "back_to_root",
-        title: "Retour",
-        subtitle: "Menu principal",
-        icon: ChevronLeft,
-        color: "from-zinc-700 to-zinc-800"
-      };
-      return [backTile, ...baseTiles];
-    }
     return baseTiles;
   })();
 
@@ -706,13 +695,25 @@ export default function Dashboard() {
       >
         {/* Header */}
         <header className="dashboard-header shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-irised-gradient irised-glow animate-pulse-slow flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-black" />
-            </div>
-            <h1 className="font-bold tracking-[0.15em] text-lg uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400">
-              Houba Houba !
-            </h1>
+          <div className="flex items-center gap-3 min-h-[32px]">
+            {currentMenuId ? (
+              <button
+                onClick={() => handleSelectTile({ id: "back_to_root" } as any)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 active:scale-95 transition-all text-xs z-30 shrink-0 hover:text-white"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Retour</span>
+              </button>
+            ) : (
+              <>
+                <div className="w-8 h-8 rounded-full bg-irised-gradient irised-glow animate-pulse-slow flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-black" />
+                </div>
+                <h1 className="font-bold tracking-[0.15em] text-lg uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400">
+                  Houba Houba !
+                </h1>
+              </>
+            )}
           </div>
           <div className="flex items-center gap-2">
             {devMode && (
