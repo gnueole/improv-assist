@@ -161,6 +161,12 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ## 📝 Changelog
 
+### Version 0.7 BETA (0.7-beta / 1.0.0-beta.7) - 2026-06-12
+- **Documentation dynamique de l'aide** : Génération entièrement automatisée de la liste des fonctionnalités dans la vue d'aide, basée sur les métadonnées déclarées sur chaque tuile de micro-app (propriété `helpDescription`).
+- **Disque de vainqueur plus grand ("Qui Commence ?")** : Agrandissement de l'indicateur tactile du joueur tiré au sort (multiplié par 2.5) pour qu'il soit bien visible même si l'utilisateur garde son doigt posé sur l'écran.
+- **Boutons d'en-tête agrandis** : Optimisation de la taille tactile des boutons en haut à droite (Recherche, IA, À propos) sur mobile.
+- **Guide de création d'outil** : Ajout de la documentation `TileAPI.md` décrivant les spécifications techniques et l'architecture pour ajouter une nouvelle tuile.
+
 ### Version 0.6 BETA (0.6-beta / 1.0.0-beta.6) - 2026-06-12
 - **Restructuration du Tableau de Bord (Submenus)** : Restructuration de la grille plate de tuiles en un menu hiérarchique regroupé par dossiers thématiques :
   - **Incarner** : Emotions, Personnages, Animaux, Objets
