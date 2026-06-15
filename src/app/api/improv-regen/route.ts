@@ -106,7 +106,8 @@ export async function POST(request: Request) {
       system_prompt: systemPrompt,
       source: process.env.NODE_ENV === "production" ? "prod" : "dev",
       version: pkg.version,
-      platform: body.platform || "unknown"
+      platform: body.platform || "unknown",
+      model: body.model || process.env.DEFAULT_LLM_MODEL || "llama-3.3-70b-versatile"
     };
     if (category) {
       n8nBody.category = category;
