@@ -6,18 +6,33 @@
 
 `Houba Houba!` est une Progressive Web Application (PWA) moderne et mobile-first conçue pour aider les comédiens et arbitres de théâtre d'improvisation lors des entraînements, ateliers et matchs. Elle fournit des outils pour tirer au sort des paramètres de scène, chronométrer les improvisations et consulter les règles et contraintes de jeu.
 
-L'application arbore un design sombre soigné, enrichi de reflets irisés vibrants et de glassmorphisme, adapté aux écrans mobiles pour une utilisation instantanée. 50 thèmes sont disponibles au lancement. Ils sont à usage unique : lorsque la file d'attente est vide, il faut régénérer les thèmes grâce au workflow n8n/Gemini ou en cliquant sur l'icône de rotation.
+L'application arbore un design sombre soigné, enrichi de reflets irisés vibrants et de glassmorphisme, adapté aux écrans mobiles pour une utilisation instantanée.
 
 ---
 
 [![Build and Push Docker Image to GHCR](https://github.com/gnueole/improv-assist/actions/workflows/build-image.yml/badge.svg)](https://github.com/gnueole/improv-assist/actions/workflows/build-image.yml)
 
-## 🌟 Key Features
+## 📌 Sommaire (TOC)
+
+- [🌟 Fonctionnalités Clés](#-fonctionnalités-clés)
+- [📋 Wishlist / Todo](#-wishlist--todo)
+- [📂 Annexes (Documentation)](#-annexes-documentation)
+- [🛠️ Stack & Technologies](#️-stack--technologies)
+- [🚀 Démarrage Rapide](#-démarrage-rapide)
+- [🐳 Docker & Makefile](#-docker--makefile)
+- [🔑 Gestion des Secrets avec Doppler](#-gestion-des-secrets-avec-doppler)
+- [⚙️ Synchronisation Notion](#️-synchronisation-notion)
+- [🧠 Choix des Modèles d'IA](#-choix-des-modèles-dia)
+- [📝 Changelog (Historique)](#-changelog-historique)
+
+---
+
+## 🌟 Fonctionnalités Clés
 
 | **🎭 Générateur d'Émotions** | Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de **1 à 10**. |
 | **👆 Qui Commence ? (Multi-touch)** | Tirage au sort interactif pour désigner qui débute la scène. Posez jusqu'à 5 doigts sur l'écran. Après un décompte de 3 secondes, le vainqueur est choisi aléatoirement. |
 | **✨ Thèmes d'Impro** | Suggère des sujets de jeu et des idées d'histoires poétiques ou comiques. |
-| **⏳ Timer de Scène** | Chronomètre préréglé sur 2 minutes 30 secondes avec neon glow, buzzer de fin (chime arpeggio ascendant) et effet vibratoire d'urgence. |
+| **⏳ Timer de Scène** | Chronomètre préréglé sur 2 minutes 30 secondes avec neon glow, buzzer de fin (chime arpeggio ascendant) et effet vibratoire d'urgence. Sélection possible de voix masculine ou féminine. |
 | **🎬 Scénarios** | Fournit des situations de départ et intrigues scénarisées avec des explications et briefs pour lancer la scène. |
 | **📍 Suggestion de Lieu** | Suggestions créatives instantanées de cadres physiques pour planter le décor de vos scènes. |
 | **🕰️ Suggestion d'Époque** | Suggestions instantanées de temporalités (Moyen Âge, futur, années 80) pour situer vos histoires. |
@@ -30,121 +45,8 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 | **⚡ Règles du Hi Ha** | Guide de référence rapide listant les gestes officiels du jeu d'échauffement collectif Hi Ha. |
 | **💬 Retour & Idées** | Formulaire de retours d'expérience et de suggestions d'améliorations connecté à Notion via n8n. |
 | **📦 Réservoir de Prompts (Data Pool)** | Les suggestions sont piochées dans un réservoir local et consommées sans doublon. Si le réservoir se vide, 50 nouveaux items sont rechargés depuis n8n. |
-| **🔄 Régénération par l'IA (Gemini via n8n)** | Permet de recharger le cache local avec de nouveaux prompts générés à la volée par Gemini en cliquant sur l'icône de rotation. |
-| **🚦 Indicateur de connexion (n8n)** | Un voyant lumineux indique la disponibilité du service n8n/Gemini (vert/rouge) avec retour d'erreurs détaillé pour les développeurs. |
-
----
-
-## ⚙️ Synchronisation Notion
-
-Le cache local est généré en synchronisant certaines données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
-```bash
-node scripts/notion_fetch.js
-```
-
----
-
-## 🔑 Gestion des Secrets avec Doppler
-
-L'application utilise **Doppler** pour gérer de manière sécurisée et centralisée toutes les variables d'environnement (secrets API, identifiants de suivi, etc.). Les secrets ne sont plus stockés en clair dans les fichiers du projet.
-
-### Configuration Initiale (pour les développeurs)
-1. **Installer la CLI Doppler** sur votre système ou dans votre environnement WSL.
-2. **S'authentifier** sur votre machine :
-   ```bash
-   doppler login
-   ```
-3. **Associer le projet** à votre espace de travail :
-   ```bash
-   doppler setup
-   ```
-   *(Sélectionnez le projet `eole-me` et la configuration de dev `dev_eole-me-impro` pour le développement local).*
-
----
-
-## 🚀 Démarrage Rapide
-
-### Prérequis
-- Docker (testé avec WSL2)
-- Node.js (version 20+)
-- npm
-- Une base de données (Notion ou autre) pour interfacer avec les prompts de l'application (optionnel).
-- Un compte n8n pour interfacer avec les prompts de l'application, l'IA et les envois d'emails (optionnel).
-- Une clé Gemini pour régénérer des prompts de remplacement (optionnel).
-
-### Installation & Développement Local
-
-1. **Configurer l'environnement et vérifier les dépendances** :
-   Lancez le script d'initialisation interactif à la racine du projet :
-   ```bash
-   ./configure
-   ```
-   *(Ce script vérifie toutes vos dépendances système, installe les dépendances Python requises, initialise le fichier `.env` et vous propose de configurer interactivement vos clés d'intégration Notion et n8n).*
-
-2. **Installer les dépendances npm** :
-   *(Si non fait automatiquement par le script d'initialisation)*
-   ```bash
-   npm install
-   ```
-
-3. **Lancer le serveur de développement** :
-   ```bash
-   npm run dev
-   ```
-   Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
-
-3. **Compiler et démarrer le bundle de production** :
-   ```bash
-   npm run build
-   npm start
-   ```
-
----
-
-## 🏗️ Architecture Technique
-
-Pour en savoir plus sur l'organisation des composants client, l'orchestration des API proxies, la logique d'automatisation n8n et l'infrastructure de déploiement, veuillez consulter le document **[Architecture.md](Architecture.md)**.
-
----
-
-## 🐳 Docker & Makefile
-
-L'application est entièrement conteneurisée et gérée de manière simplifiée à l'aide d'un `Makefile` en local ou dans WSL.
-
-| Commande | Action |
-| :--- | :--- |
-| `make up` | Récupère dynamiquement les secrets de dev depuis Doppler et démarre le conteneur local avec HMR (Port 3000 - [http://localhost:3000](http://localhost:3000)) |
-| `make down` | Arrête le conteneur de développement local |
-| `make restart` | Redémarre l'environnement de développement local (down puis up) |
-| `make deploy` | Récupère les secrets de production depuis Doppler, les transfère de manière sécurisée au VPS par SSH, puis déploie l'application |
-| `make deploy-delay` | Envoie les commits, attend 150 secondes pour laisser le temps à GitHub Actions de compiler, puis déploie avec les secrets Doppler |
-| `make checklogs` | Affiche les journaux de production du VPS en temps réel |
-
-### Résolution d'erreur 504 (Passerelle Traefik)
-Si le VPS renvoie une erreur *504 Gateway Timeout*, reconnectez le réseau de Traefik au conteneur de l'application :
-```bash
-ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_traefik>"
-```
-
----
-
-## 🛠️ Stack & Technologies
-
-- **Frontend** : Next.js 15 (App Router), React 19, TypeScript
-- **Styling** : Tailwind CSS 3 (Grid responsive 2 colonnes avec tuiles carrées en Glassmorphism), PostCSS
-- **Icones** : Lucide React (normalisées en taille et épaisseur pour une parfaite cohérence visuelle)
-- **Déploiement** : Docker Standalone multi-stage via GHCR
-
----
-
-## 🧠 Choix du Modèle d'IA (Gemini)
-
-La génération du réservoir de prompts (500 éléments répartis en 10 catégories) requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et respect de consignes complexes (priorité aux relations humaines vs surréalisme d'objets) :
-
-* **Gemini 2.5 Pro (`gemini-2.5-pro`) — Idéal pour la génération statique** : C'est le modèle utilisé par le script `populate_reservoir.py`. Il dispose d'une excellente capacité de raisonnement et évite les répétitions ou la fatigue créative sur les grands volumes.
-  * *Temps d'exécution moyen* : ~90 secondes (timeout de script validé à 180s).
-* **Gemini 2.5 Flash (`gemini-2.5-flash`) — Idéal pour le temps réel** : Recommandé pour les régénérations à la volée depuis la PWA (au clic sur le bouton de rafraîchissement). Sa rapidité évite de faire patienter l'utilisateur sur scène.
-  * *Temps d'exécution moyen* : ~5-10 secondes (limité par le timeout de proxy de 10s côté Next.js).
+| **🔄 Régénération par l'IA (Groq via n8n)** | Permet de recharger le cache local avec de nouveaux prompts générés à la volée par Groq (Llama-3.3) en cliquant sur l'icône de rotation. |
+| **🚦 Indicateur de connexion (n8n)** | Un voyant lumineux indique la disponibilité du service n8n (vert/rouge) avec retour d'erreurs détaillé pour les développeurs. |
 
 ---
 
@@ -167,99 +69,194 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ---
 
+## 📂 Annexes (Documentation)
+
+Pour approfondir les aspects techniques et architecturaux du projet, veuillez consulter les documentations annexes suivantes :
+
+1. 🏗️ **[Architecture.md](Architecture.md)** : Fiche d'architecture détaillée décrivant la structure du projet Next.js (App Router), la gestion globale des buffers via Context, la configuration des proxies d'API, l'automatisation n8n et la topologie de l'infrastructure de production.
+2. 🎬 **[TileAPI.md](TileAPI.md)** : Guide de référence de l'API de Tuiles. Ce document détaille les normes de codage, l'arborescence des types et les étapes à suivre pas-à-pas pour implémenter proprement un nouveau générateur ou une micro-app de jeu.
+
+---
+
+## 🛠️ Stack & Technologies
+
+- **Frontend** : Next.js 15 (App Router), React 19, TypeScript
+- **Styling** : Tailwind CSS 3 (Grid responsive 2 colonnes avec tuiles carrées en Glassmorphism), PostCSS
+- **Icones** : Lucide React (normalisées en taille et épaisseur pour une parfaite cohérence visuelle)
+- **Déploiement** : Docker Standalone multi-stage via GHCR
+
+---
+
+## 🚀 Démarrage Rapide
+
+### Prérequis
+- Docker (testé avec WSL2)
+- Node.js (version 20+)
+- npm
+- Une base de données (Notion ou autre) pour interfacer avec les prompts de l'application (optionnel).
+- Un compte n8n pour interfacer avec les prompts de l'application, l'IA et les envois d'emails (optionnel).
+- Une clé Groq/Gemini pour régénérer des prompts de remplacement (optionnel).
+
+### Installation & Développement Local
+
+1. **Configurer l'environnement et vérifier les dépendances** :
+   Lancez le script d'initialisation interactif à la racine du projet :
+   ```bash
+   ./configure
+   ```
+   *(Ce script vérifie toutes vos dépendances système, installe les dépendances Python requises, initialise le fichier `.env` et vous propose de configurer interactivement vos clés d'intégration Notion et n8n).*
+
+2. **Installer les dépendances npm** :
+   *(Si non fait automatiquement par le script d'initialisation)*
+   ```bash
+   npm install
+   ```
+
+3. **Lancer le serveur de développement** :
+   ```bash
+   npm run dev
+   ```
+   Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
+
+4. **Compiler et démarrer le bundle de production localement** :
+   ```bash
+   npm run build
+   ```
+   ```bash
+   npm start
+   ```
+
+---
+
+## 🐳 Docker & Makefile
+
+L'application est entièrement conteneurisée et gérée de manière simplifiée à l'aide d'un `Makefile` via WSL ou environnement Linux.
+
+| Commande | Action |
+| :--- | :--- |
+| `make up` | Récupère dynamiquement les secrets de dev depuis Doppler et démarre le conteneur local avec HMR (Port 3000 - [http://localhost:3000](http://localhost:3000)) |
+| `make down` | Arrête le conteneur de développement local |
+| `make restart` | Redémarre l'environnement de développement local (down puis up) |
+| `make deploy` | Récupère les secrets de production depuis Doppler, les transfère de manière sécurisée au VPS par SSH, puis déploie l'application |
+| `make deploy-delay` | Envoie les commits, attend 150 secondes pour laisser le temps à GitHub Actions de compiler, puis déploie avec les secrets Doppler |
+| `make checklogs` | Affiche les journaux de production du VPS en temps réel |
+
+### Résolution d'erreur 504 (Passerelle Traefik)
+Si le VPS renvoie une erreur *504 Gateway Timeout*, reconnectez le réseau de Traefik au conteneur de l'application :
+```bash
+ssh eole.me "docker network connect jobby-md2html_default <nom_du_conteneur_traefik>"
+```
+
+---
+
+## 🔑 Gestion des Secrets avec Doppler
+
+L'application utilise **Doppler** pour gérer de manière sécurisée et centralisée toutes les variables d'environnement (secrets API, identifiants de suivi, etc.). Les secrets ne sont plus stockés en clair dans les fichiers du projet.
+
+### Configuration Initiale (pour les développeurs)
+1. **Installer la CLI Doppler** sur votre système ou dans votre environnement WSL.
+2. **S'authentifier** sur votre machine :
+   ```bash
+   doppler login
+   ```
+3. **Associer le projet** à votre espace de travail :
+   ```bash
+   doppler setup
+   ```
+   *(Sélectionnez le projet `eole-me` et la configuration de dev `dev_eole-me-impro` pour le développement local).*
+
+---
+
+## ⚙️ Synchronisation Notion
+
+Le cache local est généré en synchronisant certaines données depuis Notion vers `src/data/notionConstraints.json` pour un fonctionnement hors-ligne optimal :
+```bash
+node scripts/notion_fetch.js
+```
+
+---
+
+## 🧠 Choix des Modèles d'IA
+
+La génération du réservoir de prompts requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et rapidité :
+
+* **Groq Chat Model (`llama-3.3-70b-versatile`) — Modèle par Défaut en Temps Réel** : Migré pour les appels dynamiques de régénération depuis la PWA (au clic sur le bouton de rafraîchissement). Sa vitesse de traitement (inférieure à 2 secondes) et sa robustesse de sortie JSON résolvent les goulots d'étranglement de quotas réseau.
+* **Gemini 2.5 Pro (`gemini-2.5-pro`) — Optionnel pour la Génération Statique** : Utilisable pour le peuplement de masse hors-ligne (350 prompts initiaux). Il dispose d'une excellente capacité de raisonnement dramatique.
+
+---
+
 ## 📝 Changelog
+
+### Version 0.10 BETA (0.10-beta) - 2026-06-15
+- **Sélection Dynamique & Logging du Modèle LLM** :
+  - Support de la sélection de modèle dynamique transmise de l'application client à l'API proxy `/api/improv-regen` et relayée au webhook n8n.
+  - Mise à jour du schéma de base de données de suivi Notion pour ajouter la propriété `Model` (`rich_text`). Le workflow n8n y inscrit désormais précisément le modèle d'IA sollicité.
+- **Robustesse & Correction d'Erreur n8n** :
+  - Résolution d'une `ReferenceError: mockDb is not defined` dans le script JS de repli en le déplaçant dans la portée globale du nœud n8n.
+  - Ajout d'une routine de nettoyage regex pour supprimer les backticks de délimiteur de code markdown (comme ` ```json `) renvoyés occasionnellement par Groq, évitant ainsi les échecs de parsing JSON.
+- **Release 0.10-beta** : Incrément de version et déploiement VPS automatisé.
 
 ### Version 0.9 BETA (0.9-beta) - 2026-06-15
 - **Timer de Scène & Voix (TTS)** :
-  - **Choix du Genre de la Voix** : Ajout d'une option de choix de la voix (Féminine / Masculine) via deux boutons stylisés. Le pitch de la synthèse vocale est dynamiquement ajusté (abaissé à 0.75 pour l'option masculine) pour assurer un rendu masculin distinct même si le navigateur ne dispose que d'une seule voix française (féminine) par défaut.
-  - **Boutons d'Ajustement Rapide** : Intégration de 4 boutons d'ajustement rapide du temps (-30s, -10s, +10s, +30s) sous le chronomètre en mode simple.
-  - **Durée par Défaut Personnalisable** : Ajout d'un réglage de la durée par défaut du timer dans les options avancées, persistant en `localStorage` et synchronisable avec les boutons rapides.
-  - **Annonces Vocales Personnalisables** : Liste de jalons de temps d'annonces modifiable dynamiquement par l'utilisateur.
-  - **Gong de Fin Renforcé** : Remplacement du gong par un signal de fin plus puissant et audible en salle de spectacle.
-  - **Gestion de la Sauvegarde** : Case à cocher pour sauvegarder la configuration du timer (désactivée par défaut).
+  - **Choix du Genre de la Voix** : Ajout d'une option de choix de la voix (Féminine / Masculine). Le pitch de la synthèse vocale est dynamiquement ajusté pour assurer un rendu masculin distinct.
+  - **Boutons d'Ajustement Rapide** : Intégration de 4 boutons d'ajustement rapide du temps (-30s, -10s, +10s, +30s) sous le chronomètre.
+  - **Durée par Défaut Personnalisable** : Ajout d'un réglage de la durée par défaut du timer, persistant en `localStorage`.
+  - **Annonces Vocales Personnalisables** : Liste de jalons de temps d'annonces modifiable par l'utilisateur.
+  - **Gong de Fin Renforcé** : Remplacement du gong par un signal de fin plus puissant.
+  - **Gestion de la Sauvegarde** : Case à cocher pour sauvegarder la configuration du timer.
 - **Régénération du Réservoir & n8n** :
-  - **Correction du Bouton Rafraîchir** : Le bouton de rafraîchissement (RotateCw) dans l'en-tête appelle désormais systématiquement l'IA (n8n/Gemini) en forçant la régénération au lieu de recharger le pool statique local par défaut.
-  - **Résilience du Flux n8n** : Ajout de secours statiques pour les catégories d'animaux et d'objets dans le nœud d'erreur du workflow n8n pour éviter les listes vides.
-  - **Désactivation du Cache API** : Ajout de l'en-tête `cache: "no-store"` sur les appels de régénération (côté client et serveur proxy) pour forcer le tirage d'idées neuves.
+  - **Correction du Bouton Rafraîchir** : Le bouton de rafraîchissement appelle systématiquement l'IA en forçant la régénération.
+  - **Résilience du Flux n8n** : Ajout de secours statiques pour les catégories d'animaux et d'objets.
+  - **Désactivation du Cache API** : Ajout de l'en-tête `cache: "no-store"` sur les appels de régénération.
 - **Mise en Page Réactive** :
-  - **Ajustement du Défilement (Scroll)** : Forçage du défilement vertical (`overflow-y-auto min-h-0`) sur la zone centrale pour éviter que le panneau des options avancées ne pousse les contrôles hors de l'écran ou ne soit masqué.
+  - **Ajustement du Défilement (Scroll)** : Forçage du défilement vertical sur la zone centrale.
 
 ### Version 0.8 BETA (0.8-beta) - 2026-06-12
-- **Mesure de Durée de Génération** : Enregistrement de la durée totale d'exécution de la régénération par l'IA (en secondes) dans la base de données Notion `"Houbahouba AI regen calls"`.
-- **Suivi de la Source de Déclenchement** : Ajout d'une propriété `Source` (prod / dev / other) dans la base de données Notion pour filtrer l'usage selon l'environnement d'exécution (PWA Next.js en production, développement ou scripts de test).
-- **Parallélisation n8n et Notion** : Déplacement du nœud d'historisation Notion à la fin du flux de régénération, s'exécutant en parallèle de la réponse webhook finale afin d'éliminer toute latence ressentie côté utilisateur.
-- **Optimisation de la Mise en Page de Recherche** : Remplacement des marges verticales dynamiques (`margin: auto auto;`) sur le Hero du dashboard par des marges fixes, évitant ainsi le décalage vers le bas de la barre de recherche et l'occultation des résultats par le clavier virtuel sur mobile.
-- **Normalisation Typographique** : Suppression de l'espace superflu avant le point d'exclamation pour le nom de l'application ("Houba Houba!" au lieu de "Houba Houba !").
+- **Mesure de Durée de Génération** : Enregistrement de la durée totale d'exécution dans la base Notion.
+- **Suivi de la Source de Déclenchement** : Ajout de la propriété `Source` (prod / dev / other) dans Notion.
+- **Parallélisation n8n et Notion** : Déplacement de l'écriture Notion à la fin du flux en parallèle de la réponse webhook.
+- **Optimisation de la Mise en Page de Recherche** : Ajustement des marges du Hero pour éviter l'occultation par le clavier mobile.
+- **Normalisation Typographique** : Suppression de l'espace superflu avant le point d'exclamation pour "Houba Houba!".
 
 ### Version 0.7 BETA (0.7-beta) - 2026-06-12
-- **Documentation dynamique de l'aide** : Génération entièrement automatisée de la liste des fonctionnalités dans la vue d'aide, basée sur les métadonnées déclarées sur chaque tuile de micro-app (propriété `helpDescription`).
-- **Disque de vainqueur plus grand ("Qui Commence ?")** : Agrandissement de l'indicateur tactile du joueur tiré au sort (multiplié par 2.5) pour qu'il soit bien visible même si l'utilisateur garde son doigt posé sur l'écran.
-- **Boutons d'en-tête agrandis** : Optimisation de la taille tactile des boutons en haut à droite (Recherche, IA, À propos) sur mobile.
-- **Guide de création d'outil** : Ajout de la documentation `TileAPI.md` décrivant les spécifications techniques et l'architecture pour ajouter une nouvelle tuile.
+- **Documentation dynamique de l'aide** : Génération automatisée de la liste des fonctionnalités basée sur `helpDescription`.
+- **Disque de vainqueur plus grand ("Qui Commence ?")** : Agrandissement de l'indicateur tactile du joueur tiré au sort (x2.5).
+- **Boutons d'en-tête agrandis** : Optimisation de la taille tactile sur mobile.
+- **Guide de création d'outil** : Ajout de la documentation `TileAPI.md`.
 
 ### Version 0.6 BETA (0.6-beta) - 2026-06-12
-- **Restructuration du Tableau de Bord (Submenus)** : Restructuration de la grille plate de tuiles en un menu hiérarchique regroupé par dossiers thématiques :
-  - **Incarner** : Emotions, Personnages, Animaux, Objets
-  - **Inspiration** : Scénarios, Lieux, Époques, Thèmes
-  - **S'échauffer** : Échauffements, Contraintes, Règles du Hi Ha
-  - Les utilitaires essentiels (*Timer de scène*, *Qui commence*, *Aide*, *Retour*) restent accessibles au premier niveau.
-- **Barre de Recherche Spotlight** : Intégration d'une barre de filtrage réactive en haut du tableau de bord.
-  - La saisie d'un terme aplatit instantanément l'arborescence pour afficher directement les cartes feuilles correspondantes.
-  - Raccourci clavier `/` pour focaliser la recherche et touche `Échap` pour vider et fermer.
-- **Nouveaux Générateurs d'Inspiration** :
-  - **Animaux** : Suggestion d'animaux insolites (ex: *Un pigeon agent secret*).
-  - **Objets** : Suggestion d'objets du quotidien ou insolites (ex: *Une brosse à dents bavarde*).
-- **Historique Anti-Doublons** : Sauvegarde des 10 derniers tirages dans le `localStorage` sous `improv_history` pour interdire les tirages identiques consécutifs à court terme.
-- **Contournement Autoplay (Scene Timer)** : Initialisation et reprise forcée de l'instance d'audios Web Audio `AudioContext` lors du clic initial utilisateur de démarrage pour court-circuiter le blocage d'autoplay des navigateurs mobiles.
-- **Positionnement du Toaster de Feedback** : Repositionnement du toaster d'invitation aux retours en bas à droite de l'écran avec une animation de glissement vertical ascendante (`animate-toast-up`) pour plus de discrétion.
-- **Amélioration des retours & Télémétrie** :
-  - Intégration de Google Analytics (GA4) et Google Tag Manager (GTM) via `dataLayer.push` pour remonter les événements `workflow_trigger` (avec catégorie et statut forcé) lors des rechargements.
-  - Logging asynchrone en parallèle vers la base de données de retours d'expérience sur Notion via un nouveau nœud dans le workflow n8n (`Log to Notion`), créant des pages typées "Observation" et préfixées par `[Regen]`.
+- **Restructuration du Tableau de Bord (Submenus)** : Regroupement thématique (*Incarner*, *Inspiration*, *S'échauffer*).
+- **Barre de Recherche Spotlight** : Intégration d'une barre de filtrage réactive (raccourci `/`).
+- **Nouveaux Générateurs d'Inspiration** : Animaux et Objets.
+- **Historique Anti-Doublons** : Sauvegarde locale des 10 derniers tirages.
+- **Contournement Autoplay (Scene Timer)** : Initialisation lors du clic initial utilisateur.
+- **Amélioration des retours & Télémétrie** : Intégration de GA4/GTM et journalisation Notion via n8n.
 
 ### Version 0.5 BETA (0.5-beta) - 2026-06-11
-- **Migration vers Gemini 2.5 Pro** : Mise à niveau de l'intelligence artificielle et du modèle sous-jacent vers `gemini-2.5-pro` pour la génération du réservoir statique (350 prompts répartis en 7 catégories). Cette version apporte une plus grande cohérence dramatique en privilégiant des relations humaines ancrées avec des conflits et des enjeux clairs, tout en évitant le surréalisme abstrait d'objets.
-- **Résilience Doppler locale** : Amélioration du `Makefile` de développement. En l'absence de Doppler CLI installé en local, le script n' échoue plus avec une erreur bloquante et effectue automatiquement une copie de sauvegarde à partir de `docker/.env.example` vers `.env` pour lancer l'environnement.
-- **Timeout réseau adapté** : Validation d'un délai de timeout réseau prolongé à 180 secondes dans le script `populate_reservoir.py` afin de supporter le temps d'exécution accru requis par la complexité du modèle Gemini 2.5 Pro pour le lot complet de 350 items.
+- **Migration vers Gemini 2.5 Pro** : Lot de 350 prompts initiaux sur 7 catégories.
+- **Résilience Doppler locale** : Copie de sauvegarde automatique de `.env.example` en cas d'absence du CLI Doppler.
+- **Timeout réseau adapté** : Passage à 180s pour la génération initiale de masse.
 
 ### Version 0.4 BETA (0.4-beta) - 2026-06-11
-- **Restauration des retours Notion (Notion Feedback)** : Remplacement de l'ajout de blocs Notion bogué par un nœud standard `httpRequest` dans n8n. Reconfiguration de la structure des données pour ajouter de vrais en-têtes natifs Notion (`## Details`, `## Message`) et des puces de liste de type `bulleted_list_item` lors des envois de retours.
-- **Raccourcis clavier PC & Navigation de grille** : Ajout d'une gestion complète de navigation au clavier pour ordinateur :
-  - Flèches directionnelles (`Haut`, `Bas`, `Gauche`, `Droite`) pour naviguer entre les tuiles de la grille du tableau de bord avec un effet visuel d'échelle et une lueur irisée réactive.
-  - Touches `Entrée` ou `Espace` pour ouvrir la tuile sélectionnée ou lancer le tirage dans les générateurs.
-  - Flèches `Droite` / `Bas` pour passer au générateur suivant depuis une vue de détail, et `Haut` pour aller au précédent.
-  - Flèches `Gauche` / `Échap` / `Esc` pour retourner au tableau de bord ou fermer tout modal actif.
-  - Touches `a` ou `i` pour afficher/masquer le modal À propos, et touche `g` pour régénérer le réservoir de prompts.
-  - Touche `m` pour ouvrir directement le formulaire de retours (Feedback), touche `h` pour les règles du HiHa, et `?` pour afficher le Guide d'aide.
-  - Touche `d` pour activer/désactiver le mode développeur, et touche `p` pour inspecter le prompt système Gemini en mode DEV.
-  - Contournement intelligent pour désactiver automatiquement les raccourcis lorsque l'utilisateur tape du texte dans un formulaire.
-- **Recharges optimisées du réservoir** : Refonte de la recharge lorsque le réservoir est vide pour récupérer 50 nouveaux éléments depuis n8n d'un coup et les fusionner dans la file d'attente globale en `localStorage`, évitant ainsi des requêtes n8n réseau répétitives et garantissant une utilisation hors-ligne fluide.
-- **Amélioration du Timer Théâtral** :
-  - Remplacement du buzzer final descendant par un carillon arpège ascendant synthétisé en 4 étapes ("uptone") grâce à l'API Web Audio.
-  - Ajout d'un effet de lueur néon haute visibilité sur l'affichage du temps (lueur rouge intense les 30 dernières secondes, doublée les 5 dernières secondes) pour une parfaite lisibilité sur tous les gradients.
-  - Intégration d'une animation dynamique de rebond prononcé (`scale-panic` jusqu'à 1,6x) durant le compte à rebours critique des 5 dernières secondes.
-- **Polissage UI & UX** :
-  - Déplacement des compteurs de suggestions restantes à l'intérieur des cartes de générateurs pour un rendu épuré.
-  - Simplification du badge d'activation du mode développeur de "devMode" en "DEV".
-  - Mise à jour globale de toutes les mentions de version vers la version 0.4 BETA dans les fenêtres modales, la section d'aide et les documentations techniques.
+- **Restauration des retours Notion (Notion Feedback)** : Correction du formattage de texte et des listes à puces.
+- **Raccourcis clavier PC & Navigation de grille** : Contrôles complets via touches fléchées, `Entrée`, `Espace`, `Échap`, etc.
+- **Recharges optimisées du réservoir** : Récupération par blocs de 50 prompts pour préserver le mode hors-ligne.
+- **Amélioration du Timer Théâtral** : Carillon arpège Web Audio, lueur de panique rouge et effet d'échelle `scale-panic`.
+- **Polissage UI & UX** : Compteurs intégrés, simplification du badge "DEV".
 
 ### Version 0.3 BETA (0.3-beta) - 2026-06-10
-- **Refactoring & Centralisation (React Context)** : Migration du buffer d'improvisation vers un Context Provider global (`ImprovBufferContext`) pour synchroniser les tirages entre tous les générateurs, éliminer les tirages doublons et éviter les requêtes n8n concurrentes. Découpage modulaire du hook en sous-hooks (`useToast`, `useDevMode`) et utilitaires (`bufferUtils`).
-- **Optimisation n8n & Réservoir de secours** : Extension du réservoir hors-ligne à **50 entrées par catégorie** (350 prompts au total) et sécurisation du workflow n8n via un double-port (succès/erreur) pour garantir le retour systématique du réservoir de secours lors des surcharges du modèle Gemini.
-- **Ajout d'échauffements & Descriptions** : Intégration de descriptions explicatives en français pour les exercices d'échauffement et les contraintes (catégories) de jeu, guidant l'utilisateur directement depuis l'interface.
-- **Ponçage des thèmes & Générateurs** : Enrichissement et affinage des listes de thèmes, époques, émotions et lieux pour maximiser la variété dramatique.
-- **Envoi de feedback & RGPD** : Sélecteur de note par balayage/glissement tactile ou souris (1 à 5 étoiles) avec émoticônes dynamiques connecté à Notion ou la base de votre choix (via n8n), validation obligatoire du consentement RGPD et intégration d'un modal de politique de confidentialité.
-- **Intégration de Feedback Email** : Mise en place d'un formulaire de feedback permettant aux utilisateurs de partager leurs expériences directement depuis l'application. Les données sont transmises via un workflow n8n qui envoie un email récapitulatif au propriétaire du site.
-- **Conditions générales d'utilisation** : Ajout d'un modal de conditions générales d'utilisation conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
+- **React Context global (`ImprovBufferContext`)** : Centralisation et synchronisation anti-doublon et requêtes concurrentes.
+- **Réservoir de secours de 50 entrées** : Robustesse face aux surcharges d'IA.
+- **Descriptions explicatives** : Aide en français sur les exercices et catégories.
+- **Envoi de feedback & RGPD** : Notes de 1 à 5 étoiles, modals CGU et consentement RGPD.
 
 ### Version BETA 2 (0.2-beta) - 2026-06-09
-- **Architecture & Refactoring JSON** : Déplacement de la configuration des tuiles du tableau de bord et des données de repli des générateurs (émotions, lieux, époques) vers des fichiers JSON externes (`tiles.json`, `reservoir-config.json`).
-- **Description des échauffements** : Ajout d'un champ description explicatif en français pour chaque exercice d'échauffement dans l'interface et le prompt système Gemini.
-- **Robustesse n8n & Notion** : Gestion proactive des échecs d'API Notion dans le workflow n8n (renvoi d'une erreur 500 explicite et propagation propre au client).
-- **Simplification Docker & Makefile** : Harmonisation des commandes de démarrage local (`make up` / `make down` / `make restart`) et isolation réseau locale complète pour éviter tout conflit de ports ou de réseaux Docker. Ajout de `make deploy-delay` pour automatiser l'attente du cycle de build CI/CD.
-- **Normalisation du code** : Ajout d'en-têtes de commentaires de métadonnées normalisés pour toutes les classes, interfaces et routes d'API de l'application.
+- **Architecture JSON** : Externalisation de `tiles.json` et `reservoir-config.json`.
+- **Robustesse Notion** : Gestion des erreurs 500 sur l'API Notion.
+- **Docker & Makefile** : Harmonisation des commandes dev/prod et de déploiement CI/CD.
 
 ### Version Beta 1 (0.1-beta)
 - Corrections de bugs.
-- **Privacy & RGPD** : Ajout d'un modal de politique de confidentialité conforme au RGPD et validation explicite du consentement utilisateur sur le formulaire de retour.
-- **Chemins d'URL dynamiques & Routage** : Association de chaque tuile à un sous-chemin d'URL dédié (ex: `/emotions`, `/timer`) pour un accès direct, avec des règles de réécriture (*rewrites*) Next.js pour empêcher les erreurs 404 lors du rafraîchissement d'une page.
-- **Ajusteur de taille de texte** : Boutons d'ajustement dynamique de taille de police (Standard, Grand, Très Grand) dans l'Aide avec mémorisation persistante dans le `localStorage`.
+- **Privacy & RGPD** : Modals de politique de confidentialité.
+- **Chemins d'URL dynamiques & Routage** : Support du rafraîchissement direct d'URL via rewrites Next.js.
+- **Taille de texte** : Ajustement Standard/Grand/Très Grand persistant en `localStorage`.
