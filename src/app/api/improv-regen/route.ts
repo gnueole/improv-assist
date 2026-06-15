@@ -9,6 +9,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import pkg from "../../../../package.json";
 
 // Parses the master.prompt file dynamically depending on the requested category and count
 function parsePrompt(category?: string, count: number = 350): string {
@@ -103,7 +104,9 @@ export async function POST(request: Request) {
     const n8nBody: Record<string, any> = {
       count,
       system_prompt: systemPrompt,
-      source: process.env.NODE_ENV === "production" ? "prod" : "dev"
+      source: process.env.NODE_ENV === "production" ? "prod" : "dev",
+      version: pkg.version,
+      platform: body.platform || "unknown"
     };
     if (category) {
       n8nBody.category = category;

@@ -33,6 +33,17 @@ interface ImprovBufferContextType {
 
 const ImprovBufferContext = createContext<ImprovBufferContextType | undefined>(undefined);
 
+const getPlatform = (): string => {
+  if (typeof window === "undefined" || !window.navigator) return "unknown";
+  const ua = window.navigator.userAgent.toLowerCase();
+  if (ua.includes("android")) return "Android";
+  if (ua.includes("iphone") || ua.includes("ipad") || ua.includes("ipod")) return "iOS";
+  if (ua.includes("macintosh") || ua.includes("mac os x")) return "macOS";
+  if (ua.includes("windows")) return "Windows";
+  if (ua.includes("linux")) return "Linux";
+  return "other";
+};
+
 export function ImprovBufferProvider({ children }: { children: React.ReactNode }) {
   const { devMode, handleDevModeChange } = useDevMode();
   const { toastMessage, showToast, setToastMessage } = useToast();
@@ -91,7 +102,8 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
         );
         
         const payload: Record<string, any> = {
-          count: category ? 50 : 400
+          count: category ? 50 : 400,
+          platform: getPlatform()
         };
         if (category) {
           payload.category = category;
@@ -248,7 +260,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category, count: 50 }),
+        body: JSON.stringify({ category, count: 50, platform: getPlatform() }),
         cache: "no-store"
       });
 

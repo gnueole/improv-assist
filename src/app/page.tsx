@@ -328,31 +328,44 @@ export default function Dashboard() {
     if (feedbackTile) handleSelectTile(feedbackTile);
   }, [handleSelectTile]);
 
-  // Track usage time for feedback toast
+  // Track cumulative usage time for feedback toast
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const dismissed = localStorage.getItem("feedback_prompt_dismissed");
     if (dismissed === "true") return;
 
-    let sessionStart = sessionStorage.getItem("app_session_start");
-    if (!sessionStart) {
-      sessionStart = Date.now().toString();
-      sessionStorage.setItem("app_session_start", sessionStart);
-    }
-
-    const startTime = parseInt(sessionStart, 10);
     const targetTime = 20 * 60 * 1000; // 20 minutes
 
     const urlParams = new URLSearchParams(window.location.search);
     const testFeedback = urlParams.get("test_feedback") === "true";
-    const delay = testFeedback ? 5000 : Math.max(0, targetTime - (Date.now() - startTime));
 
-    const timer = setTimeout(() => {
-      setShowFeedbackToast(true);
-    }, delay);
+    // 1. Initial check on mount
+    const rawTimeOnMount = localStorage.getItem("cumulative_usage_time") || "0";
+    const totalUsageOnMount = parseInt(rawTimeOnMount, 10);
 
-    return () => clearTimeout(timer);
+    if (totalUsageOnMount >= targetTime || testFeedback) {
+      const delay = testFeedback ? 5000 : 5000;
+      const initialTimer = setTimeout(() => {
+        setShowFeedbackToast(true);
+      }, delay);
+      return () => clearTimeout(initialTimer);
+    }
+
+    // 2. Otherwise, set up interval to track and show once reached
+    const interval = setInterval(() => {
+      const rawTime = localStorage.getItem("cumulative_usage_time") || "0";
+      let totalUsage = parseInt(rawTime, 10);
+      totalUsage += 5000; // increment by 5 seconds
+      localStorage.setItem("cumulative_usage_time", totalUsage.toString());
+
+      if (totalUsage >= targetTime) {
+        setShowFeedbackToast(true);
+        clearInterval(interval);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Modals History Open/Close Actions
