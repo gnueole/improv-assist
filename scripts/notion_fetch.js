@@ -28,9 +28,17 @@ function loadEnv() {
   }
 }
 loadEnv();
-
-const db_id = process.env.NOTION_DATABASE_ID || "829fdac6b063438382d47246c2f3c05e";
+const db_id = process.env.NOTION_DATABASE_ID;
 const api_key = process.env.NOTION_API_KEY;
+
+if (!db_id) {
+  console.error("Error: NOTION_DATABASE_ID environment variable is missing.");
+  process.exit(1);
+}
+if (!api_key) {
+  console.error("Error: NOTION_API_KEY environment variable is missing.");
+  process.exit(1);
+}
 const outputPath = path.join(__dirname, '..', 'src', 'data', 'notionConstraints.json');
 
 function makeRequest(url, method, headers, data) {

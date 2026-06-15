@@ -28,7 +28,8 @@ L'application arbore un design sombre soigné, enrichi de reflets irisés vibran
 ---
 
 ## 🌟 Fonctionnalités Clés
-
+| Outil / Générateur | Description |
+| :--- | :--- |
 | **🎭 Générateur d'Émotions** | Suggère une émotion de jeu aléatoire accompagnée d'un curseur d'intensité de **1 à 10**. |
 | **👆 Qui Commence ? (Multi-touch)** | Tirage au sort interactif pour désigner qui débute la scène. Posez jusqu'à 5 doigts sur l'écran. Après un décompte de 3 secondes, le vainqueur est choisi aléatoirement. |
 | **✨ Thèmes d'Impro** | Suggère des sujets de jeu et des idées d'histoires poétiques ou comiques. |
