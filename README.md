@@ -65,7 +65,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 - [ ] **Ajout de nouvelles tuiles freemium/premium** : Pour financer l'application (voire la rendre pérenne), il faudrait ajouter de nouvelles tuiles personalisées payantes ou via un abonnement mensuel/annuel.
 - [ ] **Application MOBILE** : Développer une application mobile pour Android et iOS. Cela permettrait d'avoir des notifications push, des widgets, etc.
 - [x] **Historique de jeu & Historique des tirages** : Garder une trace locale (dans le `localStorage` sous `improv_history`) des 10 dernières suggestions tirées pour éviter les doublons absolus à court terme.
-- [ ] **Timer avancé avec buzzer** : Ajouter des sons de buzzer de fin configurables, ainsi que la possibilité de régler le temps libre.
+- [x] **Timer avancé avec buzzer** : Ajouter des sons de buzzer de fin configurables, ainsi que la possibilité de régler le temps libre.
 - [ ] **Multilingue (FR / EN)** : Traduction complète de l'application pour l'usage dans des festivals ou ateliers internationaux.
 
 ---
