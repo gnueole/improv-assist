@@ -78,7 +78,7 @@ def load_env():
 
 load_env()
 
-N8N_WEBHOOK_URL = os.getenv("N8N_POPULATE_URL", "https://n8n.eole.me/webhook/improv-regen")
+N8N_WEBHOOK_URL = f"{os.getenv('N8N_BASE_URL', 'https://n8n.eole.me').rstrip('/')}/webhook/improv-regen"
 X_N8N_TOKEN = os.getenv("X_N8N_TOKEN", "")
 
 def parse_prompt(category=None, count=350):

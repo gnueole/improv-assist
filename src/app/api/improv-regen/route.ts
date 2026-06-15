@@ -76,7 +76,8 @@ function parsePrompt(category?: string, count: number = 350): string {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const webhookUrl = process.env.N8N_POPULATE_URL || "https://n8n.eole.me/webhook/improv-regen";
+    const n8nBaseUrl = process.env.N8N_BASE_URL || "https://n8n.eole.me";
+    const webhookUrl = `${n8nBaseUrl.replace(/\/$/, "")}/webhook/improv-regen`;
     
     let category = body.category;
     if (category === "mgt" || category === "warmup") {
