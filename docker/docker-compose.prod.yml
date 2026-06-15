@@ -11,6 +11,8 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
       - GOOGLE_TAG_ID=${GOOGLE_TAG_ID}
       - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
+      - X_N8N_TOKEN=${X_N8N_TOKEN}
+      - N8N_BASE_URL=${N8N_BASE_URL}
     networks:
       - eole_shared_network
     extra_hosts:
