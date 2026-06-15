@@ -143,7 +143,7 @@ export default function ImprovTimer() {
         selectedVoice = frenchVoices.find(v => femaleNames.some(name => v.name.toLowerCase().includes(name)));
       } else if (voiceGender === "male") {
         selectedVoice = frenchVoices.find(v => maleNames.some(name => v.name.toLowerCase().includes(name)));
-        
+
         // Fallback: If no native male voice is found, prefer a local French voice (supporting pitch modulation)
         // over Google remote voices which ignore pitch adjustments in Chrome.
         if (!selectedVoice) {
@@ -170,44 +170,34 @@ export default function ImprovTimer() {
         window.speechSynthesis.speak(utt);
       };
 
+      const isMale = voiceGender === "male";
+      const baseRate = isMale ? 0.85 : 0.90;
+      const basePitch = isMale ? (isNativeMaleVoice ? 0.85 : 0.80) : 1.05;
+
+      const createUtterance = (txt: string, rateOffset: number, pitchOverride?: number) => {
+        const utt = new SpeechSynthesisUtterance(txt);
+        utt.lang = "fr-FR";
+        if (selectedVoice) utt.voice = selectedVoice;
+        utt.rate = baseRate + rateOffset;
+        utt.pitch = pitchOverride !== undefined ? pitchOverride : basePitch;
+        utt.volume = 1.0;
+        return utt;
+      };
+
       if (isFinal) {
         if (text.trim().toLowerCase() === "hey ! impro !") {
-          const utterance1 = new SpeechSynthesisUtterance("Hey !");
-          utterance1.lang = "fr-FR";
-          if (selectedVoice) utterance1.voice = selectedVoice;
-          utterance1.rate = voiceGender === "male" ? 0.85 : 0.9;    // Natural speed, slightly slower for male voice
-          // Avoid setting pitch too low (below 0.75) to prevent nasal/robotic digital distortion in Chrome
-          utterance1.pitch = voiceGender === "male" ? (isNativeMaleVoice ? 0.85 : 0.8) : 1.25;
-          utterance1.volume = 1.0;
-
-          const utterance2 = new SpeechSynthesisUtterance("Impro !");
-          utterance2.lang = "fr-FR";
-          if (selectedVoice) utterance2.voice = selectedVoice;
-          utterance2.rate = voiceGender === "male" ? 0.75 : 0.8;   // Moderately slower to stretch without metallic echo
-          utterance2.pitch = voiceGender === "male" ? (isNativeMaleVoice ? 0.75 : 0.75) : 1.05;
-          utterance2.volume = 1.0;
+          const utterance1 = createUtterance("Hey !", -0.05, isMale ? basePitch : 1.25);
+          const utterance2 = createUtterance("Impro !", -0.10, isMale ? 0.75 : basePitch);
 
           addUtterance(utterance1);
           addUtterance(utterance2);
         } else {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = "fr-FR";
-          if (selectedVoice) utterance.voice = selectedVoice;
-          utterance.rate = voiceGender === "male" ? 0.85 : 0.9;   // natural pacing
-          utterance.pitch = voiceGender === "male" ? (isNativeMaleVoice ? 0.85 : 0.8) : 1.05;
-          utterance.volume = 1.0;  // max volume
+          const utterance = createUtterance(text, 0);
           addUtterance(utterance);
         }
       } else {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "fr-FR";
-        if (selectedVoice) utterance.voice = selectedVoice;
-
-        // Make it sound clear and projected
-        utterance.rate = voiceGender === "male" ? 0.9 : 0.95;
-        utterance.pitch = voiceGender === "male" ? (isNativeMaleVoice ? 0.85 : 0.8) : 1.0;
-        utterance.volume = 1.0; // max volume
-
+        // Non-final: sound clear and projected
+        const utterance = createUtterance(text, 0.05, isMale ? basePitch : 1.00);
         addUtterance(utterance);
       }
     } catch (e) {
@@ -374,7 +364,7 @@ export default function ImprovTimer() {
           // Combines low fundamental drone with piercing high-frequency metallic harmonics.
           const freqs = [110, 165, 220, 275, 330, 440, 550, 660, 880, 1100, 1320, 1760];
           const types: OscillatorType[] = [
-            "sine", "sine", "triangle", "triangle", "sawtooth", "triangle", 
+            "sine", "sine", "triangle", "triangle", "sawtooth", "triangle",
             "sawtooth", "triangle", "sine", "triangle", "sine", "triangle"
           ];
           const gains = [0.4, 0.3, 0.25, 0.2, 0.15, 0.12, 0.1, 0.08, 0.06, 0.05, 0.04, 0.03];
@@ -668,11 +658,10 @@ export default function ImprovTimer() {
         {!isRunning && !isFinished && (
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className={`px-3 py-1.5 rounded-full border text-xs flex items-center gap-1.5 active:scale-95 transition-all ${
-              showAdvanced
+            className={`px-3 py-1.5 rounded-full border text-xs flex items-center gap-1.5 active:scale-95 transition-all ${showAdvanced
                 ? "bg-zinc-850 border-zinc-800 text-white font-medium shadow-md shadow-black/50"
                 : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white"
-            }`}
+              }`}
           >
             <Sliders className="w-3.5 h-3.5" />
             <span>Options avancées</span>
@@ -682,13 +671,11 @@ export default function ImprovTimer() {
 
       {/* Main Display Ring */}
       <div
-        className={`generator-card transition-all duration-300 ${
-          isPanicTime ? "animate-pulse shadow-[0_0_40px_rgba(255,50,50,0.6)]" : isUrgentTime ? "animate-pulse" : ""
-        }`}
+        className={`generator-card transition-all duration-300 ${isPanicTime ? "animate-pulse shadow-[0_0_40px_rgba(255,50,50,0.6)]" : isUrgentTime ? "animate-pulse" : ""
+          }`}
       >
-        <div className={`generator-card-inner transition-colors duration-300 ${
-          isUrgentTime ? "urgent" : isLowTime ? "low-time" : isFinished ? "finished" : ""
-        }`}>
+        <div className={`generator-card-inner transition-colors duration-300 ${isUrgentTime ? "urgent" : isLowTime ? "low-time" : isFinished ? "finished" : ""
+          }`}>
 
           <div className="flex flex-col items-center select-none">
             {isFinished ? (
@@ -708,15 +695,14 @@ export default function ImprovTimer() {
                 </span>
 
                 {/* Big Time Display */}
-                <h3 className={`text-6xl sm:text-7xl tracking-tight mb-2 transition-all duration-300 tabular-nums ${
-                  isPanicTime
-                  ? "text-red-100 font-black filter drop-shadow-[0_0_30px_rgba(255,50,50,1)] drop-shadow-[0_0_15px_rgba(255,255,255,0.95)] animate-scale-panic"
-                  : isUrgentTime
-                  ? "text-red-100 font-black filter drop-shadow-[0_0_25px_rgba(255,50,50,1)] drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-scale-urgent"
-                  : isLowTime
-                  ? "text-red-100 font-black scale-105 filter drop-shadow-[0_0_20px_rgba(255,50,50,0.9)]"
-                  : "text-white font-medium filter drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
-                }`}>
+                <h3 className={`text-6xl sm:text-7xl tracking-tight mb-2 transition-all duration-300 tabular-nums ${isPanicTime
+                    ? "text-red-100 font-black filter drop-shadow-[0_0_30px_rgba(255,50,50,1)] drop-shadow-[0_0_15px_rgba(255,255,255,0.95)] animate-scale-panic"
+                    : isUrgentTime
+                      ? "text-red-100 font-black filter drop-shadow-[0_0_25px_rgba(255,50,50,1)] drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-scale-urgent"
+                      : isLowTime
+                        ? "text-red-100 font-black scale-105 filter drop-shadow-[0_0_20px_rgba(255,50,50,0.9)]"
+                        : "text-white font-medium filter drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                  }`}>
                   {formatTime(timeLeft)}
                 </h3>
 
@@ -732,7 +718,7 @@ export default function ImprovTimer() {
       {/* Settings configuration panel */}
       {isAdvancedOpen && (
         <div className="w-full max-w-sm flex flex-col gap-3 p-4 bg-zinc-950/45 border border-zinc-900 rounded-2xl backdrop-blur-md">
-          
+
           {/* 1. Custom Time adjustments (réglage personnalisé) - PLACED FIRST */}
           <div className="flex flex-col gap-1.5">
             <span className="text-xs uppercase tracking-[0.15em] text-zinc-400 font-bold">
@@ -814,11 +800,10 @@ export default function ImprovTimer() {
                     localStorage.setItem("improv_default_duration", seconds.toString());
                   }
                 }}
-                className={`py-1 px-2.5 rounded-full text-xs transition-all border ${
-                  targetDuration === seconds
+                className={`py-1 px-2.5 rounded-full text-xs transition-all border ${targetDuration === seconds
                     ? "bg-zinc-900 text-white border-zinc-800 font-semibold"
                     : "bg-zinc-950/30 border-zinc-900 text-zinc-400 hover:border-zinc-850 hover:text-zinc-300"
-                }`}
+                  }`}
               >
                 {seconds === 30 ? "Caucus (30s)" : seconds === 150 ? "2m30s" : formatTime(seconds)}
               </button>
@@ -840,7 +825,7 @@ export default function ImprovTimer() {
             {announcementTimes.length > 0 ? (
               <div className="flex flex-wrap gap-1.5 p-2 bg-zinc-950/20 border border-zinc-900/65 rounded-xl max-h-[120px] overflow-y-auto">
                 {announcementTimes.map((time) => {
-                  const label = time >= 60 
+                  const label = time >= 60
                     ? `${Math.floor(time / 60)}m${time % 60 > 0 ? (time % 60) : ""}`
                     : `${time}s`;
                   return (
@@ -906,13 +891,12 @@ export default function ImprovTimer() {
                     key={s}
                     type="button"
                     onClick={() => toggleAnnouncementTime(s)}
-                    className={`py-0.5 px-2 rounded-full text-[10px] border transition-all active:scale-95 ${
-                      isActive
+                    className={`py-0.5 px-2 rounded-full text-[10px] border transition-all active:scale-95 ${isActive
                         ? "bg-cyan-950/20 border-cyan-800/50 text-cyan-400 font-medium"
                         : "bg-zinc-950/20 border-zinc-900 text-zinc-500 hover:text-cyan-400"
-                    }`}
+                      }`}
                   >
-                    {s >= 60 
+                    {s >= 60
                       ? `${Math.floor(s / 60)}m${s % 60 > 0 ? (s % 60) : ""}`
                       : `${s}s`}
                   </button>
@@ -971,11 +955,10 @@ export default function ImprovTimer() {
                   key={g.id}
                   type="button"
                   onClick={() => handleVoiceGenderChange(g.id as any)}
-                  className={`py-1.5 px-0.5 text-xs rounded-xl font-medium border text-center transition-all truncate ${
-                    voiceGender === g.id
+                  className={`py-1.5 px-0.5 text-xs rounded-xl font-medium border text-center transition-all truncate ${voiceGender === g.id
                       ? "bg-zinc-900 text-white border-zinc-800 font-semibold shadow-md"
                       : "bg-zinc-950/30 border-transparent text-zinc-500 hover:border-zinc-900 hover:text-zinc-400"
-                  }`}
+                    }`}
                 >
                   {g.name}
                 </button>
@@ -1001,20 +984,19 @@ export default function ImprovTimer() {
               </button>
             )}
           </div>
-          
+
           <div className="grid grid-cols-5 gap-1.5">
             {BUZZER_TYPES.map((b) => (
               <button
                 key={b.id}
                 onClick={() => selectBuzzer(b.id)}
                 disabled={!soundEnabled}
-                className={`py-1.5 px-0.5 text-[10px] sm:text-xs rounded-xl font-medium border text-center transition-all truncate ${
-                  !soundEnabled
+                className={`py-1.5 px-0.5 text-[10px] sm:text-xs rounded-xl font-medium border text-center transition-all truncate ${!soundEnabled
                     ? "opacity-30 cursor-not-allowed border-zinc-900 text-zinc-600"
                     : buzzerType === b.id
-                    ? "bg-zinc-900 text-white border-zinc-800 font-semibold shadow-md"
-                    : "bg-zinc-950/30 border-transparent text-zinc-500 hover:border-zinc-900 hover:text-zinc-400"
-                }`}
+                      ? "bg-zinc-900 text-white border-zinc-800 font-semibold shadow-md"
+                      : "bg-zinc-950/30 border-transparent text-zinc-500 hover:border-zinc-900 hover:text-zinc-400"
+                  }`}
               >
                 {b.name}
               </button>
