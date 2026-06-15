@@ -169,7 +169,7 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 
 ## 📝 Changelog
 
-### Version 0.9 BETA (0.9-beta / 1.0.0-beta.9) - 2026-06-15
+### Version 0.9 BETA (0.9-beta) - 2026-06-15
 - **Timer de Scène & Voix (TTS)** :
   - **Choix du Genre de la Voix** : Ajout d'une option de choix de la voix (Féminine / Masculine) via deux boutons stylisés. Le pitch de la synthèse vocale est dynamiquement ajusté (abaissé à 0.75 pour l'option masculine) pour assurer un rendu masculin distinct même si le navigateur ne dispose que d'une seule voix française (féminine) par défaut.
   - **Boutons d'Ajustement Rapide** : Intégration de 4 boutons d'ajustement rapide du temps (-30s, -10s, +10s, +30s) sous le chronomètre en mode simple.
@@ -184,20 +184,20 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 - **Mise en Page Réactive** :
   - **Ajustement du Défilement (Scroll)** : Forçage du défilement vertical (`overflow-y-auto min-h-0`) sur la zone centrale pour éviter que le panneau des options avancées ne pousse les contrôles hors de l'écran ou ne soit masqué.
 
-### Version 0.8 BETA (0.8-beta / 1.0.0-beta.8) - 2026-06-12
+### Version 0.8 BETA (0.8-beta) - 2026-06-12
 - **Mesure de Durée de Génération** : Enregistrement de la durée totale d'exécution de la régénération par l'IA (en secondes) dans la base de données Notion `"Houbahouba AI regen calls"`.
 - **Suivi de la Source de Déclenchement** : Ajout d'une propriété `Source` (prod / dev / other) dans la base de données Notion pour filtrer l'usage selon l'environnement d'exécution (PWA Next.js en production, développement ou scripts de test).
 - **Parallélisation n8n et Notion** : Déplacement du nœud d'historisation Notion à la fin du flux de régénération, s'exécutant en parallèle de la réponse webhook finale afin d'éliminer toute latence ressentie côté utilisateur.
 - **Optimisation de la Mise en Page de Recherche** : Remplacement des marges verticales dynamiques (`margin: auto auto;`) sur le Hero du dashboard par des marges fixes, évitant ainsi le décalage vers le bas de la barre de recherche et l'occultation des résultats par le clavier virtuel sur mobile.
 - **Normalisation Typographique** : Suppression de l'espace superflu avant le point d'exclamation pour le nom de l'application ("Houba Houba!" au lieu de "Houba Houba !").
 
-### Version 0.7 BETA (0.7-beta / 1.0.0-beta.7) - 2026-06-12
+### Version 0.7 BETA (0.7-beta) - 2026-06-12
 - **Documentation dynamique de l'aide** : Génération entièrement automatisée de la liste des fonctionnalités dans la vue d'aide, basée sur les métadonnées déclarées sur chaque tuile de micro-app (propriété `helpDescription`).
 - **Disque de vainqueur plus grand ("Qui Commence ?")** : Agrandissement de l'indicateur tactile du joueur tiré au sort (multiplié par 2.5) pour qu'il soit bien visible même si l'utilisateur garde son doigt posé sur l'écran.
 - **Boutons d'en-tête agrandis** : Optimisation de la taille tactile des boutons en haut à droite (Recherche, IA, À propos) sur mobile.
 - **Guide de création d'outil** : Ajout de la documentation `TileAPI.md` décrivant les spécifications techniques et l'architecture pour ajouter une nouvelle tuile.
 
-### Version 0.6 BETA (0.6-beta / 1.0.0-beta.6) - 2026-06-12
+### Version 0.6 BETA (0.6-beta) - 2026-06-12
 - **Restructuration du Tableau de Bord (Submenus)** : Restructuration de la grille plate de tuiles en un menu hiérarchique regroupé par dossiers thématiques :
   - **Incarner** : Emotions, Personnages, Animaux, Objets
   - **Inspiration** : Scénarios, Lieux, Époques, Thèmes
@@ -216,12 +216,12 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
   - Intégration de Google Analytics (GA4) et Google Tag Manager (GTM) via `dataLayer.push` pour remonter les événements `workflow_trigger` (avec catégorie et statut forcé) lors des rechargements.
   - Logging asynchrone en parallèle vers la base de données de retours d'expérience sur Notion via un nouveau nœud dans le workflow n8n (`Log to Notion`), créant des pages typées "Observation" et préfixées par `[Regen]`.
 
-### Version 0.5 BETA (0.5-beta / 1.0.0-beta.5) - 2026-06-11
+### Version 0.5 BETA (0.5-beta) - 2026-06-11
 - **Migration vers Gemini 2.5 Pro** : Mise à niveau de l'intelligence artificielle et du modèle sous-jacent vers `gemini-2.5-pro` pour la génération du réservoir statique (350 prompts répartis en 7 catégories). Cette version apporte une plus grande cohérence dramatique en privilégiant des relations humaines ancrées avec des conflits et des enjeux clairs, tout en évitant le surréalisme abstrait d'objets.
-- **Résilience Doppler locale** : Amélioration du `Makefile` de développement. En l'absence de Doppler CLI installé en local, le script n'échoue plus avec une erreur bloquante et effectue automatiquement une copie de sauvegarde à partir de `docker/.env.example` vers `.env` pour lancer l'environnement.
+- **Résilience Doppler locale** : Amélioration du `Makefile` de développement. En l'absence de Doppler CLI installé en local, le script n' échoue plus avec une erreur bloquante et effectue automatiquement une copie de sauvegarde à partir de `docker/.env.example` vers `.env` pour lancer l'environnement.
 - **Timeout réseau adapté** : Validation d'un délai de timeout réseau prolongé à 180 secondes dans le script `populate_reservoir.py` afin de supporter le temps d'exécution accru requis par la complexité du modèle Gemini 2.5 Pro pour le lot complet de 350 items.
 
-### Version 0.4 BETA (0.4-beta / 1.0.0-beta.4) - 2026-06-11
+### Version 0.4 BETA (0.4-beta) - 2026-06-11
 - **Restauration des retours Notion (Notion Feedback)** : Remplacement de l'ajout de blocs Notion bogué par un nœud standard `httpRequest` dans n8n. Reconfiguration de la structure des données pour ajouter de vrais en-têtes natifs Notion (`## Details`, `## Message`) et des puces de liste de type `bulleted_list_item` lors des envois de retours.
 - **Raccourcis clavier PC & Navigation de grille** : Ajout d'une gestion complète de navigation au clavier pour ordinateur :
   - Flèches directionnelles (`Haut`, `Bas`, `Gauche`, `Droite`) pour naviguer entre les tuiles de la grille du tableau de bord avec un effet visuel d'échelle et une lueur irisée réactive.

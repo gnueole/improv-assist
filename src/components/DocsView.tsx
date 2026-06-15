@@ -152,9 +152,20 @@ export default function DocsView({ onOpenPrivacy, onOpenAbout, tiles }: DocsView
 
             {tiles
               .filter((tile) => tile.helpDescription)
-              .map((tile) => {
-                const firstColor = tile.color.split(" ")[0] || "from-purple-400";
-                const bgClass = firstColor.replace("from-", "bg-");
+              .map((tile, index) => {
+                const bulletColors = [
+                  "bg-purple-400",
+                  "bg-pink-400",
+                  "bg-yellow-400",
+                  "bg-cyan-400",
+                  "bg-indigo-400",
+                  "bg-orange-400",
+                  "bg-emerald-400",
+                  "bg-rose-400",
+                  "bg-teal-400",
+                  "bg-amber-400"
+                ];
+                const bgClass = bulletColors[index % bulletColors.length];
 
                 return (
                   <div key={tile.id} className="space-y-1">

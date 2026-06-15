@@ -1,6 +1,6 @@
 {
   "name": "improv-assist-frontend",
-  "version": "1.0.0-beta.9",
+  "version": "0.9-beta",
   "private": true,
   "scripts": {
     "dev": "next dev",
