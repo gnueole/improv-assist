@@ -6,11 +6,13 @@ Ce document décrit l'architecture et les étapes requises (la "pseudo API") pou
 
 ## Architecture Générale
 
-Le fonctionnement d'une tuile repose sur un modèle en 4 couches :
+Le fonctionnement d'une tuile repose sur un modèle en 5 couches (séparation stricte de l'affichage et de la logique métier) :
 1. **Configuration / Métadonnées** : La déclaration de la tuile dans le tableau de bord.
 2. **Structure des Données (TypeScript & Cache)** : La définition du type de suggestion et l'initialisation du réservoir de repli (fallback).
-3. **État Global / Logique Métier** : La gestion du tirage sans doublons via le hook contextuel.
-4. **Composant UI / Affichage** : Le générateur de scène interactif monté à l'écran.
+3. **État Global / Logique de Tampon** : La gestion du tirage sans doublons via le hook contextuel global.
+4. **Logique Métier Interne (Hook React Dédié)** : Un hook React personnalisé (`src/hooks/useMyNewTool.ts`) gérant l'état local, les paramètres de voix, de temps ou d'options spécifiques de la tuile.
+5. **Composant UI / Affichage (Display Component)** : Un composant d'affichage pur (`src/components/MyNewTool.tsx`) qui consomme le hook dédié pour restituer l'interface graphique.
+
 
 ---
 
@@ -85,30 +87,59 @@ Pour que le bouton de tirage pioche dans le réservoir local et évite les rép�
 
 ---
 
-## Étape 4 : Créer et Monter le Composant UI
+## Étape 4 : Créer la Logique (Hook) et le Composant UI (Affichage)
 
-1. **Créer le composant de vue** dans `src/components/` (ex: `MyNewGenerator.tsx`).
-   - Pour un tirage de texte standard, vous pouvez réutiliser directement le composant mutualisé `<GenericGenerator>` :
-     ```tsx
-     <GenericGenerator
-       categoryKey="my_new_tool"
-       title="Titre de l'outil"
-       pickItem={pickItem}
-       itemsPool={reservoirPool.my_new_tool || []}
-     />
+Pour respecter la séparation de l'affichage et du fonctionnel, chaque tuile doit avoir sa logique isolée dans un hook personnalisé dédié, rendant le composant UI le plus simple et déclaratif possible.
+
+1. **Créer le hook de logique métier** dans `src/hooks/useMyNewTool.ts` :
+   - Ce hook doit encapsuler tout l'état de la tuile (ex: états d'options, sélections, lecture de synthèse vocale, etc.) et retourner les fonctions et variables nécessaires à l'affichage.
+   - Exemple :
+     ```typescript
+     import { useState, useCallback } from "react";
+     import { useImprovBuffer } from "@/hooks/useImprovBuffer"; // Hook global de gestion du tampon
+     
+     export function useMyNewTool() {
+       const { pickItem } = useImprovBuffer();
+       const [item, setItem] = useState<any>(null);
+       const [loading, setLoading] = useState(false);
+       
+       const draw = useCallback(async () => {
+         setLoading(true);
+         const res = await pickItem("my_new_tool");
+         setItem(res);
+         setLoading(false);
+       }, [pickItem]);
+       
+       return { item, loading, draw };
+     }
      ```
-2. **Importer et monter le composant** dans la fonction `renderActiveComponent()` de [src/app/page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx) :
+
+2. **Créer le composant d'affichage** dans `src/components/MyNewGenerator.tsx` :
+   - Ce composant doit importer le hook personnalisé et s'en servir pour l'affichage, sans gérer d'état complexe directement en son sein.
+   - Exemple :
+     ```tsx
+     import React from "react";
+     import { useMyNewTool } from "@/hooks/useMyNewTool";
+     
+     export function MyNewGenerator() {
+       const { item, loading, draw } = useMyNewTool();
+       
+       return (
+         <div className="p-6 bg-slate-900 rounded-xl">
+           <h2 className="text-xl font-bold">Nouveau Générateur</h2>
+           <button onClick={draw} disabled={loading}>Tirer</button>
+           {item && <p>{item.text}</p>}
+         </div>
+       );
+     }
+     ```
+
+3. **Importer et monter le composant** dans la fonction `renderActiveComponent()` de [src/app/page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx) :
    ```tsx
    case "my_new_tool":
-     return (
-       <GenericGenerator
-         categoryKey="my_new_tool"
-         title="Titre"
-         pickItem={pickItem}
-         itemsPool={reservoirPool.my_new_tool || []}
-       />
-     );
+     return <MyNewGenerator />;
    ```
+
 
 ---
 
