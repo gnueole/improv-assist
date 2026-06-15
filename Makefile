@@ -12,6 +12,9 @@
 VPS_SSH  := eole.me
 VPS_PATH := /home/eole/projects/jobby-md2html/improv-assist
 
+APP_NAME := Houba Houba!
+VERSION  := $(shell node -p "require('./package.json').version" 2>/dev/null || echo "1.0.0")
+
 # 🔑 SECRETS MANAGEMENT (DOPPLER)
 # check doppler.com for information on how to use it
 DOPPLER_PROJECT     := eole-me
@@ -78,7 +81,7 @@ restart: down up
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
 # ==============================================================================
 deploy:
-	@echo "🚀 Deploying Houba Houba! to VPS Target [$(VPS_SSH)]..."
+	@echo "🚀 Deploying $(APP_NAME) ($(VERSION)) to VPS Target [$(VPS_SSH)]..."
 # 1. Ensure the remote deployment directory exists
 	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
 # 2. SCP the production compose file
