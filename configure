@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🎭 HOUBA HOUBA ! — SCRIPT DE CONFIGURATION
+# 🎭 HOUBA HOUBA! — SCRIPT DE CONFIGURATION
 # ==============================================================================
 # Description : Vérifie les dépendances système, initialise les fichiers .env
 #               et installe les paquets de dépendances requis.
@@ -37,7 +37,7 @@ for arg in "$@"; do
 done
 
 echo -e "${BOLD}======================================================================"
-echo -e "          🐸  HOUBA HOUBA ! — CONFIGURATION SYSTÈME  🐸"
+echo -e "          🐸  HOUBA HOUBA! — CONFIGURATION SYSTÈME  🐸"
 echo -e "======================================================================${NC}"
 echo ""
 
@@ -117,12 +117,62 @@ if [ ! -f ".env" ]; then
     if [ -f ".env.example" ]; then
         cp .env.example .env
         log_success "Fichier .env initialisé avec succès depuis .env.example."
-        log_info "Veuillez ouvrir et éditer le fichier .env pour renseigner vos clés d'API Notion."
     else
         log_error "Fichier .env.example manquant !"
+        exit 1
     fi
 else
     log_success "Fichier de configuration .env déjà présent."
+fi
+
+# Configuration interactive des clés d'intégration
+if [ "$AUTO_INSTALL" = false ]; then
+    echo ""
+    read -p "Voulez-vous configurer les clés d'intégration Notion/n8n dans le fichier .env maintenant ? [o/N] " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Oo]$ ]]; then
+        # Notion API Key
+        read -p "Saisissez votre clé d'intégration Notion (NOTION_API_KEY) : " input_notion_key
+        if [ ! -z "$input_notion_key" ]; then
+            node -e "
+              const fs = require('fs');
+              let c = fs.readFileSync('.env', 'utf8');
+              c = c.includes('NOTION_API_KEY=') 
+                ? c.replace(/NOTION_API_KEY=.*/, 'NOTION_API_KEY=\"' + process.argv[1] + '\"') 
+                : c + '\nNOTION_API_KEY=\"' + process.argv[1] + '\"';
+              fs.writeFileSync('.env', c, 'utf8');
+            " "$input_notion_key"
+            log_success "NOTION_API_KEY enregistrée."
+        fi
+
+        # Notion Database ID
+        read -p "Saisissez votre ID de base de données de contraintes Notion (NOTION_DATABASE_ID) : " input_notion_db
+        if [ ! -z "$input_notion_db" ]; then
+            node -e "
+              const fs = require('fs');
+              let c = fs.readFileSync('.env', 'utf8');
+              c = c.includes('NOTION_DATABASE_ID=') 
+                ? c.replace(/NOTION_DATABASE_ID=.*/, 'NOTION_DATABASE_ID=\"' + process.argv[1] + '\"') 
+                : c + '\nNOTION_DATABASE_ID=\"' + process.argv[1] + '\"';
+              fs.writeFileSync('.env', c, 'utf8');
+            " "$input_notion_db"
+            log_success "NOTION_DATABASE_ID enregistrée."
+        fi
+
+        # X_N8N_TOKEN
+        read -p "Saisissez votre jeton de sécurité Webhook n8n (X_N8N_TOKEN) : " input_n8n_token
+        if [ ! -z "$input_n8n_token" ]; then
+            node -e "
+              const fs = require('fs');
+              let c = fs.readFileSync('.env', 'utf8');
+              c = c.includes('X_N8N_TOKEN=') 
+                ? c.replace(/X_N8N_TOKEN=.*/, 'X_N8N_TOKEN=\"' + process.argv[1] + '\"') 
+                : c + '\nX_N8N_TOKEN=\"' + process.argv[1] + '\"';
+              fs.writeFileSync('.env', c, 'utf8');
+            " "$input_n8n_token"
+            log_success "X_N8N_TOKEN enregistrée."
+        fi
+    fi
 fi
 
 echo ""

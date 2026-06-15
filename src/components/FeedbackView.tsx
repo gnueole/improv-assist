@@ -132,7 +132,7 @@ export default function FeedbackView({ showToast, onOpenPrivacy }: FeedbackViewP
         <CheckCircle2 className="w-16 h-16 text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)] animate-pulse" />
         <h3 className="text-xl font-bold text-zinc-100">Merci beaucoup !</h3>
         <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">
-          Votre retour a bien été envoyé. Vos observations et suggestions nous aident à améliorer Houba Houba !
+          Votre retour a bien été envoyé. Vos observations et suggestions nous aident à améliorer Houba Houba!
         </p>
         <a
           href="index.html"

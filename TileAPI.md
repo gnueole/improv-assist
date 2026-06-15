@@ -1,6 +1,6 @@
 # Guide : Ajouter un nouvel outil (Micro-app Tile)
 
-Ce document décrit l'architecture et les étapes requises (la "pseudo API") pour ajouter une nouvelle tuile (micro-app) sur le tableau de bord de **Houba Houba !**.
+Ce document décrit l'architecture et les étapes requises (la "pseudo API") pour ajouter une nouvelle tuile (micro-app) sur le tableau de bord de **Houba Houba!**.
 
 ---
 

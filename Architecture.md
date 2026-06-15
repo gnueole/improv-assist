@@ -1,6 +1,6 @@
-# 🎭 Houba Houba ! — Architecture Technique
+# 🎭 Houba Houba! — Architecture Technique
 
-Ce document décrit l'architecture globale, la structure des données et les flux de communication de l'application **Houba Houba !**.
+Ce document décrit l'architecture globale, la structure des données et les flux de communication de l'application **Houba Houba!**.
 
 ---
 
@@ -124,8 +124,14 @@ L'intelligence métier et les enregistrements sont gérés par deux flux d'autom
 * **Gestion d'Erreur** : Si Notion renvoie une erreur (ex: limite d'API ou erreur de schéma), le flux intercepte l'erreur grâce à `"onError": "continue"` et renvoie un statut HTTP `500` avec la description de l'erreur au client.
 
 ### B. Flux d'IA & Génération (`Improv-Assist BaaS`)
-* **Déclencheur** : Webhook POST sur `/webhook/improv-regen`.
+* **Déclencheur** : Webhook POST sur `/webhook/improv-regen` (avec transmission facultative du paramètre `source` représentant l'environnement : `prod`, `dev` ou `other`).
 * **Action** : Interroge le modèle **Gemini 2.5 Pro** (via LangChain) avec un prompt système structuré pour générer un lot complet d'idées d'improvisation au format JSON.
+* **Télémétrie et Enregistrement Notion** : À la fin de l'exécution du flux (en parallèle avec l'envoi de la réponse webhook afin d'éviter toute latence pour l'utilisateur), le nœud `Log to Notion` enregistre la transaction dans la base de données Notion `"Houbahouba AI regen calls"` avec les propriétés suivantes :
+  - **Name** : `[Regen] <catégorie>`
+  - **Type** : Catégorie d'improvisation régénérée.
+  - **Source** : Provenance du déclenchement (`prod` pour la PWA en production, `dev` pour l'environnement local ou le script de peuplement, `other` pour le fallback/tests).
+  - **duration** : Durée totale de la génération en secondes (calculée par la différence de temps entre le nœud initial `Load Token` et le nœud final `Log to Notion`).
+  - **date** : Date d'exécution.
 * **Gestion d'Erreur & Timeouts** : 
   - **Limites de Temps** : Afin de s'adapter aux ~90 secondes requises par la complexité de `gemini-2.5-pro` pour générer 400 items de haute qualité, les limites de temps n8n (`executionTimeout`) ont été désactivées. 
   - **Gestion des Timeouts** : La route API proxy `/api/improv-regen` côté client impose une limite de temps stricte de 10 secondes pour garantir la réactivité sur scène de la PWA (renvoyant une structure `{ error: "Timeout issued (from Message a model)" }` interceptée par l'application). En revanche, le script d'initialisation hors-ligne `populate_reservoir.py` utilise un timeout de 180 secondes pour permettre au modèle de terminer l'ensemble de son travail de génération.
@@ -163,3 +169,40 @@ L'infrastructure est entièrement conteneurisée à l'aide de Docker, sécurisé
 * **VPS (Production - impro.eole.me)** :
   * **CI/CD** : Chaque push sur la branche `main` déclenche un workflow GitHub Actions qui compile une image de production Docker immuable et la publie sur le registre GitHub Packages (GHCR).
   * **Déploiement** : La commande `make deploy-delay` permet de diffuser les configurations et variables d'environnement de production en direct depuis Doppler via SSH sur le VPS, d'attendre la fin de la compilation CI/CD (150s), puis de recréer les conteneurs de production derrière le proxy inverse **Traefik** (uniquement pour https://impro.eole.me).
+
+---
+
+## 🛠️ 6. Procédure de Disaster Recovery (Nouvelle Instance)
+
+En cas de perte de données complète, de panne du serveur BaaS, ou de réinstallation sur une nouvelle machine / serveur, suivez cette procédure pour restaurer l'écosystème :
+
+### A. Initialisation Système et Clés d'Environnement
+1. Lancez le script de configuration à la racine :
+   ```bash
+   ./configure
+   ```
+2. Le script vérifiera toutes les dépendances locales (Node, Docker, Python), créera le fichier `.env` et vous demandera de renseigner interactivement les clés requises :
+   * **`NOTION_API_KEY`** : Jeton d'intégration de votre espace de travail Notion.
+   * **`NOTION_DATABASE_ID`** : ID de la table Notion contenant les Contraintes d'Improvisation.
+   * **`X_N8N_TOKEN`** : Jeton de sécurité pour sécuriser les appels webhook Next.js -> n8n.
+
+### B. Restauration de la Synchronisation Notion
+1. Associez l'intégration Notion de votre troupe à la base de données de contraintes (dans Notion, allez sur la base de données, cliquez sur `...` -> `Connections` -> sélectionnez votre intégration).
+2. Lancez la synchronisation locale pour recompiler le fichier `notionConstraints.json` :
+   ```bash
+   node scripts/notion_fetch.js
+   ```
+
+### C. Restauration du BaaS n8n et Télémétrie
+1. Importez les configurations de flux de [improv-assist-baas.json](file:///c:/Projects/eole.me/improv-assist/n8n/improv-assist-baas.json) et [improv-feedback.json](file:///c:/Projects/eole.me/improv-assist/n8n/improv-feedback.json) dans votre nouvelle instance n8n.
+2. Liez les nœuds Notion à vos nouvelles bases de données (si les IDs ont changé, modifiez-les dans le JSON local ou directement dans l'interface visuelle n8n).
+3. Déployez le workflow n8n en exécutant le script :
+   ```bash
+   node scratch/push_production_workflow.js
+   ```
+
+### D. Proposition d'Architecture Alternative (Migration Hors-Notion)
+Si Notion s'avère trop lent ou sujet à des blocages d'API (Rate Limiting), la structure modulaire de n8n permet de rediriger les logs et la synchronisation vers d'autres outsourcers :
+* **Supabase / PostgreSQL** : Option recommandée pour une latence minimale et des requêtes SQL performantes. n8n intègre des nœuds PostgreSQL natifs qui s'exécutent en < 50ms (contre 1-2s pour Notion).
+* **Airtable** : Alternative low-code plus réactive que Notion avec une API mieux structurée.
+

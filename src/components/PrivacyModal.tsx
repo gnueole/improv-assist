@@ -2,7 +2,7 @@
 
 /**
  * @file PrivacyModal.tsx
- * @description Modal dialog overlay showing the GDPR compliant Privacy Policy for Houba Houba !
+ * @description Modal dialog overlay showing the GDPR compliant Privacy Policy for Houba Houba!
  * @author Éole <hi@eole>
  * @creation-date $Creation Date$
  * @license MIT
@@ -33,7 +33,7 @@ export default function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
                 Politique de Confidentialité
               </h3>
               <p className="text-[10px] text-zinc-500 font-semibold tracking-wider uppercase">
-                Conformité RGPD • Houba Houba !
+                Conformité RGPD • Houba Houba!
               </p>
             </div>
           </div>
@@ -41,7 +41,7 @@ export default function PrivacyModal({ isOpen, onClose }: PrivacyModalProps) {
           {/* Scrollable Policy Body */}
           <div className="flex-1 overflow-y-auto pr-2 space-y-4 text-left text-xs text-zinc-300 leading-relaxed scrollbar-thin scrollbar-thumb-zinc-800">
             <p>
-              Bienvenue sur <strong>Houba Houba !</strong> (Impro Assist). Nous accordons une importance primordiale à la protection de vos données personnelles et au respect du Règlement Général sur la Protection des Données (RGPD).
+              Bienvenue sur <strong>Houba Houba!</strong> (Impro Assist). Nous accordons une importance primordiale à la protection de vos données personnelles et au respect du Règlement Général sur la Protection des Données (RGPD).
             </p>
 
             {/* Section 1: Collecte */}

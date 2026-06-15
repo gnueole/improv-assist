@@ -1,5 +1,5 @@
 # ==============================================================================
-# 🎭 HOUBA HOUBA ! — IMPROVISATION THEATER ENGINE
+# 🎭 HOUBA HOUBA! — IMPROVISATION THEATER ENGINE
 # ==============================================================================
 # Description : Local development management and automated VPS deployment.
 # Version     : 1.3.1
@@ -33,7 +33,7 @@ COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 # ==============================================================================
 help:
 	@echo "======================================================================"
-	@echo "          ??  HOUBA HOUBA ! — MAKEFILE CONFIGURATION  ??"
+	@echo "          ??  HOUBA HOUBA! — MAKEFILE CONFIGURATION  ??"
 	@echo "======================================================================"
 	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
 	@echo "  make up            - Start local dev environment with HMR (Port 3000)"
@@ -59,7 +59,7 @@ dev-up:
 		cp $(DOCKER_DIR)/.env.example .env; \
 	fi
 	docker compose -f $(COMPOSE_DEV) --env-file .env up -d
-	@echo "🚀 Houba Houba ! is ready locally at http://localhost:3000"
+	@echo "🚀 Houba Houba! is ready locally at http://localhost:3000"
 
 dev-down:
 	@echo "🛑 Stopping local development container..."
@@ -78,7 +78,7 @@ restart: down up
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
 # ==============================================================================
 deploy:
-	@echo "🚀 Deploying Houba Houba ! to VPS Target [$(VPS_SSH)]..."
+	@echo "🚀 Deploying Houba Houba! to VPS Target [$(VPS_SSH)]..."
 # 1. Ensure the remote deployment directory exists
 	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
 # 2. SCP the production compose file
@@ -96,7 +96,7 @@ deploy:
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && \
 		docker compose -f docker-compose.prod.yml pull && \
 		docker compose -f docker-compose.prod.yml up -d --remove-orphans"
-	@echo "✅ Deployment successfully completed on production server !"
+	@echo "✅ Deployment successfully completed on production server!"
 
 checklogs:
 	@echo "📟 Fetching real-time production logs from VPS [$(VPS_SSH)]..."

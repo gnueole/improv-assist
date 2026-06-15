@@ -850,8 +850,8 @@ export default function Dashboard() {
                 <div className="w-8 h-8 rounded-full bg-irised-gradient irised-glow animate-pulse-slow flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-black" />
                 </div>
-                <h1 className="font-bold tracking-[0.15em] text-lg uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400">
-                  Houba Houba !
+                <h1 suppressHydrationWarning className="font-bold tracking-[0.15em] text-lg uppercase bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400">
+                  Houba Houba<span style={{ display: 'inline-block', marginLeft: '-0.15em' }}>!</span>
                 </h1>
               </>
             )}
@@ -885,7 +885,7 @@ export default function Dashboard() {
               <Search className="w-5 h-5" />
             </button>
             <button
-              onClick={() => triggerRegen(devMode)}
+              onClick={() => triggerRegen(true)}
               className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="Générer 500 suggestions neuves via l'IA (Gemini) dans le réservoir local"
             >
@@ -1020,7 +1020,7 @@ export default function Dashboard() {
 
         {/* Footer */}
         <footer className="dashboard-footer shrink-0">
-          <div>Houba Houba !</div>
+          <div>Houba Houba!</div>
           <div className="text-xs text-zinc-500 font-medium flex items-center gap-1.5 flex-wrap justify-center">
             <span>© {new Date().getFullYear()} Éole</span>
             <span>•</span>
@@ -1070,7 +1070,7 @@ export default function Dashboard() {
               title={n8nStatus === "red" ? `Erreur n8n : ${n8nError}` : "Connexion 🧠 Opérationnelle"}
             />
             <button
-              onClick={() => triggerRegen(devMode, activeTileId || undefined)}
+              onClick={() => triggerRegen(true, activeTileId || undefined)}
               className="w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 active:scale-95 transition-all hover:text-white"
               title="Générer 50 suggestions neuves via l'IA (Gemini) pour cette catégorie"
             >
@@ -1087,14 +1087,16 @@ export default function Dashboard() {
         </header>
 
         {/* Central Dynamic Content Area */}
-        <div className="flex-1 flex flex-col justify-center items-center my-6 max-w-md mx-auto w-full relative">
+        <div className={`flex-1 min-h-0 flex flex-col items-center my-6 max-w-md mx-auto w-full relative overflow-y-auto px-1 ${
+          activeTileId === "timer" ? "justify-start" : "justify-center"
+        }`}>
           {renderActiveComponent()}
         </div>
 
         {/* Detail Footer */}
         <footer className="text-center py-4 border-t border-zinc-900/60 w-full flex flex-col items-center justify-center gap-1 select-none shrink-0">
-          <div className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-zinc-300">
-            Houba Houba !
+          <div suppressHydrationWarning className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-zinc-300">
+            Houba Houba<span style={{ display: 'inline-block', marginLeft: '-0.2em' }}>!</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/80 animate-pulse" />

@@ -101,7 +101,8 @@ export async function POST(request: Request) {
 
     const n8nBody: Record<string, any> = {
       count,
-      system_prompt: systemPrompt
+      system_prompt: systemPrompt,
+      source: process.env.NODE_ENV === "production" ? "prod" : "dev"
     };
     if (category) {
       n8nBody.category = category;
@@ -120,7 +121,8 @@ export async function POST(request: Request) {
         "x-n8n-token": process.env.X_N8N_TOKEN || ""
       },
       body: JSON.stringify(n8nBody),
-      signal: controller.signal
+      signal: controller.signal,
+      cache: "no-store"
     });
     
     clearTimeout(timeoutId);

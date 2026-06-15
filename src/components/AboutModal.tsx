@@ -147,15 +147,15 @@ export default function AboutModal({ isOpen, onClose, devMode, onDevModeChange, 
           </button>
 
           <h3 className="text-xl font-bold tracking-wider text-zinc-100 uppercase mb-1">
-            Houba Houba !
+            Houba Houba!
           </h3>
 
           <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium mb-4">
-            Version 0.7 BETA
+            Version 0.9 BETA
           </span>
 
           <p className="text-sm text-zinc-300 leading-relaxed mb-6">
-            Houba Houba ! est le compagnon de scène ultime pour les comédiens d'improvisation théâtrale. Conçu pour générer des idées de scènes fluides et rapides.
+            Houba Houba! est le compagnon de scène ultime pour les comédiens d'improvisation théâtrale. Conçu pour générer des idées de scènes fluides et rapides.
           </p>
 
           {/* Metadata Block */}

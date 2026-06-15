@@ -212,8 +212,8 @@ main {
 }
 
 .dashboard-hero {
-  margin: auto auto;
-  padding: 1rem 0;
+  margin: 1.5rem auto 1rem auto;
+  padding: 0.5rem 0;
   text-align: center;
   max-width: 24rem; /* max-w-sm */
   width: 100%;

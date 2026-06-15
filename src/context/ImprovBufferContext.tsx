@@ -102,7 +102,8 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
         const response = await fetch("/api/improv-regen", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          cache: "no-store"
         });
         if (!response.ok) {
           throw new Error("Erreur de communication avec le serveur de génération");
@@ -247,7 +248,8 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category, count: 50 })
+        body: JSON.stringify({ category, count: 50 }),
+        cache: "no-store"
       });
 
       if (!response.ok) {

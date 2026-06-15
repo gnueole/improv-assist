@@ -11,6 +11,7 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
+  turbopack: {},
   async rewrites() {
     return [
       { source: "/index.html", destination: "/" },

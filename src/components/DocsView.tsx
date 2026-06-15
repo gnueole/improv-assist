@@ -243,7 +243,7 @@ export default function DocsView({ onOpenPrivacy, onOpenAbout, tiles }: DocsView
           <div className={`p-4 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-md flex items-start gap-3 text-zinc-300 leading-relaxed ${fonts.base}`}>
             <Info className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
             <div>
-              Conçu et optimisé par <strong>Éole</strong> pour les troupes de théâtre d'improvisation. Version active : 0.7 BETA. Tous droits réservés.
+              Conçu et optimisé par <strong>Éole</strong> pour les troupes de théâtre d'improvisation. Version active : 0.9 BETA. Tous droits réservés.
             </div>
           </div>
 
@@ -253,7 +253,7 @@ export default function DocsView({ onOpenPrivacy, onOpenAbout, tiles }: DocsView
             className="w-full py-4 px-6 rounded-2xl bg-irised-gradient irised-glow text-black font-extrabold text-center active:scale-[0.98] transition-all flex items-center justify-center gap-2 border border-white/20 hover:brightness-110 shrink-0 shadow-xl"
           >
             <Info className="w-5 h-5" />
-            <span>À propos de Houba Houba !</span>
+            <span>À propos de Houba Houba!</span>
           </button>
         </div>
       </div>

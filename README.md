@@ -1,10 +1,10 @@
-# 🎭 Houba Houba !
+# 🎭 Houba Houba!
 
 <p align="center">
-  <img src="images/improv-assist-beta2.jpg" alt="Houba Houba ! — Moteur d'improvisation" />
+  <img src="images/improv-assist-beta2.jpg" alt="Houba Houba! — Moteur d'improvisation" />
 </p>
 
-`Houba Houba !` est une Progressive Web Application (PWA) moderne et mobile-first conçue pour aider les comédiens et arbitres de théâtre d'improvisation lors des entraînements, ateliers et matchs. Elle fournit des outils pour tirer au sort des paramètres de scène, chronométrer les improvisations et consulter les règles et contraintes de jeu.
+`Houba Houba!` est une Progressive Web Application (PWA) moderne et mobile-first conçue pour aider les comédiens et arbitres de théâtre d'improvisation lors des entraînements, ateliers et matchs. Elle fournit des outils pour tirer au sort des paramètres de scène, chronométrer les improvisations et consulter les règles et contraintes de jeu.
 
 L'application arbore un design sombre soigné, enrichi de reflets irisés vibrants et de glassmorphisme, adapté aux écrans mobiles pour une utilisation instantanée. 50 thèmes sont disponibles au lancement. Ils sont à usage unique : lorsque la file d'attente est vide, il faut régénérer les thèmes grâce au workflow n8n/Gemini ou en cliquant sur l'icône de rotation.
 
@@ -74,12 +74,20 @@ L'application utilise **Doppler** pour gérer de manière sécurisée et central
 
 ### Installation & Développement Local
 
-1. **Installer les dépendances** :
+1. **Configurer l'environnement et vérifier les dépendances** :
+   Lancez le script d'initialisation interactif à la racine du projet :
+   ```bash
+   ./configure
+   ```
+   *(Ce script vérifie toutes vos dépendances système, installe les dépendances Python requises, initialise le fichier `.env` et vous propose de configurer interactivement vos clés d'intégration Notion et n8n).*
+
+2. **Installer les dépendances npm** :
+   *(Si non fait automatiquement par le script d'initialisation)*
    ```bash
    npm install
    ```
 
-2. **Lancer le serveur de développement** :
+3. **Lancer le serveur de développement** :
    ```bash
    npm run dev
    ```
@@ -160,6 +168,28 @@ Voici les fonctionnalités futures envisagées (ou pas, ou pas) pour enrichir l'
 ---
 
 ## 📝 Changelog
+
+### Version 0.9 BETA (0.9-beta / 1.0.0-beta.9) - 2026-06-15
+- **Timer de Scène & Voix (TTS)** :
+  - **Choix du Genre de la Voix** : Ajout d'une option de choix de la voix (Féminine / Masculine) via deux boutons stylisés. Le pitch de la synthèse vocale est dynamiquement ajusté (abaissé à 0.75 pour l'option masculine) pour assurer un rendu masculin distinct même si le navigateur ne dispose que d'une seule voix française (féminine) par défaut.
+  - **Boutons d'Ajustement Rapide** : Intégration de 4 boutons d'ajustement rapide du temps (-30s, -10s, +10s, +30s) sous le chronomètre en mode simple.
+  - **Durée par Défaut Personnalisable** : Ajout d'un réglage de la durée par défaut du timer dans les options avancées, persistant en `localStorage` et synchronisable avec les boutons rapides.
+  - **Annonces Vocales Personnalisables** : Liste de jalons de temps d'annonces modifiable dynamiquement par l'utilisateur.
+  - **Gong de Fin Renforcé** : Remplacement du gong par un signal de fin plus puissant et audible en salle de spectacle.
+  - **Gestion de la Sauvegarde** : Case à cocher pour sauvegarder la configuration du timer (désactivée par défaut).
+- **Régénération du Réservoir & n8n** :
+  - **Correction du Bouton Rafraîchir** : Le bouton de rafraîchissement (RotateCw) dans l'en-tête appelle désormais systématiquement l'IA (n8n/Gemini) en forçant la régénération au lieu de recharger le pool statique local par défaut.
+  - **Résilience du Flux n8n** : Ajout de secours statiques pour les catégories d'animaux et d'objets dans le nœud d'erreur du workflow n8n pour éviter les listes vides.
+  - **Désactivation du Cache API** : Ajout de l'en-tête `cache: "no-store"` sur les appels de régénération (côté client et serveur proxy) pour forcer le tirage d'idées neuves.
+- **Mise en Page Réactive** :
+  - **Ajustement du Défilement (Scroll)** : Forçage du défilement vertical (`overflow-y-auto min-h-0`) sur la zone centrale pour éviter que le panneau des options avancées ne pousse les contrôles hors de l'écran ou ne soit masqué.
+
+### Version 0.8 BETA (0.8-beta / 1.0.0-beta.8) - 2026-06-12
+- **Mesure de Durée de Génération** : Enregistrement de la durée totale d'exécution de la régénération par l'IA (en secondes) dans la base de données Notion `"Houbahouba AI regen calls"`.
+- **Suivi de la Source de Déclenchement** : Ajout d'une propriété `Source` (prod / dev / other) dans la base de données Notion pour filtrer l'usage selon l'environnement d'exécution (PWA Next.js en production, développement ou scripts de test).
+- **Parallélisation n8n et Notion** : Déplacement du nœud d'historisation Notion à la fin du flux de régénération, s'exécutant en parallèle de la réponse webhook finale afin d'éliminer toute latence ressentie côté utilisateur.
+- **Optimisation de la Mise en Page de Recherche** : Remplacement des marges verticales dynamiques (`margin: auto auto;`) sur le Hero du dashboard par des marges fixes, évitant ainsi le décalage vers le bas de la barre de recherche et l'occultation des résultats par le clavier virtuel sur mobile.
+- **Normalisation Typographique** : Suppression de l'espace superflu avant le point d'exclamation pour le nom de l'application ("Houba Houba!" au lieu de "Houba Houba !").
 
 ### Version 0.7 BETA (0.7-beta / 1.0.0-beta.7) - 2026-06-12
 - **Documentation dynamique de l'aide** : Génération entièrement automatisée de la liste des fonctionnalités dans la vue d'aide, basée sur les métadonnées déclarées sur chaque tuile de micro-app (propriété `helpDescription`).
