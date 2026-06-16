@@ -75,7 +75,8 @@
         "httpMethod": "POST",
         "path": "improv-regen",
         "responseMode": "responseNode",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "webhook-trigger",
       "name": "Webhook",
@@ -85,7 +86,13 @@
         -320,
         208
       ],
-      "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9"
+      "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "y68kSCO178c4TXvD",
+          "name": "improv-assist-token"
+        }
+      }
     },
     {
       "parameters": {
@@ -119,7 +126,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const token = $input.item.json.headers['x-n8n-token'] || $input.item.json.body?.token;\nconst vpsToken = $input.item.json.vps_token;\nif (token !== vpsToken) {\n  throw new Error(\"Unauthorized\");\n}\nreturn { json: { system_prompt: $input.item.json.body.system_prompt, body: $input.item.json.body } };"
+        "jsCode": "return { json: { system_prompt: $input.item.json.body.system_prompt, body: $input.item.json.body } };"
       },
       "id": "verify-token-node",
       "name": "Verify Token",
@@ -133,12 +140,7 @@
     {
       "parameters": {
         "values": {
-          "string": [
-            {
-              "name": "vps_token",
-              "value": "={{ $env.X_N8N_TOKEN }}"
-            }
-          ],
+          "string": [],
           "number": [
             {
               "name": "start_time",
@@ -227,6 +229,22 @@
           "name": "Groq account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "### Last Publish Info\n\nPublished on 2026-06-16 18:21:34 | Git: No git commit info available",
+        "height": 150,
+        "width": 300,
+        "color": 6
+      },
+      "id": "1d10df04-aa8c-4a58-b03d-8e02b1bd18a6",
+      "name": "Last Publish Info",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -670,
+        112
+      ]
     }
   ],
   "connections": {
@@ -680,5 +698,6 @@
         "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
       }
     ]
-  }
+  },
+  "//": "Published on 2026-06-16 18:21:34 | Git: No git commit info available"
 }

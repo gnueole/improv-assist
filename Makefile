@@ -29,7 +29,7 @@ DOCKER_DIR   := docker
 COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
 COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 
-.PHONY: help dev-up dev-down up down restart deploy deploy-delay checklogs
+.PHONY: help dev-up dev-down up down restart deploy deploy-delay checklogs sync-n8n-token
 
 # ==============================================================================
 # ℹ️ HELP MENU
@@ -108,3 +108,7 @@ checklogs:
 deploy-delay:
 	@echo "⏳ Waiting 150 seconds for GitHub Actions build to complete..."
 	git push && sleep 150 && $(MAKE) deploy
+
+sync-n8n-token:
+	@echo "🔑 Syncing Webhook token credential to n8n server..."
+	uv run --directory C:/Users/gnueo/.gemini/config/plugins/n8n-sync-plugin/skills/n8n-sync scripts/sync_n8n.py --sync-token --dir $(CURDIR)/n8n --credential-name improv-assist-token $(ARGS)
