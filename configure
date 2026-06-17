@@ -25,6 +25,14 @@ log_warn() { echo -e "${YELLOW}⚠ $1${NC}"; }
 log_error() { echo -e "${RED}✘ $1${NC}"; }
 log_info() { echo -e "${BLUE}ℹ $1${NC}"; }
 
+# Resolve project name dynamically from git remote or directory name
+REPO_NAME=$(git config --get remote.origin.url 2>/dev/null | sed 's/.*\///; s/\.git$//')
+if [ -z "$REPO_NAME" ]; then
+    REPO_NAME=$(basename "$(pwd)")
+fi
+PROJECT_NAME=$(echo "$REPO_NAME" | cut -d'-' -f1 | sed 's/./\u&/')
+PROJECT_NAME_UPPER=$(echo "$PROJECT_NAME" | tr '[:lower:]' '[:upper:]')
+
 # Options en ligne de commande
 AUTO_INSTALL=false
 for arg in "$@"; do
@@ -37,7 +45,7 @@ for arg in "$@"; do
 done
 
 echo -e "${BOLD}======================================================================"
-echo -e "          🐸  HOUBA HOUBA! — CONFIGURATION SYSTÈME  🐸"
+echo -e "          🐸  ${PROJECT_NAME_UPPER} — SYSTEM CONFIGURATION & INITIALIZATION  🐸"
 echo -e "======================================================================${NC}"
 echo ""
 
@@ -201,7 +209,7 @@ fi
 echo ""
 # 4. Synthèse et démarrage
 echo -e "${BOLD}======================================================================${NC}"
-log_success "Le projet est configuré et prêt !"
+log_success "${PROJECT_NAME} configuration setup completed successfully!"
 echo ""
 echo "Commandes utiles pour démarrer :"
 echo -e "  * Lancer en mode de dev local :       ${BOLD}make up${NC} (ou ${BOLD}npm run dev${NC})"
