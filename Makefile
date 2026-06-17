@@ -9,17 +9,18 @@
 # ==============================================================================
 
 # ⚙️ INFRASTRUCTURE VARIABLES (SECURED)
-VPS_SSH  := eole.me
-VPS_PATH := /home/eole/projects/jobby-md2html/improv-assist
+VPS_SSH              := eole.me
+VPS_PROJECT_NAME     := $(shell git config --get remote.origin.url | sed 's/.*\///; s/\.git$$//')
+VPS_PROJECT_TAG      := $(shell git rev-parse --short HEAD 2>/dev/null || echo "dev")
+VPS_PATH             := /home/eole/projects/$(VPS_PROJECT_NAME)
 
-APP_NAME := Houba Houba!
-VERSION  := $(shell node -p "require('./package.json').version" 2>/dev/null || echo "1.0.0")
+PROJECT_NAME         := $(shell echo $(VPS_PROJECT_NAME) | cut -d'-' -f1 | sed 's/./\u&/')
+VERSION              := $(shell node -p "require('./package.json').version" 2>/dev/null || echo "1.0.0")
 
 # 🔑 SECRETS MANAGEMENT (DOPPLER)
-# check doppler.com for information on how to use it
 DOPPLER_PROJECT     := eole-me
-DOPPLER_CONFIG_DEV  := dev_eole-me-impro
-DOPPLER_CONFIG_PROD := prd_eole-me-impro
+DOPPLER_CONFIG_DEV  := dev_$(DOPPLER_PROJECT)-$(shell echo $(PROJECT_NAME) | tr '[:upper:]' '[:lower:]')
+DOPPLER_CONFIG_PROD := prd_$(DOPPLER_PROJECT)-$(shell echo $(PROJECT_NAME) | tr '[:upper:]' '[:lower:]')
 
 # Find doppler binary (robust check for WSL non-interactive paths)
 DOPPLER := $(shell which doppler 2>/dev/null || ( [ -f $(HOME)/bin/doppler ] && echo $(HOME)/bin/doppler ) || echo doppler)
@@ -36,7 +37,7 @@ COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 # ==============================================================================
 help:
 	@echo "======================================================================"
-	@echo "          ??  HOUBA HOUBA! — MAKEFILE CONFIGURATION  ??"
+	@echo "                   🛠️  $(PROJECT_NAME) Project Makefile 🛠️"
 	@echo "======================================================================"
 	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
 	@echo "  make up            - Start local dev environment with HMR (Port 3000)"
@@ -62,7 +63,7 @@ dev-up:
 		cp $(DOCKER_DIR)/.env.example .env; \
 	fi
 	docker compose -f $(COMPOSE_DEV) --env-file .env up -d
-	@echo "🚀 Houba Houba! is ready locally at http://localhost:3000"
+	@echo "🚀 $(PROJECT_NAME) ($(VERSION) / $(VPS_PROJECT_TAG)) is ready locally! (http://localhost:3000)"
 
 dev-down:
 	@echo "🛑 Stopping local development container..."
@@ -81,25 +82,32 @@ restart: down up
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
 # ==============================================================================
 deploy:
-	@echo "🚀 Deploying $(APP_NAME) ($(VERSION)) to VPS Target [$(VPS_SSH)]..."
+	@echo "🚀 Deploying $(PROJECT_NAME) stack [$(VPS_PROJECT_TAG)] [$(VERSION)] to VPS '[$(VPS_SSH)]' on '[$(VPS_PATH)]'..."
 # 1. Ensure the remote deployment directory exists
 	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
 # 2. SCP the production compose file
 	scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
-# 3. Stream production secrets from Doppler to remote VPS .env or fallback
+# 3. Stream production secrets from Doppler to remote VPS .env
 	@if $(DOPPLER) --version >/dev/null 2>&1; then \
-		echo "🔑 Fetching production secrets from Doppler (project: $(DOPPLER_PROJECT) / config: $(DOPPLER_CONFIG_PROD))..."; \
-		$(DOPPLER) secrets download --project $(DOPPLER_PROJECT) --config $(DOPPLER_CONFIG_PROD) --no-file --format env | ssh $(VPS_SSH) "cat > $(VPS_PATH)/.env"; \
+		echo "🔑 Envoi des secrets de production Doppler vers le VPS..."; \
+		if $(DOPPLER) secrets download --project $(DOPPLER_PROJECT) --config $(DOPPLER_CONFIG_PROD) --no-file --format env > docker/.env.prod.temp; then \
+			scp docker/.env.prod.temp $(VPS_SSH):$(VPS_PATH)/.env; \
+			rm -f docker/.env.prod.temp; \
+		else \
+			echo "❌ Error: Doppler secrets download failed for project $(DOPPLER_PROJECT) (config: $(DOPPLER_CONFIG_PROD))!"; \
+			rm -f docker/.env.prod.temp; \
+			exit 1; \
+		fi; \
 	else \
-		echo "⚠️ Doppler CLI not found. Copying local $(DOCKER_DIR)/.env.prod as fallback..."; \
-		scp $(DOCKER_DIR)/.env.prod $(VPS_SSH):$(VPS_PATH)/.env; \
+		echo "❌ Error: Doppler CLI is not installed or not found in PATH!"; \
+		exit 1; \
 	fi
 # 4. Pull the immutable image from GHCR and recreate containers (NO local build)
 	@echo "📥 Pulling latest immutable image from GHCR..."
 	ssh $(VPS_SSH) "cd $(VPS_PATH) && \
 		docker compose -f docker-compose.prod.yml pull && \
 		docker compose -f docker-compose.prod.yml up -d --remove-orphans"
-	@echo "✅ Deployment successfully completed on production server!"
+	@echo "✅ Deployment of $(PROJECT_NAME) [$(VERSION) / $(VPS_PROJECT_TAG)] successfully completed on production server !"
 
 checklogs:
 	@echo "📟 Fetching real-time production logs from VPS [$(VPS_SSH)]..."
