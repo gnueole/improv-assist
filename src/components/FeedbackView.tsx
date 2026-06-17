@@ -26,6 +26,7 @@ export default function FeedbackView({ showToast, onOpenPrivacy }: FeedbackViewP
   const [consent, setConsent] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -146,6 +147,7 @@ export default function FeedbackView({ showToast, onOpenPrivacy }: FeedbackViewP
 
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
       className="w-full max-w-md mx-auto p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md flex flex-col gap-4 animate-fade-in overflow-y-auto max-h-[calc(100vh-200px)]"
     >
@@ -269,7 +271,18 @@ export default function FeedbackView({ showToast, onOpenPrivacy }: FeedbackViewP
           type="checkbox"
           required
           checked={consent}
-          onChange={(e) => setConsent(e.target.checked)}
+          onChange={(e) => {
+            const checked = e.target.checked;
+            setConsent(checked);
+            if (checked) {
+              setTimeout(() => {
+                formRef.current?.scrollTo({
+                  top: formRef.current.scrollHeight,
+                  behavior: "smooth"
+                });
+              }, 50);
+            }
+          }}
           className="w-4 h-4 accent-cyan-500 rounded border-zinc-800 bg-zinc-950 mt-0.5 cursor-pointer shrink-0"
         />
         <label htmlFor="consent-checkbox" className="text-[10px] text-zinc-400 leading-snug cursor-pointer select-none">

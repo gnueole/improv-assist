@@ -25,7 +25,7 @@
             },
             {
               "key": "date|date",
-              "date": "={{ $now.format('yyyy-MM-dd') }}"
+              "date": "={{ $now.toISO() }}"
             },
             {
               "key": "Type|select",
@@ -362,7 +362,7 @@
               },
               {
                 "key": "date|date",
-                "date": "={{ $now.format('yyyy-MM-dd') }}"
+                "date": "={{ $now.toISO() }}"
               },
               {
                 "key": "Type|select",

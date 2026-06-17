@@ -25,7 +25,7 @@
             },
             {
               "key": "date|date",
-              "date": "={{ $now.format('yyyy-MM-dd') }}"
+              "date": "={{ $now.toISO() }}"
             },
             {
               "key": "Type|select",
@@ -208,7 +208,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"icon\": {\n    \"type\": \"emoji\",\n    \"emoji\": \"{{ {scenarios: '🎬', categories: '🏷️', themes: '💡', echauffements: '🏃‍♂️', emotions: '🎭', locations: '📍', eras: '⏳', characters: '👤', animals: '🦁', objects: '📦'}[$('Verify Token').first().json.body.category || 'all'] }}\"\n  }\n}"
+        "jsonBody": "={\n  \"icon\": {\n    \"type\": \"emoji\",\n    \"emoji\": \"{{ {all: '🎲', scenarios: '🎬', categories: '🏷️', themes: '💡', echauffements: '🏃‍♂️', emotions: '🎭', locations: '📍', eras: '⏳', characters: '👤', animals: '🦁', objects: '📦'}[$('Verify Token').first().json.body.category || 'all'] }}\"\n  }\n}"
       },
       "id": "set-page-icon-node",
       "name": "Set Page Icon",
@@ -224,6 +224,25 @@
           "name": "Notion account"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://vector:8080",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"production\",\n  \"source\": \"agy_agent\",\n  \"action\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
+        "options": {}
+      },
+      "id": "vector-log-node",
+      "name": "Log to Vector",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -112,
+        550
+      ],
+      "onError": "continue"
     }
   ],
   "connections": {
@@ -266,6 +285,11 @@
           },
           {
             "node": "Log to Notion",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log to Vector",
             "type": "main",
             "index": 0
           }
@@ -370,7 +394,7 @@
               },
               {
                 "key": "date|date",
-                "date": "={{ $now.format('yyyy-MM-dd') }}"
+                "date": "={{ $now.toISO() }}"
               },
               {
                 "key": "Type|select",
@@ -527,6 +551,25 @@
           -48,
           208
         ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://vector:8080",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"production\",\n  \"source\": \"agy_agent\",\n  \"action\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
+          "options": {}
+        },
+        "id": "vector-log-node",
+        "name": "Log to Vector",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          -112,
+          550
+        ],
+        "onError": "continue"
       }
     ],
     "connections": {
@@ -569,6 +612,11 @@
             },
             {
               "node": "Log to Notion",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Log to Vector",
               "type": "main",
               "index": 0
             }
