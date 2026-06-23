@@ -104,7 +104,8 @@ deploy:
 	fi
 # 4. Pull the immutable image from GHCR and recreate containers (NO local build)
 	@echo "📥 Pulling latest immutable image from GHCR..."
-	ssh $(VPS_SSH) "cd $(VPS_PATH) && \
+	@ssh $(VPS_SSH) "docker rm -f improv-assist-frontend-prod 2>/dev/null || true"
+	@ssh $(VPS_SSH) "cd $(VPS_PATH) && \
 		docker compose -f docker-compose.prod.yml pull && \
 		docker compose -f docker-compose.prod.yml up -d --remove-orphans"
 	@echo "✅ Deployment of $(PROJECT_NAME) [$(VERSION) / $(VPS_PROJECT_TAG)] successfully completed on production server !"
