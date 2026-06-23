@@ -7,44 +7,31 @@
  */
 
 import { NextResponse } from "next/server";
+import { after } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const webhookUrl = process.env.FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/improv-feedback";
     
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+    // Execute n8n webhook call asynchronously after the response has been sent
+    after(async () => {
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        
+        if (!response.ok) {
+          console.error(`[Feedback Background Task Error]: n8n webhook returned status ${response.status}`);
+        }
+      } catch (err) {
+        console.error("[Feedback Background Task Exception]:", err);
+      }
     });
     
-    if (!response.ok) {
-      let errorMsg = `n8n webhook returned status ${response.status}`;
-      try {
-        const errBody = await response.json();
-        if (errBody && errBody.error) {
-          errorMsg = errBody.error;
-        }
-      } catch (e) {}
-      return NextResponse.json(
-        { error: errorMsg },
-        { status: response.status }
-      );
-    }
-    
-    // Try parsing response if there is any content, otherwise return success
-    let responseData: any = { success: true };
-    const text = await response.text();
-    if (text) {
-      try {
-        responseData = JSON.parse(text);
-      } catch (e) {
-        responseData = { success: true, message: text };
-      }
-    }
-    
-    return NextResponse.json(responseData);
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[Feedback API Proxy Error]:", error);
     return NextResponse.json(
