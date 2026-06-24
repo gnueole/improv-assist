@@ -231,7 +231,7 @@
     },
     {
       "parameters": {
-        "content": "### Last Publish Info\n\nPublished on 2026-06-17 09:57:52 | Git: 6f373e0 feat: add n8n workflow definitions and sync script support, and adjust TypeScript configuration",
+        "content": "### Last Publish Info\n\nPublished on 2026-06-24 08:19:49 | Git: fb2d12d docs: document n8n database tagging injection in ARCHITECTURE.md",
         "height": 150,
         "width": 300,
         "color": 6
@@ -805,5 +805,5 @@
       }
     ]
   },
-  "//": "Published on 2026-06-17 09:57:52 | Git: 6f373e0 feat: add n8n workflow definitions and sync script support, and adjust TypeScript configuration"
+  "//": "Published on 2026-06-24 08:19:49 | Git: fb2d12d docs: document n8n database tagging injection in ARCHITECTURE.md"
 }

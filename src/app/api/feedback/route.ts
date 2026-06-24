@@ -12,6 +12,9 @@ import { after } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    // Add running environment to the payload for Notion tagging
+    body.platform = process.env.NODE_ENV === "production" ? "prod" : "dev";
+    
     const webhookUrl = process.env.FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/improv-feedback";
     
     // Execute n8n webhook call asynchronously after the response has been sent
