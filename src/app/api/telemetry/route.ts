@@ -11,9 +11,13 @@ import { after } from "next/server";
 
 export async function POST(request: Request) {
   try {
+    if (process.env.NODE_ENV !== "production") {
+      return NextResponse.json({ status: "skipped", reason: "dev_environment" });
+    }
+
     const body = await request.json();
     // Add platform environment
-    body.platform = process.env.NODE_ENV === "production" ? "prod" : "dev";
+    body.platform = "prod";
     
     const n8nBaseUrl = process.env.N8N_BASE_URL || "https://n8n.eole.me";
     const webhookUrl = process.env.TELEMETRY_WEBHOOK_URL || `${n8nBaseUrl.replace(/\/$/, "")}/webhook/improv-telemetry`;

@@ -331,16 +331,26 @@ export default function Dashboard() {
 
       // Track leaf tile usage telemetry
       if (tile.id !== "feedback") {
-        fetch("/api/telemetry", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            event_type: "tile_used",
-            tile_id: tile.id,
-            tile_title: tile.title,
-            session_id: sessionId
-          })
-        }).catch((err) => console.warn("[Telemetry] Error sending page tracking:", err));
+        const isDev = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname.endsWith(".local"));
+        let isOptOut = false;
+        try {
+          isOptOut = localStorage.getItem("telemetry-opt-out") === "true";
+        } catch (e) {}
+        
+        if (!isDev && !isOptOut) {
+          fetch("/api/telemetry", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              event_type: "tile_used",
+              tile_id: tile.id,
+              tile_title: tile.title,
+              session_id: sessionId
+            })
+          }).catch((err) => console.warn("[Telemetry] Error sending page tracking:", err));
+        } else {
+          console.log(`[Telemetry Skip - ${isDev ? "DEV" : "Opt-Out"}] tile_used:`, tile.id);
+        }
       }
     }
   }, [currentMenuId, sessionId]);
