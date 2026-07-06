@@ -10,7 +10,7 @@
  * @license MIT
  */
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
   Smile,         // Emotions Generator
   Fingerprint,   // Who Starts? (Multi-touch)
@@ -228,6 +228,21 @@ export default function Dashboard() {
   const [focusedTileIndex, setFocusedTileIndex] = useState<number>(0);
   const [showFeedbackToast, setShowFeedbackToast] = useState(false);
 
+  // Generate session ID for tracking tile usage
+  const sessionId = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    try {
+      let id = sessionStorage.getItem("improv_session_id");
+      if (!id) {
+        id = "sess_" + Math.random().toString(36).substring(2, 15) + "_" + Date.now();
+        sessionStorage.setItem("improv_session_id", id);
+      }
+      return id;
+    } catch (e) {
+      return "sess_fallback_" + Math.random().toString(36).substring(2, 15);
+    }
+  }, []);
+
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch master.prompt dynamically when prompt modal is opened
@@ -313,8 +328,22 @@ export default function Dashboard() {
         isPromptOpen: false,
         isRegenerating: false
       }, "", `/${tile.id}`);
+
+      // Track leaf tile usage telemetry
+      if (tile.id !== "feedback") {
+        fetch("/api/telemetry", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event_type: "tile_used",
+            tile_id: tile.id,
+            tile_title: tile.title,
+            session_id: sessionId
+          })
+        }).catch((err) => console.warn("[Telemetry] Error sending page tracking:", err));
+      }
     }
-  }, [currentMenuId]);
+  }, [currentMenuId, sessionId]);
 
   const dismissFeedbackToast = useCallback(() => {
     localStorage.setItem("feedback_prompt_dismissed", "true");

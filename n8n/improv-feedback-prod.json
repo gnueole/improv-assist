@@ -133,7 +133,7 @@
     },
     {
       "parameters": {
-        "content": "### Last Publish Info\n\nPublished on 2026-06-24 08:19:49 | Git: fb2d12d docs: document n8n database tagging injection in ARCHITECTURE.md",
+        "content": "### Last Publish Info\n\nPublished on 2026-07-06 16:00:45 | Git: 13ac1bc chore: update n8n orchestration workflows",
         "height": 150,
         "width": 300,
         "color": 6
@@ -445,5 +445,5 @@
       }
     ]
   },
-  "//": "Published on 2026-06-24 08:19:49 | Git: fb2d12d docs: document n8n database tagging injection in ARCHITECTURE.md"
+  "//": "Published on 2026-07-06 16:00:45 | Git: 13ac1bc chore: update n8n orchestration workflows"
 }
