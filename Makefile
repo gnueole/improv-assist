@@ -25,20 +25,31 @@ DOPPLER_CONFIG_PROD := prd_$(DOPPLER_PROJECT)-$(shell echo $(PROJECT_NAME) | tr 
 # Find doppler binary (robust check for WSL non-interactive paths)
 DOPPLER := $(shell which doppler 2>/dev/null || ( [ -f $(HOME)/bin/doppler ] && echo $(HOME)/bin/doppler ) || echo doppler)
 
+# 🎨 COLOR CODES FOR MODERN HELP MENU (TrueColor ANSI)
+GREEN     := \033[38;2;74;222;128m
+BLUE      := \033[38;2;96;165;250m
+PURPLE    := \033[38;2;167;139;250m
+CYAN      := \033[38;2;45;212;191m
+ORANGE    := \033[38;2;251;146;60m
+GRAY      := \033[38;2;156;163;175m
+DARK_GRAY := \033[38;2;75;85;99m
+BOLD      := \033[1m
+RESET     := \033[0m
+
 # 🛠️ LOCAL DOCKER CONFIGURATION
 DOCKER_DIR   := docker
 COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
 COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 
-.PHONY: help dev-up dev-down up down restart deploy deploy-delay checklogs sync-n8n-token
+.PHONY: help dev-up dev-down up down restart deploy deploy-delay checklogs check-build check-build-full sync-n8n-token
 
 # ==============================================================================
 # ℹ️ HELP MENU
 # ==============================================================================
 help:
-	@echo "======================================================================"
-	@echo "                   🛠️  $(PROJECT_NAME) Project Makefile 🛠️"
-	@echo "======================================================================"
+	@printf "$(CYAN)──────────────────────────────────────────────────────────────────────$(RESET)\n"
+	@printf "                   🛠️  $(BOLD)$(PROJECT_NAME) Project Makefile$(RESET) 🛠️\n"
+	@printf "$(CYAN)──────────────────────────────────────────────────────────────────────$(RESET)\n"
 	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
 	@echo "  make up            - Start local dev environment with HMR (Port 3000)"
 	@echo "  make down          - Stop local dev environment"
@@ -47,7 +58,10 @@ help:
 	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - impro.eole.me):"
 	@echo "  make deploy        - Push config and pull immutable image from GHCR"
 	@echo "  make deploy-delay  - Wait 150s for GitHub Actions and then deploy"
-	@echo "======================================================================"
+	@echo "  make checklogs     - Fetch real-time production logs from VPS"
+	@echo "  make check-build   - Query GitHub Actions build status"
+	@echo "  make check-build-full - Display verbose details of the latest GitHub Actions run"
+	@printf "$(CYAN)──────────────────────────────────────────────────────────────────────$(RESET)\n"
 
 # ==============================================================================
 # 💻 DEVELOPMENT COMMANDS (LOCAL)
@@ -89,7 +103,7 @@ deploy:
 	scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
 # 3. Stream production secrets from Doppler to remote VPS .env
 	@if $(DOPPLER) --version >/dev/null 2>&1; then \
-		echo "🔑 Envoi des secrets de production Doppler vers le VPS..."; \
+		echo "🔑 Sending Doppler production secrets to VPS..."; \
 		if $(DOPPLER) secrets download --project $(DOPPLER_PROJECT) --config $(DOPPLER_CONFIG_PROD) --no-file --format env > docker/.env.prod.temp; then \
 			scp docker/.env.prod.temp $(VPS_SSH):$(VPS_PATH)/.env; \
 			rm -f docker/.env.prod.temp; \
@@ -117,6 +131,12 @@ checklogs:
 deploy-delay:
 	@echo "⏳ Waiting 150 seconds for GitHub Actions build to complete..."
 	git push && sleep 150 && $(MAKE) deploy
+
+check-build:
+	@python3 toolkit/check_build.py
+
+check-build-full:
+	@python3 toolkit/check_build.py --full
 
 sync-n8n-token:
 	@echo "🔑 Syncing Webhook token credential to n8n server..."
