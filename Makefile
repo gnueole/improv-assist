@@ -96,33 +96,30 @@ restart: down up
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
 # ==============================================================================
 deploy:
-	@echo "🚀 Deploying $(PROJECT_NAME) stack [$(VPS_PROJECT_TAG)] [$(VERSION)] to VPS '[$(VPS_SSH)]' on '[$(VPS_PATH)]'..."
-# 1. Ensure the remote deployment directory exists
-	ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)"
-# 2. SCP the production compose file
-	scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml
-# 3. Stream production secrets from Doppler to remote VPS .env
+	@printf "$(CYAN)🚀 [1/4]$(RESET) Preparing deployment space on VPS $(BOLD)$(VPS_SSH)$(RESET)...\n"
+	@ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)" >/dev/null
+	@printf "$(CYAN)📦 [2/4]$(RESET) Uploading static assets and configuration files...\n"
+	@scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml >/dev/null
+	@printf "$(CYAN)🔑 [3/4]$(RESET) Streaming production secrets from Doppler...\n"
 	@if $(DOPPLER) --version >/dev/null 2>&1; then \
-		echo "🔑 Sending Doppler production secrets to VPS..."; \
 		if $(DOPPLER) secrets download --project $(DOPPLER_PROJECT) --config $(DOPPLER_CONFIG_PROD) --no-file --format env > docker/.env.prod.temp; then \
-			scp docker/.env.prod.temp $(VPS_SSH):$(VPS_PATH)/.env; \
+			scp docker/.env.prod.temp $(VPS_SSH):$(VPS_PATH)/.env >/dev/null; \
 			rm -f docker/.env.prod.temp; \
 		else \
-			echo "❌ Error: Doppler secrets download failed for project $(DOPPLER_PROJECT) (config: $(DOPPLER_CONFIG_PROD))!"; \
+			printf "$(ORANGE)❌ Error: Doppler secrets download failed for project $(DOPPLER_PROJECT) (config: $(DOPPLER_CONFIG_PROD))!$(RESET)\n"; \
 			rm -f docker/.env.prod.temp; \
 			exit 1; \
 		fi; \
 	else \
-		echo "❌ Error: Doppler CLI is not installed or not found in PATH!"; \
+		printf "$(ORANGE)❌ Error: Doppler CLI is not installed or not found in PATH!$(RESET)\n"; \
 		exit 1; \
 	fi
-# 4. Pull the immutable image from GHCR and recreate containers (NO local build)
-	@echo "📥 Pulling latest immutable image from GHCR..."
-	@ssh $(VPS_SSH) "docker rm -f improv-assist-frontend-prod 2>/dev/null || true"
+	@printf "$(CYAN)🐳 [4/4]$(RESET) Recreating and starting production containers...\n"
+	@ssh $(VPS_SSH) "docker rm -f improv-assist-frontend-prod 2>/dev/null || true" >/dev/null
 	@ssh $(VPS_SSH) "cd $(VPS_PATH) && \
 		docker compose -f docker-compose.prod.yml pull && \
-		docker compose -f docker-compose.prod.yml up -d --remove-orphans"
-	@echo "✅ Deployment of $(PROJECT_NAME) [$(VERSION) / $(VPS_PROJECT_TAG)] successfully completed on production server !"
+		docker compose -f docker-compose.prod.yml up -d --remove-orphans" >/dev/null
+	@printf "$(GREEN)✅ Deployment of $(PROJECT_NAME) [$(VERSION) / $(VPS_PROJECT_TAG)] successfully completed on production server!$(RESET)\n"
 
 checklogs:
 	@echo "📟 Fetching real-time production logs from VPS [$(VPS_SSH)]..."
