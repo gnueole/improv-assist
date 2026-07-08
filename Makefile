@@ -58,21 +58,22 @@ COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 # ℹ️ HELP MENU
 # ==============================================================================
 help:
-	@printf "$(STYLE_TITLE)──────────────────────────────────────────────────────────────────────$(RESET)\n"
-	@printf "                   🛠️  $(BOLD)$(PROJECT_NAME) Project Makefile$(RESET) 🛠️\n"
-	@printf "$(STYLE_TITLE)──────────────────────────────────────────────────────────────────────$(RESET)\n"
-	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
-	@echo "  make up               - Start local dev environment with HMR (Port 3000)"
-	@echo "  make down             - Stop local dev environment"
-	@echo "  make restart          - Restart local dev environment (down && up)"
-	@echo ""
-	@echo "🚀 PRODUCTION DEPLOYMENT (VPS - impro.eole.me):"
-	@echo "  make deploy           - Push config and pull immutable image from GHCR"
-	@echo "  make deploy-delay     - Wait 150s for GitHub Actions and then deploy"
-	@echo "  make checklogs        - Fetch real-time production logs from VPS"
-	@echo "  make check-build      - Query GitHub Actions build status"
-	@echo "  make check-build-full - Display verbose details of the latest GitHub Actions run"
-	@printf "$(STYLE_TITLE)──────────────────────────────────────────────────────────────────────$(RESET)\n"
+	@printf "  $(STYLE_TITLE)┌───────────────────────────────────────────────────────────┐$(RESET)\n"
+	@printf "  $(STYLE_TITLE)│$(RESET)     🎭 $(BOLD)$(STYLE_TITLE)IMPROV$(RESET) $(STYLE_SECTION)- IMPROV ASSIST stack COMMANDS$(RESET)                $(STYLE_TITLE)│$(RESET)\n"
+	@printf "  $(STYLE_TITLE)└───────────────────────────────────────────────────────────┘$(RESET)\n"
+	@printf "\n"
+	@printf "  $(BOLD)$(STYLE_SECTION)❯ Local Development (WSL Localhost):$(RESET)\n"
+	@printf "    $(STYLE_INSTRUCTION)make up$(RESET)                   $(STYLE_DISCREET)•$(RESET) Start local dev environment with HMR (Port 3000)\n"
+	@printf "    $(STYLE_INSTRUCTION)make down$(RESET)                 $(STYLE_DISCREET)•$(RESET) Stop local dev environment\n"
+	@printf "    $(STYLE_INSTRUCTION)make restart$(RESET)              $(STYLE_DISCREET)•$(RESET) Restart local dev environment (down && up)\n"
+	@printf "\n"
+	@printf "  $(BOLD)$(STYLE_SECTION)❯ Production Deployment (VPS - impro.eole.me):$(RESET)\n"
+	@printf "    $(STYLE_INSTRUCTION)make deploy$(RESET)               $(STYLE_DISCREET)•$(RESET) Push config and pull immutable image from GHCR\n"
+	@printf "    $(STYLE_INSTRUCTION)make deploy-delay$(RESET)         $(STYLE_DISCREET)•$(RESET) Wait 150s for GitHub Actions and then deploy\n"
+	@printf "    $(STYLE_INSTRUCTION)make checklogs$(RESET)            $(STYLE_DISCREET)•$(RESET) Fetch real-time production logs from VPS\n"
+	@printf "    $(STYLE_INSTRUCTION)make check-build$(RESET)          $(STYLE_DISCREET)•$(RESET) Query GitHub Actions build status\n"
+	@printf "    $(STYLE_INSTRUCTION)make check-build-full$(RESET)     $(STYLE_DISCREET)•$(RESET) Display verbose details of the latest GitHub Actions run\n"
+	@printf "  $(STYLE_DISCREET)────────────────────────────────────────────────────────────$(RESET)\n"
 
 # ==============================================================================
 # 💻 DEVELOPMENT COMMANDS (LOCAL)
