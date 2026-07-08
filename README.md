@@ -182,7 +182,7 @@ node scripts/notion_fetch.js
 La génération du réservoir de prompts requiert un équilibre délicat entre créativité dramatique, structure JSON rigoureuse et rapidité :
 
 * **Groq Chat Model (`llama-3.3-70b-versatile`) — Modèle par Défaut en Temps Réel** : Migré pour les appels dynamiques de régénération depuis la PWA (au clic sur le bouton de rafraîchissement). Sa vitesse de traitement (inférieure à 2 secondes) et sa robustesse de sortie JSON résolvent les goulots d'étranglement de quotas réseau.
-* **Gemini 2.5 Pro (`gemini-2.5-pro`) — Optionnel pour la Génération Statique** : Utilisable pour le peuplement de masse hors-ligne (350 prompts initiaux). Il dispose d'une excellente capacité de raisonnement dramatique.
+* **Gemini 3.1 Pro (`gemini-3.1-pro-preview`) — Optionnel pour la Génération Statique** : Utilisable pour le peuplement de masse hors-ligne (350 prompts initiaux). Il dispose d'une excellente capacité de raisonnement dramatique.
 
 ---
 
@@ -234,7 +234,7 @@ La génération du réservoir de prompts requiert un équilibre délicat entre c
 - **Amélioration des retours & Télémétrie** : Intégration de GA4/GTM et journalisation Notion via n8n.
 
 ### Version 0.5 BETA (0.5-beta) - 2026-06-11
-- **Migration vers Gemini 2.5 Pro** : Lot de 350 prompts initiaux sur 7 catégories.
+- **Migration vers Gemini 3.1 Pro** : Lot de 350 prompts initiaux sur 7 catégories.
 - **Résilience Doppler locale** : Copie de sauvegarde automatique de `.env.example` en cas d'absence du CLI Doppler.
 - **Timeout réseau adapté** : Passage à 180s pour la génération initiale de masse.
 
