@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-16T16:21:34.617Z",
+  "updatedAt": "2026-06-11T00:57:53.484Z",
   "createdAt": "2026-06-10T16:57:42.070Z",
   "id": "FBKdb1280a59b767",
-  "name": "improv - feedback - prod",
+  "name": "Improv-Feedback",
   "description": null,
   "active": true,
   "isArchived": false,
@@ -22,7 +22,7 @@
         250,
         300
       ],
-      "webhookId": "04954d3b-a71f-47d6-9fb0-ef2e3292a775"
+      "webhookId": "1e91cf08-07f4-49a8-a92e-7a1b05948216"
     },
     {
       "parameters": {
@@ -30,8 +30,9 @@
         "operation": "create",
         "databaseId": {
           "__rl": true,
-          "value": "385ee932-db12-81f6-8256-e350b3d1b0f2",
-          "mode": "list"
+          "value": "37bee932-db12-80a5-9b76-f767836619f1",
+          "mode": "list",
+          "cachedResultName": "retour d’expérience"
         },
         "propertiesUi": {
           "propertyValues": [
@@ -40,25 +41,17 @@
               "title": "={{ $json.body.name }}"
             },
             {
-              "key": "Email|email",
+              "key": "Type|select",
+              "selectValue": "={{ $json.body.type === 'Demande' ? 'Observation' : $json.body.type }}"
+            },
+            {
+              "key": "email|email",
               "emailValue": "={{ $json.body.email || null }}",
               "ignoreIfEmpty": true
             },
             {
-              "key": "Stars|number",
+              "key": "score|number",
               "numberValue": "={{ Number($json.body.score) }}"
-            },
-            {
-              "key": "Category|select",
-              "selectValue": "={{ $json.body.type === 'Demande' ? 'Observation' : $json.body.type }}"
-            },
-            {
-              "key": "Platform|select",
-              "selectValue": "improv"
-            },
-            {
-              "key": "Environment|select",
-              "selectValue": "={{ $json.body.platform || 'prod' }}"
             }
           ]
         }
@@ -74,8 +67,8 @@
       "onError": "continue",
       "credentials": {
         "notionApi": {
-          "id": "KYrsxF0plfLkPpqW",
-          "name": "Notion LinkedIn Auto"
+          "id": "VOvaHX7fQfQvSZzV",
+          "name": "Notion account"
         }
       }
     },
@@ -109,8 +102,8 @@
       "onError": "continue",
       "credentials": {
         "notionApi": {
-          "id": "KYrsxF0plfLkPpqW",
-          "name": "Notion LinkedIn Auto"
+          "id": "VOvaHX7fQfQvSZzV",
+          "name": "Notion account"
         }
       }
     },
@@ -138,7 +131,7 @@
         "width": 300,
         "color": 6
       },
-      "id": "e302a8ae-ea51-4b9d-b6f2-c40b18be8929",
+      "id": "a7ae98e5-5bb6-4c35-b99e-836e26a8c188",
       "name": "Last Publish Info",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -193,9 +186,9 @@
   },
   "nodeGroups": [],
   "pinData": {},
-  "versionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
-  "activeVersionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
-  "versionCounter": 48,
+  "versionId": "80d50436-1ad2-44bc-9b6f-f229e1340ebb",
+  "activeVersionId": "80d50436-1ad2-44bc-9b6f-f229e1340ebb",
+  "versionCounter": 45,
   "triggerCount": 1,
   "sourceWorkflowId": null,
   "shared": [
@@ -218,15 +211,11 @@
       }
     }
   ],
-  "tags": [
-    {
-      "name": "improv"
-    }
-  ],
+  "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-06-16T16:21:34.618Z",
-    "createdAt": "2026-06-16T16:21:34.618Z",
-    "versionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
+    "updatedAt": "2026-06-11T00:57:53.485Z",
+    "createdAt": "2026-06-11T00:57:53.485Z",
+    "versionId": "80d50436-1ad2-44bc-9b6f-f229e1340ebb",
     "workflowId": "FBKdb1280a59b767",
     "nodes": [
       {
@@ -244,7 +233,7 @@
           250,
           300
         ],
-        "webhookId": "04954d3b-a71f-47d6-9fb0-ef2e3292a775"
+        "webhookId": "1e91cf08-07f4-49a8-a92e-7a1b05948216"
       },
       {
         "parameters": {
@@ -252,8 +241,9 @@
           "operation": "create",
           "databaseId": {
             "__rl": true,
-            "value": "385ee932-db12-81f6-8256-e350b3d1b0f2",
-            "mode": "list"
+            "value": "37bee932-db12-80a5-9b76-f767836619f1",
+            "mode": "list",
+            "cachedResultName": "retour d’expérience"
           },
           "propertiesUi": {
             "propertyValues": [
@@ -262,25 +252,17 @@
                 "title": "={{ $json.body.name }}"
               },
               {
-                "key": "Email|email",
+                "key": "Type|select",
+                "selectValue": "={{ $json.body.type === 'Demande' ? 'Observation' : $json.body.type }}"
+              },
+              {
+                "key": "email|email",
                 "emailValue": "={{ $json.body.email || null }}",
                 "ignoreIfEmpty": true
               },
               {
-                "key": "Stars|number",
+                "key": "score|number",
                 "numberValue": "={{ Number($json.body.score) }}"
-              },
-              {
-                "key": "Category|select",
-                "selectValue": "={{ $json.body.type === 'Demande' ? 'Observation' : $json.body.type }}"
-              },
-              {
-                "key": "Platform|select",
-                "selectValue": "improv"
-              },
-              {
-                "key": "Environment|select",
-                "selectValue": "={{ $json.body.platform || 'prod' }}"
               }
             ]
           }
@@ -296,8 +278,8 @@
         "onError": "continue",
         "credentials": {
           "notionApi": {
-            "id": "KYrsxF0plfLkPpqW",
-            "name": "Notion LinkedIn Auto"
+            "id": "VOvaHX7fQfQvSZzV",
+            "name": "Notion account"
           }
         }
       },
@@ -331,8 +313,8 @@
         "onError": "continue",
         "credentials": {
           "notionApi": {
-            "id": "KYrsxF0plfLkPpqW",
-            "name": "Notion LinkedIn Auto"
+            "id": "VOvaHX7fQfQvSZzV",
+            "name": "Notion account"
           }
         }
       },
@@ -350,22 +332,6 @@
         "typeVersion": 1,
         "position": [
           880,
-          300
-        ]
-      },
-      {
-        "parameters": {
-          "content": "### Last Publish Info\n\nPublished on 2026-06-16 18:21:34 | Git: No git commit info available",
-          "height": 150,
-          "width": 300,
-          "color": 6
-        },
-        "id": "e302a8ae-ea51-4b9d-b6f2-c40b18be8929",
-        "name": "Last Publish Info",
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          -100,
           300
         ]
       }
@@ -412,34 +378,18 @@
     "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-06-16T16:21:34.722Z",
-        "id": 585,
+        "createdAt": "2026-06-11T00:57:53.550Z",
+        "id": 395,
         "workflowId": "FBKdb1280a59b767",
-        "versionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
+        "versionId": "80d50436-1ad2-44bc-9b6f-f229e1340ebb",
         "event": "activated",
         "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
       },
       {
-        "createdAt": "2026-06-16T16:21:34.825Z",
-        "id": 587,
+        "createdAt": "2026-06-11T00:57:53.525Z",
+        "id": 394,
         "workflowId": "FBKdb1280a59b767",
-        "versionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
-        "event": "activated",
-        "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
-      },
-      {
-        "createdAt": "2026-06-16T16:21:34.709Z",
-        "id": 584,
-        "workflowId": "FBKdb1280a59b767",
-        "versionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
-        "event": "deactivated",
-        "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
-      },
-      {
-        "createdAt": "2026-06-16T16:21:34.809Z",
-        "id": 586,
-        "workflowId": "FBKdb1280a59b767",
-        "versionId": "613a17df-5c2c-44fb-9963-7938b81ef049",
+        "versionId": "80d50436-1ad2-44bc-9b6f-f229e1340ebb",
         "event": "deactivated",
         "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
       }

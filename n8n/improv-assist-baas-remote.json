@@ -1,0 +1,325 @@
+{
+  "updatedAt": "2026-06-09T20:45:59.816Z",
+  "createdAt": "2026-06-09T20:39:22.387Z",
+  "id": "IRPFf4VvvoYrzqF6",
+  "name": "Improv-Assist BaaS",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "improv-regen",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        208
+      ],
+      "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.parse($json.output.replace(/```json|```/g, '').trim()) }}",
+        "options": {}
+      },
+      "id": "respond-to-webhook-node",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        800,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-3.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Tu es un assistant d'improvisation théâtrale pour l'EFIT. Génère un fichier JSON structuré contenant 3 listes d'éléments inspirants pour alimenter des générateurs d'impro : 1. \"emotions\" : 50 suggestions d'émotions/états d'esprit avec leur catégorie (Positive, Négative, Neutre). Chaque objet doit être au format : { \"text\": string, \"category\": \"Positive\" | \"Négative\" | \"Neutre\" } 2. \"locations\" : 50 suggestions de lieux propices au jeu dramatique ou comique, classés par catégorie (Huis clos, Quotidien, Aventure, Insolite). Chaque objet doit être au format : { \"text\": string, \"category\": \"Huis clos\" | \"Quotidien\" | \"Aventure\" | \"Insolite\" } 3. \"eras\" : 50 suggestions de périodes temporelles ou époques inspirantes, classées par temporalité (Passé, Présent, Futur). Chaque objet doit être au format : { \"text\": string, \"era\": \"Passé\" | \"Présent\" | \"Futur\" } Important : Ne renvoie rien d'autre que le JSON brut de cette structure. Les suggestions doivent être variées, théâtrales, poétiques ou insolites."
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        208
+      ],
+      "id": "5f6b860c-46b5-4d1a-8290-a179336c7640",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "QZGttnIQoPa4rsAg",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/mcp-registry.notion",
+      "typeVersion": 1,
+      "position": [
+        496,
+        448
+      ],
+      "id": "c3482d1a-d34e-4014-831f-2bd780d20579",
+      "name": "Notion MCP",
+      "credentials": {
+        "notionMcpOAuth2Api": {
+          "id": "VhjnOqbcADUw4itW",
+          "name": "Notion MCP OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Last Publish Info\n\nPublished on 2026-07-08 10:44:58 | Git: No git commit info available",
+        "height": 150,
+        "width": 300,
+        "color": 6
+      },
+      "id": "ecb6354f-1a81-4ead-a80b-8b232b76ab75",
+      "name": "Last Publish Info",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -462,
+        208
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion MCP": {
+      "ai_tool": [
+        [
+          {
+            "node": "Message a model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "pinData": {},
+  "versionId": "1e32566e-6524-4914-9765-5707e3bc7edd",
+  "activeVersionId": "1e32566e-6524-4914-9765-5707e3bc7edd",
+  "versionCounter": 16,
+  "triggerCount": 1,
+  "sourceWorkflowId": null,
+  "shared": [
+    {
+      "updatedAt": "2026-06-09T20:39:22.392Z",
+      "createdAt": "2026-06-09T20:39:22.392Z",
+      "role": "workflow:owner",
+      "workflowId": "IRPFf4VvvoYrzqF6",
+      "projectId": "GfFdmZTqGEJQkrXG",
+      "project": {
+        "updatedAt": "2026-05-11T09:44:44.757Z",
+        "createdAt": "2026-05-11T09:34:45.695Z",
+        "id": "GfFdmZTqGEJQkrXG",
+        "name": "Éole Wind <megazef@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "2792484d-cba3-4156-adba-fbc49134eb55"
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-06-09T20:46:16.000Z",
+    "createdAt": "2026-06-09T20:45:59.817Z",
+    "versionId": "1e32566e-6524-4914-9765-5707e3bc7edd",
+    "workflowId": "IRPFf4VvvoYrzqF6",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "improv-regen",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "webhook-trigger",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -112,
+          208
+        ],
+        "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.parse($json.output.replace(/```json|```/g, '').trim()) }}",
+          "options": {}
+        },
+        "id": "respond-to-webhook-node",
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          800,
+          208
+        ]
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-3.5-flash"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "Tu es un assistant d'improvisation théâtrale pour l'EFIT. Génère un fichier JSON structuré contenant 3 listes d'éléments inspirants pour alimenter des générateurs d'impro : 1. \"emotions\" : 50 suggestions d'émotions/états d'esprit avec leur catégorie (Positive, Négative, Neutre). Chaque objet doit être au format : { \"text\": string, \"category\": \"Positive\" | \"Négative\" | \"Neutre\" } 2. \"locations\" : 50 suggestions de lieux propices au jeu dramatique ou comique, classés par catégorie (Huis clos, Quotidien, Aventure, Insolite). Chaque objet doit être au format : { \"text\": string, \"category\": \"Huis clos\" | \"Quotidien\" | \"Aventure\" | \"Insolite\" } 3. \"eras\" : 50 suggestions de périodes temporelles ou époques inspirantes, classées par temporalité (Passé, Présent, Futur). Chaque objet doit être au format : { \"text\": string, \"era\": \"Passé\" | \"Présent\" | \"Futur\" } Important : Ne renvoie rien d'autre que le JSON brut de cette structure. Les suggestions doivent être variées, théâtrales, poétiques ou insolites."
+              }
+            ]
+          },
+          "jsonOutput": true,
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          256,
+          208
+        ],
+        "id": "5f6b860c-46b5-4d1a-8290-a179336c7640",
+        "name": "Message a model",
+        "credentials": {
+          "googlePalmApi": {
+            "id": "QZGttnIQoPa4rsAg",
+            "name": "Google Gemini(PaLM) Api account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/mcp-registry.notion",
+        "typeVersion": 1,
+        "position": [
+          496,
+          448
+        ],
+        "id": "c3482d1a-d34e-4014-831f-2bd780d20579",
+        "name": "Notion MCP",
+        "credentials": {
+          "notionMcpOAuth2Api": {
+            "id": "VhjnOqbcADUw4itW",
+            "name": "Notion MCP OAuth2"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Message a model",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Message a model": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Notion MCP": {
+        "ai_tool": [
+          [
+            {
+              "node": "Message a model",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "Éole Wind",
+    "name": "Version 1e32566e",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-06-09T20:46:16.148Z",
+        "id": 265,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "1e32566e-6524-4914-9765-5707e3bc7edd",
+        "event": "activated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
+      }
+    ]
+  },
+  "//": "Published on 2026-07-08 10:44:58 | Git: No git commit info available"
+}
