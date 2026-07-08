@@ -36,6 +36,17 @@ DARK_GRAY := \033[38;2;75;85;99m
 BOLD      := \033[1m
 RESET     := \033[0m
 
+# Semantic Typology mappings (Meta-colorization)
+STYLE_TITLE       ?= $(CYAN)
+STYLE_SECTION     ?= $(PURPLE)
+STYLE_PHASE       ?= $(CYAN)
+STYLE_DISCREET    ?= $(GRAY)
+STYLE_INSTRUCTION ?= $(GREEN)
+STYLE_RESULT      ?= $(GREEN)
+STYLE_WARNING     ?= $(ORANGE)
+STYLE_ERROR       ?= $(ORANGE)
+
+
 # 🛠️ LOCAL DOCKER CONFIGURATION
 DOCKER_DIR   := docker
 COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
@@ -47,9 +58,9 @@ COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 # ℹ️ HELP MENU
 # ==============================================================================
 help:
-	@printf "$(CYAN)──────────────────────────────────────────────────────────────────────$(RESET)\n"
+	@printf "$(STYLE_TITLE)──────────────────────────────────────────────────────────────────────$(RESET)\n"
 	@printf "                   🛠️  $(BOLD)$(PROJECT_NAME) Project Makefile$(RESET) 🛠️\n"
-	@printf "$(CYAN)──────────────────────────────────────────────────────────────────────$(RESET)\n"
+	@printf "$(STYLE_TITLE)──────────────────────────────────────────────────────────────────────$(RESET)\n"
 	@echo "💻 LOCAL DEVELOPMENT (WSL LOCALHOST):"
 	@echo "  make up            - Start local dev environment with HMR (Port 3000)"
 	@echo "  make down          - Stop local dev environment"
@@ -61,7 +72,7 @@ help:
 	@echo "  make checklogs     - Fetch real-time production logs from VPS"
 	@echo "  make check-build   - Query GitHub Actions build status"
 	@echo "  make check-build-full - Display verbose details of the latest GitHub Actions run"
-	@printf "$(CYAN)──────────────────────────────────────────────────────────────────────$(RESET)\n"
+	@printf "$(STYLE_TITLE)──────────────────────────────────────────────────────────────────────$(RESET)\n"
 
 # ==============================================================================
 # 💻 DEVELOPMENT COMMANDS (LOCAL)
@@ -96,30 +107,30 @@ restart: down up
 # 🚀 AUTOMATED DEPLOYMENT PIPELINE (VPS)
 # ==============================================================================
 deploy:
-	@printf "$(CYAN)🚀 [1/4]$(RESET) Preparing deployment space on VPS $(BOLD)$(VPS_SSH)$(RESET)...\n"
+	@printf "$(STYLE_RESULT)🚀 [1/4]$(RESET) Preparing deployment space on VPS $(BOLD)$(VPS_SSH)$(RESET)...\n"
 	@ssh $(VPS_SSH) "mkdir -p $(VPS_PATH)" >/dev/null
-	@printf "$(CYAN)📦 [2/4]$(RESET) Uploading static assets and configuration files...\n"
+	@printf "$(STYLE_PHASE)📦 [2/4]$(RESET) Uploading static assets and configuration files...\n"
 	@scp $(COMPOSE_PROD) $(VPS_SSH):$(VPS_PATH)/docker-compose.prod.yml >/dev/null
-	@printf "$(CYAN)🔑 [3/4]$(RESET) Streaming production secrets from Doppler...\n"
+	@printf "$(STYLE_PHASE)🔑 [3/4]$(RESET) Streaming production secrets from Doppler...\n"
 	@if $(DOPPLER) --version >/dev/null 2>&1; then \
 		if $(DOPPLER) secrets download --project $(DOPPLER_PROJECT) --config $(DOPPLER_CONFIG_PROD) --no-file --format env > docker/.env.prod.temp; then \
 			scp docker/.env.prod.temp $(VPS_SSH):$(VPS_PATH)/.env >/dev/null; \
 			rm -f docker/.env.prod.temp; \
 		else \
-			printf "$(ORANGE)❌ Error: Doppler secrets download failed for project $(DOPPLER_PROJECT) (config: $(DOPPLER_CONFIG_PROD))!$(RESET)\n"; \
+			printf "$(STYLE_ERROR)❌ Error: Doppler secrets download failed for project $(DOPPLER_PROJECT) (config: $(DOPPLER_CONFIG_PROD))!$(RESET)\n"; \
 			rm -f docker/.env.prod.temp; \
 			exit 1; \
 		fi; \
 	else \
-		printf "$(ORANGE)❌ Error: Doppler CLI is not installed or not found in PATH!$(RESET)\n"; \
+		printf "$(STYLE_ERROR)❌ Error: Doppler CLI is not installed or not found in PATH!$(RESET)\n"; \
 		exit 1; \
 	fi
-	@printf "$(CYAN)🐳 [4/4]$(RESET) Recreating and starting production containers...\n"
+	@printf "$(STYLE_PHASE)🐳 [4/4]$(RESET) Recreating and starting production containers...\n"
 	@ssh $(VPS_SSH) "docker rm -f improv-assist-frontend-prod 2>/dev/null || true" >/dev/null
 	@ssh $(VPS_SSH) "cd $(VPS_PATH) && \
 		docker compose -f docker-compose.prod.yml pull && \
 		docker compose -f docker-compose.prod.yml up -d --remove-orphans" >/dev/null
-	@printf "$(GREEN)✅ Deployment of $(PROJECT_NAME) [$(VERSION) / $(VPS_PROJECT_TAG)] successfully completed on production server!$(RESET)\n"
+	@printf "$(STYLE_RESULT)✅ Deployment of $(PROJECT_NAME) [$(VERSION) / $(VPS_PROJECT_TAG)] successfully completed on production server!$(RESET)\n"
 
 checklogs:
 	@echo "📟 Fetching real-time production logs from VPS [$(VPS_SSH)]..."
