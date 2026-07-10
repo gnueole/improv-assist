@@ -12,10 +12,20 @@ import { after } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    // Add running environment to the payload for Notion tagging
-    body.platform = process.env.NODE_ENV === "production" ? "prod" : "dev";
     
-    const webhookUrl = process.env.FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/improv-feedback";
+    // Map payload to match the unified n8n feedback workflow schema
+    const mappedBody = {
+      name: body.name,
+      email: body.email,
+      stars: body.score,
+      category: body.type === "Demande" ? "Comment" : (body.type === "Suggestion" ? "Improvement" : "Bug"),
+      message: body.comment,
+      app: "improv-assist",
+      platform: process.env.NODE_ENV === "production" ? "prod" : "dev",
+      timestamp: new Date().toISOString()
+    };
+    
+    const webhookUrl = process.env.N8N_FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/jobby-feedback";
     
     // Execute n8n webhook call asynchronously after the response has been sent
     after(async () => {
@@ -23,7 +33,7 @@ export async function POST(request: Request) {
         const response = await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
+          body: JSON.stringify(mappedBody),
         });
         
         if (!response.ok) {
