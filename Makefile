@@ -139,7 +139,7 @@ checklogs:
 
 deploy-delay:
 	@echo "⏳ Waiting 150 seconds for GitHub Actions build to complete..."
-	git push && sleep 150 && $(MAKE) deploy
+	git push && sleep 150 && "$(MAKE)" deploy
 
 check-build:
 	@python3 toolkit/check_build.py

@@ -11,6 +11,25 @@ import fs from "fs";
 import path from "path";
 import pkg from "../../../../package.json";
 
+// Simple in-memory rate limiter to control OpenAI token generation costs
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const LIMIT_WINDOW = 60 * 1000; // 1 minute window
+const MAX_REQUESTS = 3; // Max 3 requests per minute
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const limitData = rateLimitMap.get(ip);
+  if (!limitData || now > limitData.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + LIMIT_WINDOW });
+    return false;
+  }
+  if (limitData.count < MAX_REQUESTS) {
+    limitData.count++;
+    return false;
+  }
+  return true;
+}
+
 // Parses the master.prompt file dynamically depending on the requested category and count
 function parsePrompt(category?: string, count: number = 350): string {
   const filePath = path.join(process.cwd(), "n8n", "prompts", "master.prompt");
@@ -76,6 +95,14 @@ function parsePrompt(category?: string, count: number = 350): string {
 
 export async function POST(request: Request) {
   try {
+    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait a minute before generating more themes." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const n8nBaseUrl = process.env.N8N_BASE_URL || "https://n8n.eole.me";
     const webhookUrl = `${n8nBaseUrl.replace(/\/$/, "")}/webhook/improv-regen`;

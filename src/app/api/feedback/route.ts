@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString()
     };
     
-    const webhookUrl = process.env.N8N_FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/jobby-feedback";
+    const webhookUrl = process.env.N8N_FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/feedback";
     
     // Execute n8n webhook call asynchronously after the response has been sent
     after(async () => {

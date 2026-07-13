@@ -46,6 +46,7 @@ export function useImprovTimer() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const utterancesRef = useRef<SpeechSynthesisUtterance[]>([]);
+  const targetEndTimeRef = useRef<number | null>(null);
 
   // Initialize from LocalStorage after hydration
   useEffect(() => {
@@ -338,18 +339,32 @@ export function useImprovTimer() {
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
       timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
+        if (targetEndTimeRef.current) {
+          const remaining = Math.max(0, Math.ceil((targetEndTimeRef.current - Date.now()) / 1000));
+          setTimeLeft(remaining);
+          if (remaining <= 0) {
             setIsRunning(false);
+            targetEndTimeRef.current = null;
             if (timerRef.current) clearInterval(timerRef.current);
             if (soundEnabled && typeof window !== "undefined") {
               playBuzzerSound(buzzerType);
               speak(finalAnnouncementText, true);
             }
-            return 0;
           }
-          return prev - 1;
-        });
+        } else {
+          setTimeLeft((prev) => {
+            if (prev <= 1) {
+              setIsRunning(false);
+              if (timerRef.current) clearInterval(timerRef.current);
+              if (soundEnabled && typeof window !== "undefined") {
+                playBuzzerSound(buzzerType);
+                speak(finalAnnouncementText, true);
+              }
+              return 0;
+            }
+            return prev - 1;
+          });
+        }
       }, 1000);
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -359,6 +374,31 @@ export function useImprovTimer() {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isRunning, timeLeft, soundEnabled, buzzerType, finalAnnouncementText, voiceGender]);
+
+  // Synchronize timer on visibility changes to prevent drift
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && isRunning && targetEndTimeRef.current) {
+        const remaining = Math.max(0, Math.ceil((targetEndTimeRef.current - Date.now()) / 1000));
+        setTimeLeft(remaining);
+        if (remaining <= 0) {
+          setIsRunning(false);
+          targetEndTimeRef.current = null;
+          if (soundEnabled && typeof window !== "undefined") {
+            playBuzzerSound(buzzerType);
+            speak(finalAnnouncementText, true);
+          }
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isRunning, soundEnabled, buzzerType, finalAnnouncementText]);
 
   // Clear flash message immediately when timer is paused
   useEffect(() => {
@@ -499,12 +539,16 @@ export function useImprovTimer() {
     }
     if (!isRunning) {
       setIsSessionActive(true);
+      targetEndTimeRef.current = Date.now() + timeLeft * 1000;
+    } else {
+      targetEndTimeRef.current = null;
     }
     setIsRunning(!isRunning);
   };
 
   const resetTimer = () => {
     setIsRunning(false);
+    targetEndTimeRef.current = null;
     setTimeLeft(targetDuration);
     setIsSessionActive(false);
   };
@@ -559,12 +603,16 @@ export function useImprovTimer() {
       const newVal = prev + amount;
       if (newVal <= 0) {
         setIsRunning(false);
+        targetEndTimeRef.current = null;
         if (timerRef.current) clearInterval(timerRef.current);
         if (prev > 0 && soundEnabled && typeof window !== "undefined") {
           playBuzzerSound(buzzerType);
           speak(finalAnnouncementText, true);
         }
         return 0;
+      }
+      if (isRunning) {
+        targetEndTimeRef.current = Date.now() + newVal * 1000;
       }
       return newVal;
     });
