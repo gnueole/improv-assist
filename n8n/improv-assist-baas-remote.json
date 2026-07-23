@@ -67,8 +67,8 @@
       "name": "Message a model",
       "credentials": {
         "googlePalmApi": {
-          "id": "QZGttnIQoPa4rsAg",
-          "name": "Google Gemini(PaLM) Api account"
+          "id": "0NE5RaI6AICMxrFc",
+          "name": "Google Gemini - Improv Assist"
         }
       }
     },
@@ -93,7 +93,7 @@
     },
     {
       "parameters": {
-        "content": "### Last Publish Info\n\nPublished on 2026-07-08 10:44:58 | Git: No git commit info available",
+        "content": "### Last Publish Info\n\nPublished on 2026-07-23 14:58:25 | Git: bf7656e fix(dependabot): use Docker Hub image path for n8n to enable Dependabot support",
         "height": 150,
         "width": 300,
         "color": 6
@@ -245,8 +245,8 @@
         "name": "Message a model",
         "credentials": {
           "googlePalmApi": {
-            "id": "QZGttnIQoPa4rsAg",
-            "name": "Google Gemini(PaLM) Api account"
+            "id": "0NE5RaI6AICMxrFc",
+            "name": "Google Gemini - Improv Assist"
           }
         }
       },
@@ -321,5 +321,5 @@
       }
     ]
   },
-  "//": "Published on 2026-07-08 10:44:58 | Git: No git commit info available"
+  "//": "Published on 2026-07-23 14:58:25 | Git: bf7656e fix(dependabot): use Docker Hub image path for n8n to enable Dependabot support"
 }
