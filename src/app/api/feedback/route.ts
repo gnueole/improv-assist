@@ -20,7 +20,11 @@ export async function POST(request: Request) {
       stars: body.score,
       category: body.type === "Demande" ? "Comment" : (body.type === "Suggestion" ? "Improvement" : "Bug"),
       message: body.comment,
-      app: "improv-assist",
+      // "improv", not "improv-assist": this lands in the Platform select of the
+      // shared "Feedback & Contacts" Notion table, whose options are
+      // jobby | improv | www. Sending the engine name would have Notion create a
+      // fourth option and split this app's feedback across two labels.
+      app: "improv",
       platform: process.env.NODE_ENV === "production" ? "prod" : "dev",
       timestamp: new Date().toISOString()
     };
