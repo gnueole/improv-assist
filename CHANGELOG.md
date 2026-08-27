@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.11.4] - 2026-08-27
+
+### Fixed
+
+- **The image build broke on an unpinned npm.** Both Dockerfiles ran
+  `npm install -g npm@latest` on a `node:20-alpine` base. npm now requires
+  Node >= 22.22.2, so the step fails with `notsup` and takes the whole build
+  down — on any push, without a line of this repo changing. Pinned to `npm@^10`,
+  the line Node 20 ships and supports. Moving the base to Node 22 is the real
+  answer and deserves its own change.
+
+---
+
 ## [0.11.3] - 2026-08-27
 
 ### Fixed

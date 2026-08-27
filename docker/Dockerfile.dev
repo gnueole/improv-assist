@@ -1,7 +1,11 @@
 FROM node:20-alpine
 
 # Fix system vulnerabilities (CVEs) and update npm to latest
-RUN apk update && apk upgrade --no-cache && npm install -g npm@latest
+# npm@latest is unpinned against a moving target: npm now requires Node
+# >= 22.22.2, so on this node:20 base it fails with `notsup` and takes the
+# whole image build with it — on any push, with no change to this repo.
+# Pinned to the 10.x line, which is what Node 20 ships and supports.
+RUN apk update && apk upgrade --no-cache && npm install -g npm@^10
 
 WORKDIR /app
 
