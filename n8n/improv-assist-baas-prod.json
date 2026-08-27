@@ -1,11 +1,16 @@
 {
-  "updatedAt": "2026-06-16T16:21:34.260Z",
-  "createdAt": "2026-06-09T20:39:22.387Z",
-  "id": "IRPFf4VvvoYrzqF6",
+  "id": "r1nOXWI1YAf1Ii13",
   "name": "improv - assist-baas - prod",
-  "description": "Published on 2026-06-17 09:57:52 | Git: 6f373e0 feat: add n8n workflow definitions and sync script support, and adjust TypeScript configuration",
-  "active": true,
+  "description": null,
+  "active": false,
+  "activeVersionId": null,
+  "createdAt": "2026-06-24T07:15:43.262Z",
+  "updatedAt": "2026-08-27T09:03:03.734Z",
   "isArchived": false,
+  "versionId": "b7c9d6c7-1bfc-41a0-9b43-c4579e50be82",
+  "versionCounter": 9,
+  "sourceWorkflowId": null,
+  "triggerCount": 0,
   "nodes": [
     {
       "parameters": {
@@ -399,49 +404,34 @@
       ]
     }
   },
+  "nodeGroups": [],
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "timeSavedMode": "fixed",
-    "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": null,
-    "availableInMCP": false
+    "availableInMCP": true
   },
   "staticData": null,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
-  "nodeGroups": [],
-  "pinData": {},
-  "versionId": "b0669db9-8678-468d-ab2f-5a3f9ab76349",
-  "activeVersionId": "b0669db9-8678-468d-ab2f-5a3f9ab76349",
-  "versionCounter": 100,
-  "triggerCount": 1,
-  "sourceWorkflowId": null,
+  "pinData": null,
+  "meta": null,
+  "tags": [],
   "shared": [
     {
-      "updatedAt": "2026-06-09T20:39:22.392Z",
-      "createdAt": "2026-06-09T20:39:22.392Z",
       "role": "workflow:owner",
-      "workflowId": "IRPFf4VvvoYrzqF6",
+      "workflowId": "r1nOXWI1YAf1Ii13",
       "projectId": "GfFdmZTqGEJQkrXG",
       "project": {
-        "updatedAt": "2026-05-11T09:44:44.757Z",
-        "createdAt": "2026-05-11T09:34:45.695Z",
         "id": "GfFdmZTqGEJQkrXG",
         "name": "Éole Wind <megazef@gmail.com>",
         "type": "personal",
         "icon": null,
         "description": null,
         "customTelemetryTags": [],
-        "creatorId": "2792484d-cba3-4156-adba-fbc49134eb55"
-      }
+        "creatorId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-05-11T09:34:45.695Z",
+        "updatedAt": "2026-07-06T15:34:54.223Z"
+      },
+      "createdAt": "2026-06-24T07:15:43.264Z",
+      "updatedAt": "2026-06-24T07:15:43.264Z"
     }
   ],
-  "tags": [
-    {
-      "name": "improv"
-    }
-  ],
-  "//": "Published on 2026-07-23 14:58:25 | Git: bf7656e fix(dependabot): use Docker Hub image path for n8n to enable Dependabot support"
+  "activeVersion": null
 }

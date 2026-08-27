@@ -1,11 +1,16 @@
 {
-  "updatedAt": "2026-06-15T15:47:17.364Z",
-  "createdAt": "2026-06-09T20:39:22.387Z",
   "id": "IRPFf4VvvoYrzqF6",
   "name": "Improv-Assist BaaS",
-  "description": null,
+  "description": "Published on 2026-06-17 09:57:52 | Git: 6f373e0 feat: add n8n workflow definitions and sync script support, and adjust TypeScript configuration",
   "active": true,
+  "activeVersionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
+  "createdAt": "2026-06-09T20:39:22.387Z",
+  "updatedAt": "2026-08-27T18:33:26.122Z",
   "isArchived": false,
+  "versionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
+  "versionCounter": 112,
+  "sourceWorkflowId": null,
+  "triggerCount": 1,
   "nodes": [
     {
       "parameters": {
@@ -71,7 +76,8 @@
         "httpMethod": "POST",
         "path": "improv-regen",
         "responseMode": "responseNode",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "webhook-trigger",
       "name": "Webhook",
@@ -81,7 +87,13 @@
         -320,
         208
       ],
-      "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9"
+      "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "y68kSCO178c4TXvD",
+          "name": "improv-assist-token"
+        }
+      }
     },
     {
       "parameters": {
@@ -152,7 +164,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const token = $input.item.json.headers['x-n8n-token'] || $input.item.json.body?.token;\nconst vpsToken = $input.item.json.vps_token;\nif (token !== vpsToken) {\n  throw new Error(\"Unauthorized\");\n}\nreturn { json: { system_prompt: $input.item.json.body.system_prompt, body: $input.item.json.body } };"
+        "jsCode": "// Auth is enforced by the webhook's Header Auth credential, at the door.\n// This node only reshapes the payload for the model.\nreturn { json: { system_prompt: $input.item.json.body.system_prompt, body: $input.item.json.body } };"
       },
       "id": "verify-token-node",
       "name": "Verify Token",
@@ -166,12 +178,7 @@
     {
       "parameters": {
         "values": {
-          "string": [
-            {
-              "name": "vps_token",
-              "value": "={{ $env.X_N8N_TOKEN }}"
-            }
-          ],
+          "string": [],
           "number": [
             {
               "name": "start_time",
@@ -322,6 +329,7 @@
       ]
     }
   },
+  "nodeGroups": [],
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
@@ -331,41 +339,40 @@
     "availableInMCP": false
   },
   "staticData": null,
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "nodeGroups": [],
-  "pinData": {},
-  "versionId": "33b587b1-306a-486a-9a92-3e4fc3ab4002",
-  "activeVersionId": "33b587b1-306a-486a-9a92-3e4fc3ab4002",
-  "versionCounter": 92,
-  "triggerCount": 1,
-  "sourceWorkflowId": null,
+  "tags": [
+    {
+      "id": "OjQc3bupLROFSp8d",
+      "name": "improv",
+      "createdAt": "2026-06-23T20:53:06.000Z",
+      "updatedAt": "2026-06-23T20:53:06.000Z"
+    }
+  ],
   "shared": [
     {
-      "updatedAt": "2026-06-09T20:39:22.392Z",
-      "createdAt": "2026-06-09T20:39:22.392Z",
       "role": "workflow:owner",
       "workflowId": "IRPFf4VvvoYrzqF6",
       "projectId": "GfFdmZTqGEJQkrXG",
       "project": {
-        "updatedAt": "2026-05-11T09:44:44.757Z",
-        "createdAt": "2026-05-11T09:34:45.695Z",
         "id": "GfFdmZTqGEJQkrXG",
         "name": "Éole Wind <megazef@gmail.com>",
         "type": "personal",
         "icon": null,
         "description": null,
         "customTelemetryTags": [],
-        "creatorId": "2792484d-cba3-4156-adba-fbc49134eb55"
-      }
+        "creatorId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-05-11T09:34:45.695Z",
+        "updatedAt": "2026-07-06T15:34:54.223Z"
+      },
+      "createdAt": "2026-06-09T20:39:22.392Z",
+      "updatedAt": "2026-06-09T20:39:22.392Z"
     }
   ],
-  "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-06-15T15:47:21.000Z",
-    "createdAt": "2026-06-15T15:47:17.367Z",
-    "versionId": "33b587b1-306a-486a-9a92-3e4fc3ab4002",
+    "versionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
     "workflowId": "IRPFf4VvvoYrzqF6",
     "nodes": [
       {
@@ -432,7 +439,8 @@
           "httpMethod": "POST",
           "path": "improv-regen",
           "responseMode": "responseNode",
-          "options": {}
+          "options": {},
+          "authentication": "headerAuth"
         },
         "id": "webhook-trigger",
         "name": "Webhook",
@@ -442,7 +450,13 @@
           -320,
           208
         ],
-        "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9"
+        "webhookId": "2df6219d-7c6c-4fe3-8793-2a95b64640a9",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "y68kSCO178c4TXvD",
+            "name": "improv-assist-token"
+          }
+        }
       },
       {
         "parameters": {
@@ -513,7 +527,7 @@
       {
         "parameters": {
           "mode": "runOnceForEachItem",
-          "jsCode": "const token = $input.item.json.headers['x-n8n-token'] || $input.item.json.body?.token;\nconst vpsToken = $input.item.json.vps_token;\nif (token !== vpsToken) {\n  throw new Error(\"Unauthorized\");\n}\nreturn { json: { system_prompt: $input.item.json.body.system_prompt, body: $input.item.json.body } };"
+          "jsCode": "// Auth is enforced by the webhook's Header Auth credential, at the door.\n// This node only reshapes the payload for the model.\nreturn { json: { system_prompt: $input.item.json.body.system_prompt, body: $input.item.json.body } };"
         },
         "id": "verify-token-node",
         "name": "Verify Token",
@@ -527,12 +541,7 @@
       {
         "parameters": {
           "values": {
-            "string": [
-              {
-                "name": "vps_token",
-                "value": "={{ $env.X_N8N_TOKEN }}"
-              }
-            ],
+            "string": [],
             "number": [
               {
                 "name": "start_time",
@@ -585,6 +594,22 @@
             "name": "Notion account"
           }
         }
+      },
+      {
+        "parameters": {
+          "content": "### Last Publish Info\n\nPublished on 2026-07-23 14:58:25 | Git: bf7656e fix(dependabot): use Docker Hub image path for n8n to enable Dependabot support",
+          "height": 150,
+          "width": 300,
+          "color": 6
+        },
+        "id": "890ef6b9-aa0c-4de2-9114-17bec0149044",
+        "name": "Last Publish Info",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -670,
+          112
+        ]
       }
     ],
     "connections": {
@@ -669,19 +694,20 @@
     },
     "nodeGroups": [],
     "authors": "Éole Wind",
-    "name": "Version 33b587b1",
-    "description": "",
-    "autosaved": true,
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "createdAt": "2026-08-27T18:33:26.130Z",
+    "updatedAt": "2026-08-27T18:33:26.130Z",
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-06-15T15:47:21.212Z",
-        "id": 539,
+        "id": 2122,
         "workflowId": "IRPFf4VvvoYrzqF6",
-        "versionId": "33b587b1-306a-486a-9a92-3e4fc3ab4002",
+        "versionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
         "event": "activated",
-        "userId": "2792484d-cba3-4156-adba-fbc49134eb55"
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-27T18:33:26.366Z"
       }
     ]
-  },
-  "//": "Published on 2026-07-23 14:58:25 | Git: bf7656e fix(dependabot): use Docker Hub image path for n8n to enable Dependabot support"
+  }
 }
