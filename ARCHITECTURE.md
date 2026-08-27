@@ -119,7 +119,7 @@ Pour sécuriser les clés d'intégration, contourner les restrictions de CORS et
 L'intelligence métier et les enregistrements sont gérés par deux flux d'automatisation hébergés sur un serveur **n8n** :
 
 ### A. Flux de Feedback (`Improv-Feedback`)
-* **Déclencheur** : Webhook POST sur `/webhook/improv-feedback`.
+* **Déclencheur** : Webhook POST sur `/webhook/feedback` — l'admission unique partagée avec www et jobby. `/webhook/improv-feedback` a été retiré en juillet.
 * **Action** : Insère le nom, le type, la note (score 1-5 étoiles) et le commentaire dans une base de données Notion dédiée.
 * **Gestion d'Erreur** : Si Notion renvoie une erreur (ex: limite d'API ou erreur de schéma), le flux intercepte l'erreur grâce à `"onError": "continue"` et renvoie un statut HTTP `500` avec la description de l'erreur au client.
 

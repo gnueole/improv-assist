@@ -13,6 +13,10 @@ services:
       - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
       - X_N8N_TOKEN=${X_N8N_TOKEN}
       - N8N_BASE_URL=${N8N_BASE_URL}
+      # Never passed before, so the container always fell back to whatever the
+      # image had baked in — and a July image still pointed at /jobby-feedback,
+      # retired since. Every submission answered 404 in silence.
+      - N8N_FEEDBACK_WEBHOOK_URL=${N8N_FEEDBACK_WEBHOOK_URL:-https://n8n.eole.me/webhook/feedback}
     networks:
       - eole_shared_network
     extra_hosts:

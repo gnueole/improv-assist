@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.11.5] - 2026-08-27
+
+### Fixed
+
+- **Feedback never reached n8n, and said so only in the container logs.**
+  `docker-compose.prod.yml` passed `X_N8N_TOKEN` and `N8N_BASE_URL` but not
+  `N8N_FEEDBACK_WEBHOOK_URL`, so the app always used whatever fallback its image
+  had baked in — and the image running in production still pointed at
+  `/webhook/jobby-feedback`, retired in July. Every submission answered:
+
+  ```
+  [Feedback Background Task Error]: n8n webhook returned status 404
+  ```
+
+  The variable is now passed explicitly, defaulting to
+  `https://n8n.eole.me/webhook/feedback`. **A redeploy is required**: the fix is
+  in the image and in the compose, not in the running container.
+
+- **`ARCHITECTURE.md` still documented `/webhook/improv-feedback`** as the
+  trigger, which no longer exists.
+
+---
+
 ## [0.11.4] - 2026-08-27
 
 ### Fixed
