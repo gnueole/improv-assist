@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.11.6] - 2026-08-27
+
+### Fixed
+
+- **Same unreachable address as jobby.** The fallback added in 0.11.5 pointed at
+  `https://n8n.eole.me/webhook/feedback`, which no container can reach: the VPS
+  `/etc/hosts` maps that name to `127.0.1.1`. Now
+  `http://n8n-server:5678/webhook/feedback`, in Doppler
+  (`prd_eole-me-improv`), in the compose default and in the code.
+
+> Still requires a redeploy: the running image is seven weeks old and predates
+> both this fix and the `/feedback` migration.
+
+---
+
 ## [0.11.5] - 2026-08-27
 
 ### Fixed

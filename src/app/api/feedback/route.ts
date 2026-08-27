@@ -29,7 +29,11 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString()
     };
     
-    const webhookUrl = process.env.N8N_FEEDBACK_WEBHOOK_URL || "https://n8n.eole.me/webhook/feedback";
+    // Container-internal address: the VPS /etc/hosts maps n8n.eole.me to
+    // 127.0.1.1 and containers inherit it, so the public hostname answers
+    // ECONNREFUSED from in here. n8n-server is the container name on
+    // eole_shared_network.
+    const webhookUrl = process.env.N8N_FEEDBACK_WEBHOOK_URL || "http://n8n-server:5678/webhook/feedback";
     
     // Execute n8n webhook call asynchronously after the response has been sent
     after(async () => {

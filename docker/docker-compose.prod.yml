@@ -16,7 +16,7 @@ services:
       # Never passed before, so the container always fell back to whatever the
       # image had baked in — and a July image still pointed at /jobby-feedback,
       # retired since. Every submission answered 404 in silence.
-      - N8N_FEEDBACK_WEBHOOK_URL=${N8N_FEEDBACK_WEBHOOK_URL:-https://n8n.eole.me/webhook/feedback}
+      - N8N_FEEDBACK_WEBHOOK_URL=${N8N_FEEDBACK_WEBHOOK_URL:-http://n8n-server:5678/webhook/feedback}
     networks:
       - eole_shared_network
     extra_hosts:
