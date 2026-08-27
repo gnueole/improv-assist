@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.11.7] - 2026-08-28
+
+### Added
+
+- **`vector.dev/collect=true`** on the production container. Vector now collects
+  logs by that label rather than by compose project, and improv was the only
+  project of the five not declaring it — so its logs reached Axiom neither
+  before the change nor after.
+
+---
+
 ## [0.11.6] - 2026-08-27
 
 ### Fixed

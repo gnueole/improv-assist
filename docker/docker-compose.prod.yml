@@ -22,6 +22,9 @@ services:
     extra_hosts:
       - "n8n.eole.me:host-gateway"
     labels:
+      # Ships this container's logs to Axiom. Vector collects by this label —
+      # improv was the only project not declaring it, so it shipped nothing.
+      - "vector.dev/collect=true"
       - "traefik.enable=true"
       - "traefik.http.routers.improv.rule=Host(`${APP_DOMAIN}`)"
       - "traefik.http.routers.improv.entrypoints=websecure"
