@@ -17,6 +17,9 @@ services:
       # image had baked in — and a July image still pointed at /jobby-feedback,
       # retired since. Every submission answered 404 in silence.
       - N8N_FEEDBACK_WEBHOOK_URL=${N8N_FEEDBACK_WEBHOOK_URL:-http://n8n-server:5678/webhook/feedback}
+      # Telemetry goes to Vector, which ships to Axiom — not to n8n, and not to
+      # a Notion database.
+      - TELEMETRY_WEBHOOK_URL=${TELEMETRY_WEBHOOK_URL:-http://vector:8080}
     networks:
       - eole_shared_network
     extra_hosts:

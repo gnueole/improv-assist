@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.12.0] - 2026-08-28
+
+### Changed
+
+- **Telemetry goes to Vector, not to n8n and not to Notion.** The receiving
+  workflow failed on **every single event** — 66 runs, 66 failures — because its
+  Notion node read `$json.body` while its input was a data-table node's output.
+  Rather than fix a workflow that writes to the wrong store, the route now posts
+  to `http://vector:8080` and tags the payload `application: "improv"`.
+
+  The workflow is quarantined as `TODEL_2026-08-28_improv - telemetry - prod`.
+
+---
+
 ## [0.11.7] - 2026-08-28
 
 ### Added

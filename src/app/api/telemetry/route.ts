@@ -18,9 +18,15 @@ export async function POST(request: Request) {
     const body = await request.json();
     // Add platform environment
     body.platform = "prod";
-    
-    const n8nBaseUrl = process.env.N8N_BASE_URL || "https://n8n.eole.me";
-    const webhookUrl = process.env.TELEMETRY_WEBHOOK_URL || `${n8nBaseUrl.replace(/\/$/, "")}/webhook/improv-telemetry`;
+    // The Axiom dashboards group by `application`; without it every project's
+    // events pile into one anonymous heap.
+    body.application = "improv";
+
+    // Vector, not n8n. Telemetry used to reach a Notion database through a
+    // workflow that failed on every single event — 66 runs, 66 failures — while
+    // Notion is the wrong store for a time series anyway. Vector ships straight
+    // to the Axiom eole-telemetry dataset.
+    const webhookUrl = process.env.TELEMETRY_WEBHOOK_URL || "http://vector:8080";
     
     // Execute n8n webhook call asynchronously after the client receives the response
     after(async () => {
