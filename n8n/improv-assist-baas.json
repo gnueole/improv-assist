@@ -3,12 +3,12 @@
   "name": "Improv-Assist BaaS",
   "description": "Published on 2026-06-17 09:57:52 | Git: 6f373e0 feat: add n8n workflow definitions and sync script support, and adjust TypeScript configuration",
   "active": true,
-  "activeVersionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
+  "activeVersionId": "4262f729-a793-4790-847a-6405ccc28785",
   "createdAt": "2026-06-09T20:39:22.387Z",
-  "updatedAt": "2026-08-27T18:33:26.122Z",
+  "updatedAt": "2026-08-28T09:45:04.543Z",
   "isArchived": false,
-  "versionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
-  "versionCounter": 112,
+  "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+  "versionCounter": 116,
   "sourceWorkflowId": null,
   "triggerCount": 1,
   "nodes": [
@@ -214,7 +214,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"icon\": {\n    \"type\": \"emoji\",\n    \"emoji\": \"{{ {scenarios: '🎬', categories: '🏷️', themes: '💡', echauffements: '🏃‍♂️', emotions: '🎭', locations: '📍', eras: '⏳', characters: '👤', animals: '🦁', objects: '📦'}[$('Verify Token').first().json.body.category || 'all'] }}\"\n  }\n}",
+        "jsonBody": "={\n  \"icon\": {\n    \"type\": \"emoji\",\n    \"emoji\": \"{{ ({scenarios: '🎬', categories: '🏷️', themes: '💡', echauffements: '🏃', emotions: '🎭', locations: '📍', eras: '⏳', characters: '👤', animals: '🦁', objects: '📦'})[$('Verify Token').first().json.body.category || 'all'] || '💡' }}\"\n  }\n}",
         "options": {}
       },
       "id": "set-page-icon-node",
@@ -230,7 +230,8 @@
           "id": "VOvaHX7fQfQvSZzV",
           "name": "Notion account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -247,6 +248,26 @@
         -670,
         112
       ]
+    },
+    {
+      "id": "d1be229c-1969-4761-9e7a-51d1dc7ad9ef",
+      "name": "Log to Vector",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        928,
+        450
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://vector:8080",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"production\",\n  \"source\": \"improv_baas\",\n  \"action\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
+        "options": {}
+      },
+      "notes": "Telemetry rail: Vector on the shared network ships to Axiom. Not Notion.",
+      "onError": "continueRegularOutput"
     }
   ],
   "connections": {
@@ -289,6 +310,11 @@
           },
           {
             "node": "Log to Notion",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log to Vector",
             "type": "main",
             "index": 0
           }
@@ -336,12 +362,15 @@
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": null,
-    "availableInMCP": false
+    "availableInMCP": true,
+    "errorWorkflow": "tx4xTfvUypqRf7jO"
   },
   "staticData": null,
   "pinData": {},
   "meta": {
-    "templateCredsSetupCompleted": true
+    "templateCredsSetupCompleted": true,
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
   },
   "tags": [
     {
@@ -372,7 +401,7 @@
     }
   ],
   "activeVersion": {
-    "versionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
+    "versionId": "4262f729-a793-4790-847a-6405ccc28785",
     "workflowId": "IRPFf4VvvoYrzqF6",
     "nodes": [
       {
@@ -577,7 +606,7 @@
           },
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"icon\": {\n    \"type\": \"emoji\",\n    \"emoji\": \"{{ {scenarios: '🎬', categories: '🏷️', themes: '💡', echauffements: '🏃‍♂️', emotions: '🎭', locations: '📍', eras: '⏳', characters: '👤', animals: '🦁', objects: '📦'}[$('Verify Token').first().json.body.category || 'all'] }}\"\n  }\n}",
+          "jsonBody": "={\n  \"icon\": {\n    \"type\": \"emoji\",\n    \"emoji\": \"{{ ({scenarios: '🎬', categories: '🏷️', themes: '💡', echauffements: '🏃', emotions: '🎭', locations: '📍', eras: '⏳', characters: '👤', animals: '🦁', objects: '📦'})[$('Verify Token').first().json.body.category || 'all'] || '💡' }}\"\n  }\n}",
           "options": {}
         },
         "id": "set-page-icon-node",
@@ -593,7 +622,8 @@
             "id": "VOvaHX7fQfQvSZzV",
             "name": "Notion account"
           }
-        }
+        },
+        "onError": "continueRegularOutput"
       },
       {
         "parameters": {
@@ -610,6 +640,26 @@
           -670,
           112
         ]
+      },
+      {
+        "id": "d1be229c-1969-4761-9e7a-51d1dc7ad9ef",
+        "name": "Log to Vector",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          928,
+          450
+        ],
+        "parameters": {
+          "method": "POST",
+          "url": "http://vector:8080",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"production\",\n  \"source\": \"improv_baas\",\n  \"action\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
+          "options": {}
+        },
+        "notes": "Telemetry rail: Vector on the shared network ships to Axiom. Not Notion.",
+        "onError": "continueRegularOutput"
       }
     ],
     "connections": {
@@ -654,6 +704,11 @@
               "node": "Log to Notion",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "Log to Vector",
+              "type": "main",
+              "index": 0
             }
           ]
         ]
@@ -693,20 +748,68 @@
       }
     },
     "nodeGroups": [],
-    "authors": "Éole Wind",
-    "name": null,
-    "description": null,
+    "authors": "Éole Wind (via MCP)",
+    "name": "Set Page Icon: default emoji, and never fail the run for decoration",
+    "description": "The icon lookup has no 'all' key, and 'all' is the default when the caller sends no category — so the common case produced \\\"emoji\\\": \\\"undefined\\\" and Notion answered with its whole emoji validation list. Every regen call ended in error, which is what filled the n8n logs, and the error stopped the run before the third branch (Log to Vector) could execute. Adds a fallback and marks the node non-fatal: the icon is decoration, the logged row is the payload.",
     "autosaved": false,
-    "createdAt": "2026-08-27T18:33:26.130Z",
-    "updatedAt": "2026-08-27T18:33:26.130Z",
+    "createdAt": "2026-08-27T22:14:13.151Z",
+    "updatedAt": "2026-08-27T22:14:13.151Z",
     "workflowPublishHistory": [
       {
-        "id": 2122,
+        "id": 2133,
         "workflowId": "IRPFf4VvvoYrzqF6",
-        "versionId": "889a85bf-a13a-45bc-bf87-cfc7b72e1226",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
         "event": "activated",
         "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
-        "createdAt": "2026-08-27T18:33:26.366Z"
+        "createdAt": "2026-08-27T22:14:19.134Z"
+      },
+      {
+        "id": 2135,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+        "event": "activated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-27T22:15:04.579Z"
+      },
+      {
+        "id": 2148,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+        "event": "activated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-28T09:45:04.789Z"
+      },
+      {
+        "id": 2150,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+        "event": "activated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-28T09:45:06.664Z"
+      },
+      {
+        "id": 2134,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+        "event": "deactivated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-27T22:15:02.140Z"
+      },
+      {
+        "id": 2147,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+        "event": "deactivated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-28T09:45:04.736Z"
+      },
+      {
+        "id": 2149,
+        "workflowId": "IRPFf4VvvoYrzqF6",
+        "versionId": "4262f729-a793-4790-847a-6405ccc28785",
+        "event": "deactivated",
+        "userId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-08-28T09:45:04.953Z"
       }
     ]
   }
