@@ -1,0 +1,178 @@
+{
+  "id": "Fsx4Qf3yzMnvD1Yn",
+  "name": "TODEL_2026-08-28_improv - telemetry - prod",
+  "description": null,
+  "active": false,
+  "activeVersionId": null,
+  "createdAt": "2026-07-06T14:53:03.083Z",
+  "updatedAt": "2026-08-28T12:04:32.100Z",
+  "isArchived": false,
+  "versionId": "7c584891-7076-433e-938a-be74689ac026",
+  "versionCounter": 7,
+  "sourceWorkflowId": null,
+  "triggerCount": 1,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "improv-telemetry",
+        "options": {
+          "responseCode": {
+            "values": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        250,
+        240
+      ],
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "webhookId": "fa75e990-3286-4a04-b192-6d3400769c46"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "={{ $('Get Notion DB ID').item.json.value }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Session ID|title",
+              "title": "={{ $json.body.session_id || 'unknown-' + $now.toISO() }}"
+            },
+            {
+              "key": "Tile ID|select",
+              "selectValue": "={{ $json.body.tile_id }}"
+            },
+            {
+              "key": "Tile Title|rich_text",
+              "textContent": "={{ $json.body.tile_title }}"
+            },
+            {
+              "key": "Platform|select",
+              "selectValue": "={{ $json.body.platform }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        240
+      ],
+      "id": "notion-node",
+      "name": "Notion",
+      "credentials": {
+        "notionApi": {
+          "id": "KYrsxF0plfLkPpqW",
+          "name": "Notion LinkedIn Auto"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Last Publish Info\n\nPublished on 2026-07-23 14:58:25 | Git: bf7656e fix(dependabot): use Docker Hub image path for n8n to enable Dependabot support",
+        "height": 150,
+        "width": 300,
+        "color": 6
+      },
+      "id": "360b7d83-cf93-42a9-a86f-c547117ae2d8",
+      "name": "Last Publish Info",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "OtWoNuYUmoj7knoz",
+          "mode": "id"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "key",
+              "keyValue": "improv_telemetry_db_id"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        480,
+        240
+      ],
+      "id": "get-notion-db-id",
+      "name": "Get Notion DB ID"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Notion DB ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Notion DB ID": {
+      "main": [
+        [
+          {
+            "node": "Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodeGroups": [],
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "errorWorkflow": "tx4xTfvUypqRf7jO"
+  },
+  "staticData": null,
+  "pinData": null,
+  "meta": null,
+  "tags": [],
+  "shared": [
+    {
+      "role": "workflow:owner",
+      "workflowId": "Fsx4Qf3yzMnvD1Yn",
+      "projectId": "GfFdmZTqGEJQkrXG",
+      "project": {
+        "id": "GfFdmZTqGEJQkrXG",
+        "name": "Éole Wind <megazef@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "2792484d-cba3-4156-adba-fbc49134eb55",
+        "createdAt": "2026-05-11T09:34:45.695Z",
+        "updatedAt": "2026-07-06T15:34:54.223Z"
+      },
+      "createdAt": "2026-07-06T14:53:03.086Z",
+      "updatedAt": "2026-07-06T14:53:03.086Z"
+    }
+  ],
+  "activeVersion": null
+}
