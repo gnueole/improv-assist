@@ -263,7 +263,7 @@
         "url": "http://vector:8080",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"production\",\n  \"source\": \"improv_baas\",\n  \"action\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
+        "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"prod\",\n  \"source\": \"improv_baas\",\n  \"event_type\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
         "options": {}
       },
       "notes": "Telemetry rail: Vector on the shared network ships to Axiom. Not Notion.",
@@ -655,7 +655,7 @@
           "url": "http://vector:8080",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"production\",\n  \"source\": \"improv_baas\",\n  \"action\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
+          "jsonBody": "={\n  \"application\": \"reservoir_idees\",\n  \"environment\": \"prod\",\n  \"source\": \"improv_baas\",\n  \"event_type\": \"regen_request\",\n  \"categorie_demandee\": \"{{ $('Verify Token').first().json.body.category || 'all' }}\",\n  \"user_prompt_brut\": \"{{ $('Verify Token').first().json.body.prompt || 'Non spécifié' }}\"\n}",
           "options": {}
         },
         "notes": "Telemetry rail: Vector on the shared network ships to Axiom. Not Notion.",
