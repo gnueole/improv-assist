@@ -16,6 +16,9 @@ const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const LIMIT_WINDOW = 60 * 1000; // 1 minute window
 const MAX_REQUESTS = 3; // Max 3 requests per minute
 
+// Upper bound for the n8n round-trip, matching the 1-2 minutes the UI announces
+const REGEN_TIMEOUT_MS = 120 * 1000;
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const limitData = rateLimitMap.get(ip);
@@ -142,9 +145,11 @@ export async function POST(request: Request) {
       n8nBody.categories_required = categoriesRequired;
     }
 
-    // Set a 10-second timeout using AbortController to keep the user experience fast
+    // The n8n workflow is dominated by its Gemini node, measured at 11-19s for a
+    // single category: a 10s budget aborted every regeneration while n8n itself
+    // kept succeeding, so the budget has to cover a full-reservoir generation.
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), REGEN_TIMEOUT_MS);
     
     const response = await fetch(webhookUrl, {
       method: "POST",

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.12.1] - 2026-09-25
+
+### Fixed
+
+- **Regeneration could not succeed at all.** The `/api/improv-regen` proxy aborted
+  its call to n8n after 10s, while the workflow's Gemini node alone takes 11-19s
+  for a single category. Twelve consecutive attempts from six devices ended in a
+  `504`, every one of them against an n8n execution that had **succeeded** — the
+  reservoir was generated, logged to Notion, and thrown away on the way back. The
+  budget is now 120s, matching the 1-2 minutes the UI announces.
+
+- **The timeout was reported as a generic failure.** The route answers a 504 with
+  `{ error: "Timeout issued (from Message a model)" }`, but `reloadBuffer` threw
+  its own message without reading the body, so the branch meant to surface it was
+  unreachable and the toast read "Échec de la régénération via n8n." Both call
+  sites now share a single `readErrorMessage` helper — the one in `pickItem`,
+  which already did this correctly, was the model for it.
+
+---
+
 ## [0.12.0] - 2026-08-28
 
 ### Changed

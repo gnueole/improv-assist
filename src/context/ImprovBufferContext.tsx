@@ -44,6 +44,24 @@ const getPlatform = (): string => {
   return "other";
 };
 
+// Reads the JSON error body the /api/improv-regen route sends with a non-2xx status.
+// Without it the timeout message never reaches the caller, and a 504 is reported as
+// a generic communication failure.
+const readErrorMessage = async (response: Response): Promise<string> => {
+  try {
+    const errData = await response.json();
+    if (errData) {
+      const description = errData.errorDescription || errData.description;
+      const message = errData.errorMessage || errData.error?.message || errData.error;
+
+      if (message && description) return `${message} (${description})`;
+      if (message) return message;
+      if (description) return description;
+    }
+  } catch (_) {}
+  return `HTTP error! Status: ${response.status}`;
+};
+
 export function ImprovBufferProvider({ children }: { children: React.ReactNode }) {
   const { devMode, handleDevModeChange } = useDevMode();
   const { toastMessage, showToast, setToastMessage } = useToast();
@@ -118,7 +136,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
           cache: "no-store"
         });
         if (!response.ok) {
-          throw new Error("Erreur de communication avec le serveur de génération");
+          throw new Error(await readErrorMessage(response));
         }
         const data = await response.json();
         
@@ -265,23 +283,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       });
 
       if (!response.ok) {
-        let errorMsg = `HTTP error! Status: ${response.status}`;
-        try {
-          const errData = await response.json();
-          if (errData) {
-            const description = errData.errorDescription || errData.description;
-            const message = errData.errorMessage || errData.error?.message || errData.error;
-            
-            if (message && description) {
-              errorMsg = `${message} (${description})`;
-            } else if (message) {
-              errorMsg = message;
-            } else if (description) {
-              errorMsg = description;
-            }
-          }
-        } catch (_) {}
-        throw new Error(errorMsg);
+        throw new Error(await readErrorMessage(response));
       }
 
       const data = await response.json();
