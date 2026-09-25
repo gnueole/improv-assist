@@ -62,6 +62,26 @@ const readErrorMessage = async (response: Response): Promise<string> => {
   return `HTTP error! Status: ${response.status}`;
 };
 
+// Last draws, kept so the same proposition is not served twice in a row.
+const readHistory = (): string[] => {
+  try {
+    const stored = localStorage.getItem("improv_history");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch (e) {}
+  return [];
+};
+
+const rememberPick = (history: string[], text: string): void => {
+  history.push(text);
+  if (history.length > 10) {
+    history.shift();
+  }
+  localStorage.setItem("improv_history", JSON.stringify(history));
+};
+
 export function ImprovBufferProvider({ children }: { children: React.ReactNode }) {
   const { devMode, handleDevModeChange } = useDevMode();
   const { toastMessage, showToast, setToastMessage } = useToast();
@@ -232,14 +252,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
     }
 
     if (filteredQueue.length > 0) {
-      let history: string[] = [];
-      try {
-        const storedHistory = localStorage.getItem("improv_history");
-        if (storedHistory) {
-          history = JSON.parse(storedHistory);
-          if (!Array.isArray(history)) history = [];
-        }
-      } catch (e) {}
+      const history = readHistory();
 
       // Try to find options not in the history of last 10 draws
       let availableOptions = filteredQueue.filter((item: any) => !history.includes(item.text));
@@ -250,12 +263,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       const randomIndex = Math.floor(Math.random() * availableOptions.length);
       const picked = availableOptions[randomIndex];
 
-      // Add to history
-      history.push(picked.text);
-      if (history.length > 10) {
-        history.shift();
-      }
-      localStorage.setItem("improv_history", JSON.stringify(history));
+      rememberPick(history, picked.text);
 
       const updatedQueue = queue.filter((item: any) => item.text !== picked.text);
       const updatedBuffer = {
@@ -266,6 +274,39 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       setBuffer(updatedBuffer);
       localStorage.setItem("improv_buffer", JSON.stringify(updatedBuffer));
       return picked;
+    }
+
+    // The shipped pool is free and the browser revalidates it on its own, so refill
+    // from it before paying for a generation. n8n is only worth its tokens once this
+    // holds nothing that has not just been drawn.
+    try {
+      const poolResponse = await fetch("/data/reservoir-config.json");
+      if (poolResponse.ok) {
+        const poolBuffer = buildBufferFromData(await poolResponse.json());
+        const poolQueue = (poolBuffer[category as keyof ImprovBuffer] || []) as any[];
+        const candidates = (filter && filter !== "All")
+          ? poolQueue.filter((item: any) => item.category === filter || item.era === filter)
+          : poolQueue;
+
+        const history = readHistory();
+        const unseen = candidates.filter((item: any) => !history.includes(item.text));
+
+        if (unseen.length > 0) {
+          const picked = unseen[Math.floor(Math.random() * unseen.length)];
+          rememberPick(history, picked.text);
+
+          const refilledBuffer = {
+            ...currentBuffer,
+            [category]: poolQueue.filter((item: any) => item.text !== picked.text)
+          };
+          setBuffer(refilledBuffer);
+          localStorage.setItem("improv_buffer", JSON.stringify(refilledBuffer));
+          showToast(`Réservoir rechargé depuis le pool local pour ${category}.`);
+          return picked;
+        }
+      }
+    } catch (e) {
+      console.error("[Local pool] Refill failed, falling back to n8n", e);
     }
 
     setIsLoading(true);
@@ -298,20 +339,7 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       const picked = categoryQueue[0];
 
       // Add to history
-      let history: string[] = [];
-      try {
-        const storedHistory = localStorage.getItem("improv_history");
-        if (storedHistory) {
-          history = JSON.parse(storedHistory);
-          if (!Array.isArray(history)) history = [];
-        }
-      } catch (e) {}
-
-      history.push(picked.text);
-      if (history.length > 10) {
-        history.shift();
-      }
-      localStorage.setItem("improv_history", JSON.stringify(history));
+      rememberPick(readHistory(), picked.text);
       
       // Remove the picked item from the queue
       const remainingNewItems = categoryQueue.slice(1);

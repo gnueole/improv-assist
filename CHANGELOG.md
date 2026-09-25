@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.13.0] - 2026-09-26
+
+### Added
+
+- **An empty category refills from the shipped pool before n8n is called.**
+  `pickItem` went straight to `/api/improv-regen` — a Gemini generation, 11-19s
+  and billed — whenever a category ran dry, while `public/data/reservoir-config.json`
+  sat one static request away, free and revalidated by the browser on its own.
+  It is now tried first, and n8n is reached only when that pool holds nothing
+  outside the last ten draws. For the six categories `buildBufferFromData` backs
+  with static datasets, the paid path becomes unreachable in practice.
+
+### Changed
+
+- `readHistory` and `rememberPick` replace the three inline copies of the draw
+  history read/write inside `pickItem`.
+
+---
+
 ## [0.12.1] - 2026-09-25
 
 ### Fixed
