@@ -12,6 +12,9 @@ on:
   push:
     branches:
       - main
+  # The pool refresh pushes with GITHUB_TOKEN, which triggers no workflow: it starts
+  # this one itself, so the regenerated pool actually reaches an image.
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io

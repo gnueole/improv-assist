@@ -1,0 +1,72 @@
+# ==============================================================================
+# 🎲 SCHEDULED WORKFLOW: REFRESH THE THEME POOL
+# ==============================================================================
+# Trigger    : Every Saturday at 06:00 UTC, or on demand
+# Objective  : Regenerate public/data/reservoir-config.json through the app's own
+#              /api/improv-regen route and commit it, so a single generation per
+#              week serves every client for free and no user pays for one.
+# ==============================================================================
+
+name: "🎲 Scheduled - Refresh the theme pool"
+
+on:
+  schedule:
+    - cron: "0 6 * * 6" # Saturday, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write # required by the last step, which starts the image build itself
+
+concurrency:
+  group: refresh-pool
+  cancel-in-progress: false
+
+jobs:
+  refresh-pool:
+    name: 🔄 Regenerate & commit the pool
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: ⬇️ Checkout source code
+        uses: actions/checkout@v4
+        with:
+          ref: main # the pool belongs to main, whichever branch dispatched the run
+
+      - name: 🟩 Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: 🎲 Regenerate the pool, one category at a time
+        run: node toolkit/refresh-pool.mjs
+
+      - name: 🔍 Check whether the pool actually moved
+        id: pool
+        run: |
+          if git diff --quiet -- public/data/reservoir-config.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "The generation returned what is already shipped — nothing to commit."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git --no-pager diff --stat -- public/data/reservoir-config.json
+          fi
+
+      - name: 📝 Commit the new pool
+        if: steps.pool.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/reservoir-config.json
+          git commit -m "chore(pool): refresh the theme pool ($(date -u +%Y-%m-%d))"
+          git push
+
+      - name: 🏗️ Start the image build
+        # A push made with GITHUB_TOKEN does not trigger other workflows, so the build
+        # that publishes :latest has to be asked for explicitly — otherwise the new
+        # pool would sit on main and never reach an image, nor a deployment.
+        if: steps.pool.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run build-image.yml --ref main

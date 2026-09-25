@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.14.0] - 2026-09-26
+
+### Added
+
+- **The theme pool refreshes itself every Saturday at 06:00 UTC.**
+  `.github/workflows/refresh-pool.yml` runs `toolkit/refresh-pool.mjs`, which asks
+  the app's own `/api/improv-regen` route for one category at a time and commits
+  `public/data/reservoir-config.json`. One generation a week now serves every
+  client, where each user used to pay for their own. Going through the route rather
+  than the n8n webhook means no token secret in CI and no second copy of the
+  `master.prompt` assembly — at the cost of pacing the loop 25s apart, since that
+  route rate-limits to 3 requests per minute.
+
+  A category that comes back empty, truncated below half its current size, or in
+  error keeps the items already shipped, so a partial failure degrades to "some
+  categories unchanged" instead of a wiped pool. `make refresh-pool` runs it by
+  hand, and `POOL_CATEGORIES=animals,objects` restricts it.
+
+  The new pool reaches production at the next `make deploy`, which is soon enough
+  for a list of themes.
+
+### Changed
+
+- `build-image.yml` accepts `workflow_dispatch`. A push made with `GITHUB_TOKEN`
+  triggers no workflow, so the refresh starts the build itself — otherwise the
+  regenerated pool would sit on `main` and never reach an image.
+
+---
+
 ## [0.13.0] - 2026-09-26
 
 ### Added

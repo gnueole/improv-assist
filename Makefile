@@ -52,7 +52,7 @@ DOCKER_DIR   := docker
 COMPOSE_DEV  := $(DOCKER_DIR)/docker-compose.yml
 COMPOSE_PROD := $(DOCKER_DIR)/docker-compose.prod.yml
 
-.PHONY: help dev-up dev-down up down restart deploy deploy-delay checklogs check-build check-build-full sync-n8n-token
+.PHONY: help dev-up dev-down up down restart deploy deploy-delay checklogs check-build check-build-full sync-n8n-token refresh-pool
 
 # ==============================================================================
 # ℹ️ HELP MENU
@@ -72,6 +72,7 @@ help:
 	@printf "    $(STYLE_INSTRUCTION)make deploy-delay$(RESET)         $(STYLE_DISCREET)•$(RESET) Wait 150s for GitHub Actions and then deploy\n"
 	@printf "    $(STYLE_INSTRUCTION)make checklogs$(RESET)            $(STYLE_DISCREET)•$(RESET) Fetch real-time production logs from VPS\n"
 	@printf "    $(STYLE_INSTRUCTION)make check-build$(RESET)          $(STYLE_DISCREET)•$(RESET) Query GitHub Actions build status\n"
+	@printf "    $(STYLE_INSTRUCTION)make refresh-pool$(RESET)         $(STYLE_DISCREET)•$(RESET) Regenerate public/data/reservoir-config.json (weekly in CI)\n"
 	@printf "    $(STYLE_INSTRUCTION)make check-build-full$(RESET)     $(STYLE_DISCREET)•$(RESET) Display verbose details of the latest GitHub Actions run\n"
 	@printf "  $(STYLE_DISCREET)────────────────────────────────────────────────────────────$(RESET)\n"
 
@@ -184,6 +185,9 @@ checklogs:
 deploy-delay:
 	@echo "⏳ Waiting 150 seconds for GitHub Actions build to complete..."
 	git push && sleep 150 && "$(MAKE)" deploy
+
+refresh-pool:
+	@node toolkit/refresh-pool.mjs
 
 check-build:
 	@python3 toolkit/check_build.py
