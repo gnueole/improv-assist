@@ -19,6 +19,23 @@ const MAX_REQUESTS = 3; // Max 3 requests per minute
 // Upper bound for the n8n round-trip, matching the 1-2 minutes the UI announces
 const REGEN_TIMEOUT_MS = 120 * 1000;
 
+// Items the caller already holds. They are handed to the model so a refresh renews
+// the pool instead of converging on the same answer: at temperature 0.2 with an
+// identical prompt, four categories out of ten came back item-for-item identical
+// across two runs. The block is in French, like the prompt it joins.
+const MAX_AVOID = 500;
+
+function buildAvoidBlock(avoid: string[]): string {
+  if (avoid.length === 0) {
+    return "";
+  }
+  return [
+    "# À NE PAS PROPOSER",
+    "Les éléments suivants sont déjà dans le réservoir. N'en propose aucun, ni une variante proche (même idée reformulée, même personnage, même lieu, même jeu de mots) :",
+    ...avoid.map((text) => `- ${text}`)
+  ].join("\n");
+}
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const limitData = rateLimitMap.get(ip);
@@ -34,7 +51,7 @@ function isRateLimited(ip: string): boolean {
 }
 
 // Parses the master.prompt file dynamically depending on the requested category and count
-function parsePrompt(category?: string, count: number = 350): string {
+function parsePrompt(category?: string, count: number = 350, avoid: string[] = []): string {
   const filePath = path.join(process.cwd(), "n8n", "prompts", "master.prompt");
   if (!fs.existsSync(filePath)) {
     throw new Error(`Prompt file not found at: ${filePath}`);
@@ -82,9 +99,11 @@ function parsePrompt(category?: string, count: number = 350): string {
     sectionsStr[name] = val.join("\n").trim();
   }
   
+  const avoidBlock = buildAvoidBlock(avoid);
+
   if (category && sectionsStr[category]) {
     const secContent = sectionsStr[category].replace("{{count}}", count.toString());
-    return `${basePrompt}\n\n${secContent}\n\n${footerPrompt}`;
+    return [basePrompt, secContent, avoidBlock, footerPrompt].filter(Boolean).join("\n\n");
   } else {
     const allSections = ["scenarios", "categories", "themes", "echauffements", "emotions", "locations", "eras", "characters", "animals", "objects"];
     const allSectionsContent = allSections.map((secName) => {
@@ -92,7 +111,7 @@ function parsePrompt(category?: string, count: number = 350): string {
       const itemsCount = Math.floor(count / allSections.length) || 50;
       return secBody.replace("{{count}}", itemsCount.toString());
     });
-    return `${basePrompt}\n\n${allSectionsContent.join("\n\n")}\n\n${footerPrompt}`;
+    return [basePrompt, allSectionsContent.join("\n\n"), avoidBlock, footerPrompt].filter(Boolean).join("\n\n");
   }
 }
 
@@ -122,10 +141,17 @@ export async function POST(request: Request) {
     
     const count = body.count || (category ? 50 : 400);
     
+    const avoid: string[] = Array.isArray(body.avoid)
+      ? body.avoid
+          .filter((text: any) => typeof text === "string" && text.trim().length > 0)
+          .map((text: string) => text.trim())
+          .slice(0, MAX_AVOID)
+      : [];
+
     // Parse system prompt dynamically from master.prompt
     let systemPrompt: string;
     try {
-      systemPrompt = parsePrompt(category, count);
+      systemPrompt = parsePrompt(category, count, avoid);
     } catch (e: any) {
       console.error("[Improv Regen Prompt Parse Error]:", e);
       return NextResponse.json({ error: e.message || "Failed to parse prompt template" }, { status: 500 });

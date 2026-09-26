@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.15.0] - 2026-09-26
+
+### Fixed
+
+- **The weekly refresh regenerated a quarter of the pool.** Two runs of
+  `refresh-pool.mjs` left 317 of 420 items exactly as they were before the job
+  existed: `scenarios`, `categories`, `echauffements` and `characters` came back
+  item-for-item identical both times, and `emotions`, `locations` and `animals`
+  merely alternated between two stable lists. With `temperature: 0.2` and a prompt
+  that never varies, the model returns its mode.
+
+  `/api/improv-regen` now accepts an `avoid` array (up to 500 strings), which
+  `parsePrompt` renders as a "do not propose these, nor a close variant" block
+  inserted before the footer — the footer demands raw JSON and has to stay last.
+  The refresh sends the category's current items, so each run is asked for
+  something it does not already have.
+
+### Added
+
+- The refresh log prints a novelty count per category (`✔ themes: 50 -> 50
+  (48 new)`). The mechanism working was not the same as the mechanism being
+  useful, and only one of the two was visible before.
+
+---
+
 ## [0.14.0] - 2026-09-26
 
 ### Added

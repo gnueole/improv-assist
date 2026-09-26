@@ -22,11 +22,13 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const isUsable = (item) => item && typeof item.text === "string" && item.text.trim().length > 0;
 
-async function requestCategory(category, count) {
+async function requestCategory(category, count, avoid) {
   const response = await fetch(ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ category, count, platform: "ci" }),
+    // Without `avoid`, the model converges on the same answer week after week:
+    // the first two runs reproduced four categories out of ten item-for-item.
+    body: JSON.stringify({ category, count, platform: "ci", avoid }),
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS)
   });
 
@@ -68,15 +70,20 @@ for (const [index, category] of categories.entries()) {
     await sleep(PACING_MS);
   }
 
+  const known = new Set(previous.map((item) => item.text));
+
   try {
-    const fresh = await requestCategory(category, target);
+    const fresh = await requestCategory(category, target, [...known]);
     if (fresh.length < floor) {
       report.push(`~ ${category}: kept ${previous.length} (only ${fresh.length} returned, ${floor} needed)`);
       continue;
     }
     pool[category] = fresh;
     refreshed += 1;
-    report.push(`✔ ${category}: ${previous.length} -> ${fresh.length}`);
+    // The novelty count is the only thing that says whether the refresh was worth
+    // its tokens, so it belongs in the log rather than in someone's assumption.
+    const novel = fresh.filter((item) => !known.has(item.text)).length;
+    report.push(`✔ ${category}: ${previous.length} -> ${fresh.length} (${novel} new)`);
   } catch (error) {
     report.push(`✘ ${category}: kept ${previous.length} (${error.message})`);
   }
