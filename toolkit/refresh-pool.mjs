@@ -13,8 +13,14 @@ import path from "node:path";
 
 const POOL_FILE = path.join(process.cwd(), "public", "data", "reservoir-config.json");
 const ENDPOINT = process.env.POOL_ENDPOINT || "https://impro.eole.me/api/improv-regen";
-// The route rate-limits to 3 requests per minute and per IP, so the caller paces itself.
-const PACING_MS = Number(process.env.POOL_PACING_MS || 25000);
+// The route rate-limits to 3 requests per minute and per IP, and Gemini's own free
+// tier rejects a call outright once two or three have gone through 25s apart, so the
+// caller waits a full minute between them.
+const PACING_MS = Number(process.env.POOL_PACING_MS || 60000);
+// Three categories a week, not ten: fewer calls stay under the quota, and a themes
+// reservoir does not need every category renewed weekly. The window advances with the
+// week number, so each category comes round every few weeks with no cursor to store.
+const BATCH_SIZE = Number(process.env.POOL_BATCH_SIZE || 3);
 // The route gives up on n8n at 120s; leave it the room to answer that with a 504.
 const REQUEST_TIMEOUT_MS = 150000;
 
@@ -54,11 +60,22 @@ async function requestCategory(category, count, avoid) {
 const only = (process.env.POOL_CATEGORIES || "").split(",").map((name) => name.trim()).filter(Boolean);
 
 const pool = JSON.parse(fs.readFileSync(POOL_FILE, "utf-8"));
-const categories = Object.keys(pool)
-  .filter((key) => Array.isArray(pool[key]))
-  .filter((key) => only.length === 0 || only.includes(key));
+const available = Object.keys(pool).filter((key) => Array.isArray(pool[key]));
+
+const week = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+const rotating = [];
+for (let i = 0; i < Math.min(BATCH_SIZE, available.length); i += 1) {
+  const candidate = available[(week * BATCH_SIZE + i) % available.length];
+  if (!rotating.includes(candidate)) {
+    rotating.push(candidate);
+  }
+}
+
+const categories = only.length > 0 ? available.filter((key) => only.includes(key)) : rotating;
 const report = [];
 let refreshed = 0;
+
+console.log(`Refreshing ${categories.length} categor${categories.length === 1 ? "y" : "ies"}: ${categories.join(", ")}`);
 
 for (const [index, category] of categories.entries()) {
   const previous = pool[category];
@@ -78,11 +95,18 @@ for (const [index, category] of categories.entries()) {
       report.push(`~ ${category}: kept ${previous.length} (only ${fresh.length} returned, ${floor} needed)`);
       continue;
     }
+    // Not one new item means the n8n workflow answered with the fallback reservoir
+    // hardcoded in its `Check Error and Mock` node — it does that on any model
+    // failure, with HTTP 200, and 46% of calls hit it. Writing that into the repo
+    // would replace real generated content with canned data, which is how seven of
+    // the ten categories came to be identical to the mock.
+    const novel = fresh.filter((item) => !known.has(item.text)).length;
+    if (novel === 0) {
+      report.push(`~ ${category}: kept ${previous.length} (nothing new — the workflow served its fallback)`);
+      continue;
+    }
     pool[category] = fresh;
     refreshed += 1;
-    // The novelty count is the only thing that says whether the refresh was worth
-    // its tokens, so it belongs in the log rather than in someone's assumption.
-    const novel = fresh.filter((item) => !known.has(item.text)).length;
     report.push(`✔ ${category}: ${previous.length} -> ${fresh.length} (${novel} new)`);
   } catch (error) {
     report.push(`✘ ${category}: kept ${previous.length} (${error.message})`);

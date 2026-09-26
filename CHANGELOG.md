@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.16.0] - 2026-09-26
+
+### Fixed
+
+- **The weekly refresh was writing the fallback reservoir into the repository.**
+  The n8n workflow answers `200` with the mock hardcoded in its `Check Error and
+  Mock` node whenever the model fails, and over 39 runs it did so **18 times
+  (46%)** — an empty model item, sometimes refused in 400ms, sometimes after 30s.
+  The body is complete and well-shaped, so nothing downstream could tell. That is
+  why seven of the ten categories in the shipped pool are identical, item for item,
+  to that mock, and why the first scheduled run *degraded* `emotions`, `locations`
+  and `animals`, which held real content the day before.
+
+  A response carrying no new item is now a failure: the shipped items are kept, and
+  a run where nothing came back usable exits non-zero so the job fails visibly
+  instead of committing canned data. This also explains why 0.15.0's `avoid` block
+  changed nothing on those calls — the model never saw it, it never answered.
+
+### Changed
+
+- **Three categories per run instead of ten**, on a window that advances with the
+  week number, so each comes round in ten weeks. Ten consecutive calls exhausted
+  the free tier; three do not. `POOL_BATCH_SIZE` overrides it.
+- **Sixty seconds between calls**, up from 25: at 25, Gemini refused outright once
+  two or three had gone through.
+
+---
+
 ## [0.15.0] - 2026-09-26
 
 ### Fixed
