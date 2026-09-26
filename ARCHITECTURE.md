@@ -84,7 +84,7 @@ Le projet est organisé selon une structure modulaire séparant les configuratio
 ## 🧠 Défis Techniques Résolus
 
 * **Gestion de la Réponse Vide sur Surcharge IA** : Lorsque le modèle Gemini dépasse ses quotas gratuits (erreur 429), le nœud LangChain n8n renvoyait un tableau vide `[]`, ce qui court-circuitait le reste du workflow et renvoyait un code HTTP `200` vide, cassant le parsing JSON du client. Résolu en paramétrant le nœud Gemini sur `continueErrorOutput` et en connectant son port d'erreur au nœud de secours JavaScript pour renvoyer le réservoir d'improvisation de secours.
-* **Contournement des limitations de Quotas (Rate Limiting)** : La génération de 50 suggestions par l'IA consomme beaucoup de requêtes. La logique client (`useImprovBuffer.ts`) a été conçue pour consommer en priorité le réservoir local persistant, et ne solliciter le webhook n8n en temps réel que pour un seul élément à la fois en cas de réservoir complètement vide, minimisant drastiquement l'usage de jetons.
+* **Contournement des limitations de Quotas (Rate Limiting)** : La génération de 50 suggestions par l'IA consomme beaucoup de requêtes. Le tirage suit donc une cascade à trois étages, implémentée dans `pickItem` ([ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx)) : le réservoir local persistant d'abord, puis le pool livré avec l'image (`/data/reservoir-config.json`, gratuit et revalidé par le navigateur), et le webhook n8n en dernier recours seulement, pour un seul élément à la fois. Depuis la 0.13.0, les six catégories que `buildBufferFromData` remplace par ses jeux statiques (`emotions`, `locations`, `eras`, `characters`, `animals`, `objects`) n'atteignent plus jamais le chemin payant.
 * **Hydratation React en PWA et LocalStorage** : Le chargement d'états depuis le `localStorage` du navigateur pendant la phase d'initialisation provoquait des avertissements de divergence d'hydratation (le rendu serveur de Next.js différant du stockage local du client). Ce défi a été résolu en externalisant et en isolant les lectures de stockage dans des hooks secondaires (`useDevMode`, `useToast`) et en différant l'hydratation du buffer principal dans un `useEffect` exécuté uniquement côté client.
 
 ---
@@ -109,7 +109,7 @@ Pour sécuriser les clés d'intégration, contourner les restrictions de CORS et
 
 1. **`/api/constraints`** : Lit et sert le fichier de cache statique `notionConstraints.json` compilé localement.
 2. **`/api/feedback`** : Transmet les formulaires de retour utilisateur au webhook de n8n.
-3. **`/api/improv-regen`** : Transmet les demandes de génération de prompts en lot à l'automatisation n8n. Elle implémente une limite de temps stricte de 10 secondes (`AbortController`). En cas de dépassement, elle renvoie une réponse structurée de type 504 Gateway Timeout contenant `{ error: "Timeout issued (from Message a model)" }` que l'application client intercepte pour afficher un avertissement convivial.
+3. **`/api/improv-regen`** : Transmet les demandes de génération de prompts en lot à l'automatisation n8n. Elle accorde 120 secondes à la réponse (`REGEN_TIMEOUT_MS`, `AbortController`) : le nœud Gemini du workflow demande 11 à 19 secondes pour une seule catégorie, et jusqu'à ~90 secondes pour 400 items. En cas de dépassement, elle renvoie une réponse structurée de type 504 Gateway Timeout contenant `{ error: "Timeout issued (from Message a model)" }` que l'application client intercepte — via `readErrorMessage` — pour afficher un avertissement convivial.
 4. **Gestion du Routage Virtuel (PWA)** : Pour éviter les erreurs 404 lors du rafraîchissement d'un navigateur sur une tuile active (ex: `/emotions`, `/timer`), des règles de réécriture (*rewrites*) dynamiques sont définies dans `next.config.mjs`. Toutes les routes (à l'exception des ressources statiques, des API et des SVGs dynamiques comme `/favicon.svg`) sont redirigées de manière transparente à la racine (`/`) grâce à un motif de lookahead négatif : `/:path((?!_next|api|data|manifest\\.json|sw\\.js|favicon\\.svg|icon\\.svg).*$)`. Cela garantit que l'ajout ou la modification de tuiles sur le tableau de bord ne nécessite aucune mise à jour de configuration de routage.
 
 ---
@@ -134,7 +134,7 @@ L'intelligence métier et les enregistrements sont gérés par deux flux d'autom
   - **date** : Date d'exécution.
 * **Gestion d'Erreur & Timeouts** : 
   - **Limites de Temps** : Afin de s'adapter aux ~90 secondes requises par la complexité de `gemini-3.5-flash` pour générer 400 items de haute qualité, les limites de temps n8n (`executionTimeout`) ont été désactivées. 
-  - **Gestion des Timeouts** : La route API proxy `/api/improv-regen` côté client impose une limite de temps stricte de 10 secondes pour garantir la réactivité sur scène de la PWA (renvoyant une structure `{ error: "Timeout issued (from Message a model)" }` interceptée par l'application). En revanche, le script d'initialisation hors-ligne `populate_reservoir.py` utilise un timeout de 180 secondes pour permettre au modèle de terminer l'ensemble de son travail de génération.
+  - **Gestion des Timeouts** : La route API proxy `/api/improv-regen` accorde 120 secondes à n8n, de quoi couvrir une génération complète. Les 10 secondes appliquées jusqu'à la 0.12.1, choisies pour la réactivité sur scène, étaient plus courtes que la génération elle-même : le 24 septembre 2026, douze tentatives consécutives ont fini en 504 alors que les douze exécutions n8n correspondantes avaient **réussi** — le réservoir était généré, enregistré dans Notion, puis jeté au retour. Le script d'initialisation hors-ligne `populate_reservoir.py` utilise, lui, un timeout de 180 secondes.
   - **Interception des échecs** : En cas de panne générale ou de quota d'API dépassé, le flux bascule automatiquement vers un nœud de code JavaScript (`Check Error and Mock`) contenant un réservoir complet de données de secours (*mock data*).
 
 ---
@@ -147,9 +147,11 @@ L'application utilise deux types de fichiers de données persistés localement :
    ```bash
    node scripts/notion_fetch.js
    ```
-2. **`reservoir-config.json`** : Réservoir de prompts utilisé par les générateurs hors-ligne. Il peut être régénéré en interrogeant l'IA via le script Python en environnement de développement :
+2. **`reservoir-config.json`** : Réservoir de prompts utilisé par les générateurs hors-ligne. Il est régénéré automatiquement **chaque samedi à 06:00 UTC** par le workflow [refresh-pool.yml](file:///c:/Projects/eole.me/improv-assist/.github/workflows/refresh-pool.yml), qui interroge `/api/improv-regen` catégorie par catégorie (25 secondes d'écart, la route limitant à 3 requêtes par minute) et commite le résultat sur `main` : une génération par semaine sert tous les clients, là où chaque utilisateur payait la sienne. Une catégorie vide, tronquée sous la moitié de sa taille ou en erreur conserve les items déjà livrés. Le nouveau pool atteint la production au `make deploy` suivant.
    ```bash
-   wsl python3 scripts/populate_reservoir.py
+   make refresh-pool                                    # à la main, toutes les catégories
+   POOL_CATEGORIES=animals,objects make refresh-pool    # partiellement
+   wsl python3 scripts/populate_reservoir.py            # alternative hors-ligne historique
    ```
 
 ---

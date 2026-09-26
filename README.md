@@ -141,6 +141,8 @@ L'application est entièrement conteneurisée et gérée de manière simplifiée
 | `make deploy` | Récupère les secrets de production depuis Doppler, les transfère de manière sécurisée au VPS par SSH, puis déploie l'application |
 | `make deploy-delay` | Envoie les commits, attend 150 secondes pour laisser le temps à GitHub Actions de compiler, puis déploie avec les secrets Doppler |
 | `make checklogs` | Affiche les journaux de production du VPS en temps réel |
+| `make check-build` | Interroge GitHub Actions sur l'état du dernier build d'image |
+| `make refresh-pool` | Régénère `public/data/reservoir-config.json` (automatique chaque samedi 06:00 UTC en CI) |
 
 ### Résolution d'erreur 504 (Passerelle Traefik)
 Si le VPS renvoie une erreur *504 Gateway Timeout*, reconnectez le réseau de Traefik au conteneur de l'application :
