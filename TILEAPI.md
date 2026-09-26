@@ -1,67 +1,67 @@
-# Guide : Ajouter un nouvel outil (Micro-app Tile)
+# Guide: Adding a new tool (micro-app tile)
 
-Ce document décrit l'architecture et les étapes requises (la "pseudo API") pour ajouter une nouvelle tuile (micro-app) sur le tableau de bord de **Houba Houba!**.
-
----
-
-## Architecture Générale
-
-Le fonctionnement d'une tuile repose sur un modèle en 5 couches (séparation stricte de l'affichage et de la logique métier) :
-1. **Configuration / Métadonnées** : La déclaration de la tuile dans le tableau de bord.
-2. **Structure des Données (TypeScript & Cache)** : La définition du type de suggestion et l'initialisation du réservoir de repli (fallback).
-3. **État Global / Logique de Tampon** : La gestion du tirage sans doublons via le hook contextuel global.
-4. **Logique Métier Interne (Hook React Dédié)** : Un hook React personnalisé (`src/hooks/useMyNewTool.ts`) gérant l'état local, les paramètres de voix, de temps ou d'options spécifiques de la tuile.
-5. **Composant UI / Affichage (Display Component)** : Un composant d'affichage pur (`src/components/MyNewTool.tsx`) qui consomme le hook dédié pour restituer l'interface graphique.
-
+This document describes the architecture and the steps required — the "pseudo API" — to add a new tile (micro-app) to the **Houba Houba!** dashboard.
 
 ---
 
-## Étape 1 : Déclaration de la Tuile (Métadonnées)
+## General Architecture
 
-Toutes les tuiles sont configurées dans l'array `tiles` au sommet de [src/app/page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx).
+A tile rests on a five-layer model, keeping the display strictly apart from the business logic:
+1. **Configuration / metadata** : The tile's declaration in the dashboard.
+2. **Data structure (TypeScript & cache)** : The suggestion type, and the initialisation of the fallback reservoir.
+3. **Global state / buffer logic** : Repeat-free drawing, through the global context hook.
+4. **Internal business logic (dedicated React hook)** : A custom React hook (`src/hooks/useMyNewTool.ts`) holding the local state — voice, time, or whatever options are specific to the tile.
+5. **UI / display component** : A pure display component (`src/components/MyNewTool.tsx`) consuming the dedicated hook to render the interface.
 
-Pour ajouter une tuile, déclarez un nouvel objet respectant l'interface `Tile` ([src/types/index.ts](file:///c:/Projects/eole.me/improv-assist/src/types/index.ts)) :
+
+---
+
+## Step 1: Declaring the tile (metadata)
+
+Every tile is configured in the `tiles` array at the top of [src/app/page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx).
+
+To add one, declare a new object matching the `Tile` interface ([src/types/index.ts](file:///c:/Projects/eole.me/improv-assist/src/types/index.ts)):
 
 ```typescript
 {
-  id: "my_new_tool",                  // ID unique de la tuile
-  title: "Titre du Générateur",       // Affiché en grand sur la tuile et en en-tête
-  subtitle: "Description courte",     // Description rapide affichée sous le titre
-  icon: Sparkles,                     // Icône Lucide importée au début du fichier
-  color: "from-purple-500 to-cyan-400", // Couleurs du dégradé (classes Tailwind)
-  menu: "inspiration",                // Dossier parent optionnel ("incarnate", "inspiration", "warmup")
-  keywords: ["mot1", "mot2"],         // Mots-clés pour la barre de recherche Spotlight
-  helpDescription: <span>Description détaillée avec du formattage <strong>JSX</strong>.</span>
+  id: "my_new_tool",                  // Unique tile ID
+  title: "Generator title",           // Shown large on the tile, and as the header
+  subtitle: "Short description",      // Quick description under the title
+  icon: Sparkles,                     // Lucide icon, imported at the top of the file
+  color: "from-purple-500 to-cyan-400", // Gradient colours (Tailwind classes)
+  menu: "inspiration",                // Optional parent folder ("incarnate", "inspiration", "warmup")
+  keywords: ["word1", "word2"],       // Keywords for the Spotlight search bar
+  helpDescription: <span>Detailed description, with <strong>JSX</strong> formatting.</span>
 }
 ```
 
 > [!TIP]
-> Grâce à la propriété `helpDescription`, la documentation d'aide de l'outil est **générée automatiquement** à la fin du guide d'aide de l'application (`DocsView.tsx`). Plus besoin de modifier manuellement la documentation !
+> Thanks to the `helpDescription` property, the tool's help documentation is **generated automatically** at the end of the application's help guide (`DocsView.tsx`). No manual documentation edit needed.
 
 ---
 
-## Étape 2 : Déclaration et Initialisation des Données
+## Step 2: Declaring and initialising the data
 
-Si votre outil tire des idées ou suggestions au sort depuis le réservoir IA :
+If your tool draws ideas or suggestions from the AI reservoir:
 
-1. **Définir l'interface de suggestion** dans [src/types/index.ts](file:///c:/Projects/eole.me/improv-assist/src/types/index.ts) :
+1. **Define the suggestion interface** in [src/types/index.ts](file:///c:/Projects/eole.me/improv-assist/src/types/index.ts):
    ```typescript
    export interface MyNewSuggestion {
      text: string;
      category?: string;
    }
    ```
-2. **Ajouter la catégorie au tampon local `ImprovBuffer`** (toujours dans `index.ts`) :
+2. **Add the category to the local `ImprovBuffer`** (still in `index.ts`):
    ```typescript
    export interface ImprovBuffer {
-     // ... existants
+     // ... existing ones
      my_new_tool: MyNewSuggestion[];
    }
    ```
-3. **Fournir les valeurs de repli (Fallback Mock Data)** :
-   - Ajoutez une liste par défaut dans [src/data/mockData.ts](file:///c:/Projects/eole.me/improv-assist/src/data/mockData.ts) (ex: `MY_NEW_FALLBACKS`).
-   - Ajoutez le tableau initialisé dans le fichier de configuration local [public/data/reservoir-config.json](file:///c:/Projects/eole.me/improv-assist/public/data/reservoir-config.json) sous la clé `my_new_tool`.
-4. **Mettre à jour le tampon vide de sécurité** dans [src/utils/bufferUtils.ts](file:///c:/Projects/eole.me/improv-assist/src/utils/bufferUtils.ts) dans la constante `EMPTY_BUFFER` et les fonctions d'assainissement / validation :
+3. **Provide the fallback mock data**:
+   - Add a default list in [src/data/mockData.ts](file:///c:/Projects/eole.me/improv-assist/src/data/mockData.ts) (e.g. `MY_NEW_FALLBACKS`).
+   - Add the initialised array to the local configuration file [public/data/reservoir-config.json](file:///c:/Projects/eole.me/improv-assist/public/data/reservoir-config.json), under the `my_new_tool` key.
+4. **Update the safety empty buffer** in [src/utils/bufferUtils.ts](file:///c:/Projects/eole.me/improv-assist/src/utils/bufferUtils.ts), in the `EMPTY_BUFFER` constant and in the sanitising / validation functions:
    ```typescript
    export const EMPTY_BUFFER: ImprovBuffer = {
      // ...
@@ -72,69 +72,69 @@ Si votre outil tire des idées ou suggestions au sort depuis le réservoir IA :
 
 ---
 
-## Étape 3 : Logique de Tirage et Synchronisation Contextuelle
+## Step 3: Draw logic and context synchronisation
 
-Pour que le bouton de tirage pioche dans le réservoir local et évite les répétitions (historique des 10 derniers tirages) :
+So that the draw button picks from the local reservoir and avoids repeats (the last ten draws are remembered):
 
-1. **Enregistrer la catégorie** dans le hook contextuel principal [src/context/ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx) :
+1. **Register the category** in the main context hook [src/context/ImprovBufferContext.tsx](file:///c:/Projects/eole.me/improv-assist/src/context/ImprovBufferContext.tsx):
    ```typescript
    const CATEGORIES = [
-     // ... existants
+     // ... existing ones
      "my_new_tool"
    ];
    ```
-2. La méthode `pickItem` du hook `useImprovBuffer` se chargera automatiquement d'extraire la suggestion, de la retirer du réservoir courant pour éviter les doublons, et de gérer l'historique de rotation locale.
+2. The `pickItem` method of the `useImprovBuffer` hook then takes care of pulling the suggestion, removing it from the current reservoir to avoid duplicates, and maintaining the local rotation history.
 
 ---
 
-## Étape 4 : Créer la Logique (Hook) et le Composant UI (Affichage)
+## Step 4: Writing the logic (hook) and the UI component (display)
 
-Pour respecter la séparation de l'affichage et du fonctionnel, chaque tuile doit avoir sa logique isolée dans un hook personnalisé dédié, rendant le composant UI le plus simple et déclaratif possible.
+To keep display and behaviour apart, each tile must isolate its logic in a dedicated custom hook, leaving the UI component as simple and declarative as possible.
 
-1. **Créer le hook de logique métier** dans `src/hooks/useMyNewTool.ts` :
-   - Ce hook doit encapsuler tout l'état de la tuile (ex: états d'options, sélections, lecture de synthèse vocale, etc.) et retourner les fonctions et variables nécessaires à l'affichage.
-   - Exemple :
+1. **Create the business logic hook** in `src/hooks/useMyNewTool.ts`:
+   - It should hold all of the tile's state (option state, selections, speech synthesis playback, and so on) and return the functions and variables the display needs.
+   - Example:
      ```typescript
      import { useState, useCallback } from "react";
-     import { useImprovBuffer } from "@/hooks/useImprovBuffer"; // Hook global de gestion du tampon
-     
+     import { useImprovBuffer } from "@/hooks/useImprovBuffer"; // Global buffer hook
+
      export function useMyNewTool() {
        const { pickItem } = useImprovBuffer();
        const [item, setItem] = useState<any>(null);
        const [loading, setLoading] = useState(false);
-       
+
        const draw = useCallback(async () => {
          setLoading(true);
          const res = await pickItem("my_new_tool");
          setItem(res);
          setLoading(false);
        }, [pickItem]);
-       
+
        return { item, loading, draw };
      }
      ```
 
-2. **Créer le composant d'affichage** dans `src/components/MyNewGenerator.tsx` :
-   - Ce composant doit importer le hook personnalisé et s'en servir pour l'affichage, sans gérer d'état complexe directement en son sein.
-   - Exemple :
+2. **Create the display component** in `src/components/MyNewGenerator.tsx`:
+   - It should import the custom hook and use it to render, without holding complex state of its own.
+   - Example:
      ```tsx
      import React from "react";
      import { useMyNewTool } from "@/hooks/useMyNewTool";
-     
+
      export function MyNewGenerator() {
        const { item, loading, draw } = useMyNewTool();
-       
+
        return (
          <div className="p-6 bg-slate-900 rounded-xl">
-           <h2 className="text-xl font-bold">Nouveau Générateur</h2>
-           <button onClick={draw} disabled={loading}>Tirer</button>
+           <h2 className="text-xl font-bold">New generator</h2>
+           <button onClick={draw} disabled={loading}>Draw</button>
            {item && <p>{item.text}</p>}
          </div>
        );
      }
      ```
 
-3. **Importer et monter le composant** dans la fonction `renderActiveComponent()` de [src/app/page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx) :
+3. **Import and mount the component** in the `renderActiveComponent()` function of [src/app/page.tsx](file:///c:/Projects/eole.me/improv-assist/src/app/page.tsx):
    ```tsx
    case "my_new_tool":
      return <MyNewGenerator />;
@@ -143,13 +143,14 @@ Pour respecter la séparation de l'affichage et du fonctionnel, chaque tuile doi
 
 ---
 
-## Étape 5 : Support de la Régénération par l'IA (Gemini via n8n)
+## Step 5: Supporting AI regeneration (Gemini through n8n)
 
-Pour que l'outil puisse être rechargé avec des suggestions fraîches générées par l'IA :
+So the tool can be refilled with fresh AI-generated suggestions:
 
-1. **Modifier l'API de proxy Next.js** dans [src/app/api/improv-regen/route.ts](file:///c:/Projects/eole.me/improv-assist/src/app/api/improv-regen/route.ts) :
-   - Ajoutez le nom de votre catégorie dans la liste des catégories acceptées pour le rechargement ciblé.
-2. **Mettre à jour le script d'alimentation local** [scripts/populate_reservoir.py](file:///c:/Projects/eole.me/improv-assist/scripts/populate_reservoir.py) :
-   - Ajoutez la clé dans la configuration python de rechargement en local.
-3. **Mettre à jour le Prompt de l'IA** dans [n8n/prompts/master.prompt](file:///c:/Projects/eole.me/improv-assist/n8n/prompts/master.prompt) :
-   - Déclarez une nouvelle section `# SECTION my_new_tool` avec des exemples pour apprendre à Gemini à générer des lignes au bon format.
+1. **Edit the Next.js proxy API** in [src/app/api/improv-regen/route.ts](file:///c:/Projects/eole.me/improv-assist/src/app/api/improv-regen/route.ts):
+   - Add your category name to the list of categories accepted for a targeted refill.
+2. **Update the local population script** [scripts/populate_reservoir.py](file:///c:/Projects/eole.me/improv-assist/scripts/populate_reservoir.py):
+   - Add the key to the Python refill configuration.
+3. **Update the AI prompt** in [n8n/prompts/master.prompt](file:///c:/Projects/eole.me/improv-assist/n8n/prompts/master.prompt):
+   - Declare a new `# SECTION my_new_tool` section, with examples that teach Gemini to generate rows in the right shape.
+   - The section name has to match the category key exactly: that is what `parsePrompt` looks up, and what the weekly refresh passes as `category`.
