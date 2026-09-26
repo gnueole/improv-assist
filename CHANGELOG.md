@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.17.0] - 2026-09-26
+
+### Added
+
+- **The fallback reservoir now says what it is.** The `Check Error and Mock` node
+  of the n8n workflow stamps `"fallback": true` on the canned data it serves when
+  the model fails — which it did on 46% of runs, with HTTP 200 and a perfectly
+  well-formed body. `refresh-pool.mjs` refuses such a response outright instead of
+  inferring it from a novelty count, and the PWA says "réservoir de secours servi"
+  rather than announcing a successful regeneration.
+
+- **`pool_refill` and `regen_fallback` events.** The free refill path added in
+  0.13.0 emitted nothing, so the token saving was only visible as an absence of
+  requests in the access logs. Both events go through `sendTelemetry`
+  (`src/utils/telemetry.ts`), a single entry point carrying the dev and opt-out
+  guards that `page.tsx` used to inline.
+
+### Fixed
+
+- **The regen telemetry reached Axiom under the wrong names.** The workflow sent
+  `application: "reservoir_idees"`, `action` and `environment: "production"`, so
+  HoubaHouba appeared as two applications and no query on `application` ever saw
+  the whole of it. It now sends `improv`, `event_type` and `prod`. The repository
+  copy had been correct since `ba0472e` — that commit was simply never pushed to
+  the instance.
+
+---
+
 ## [0.16.0] - 2026-09-26
 
 ### Fixed

@@ -14,6 +14,7 @@ import { useDevMode } from "@/hooks/useDevMode";
 import { useToast } from "@/hooks/useToast";
 import { EMPTY_BUFFER, buildBufferFromData, isValidBuffer } from "@/utils/bufferUtils";
 import { trackWorkflowTrigger } from "@/utils/analytics";
+import { sendTelemetry } from "@/utils/telemetry";
 
 interface ImprovBufferContextType {
   buffer: ImprovBuffer;
@@ -166,6 +167,9 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
           if (saved) currentBuffer = JSON.parse(saved);
         } catch (e) {}
 
+        if (data && data.fallback === true) {
+          sendTelemetry({ event_type: "regen_fallback", category: category || "all" });
+        }
         const fetchedBuffer = buildBufferFromData(data);
         const mergedBuffer = { ...currentBuffer };
         
@@ -178,9 +182,12 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
         localStorage.setItem("improv_buffer", JSON.stringify(mergedBuffer));
         setN8nStatus("green");
         setN8nError(null);
-        showToast(category 
-          ? `Catégorie '${category}' régénérée avec succès !`
-          : "Réservoir régénéré avec succès depuis n8n !"
+        showToast(
+          data && data.fallback === true
+            ? "Réservoir de secours servi : la génération n'a pas abouti."
+            : category
+              ? `Catégorie '${category}' régénérée avec succès !`
+              : "Réservoir régénéré avec succès depuis n8n !"
         );
       } else {
         const response = await fetch("/data/reservoir-config.json");
@@ -301,6 +308,9 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
           };
           setBuffer(refilledBuffer);
           localStorage.setItem("improv_buffer", JSON.stringify(refilledBuffer));
+          // Without this event the saving is only visible as an absence of n8n
+          // calls in the access logs, which is not a measurement.
+          sendTelemetry({ event_type: "pool_refill", category, items: poolQueue.length });
           showToast(`Réservoir rechargé depuis le pool local pour ${category}.`);
           return picked;
         }
@@ -328,6 +338,9 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       }
 
       const data = await response.json();
+      if (data && data.fallback === true) {
+        sendTelemetry({ event_type: "regen_fallback", category });
+      }
       const fetchedBuffer = buildBufferFromData(data);
       const categoryQueue = (fetchedBuffer[category as keyof ImprovBuffer] || []) as any[];
       
@@ -361,6 +374,9 @@ export function ImprovBufferProvider({ children }: { children: React.ReactNode }
       
       setN8nStatus("green");
       setN8nError(null);
+      if (data && data.fallback === true) {
+        showToast("Réservoir de secours servi : la génération n'a pas abouti.");
+      }
       return picked;
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error);

@@ -43,6 +43,11 @@ async function requestCategory(category, count, avoid) {
   }
 
   const data = await response.json();
+  // Since 0.17.0 the workflow labels its own fallback reservoir, so this no longer
+  // rests on the novelty heuristic below.
+  if (data && data.fallback === true) {
+    throw new Error("the workflow answered with its fallback reservoir");
+  }
   const fresh = data?.[category];
   if (!Array.isArray(fresh)) {
     throw new Error(`the response carries no "${category}" array`);
