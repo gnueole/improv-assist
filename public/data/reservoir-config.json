@@ -455,204 +455,204 @@
   ],
   "themes": [
     {
-      "text": "Le vol de l'oiseau en carton",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le secret chuchoté par la chaussette",
-      "category": "Drôle"
-    },
-    {
-      "text": "La vengeance du canard en plastique",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le murmure des étoiles oubliées",
-      "category": "Poétique"
-    },
-    {
-      "text": "L'odeur de la pluie sur le béton chaud",
-      "category": "Poétique"
-    },
-    {
-      "text": "La révolte des machines à café",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le dictionnaire des mots perdus",
-      "category": "Poétique"
-    },
-    {
-      "text": "Un chewing-gum sous la table de négociation",
-      "category": "Drôle"
-    },
-    {
-      "text": "La mélodie du vieux radiateur",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le syndicat des super-héros fatigués",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le gardien des ombres perdues",
-      "category": "Poétique"
-    },
-    {
-      "text": "La complainte du grille-pain",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le dernier voyage d'un flocon de neige",
-      "category": "Poétique"
-    },
-    {
-      "text": "Une valse avec un balai",
+      "text": "Le testament caché",
       "category": "Libre"
     },
     {
-      "text": "Le mystère du slip manquant",
-      "category": "Drôle"
-    },
-    {
-      "text": "L'arbre qui parlait aux nuages",
+      "text": "Dernier train pour Paris",
       "category": "Poétique"
     },
     {
-      "text": "Une tempête dans un verre d'eau",
+      "text": "Un dîner trop calme",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le secret de famille",
       "category": "Libre"
     },
     {
-      "text": "L'art de ne rien faire du tout",
+      "text": "Retrouvailles sur le quai",
+      "category": "Poétique"
+    },
+    {
+      "text": "Mensonge de dernière minute",
+      "category": "Drôle"
+    },
+    {
+      "text": "La rupture au restaurant",
       "category": "Libre"
     },
     {
-      "text": "Le parfum du temps qui passe",
+      "text": "Sous la même pluie",
       "category": "Poétique"
     },
     {
-      "text": "Le blues du poisson rouge",
+      "text": "Erreur de destinataire",
       "category": "Drôle"
     },
     {
-      "text": "Une clé qui n'ouvre aucune porte",
+      "text": "Le pacte d'enfance",
       "category": "Libre"
     },
     {
-      "text": "La danse des poussières dans le soleil",
+      "text": "Un silence partagé",
       "category": "Poétique"
     },
     {
-      "text": "Le voleur de sourires",
+      "text": "Le voisin trop curieux",
+      "category": "Drôle"
+    },
+    {
+      "text": "La lettre jamais envoyée",
       "category": "Poétique"
     },
     {
-      "text": "L'invasion des nains de jardin",
-      "category": "Drôle"
+      "text": "Le grand saut",
+      "category": "Libre"
     },
     {
-      "text": "Un message dans une bouteille de ketchup",
-      "category": "Drôle"
+      "text": "Une alliance perdue",
+      "category": "Libre"
     },
     {
-      "text": "L'homme qui mesurait le vent",
+      "text": "Coup de foudre tardif",
       "category": "Poétique"
     },
     {
-      "text": "Le congrès mondial des chats de gouttière",
+      "text": "La panne d'ascenseur",
       "category": "Drôle"
     },
     {
-      "text": "Un escalier qui mène vers nulle part",
+      "text": "L'aveu inattendu",
+      "category": "Libre"
+    },
+    {
+      "text": "Le premier rendez-vous",
+      "category": "Drôle"
+    },
+    {
+      "text": "Regrets d'un soir",
+      "category": "Poétique"
+    },
+    {
+      "text": "La clé manquante",
+      "category": "Libre"
+    },
+    {
+      "text": "Un gâteau d'anniversaire raté",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le dernier adieu",
+      "category": "Poétique"
+    },
+    {
+      "text": "Changement de plan",
+      "category": "Libre"
+    },
+    {
+      "text": "Le témoin gênant",
+      "category": "Libre"
+    },
+    {
+      "text": "Une nuit blanche",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le quiproquo du siècle",
+      "category": "Drôle"
+    },
+    {
+      "text": "La trahison amicale",
+      "category": "Libre"
+    },
+    {
+      "text": "L'odeur du café chaud",
+      "category": "Poétique"
+    },
+    {
+      "text": "Un invité surprise",
+      "category": "Drôle"
+    },
+    {
+      "text": "La valise échangée",
+      "category": "Libre"
+    },
+    {
+      "text": "Le premier flocon",
+      "category": "Poétique"
+    },
+    {
+      "text": "Une facture salée",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le choix difficile",
+      "category": "Libre"
+    },
+    {
+      "text": "Le banc des amoureux",
+      "category": "Poétique"
+    },
+    {
+      "text": "Un mensonge d'enfant",
+      "category": "Libre"
+    },
+    {
+      "text": "Le colocataire idéal",
+      "category": "Drôle"
+    },
+    {
+      "text": "La promesse tenue",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le retour de l'ex",
+      "category": "Drôle"
+    },
+    {
+      "text": "Une vieille photo",
+      "category": "Libre"
+    },
+    {
+      "text": "Le souffle du vent",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le contrôle fiscal",
+      "category": "Drôle"
+    },
+    {
+      "text": "Un lourd secret",
+      "category": "Libre"
+    },
+    {
+      "text": "Le dernier vol",
+      "category": "Poétique"
+    },
+    {
+      "text": "La dispute pour rien",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le nouveau départ",
       "category": "Libre"
     },
     {
       "text": "L'ombre d'un doute",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le faux coupable",
       "category": "Libre"
     },
     {
-      "text": "Le secret du vieux phare abandonné",
+      "text": "Entretien d'embauche absurde",
+      "category": "Drôle"
+    },
+    {
+      "text": "Le phare dans la nuit",
       "category": "Poétique"
-    },
-    {
-      "text": "Une chaussette orpheline cherche son âme sœur",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le sommeil du volcan enrhumé",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le reflet qui refusait d'obéir",
-      "category": "Poétique"
-    },
-    {
-      "text": "Une discussion avec mon estomac",
-      "category": "Drôle"
-    },
-    {
-      "text": "La légende de la tarte aux pommes magique",
-      "category": "Libre"
-    },
-    {
-      "text": "Le murmure du vent dans les roseaux",
-      "category": "Poétique"
-    },
-    {
-      "text": "L'école des fantômes débutants",
-      "category": "Drôle"
-    },
-    {
-      "text": "Un grain de sable nostalgique",
-      "category": "Poétique"
-    },
-    {
-      "text": "La grève des aiguilles de l'horloge",
-      "category": "Libre"
-    },
-    {
-      "text": "Le championnat du monde de sieste",
-      "category": "Drôle"
-    },
-    {
-      "text": "La lune qui avait peur du noir",
-      "category": "Poétique"
-    },
-    {
-      "text": "Une lettre d'amour écrite avec du fromage",
-      "category": "Drôle"
-    },
-    {
-      "text": "L'odyssée d'un grain de café",
-      "category": "Libre"
-    },
-    {
-      "text": "Le collectionneur de bruits de pas",
-      "category": "Poétique"
-    },
-    {
-      "text": "La colère de la feuille de papier froissée",
-      "category": "Poétique"
-    },
-    {
-      "text": "Un parapluie jaloux du soleil",
-      "category": "Drôle"
-    },
-    {
-      "text": "La conspiration des feux rouges",
-      "category": "Drôle"
-    },
-    {
-      "text": "Le chemin le moins fréquenté",
-      "category": "Libre"
-    },
-    {
-      "text": "L'écho du silence",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le dresseur de puces timide",
-      "category": "Drôle"
     }
   ],
   "echauffements": [
@@ -909,451 +909,419 @@
   ],
   "emotions": [
     {
-      "text": "Joie intense",
+      "text": "Joie exubérante",
       "category": "Positive"
     },
     {
-      "text": "Fierté immense",
-      "category": "Positive"
-    },
-    {
-      "text": "Soulagement",
-      "category": "Positive"
-    },
-    {
-      "text": "Enthousiasme débordant",
-      "category": "Positive"
-    },
-    {
-      "text": "Tendresse",
-      "category": "Positive"
-    },
-    {
-      "text": "Gratitude",
-      "category": "Positive"
-    },
-    {
-      "text": "Émerveillement",
-      "category": "Positive"
-    },
-    {
-      "text": "Sérénité",
-      "category": "Positive"
-    },
-    {
-      "text": "Espoir",
-      "category": "Positive"
-    },
-    {
-      "text": "Euphorie",
-      "category": "Positive"
-    },
-    {
-      "text": "Admiration",
-      "category": "Positive"
-    },
-    {
-      "text": "Compassion",
-      "category": "Positive"
-    },
-    {
-      "text": "Amour secret",
-      "category": "Positive"
-    },
-    {
-      "text": "Satisfaction",
-      "category": "Positive"
-    },
-    {
-      "text": "Optimisme",
-      "category": "Positive"
-    },
-    {
-      "text": "Complicité",
-      "category": "Positive"
-    },
-    {
-      "text": "Colère noire",
+      "text": "Colère froide",
       "category": "Négative"
+    },
+    {
+      "text": "Tristesse infinie",
+      "category": "Négative"
+    },
+    {
+      "text": "Sérénité absolue",
+      "category": "Positive"
     },
     {
       "text": "Jalousie maladive",
       "category": "Négative"
     },
     {
-      "text": "Tristesse profonde",
-      "category": "Négative"
+      "text": "Fierté excessive",
+      "category": "Positive"
+    },
+    {
+      "text": "Ennui mortel",
+      "category": "Neutre"
+    },
+    {
+      "text": "Mélancolie douce",
+      "category": "Neutre"
     },
     {
       "text": "Peur panique",
       "category": "Négative"
     },
     {
-      "text": "Culpabilité",
+      "text": "Curiosité enfantine",
+      "category": "Positive"
+    },
+    {
+      "text": "Dégoût profond",
       "category": "Négative"
     },
     {
-      "text": "Honte",
+      "text": "Amour passionnel",
+      "category": "Positive"
+    },
+    {
+      "text": "Honte dévorante",
       "category": "Négative"
     },
     {
-      "text": "Dégoût",
-      "category": "Négative"
-    },
-    {
-      "text": "Rancœur",
-      "category": "Négative"
-    },
-    {
-      "text": "Frustration",
-      "category": "Négative"
-    },
-    {
-      "text": "Angoisse",
-      "category": "Négative"
-    },
-    {
-      "text": "Trahison",
-      "category": "Négative"
-    },
-    {
-      "text": "Mépris",
-      "category": "Négative"
-    },
-    {
-      "text": "Impatience",
-      "category": "Négative"
-    },
-    {
-      "text": "Amertume",
-      "category": "Négative"
-    },
-    {
-      "text": "Nostalgie douloureuse",
-      "category": "Négative"
-    },
-    {
-      "text": "Humiliation",
-      "category": "Négative"
-    },
-    {
-      "text": "Regret",
-      "category": "Négative"
-    },
-    {
-      "text": "Solitude",
-      "category": "Négative"
-    },
-    {
-      "text": "Suspicion",
-      "category": "Négative"
-    },
-    {
-      "text": "Lassitude",
-      "category": "Négative"
-    },
-    {
-      "text": "Panique",
-      "category": "Négative"
-    },
-    {
-      "text": "Haine",
-      "category": "Négative"
-    },
-    {
-      "text": "Surprise",
+      "text": "Nostalgie poignante",
       "category": "Neutre"
     },
     {
-      "text": "Curiosité",
+      "text": "Impatience fébrile",
       "category": "Neutre"
     },
     {
-      "text": "Indifférence",
+      "text": "Frustration intense",
+      "category": "Négative"
+    },
+    {
+      "text": "Surprise totale",
       "category": "Neutre"
     },
     {
-      "text": "Scepticisme",
+      "text": "Soulagement immense",
+      "category": "Positive"
+    },
+    {
+      "text": "Arrogance méprisante",
+      "category": "Négative"
+    },
+    {
+      "text": "Compassion sincère",
+      "category": "Positive"
+    },
+    {
+      "text": "Timidité maladive",
       "category": "Neutre"
     },
     {
-      "text": "Confusion",
+      "text": "Panique incontrôlable",
+      "category": "Négative"
+    },
+    {
+      "text": "Hystérie collective",
+      "category": "Positive"
+    },
+    {
+      "text": "Générosité naïve",
+      "category": "Positive"
+    },
+    {
+      "text": "Rancœur tenace",
+      "category": "Négative"
+    },
+    {
+      "text": "Optimisme béat",
+      "category": "Positive"
+    },
+    {
+      "text": "Méfiance paranoïaque",
+      "category": "Négative"
+    },
+    {
+      "text": "Insouciance légère",
+      "category": "Positive"
+    },
+    {
+      "text": "Culpabilité rongeante",
+      "category": "Négative"
+    },
+    {
+      "text": "Enthousiasme débordant",
+      "category": "Positive"
+    },
+    {
+      "text": "Indifférence glaciale",
       "category": "Neutre"
     },
     {
-      "text": "Nostalgie",
+      "text": "Cynisme désabusé",
       "category": "Neutre"
     },
     {
-      "text": "Étonnement",
+      "text": "Egoïsme pur",
+      "category": "Négative"
+    },
+    {
+      "text": "Empathie chaleureuse",
+      "category": "Positive"
+    },
+    {
+      "text": "Désespoir sombre",
+      "category": "Négative"
+    },
+    {
+      "text": "Euphorie passagère",
+      "category": "Positive"
+    },
+    {
+      "text": "Scepticisme poli",
       "category": "Neutre"
     },
     {
-      "text": "Distraction",
+      "text": "Tendresse infinie",
+      "category": "Positive"
+    },
+    {
+      "text": "Rage folle",
+      "category": "Négative"
+    },
+    {
+      "text": "Distraction rêveuse",
       "category": "Neutre"
     },
     {
-      "text": "Détermination",
+      "text": "Obsession étrange",
       "category": "Neutre"
     },
     {
-      "text": "Résignation",
+      "text": "Gratitude humble",
+      "category": "Positive"
+    },
+    {
+      "text": "Amertume tenace",
+      "category": "Négative"
+    },
+    {
+      "text": "Curiosité scientifique",
       "category": "Neutre"
     },
     {
-      "text": "Fascination",
+      "text": "Zèle agaçant",
       "category": "Neutre"
     },
     {
-      "text": "Expectative",
+      "text": "Hésitation constante",
       "category": "Neutre"
+    },
+    {
+      "text": "Fascination hypnotique",
+      "category": "Positive"
+    },
+    {
+      "text": "Lassitude pesante",
+      "category": "Neutre"
+    },
+    {
+      "text": "Cupidité sans borne",
+      "category": "Négative"
+    },
+    {
+      "text": "Bienveillance tranquille",
+      "category": "Positive"
     }
   ],
   "locations": [
     {
-      "text": "Ascenseur en panne",
+      "text": "Un sous-marin en panne",
       "category": "Huis clos"
     },
     {
-      "text": "Caisse de supermarché",
+      "text": "Une file d'attente",
       "category": "Quotidien"
     },
     {
-      "text": "Sommet de l'Everest",
-      "category": "Aventure"
-    },
-    {
-      "text": "Crypte d'église",
+      "text": "La surface hostile de Mars",
       "category": "Insolite"
     },
     {
-      "text": "Compartiment de train",
+      "text": "Un ascenseur de verre",
       "category": "Huis clos"
     },
     {
-      "text": "Salon de coiffure",
+      "text": "Un salon de coiffure",
       "category": "Quotidien"
     },
     {
-      "text": "Jungle amazonienne",
+      "text": "Une jungle tropicale dense",
       "category": "Aventure"
     },
     {
-      "text": "Toit d'un gratte-ciel",
-      "category": "Insolite"
-    },
-    {
-      "text": "Cellule de prison",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Cuisine familiale",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Bateau en pleine tempête",
+      "text": "Une île déserte minuscule",
       "category": "Aventure"
     },
     {
-      "text": "Sous-sol d'un musée",
-      "category": "Insolite"
-    },
-    {
-      "text": "Cabine de pilotage",
+      "text": "Une cabine téléphonique",
       "category": "Huis clos"
     },
     {
-      "text": "Arrêt de bus",
+      "text": "Un supermarché bondé",
       "category": "Quotidien"
     },
     {
-      "text": "Désert de sel",
+      "text": "Le sommet de l'Everest",
       "category": "Aventure"
     },
     {
-      "text": "Phare abandonné",
+      "text": "Un laboratoire secret",
       "category": "Insolite"
     },
     {
-      "text": "Chambre froide",
+      "text": "Le fond d'un puits",
       "category": "Huis clos"
     },
     {
-      "text": "Bureau du patron",
+      "text": "Un guichet de gare",
       "category": "Quotidien"
     },
     {
-      "text": "Grotte souterraine",
+      "text": "Un zeppelin en feu",
       "category": "Aventure"
     },
     {
-      "text": "Coulisses d'un défilé",
+      "text": "Un musée de cire la nuit",
       "category": "Insolite"
     },
     {
-      "text": "Confessionnal",
+      "text": "Un grenier poussiéreux",
       "category": "Huis clos"
     },
     {
-      "text": "Salle d'attente médicale",
+      "text": "Un arrêt de bus sous la pluie",
       "category": "Quotidien"
     },
     {
-      "text": "Ruines d'un temple",
+      "text": "Une mine d'or abandonnée",
       "category": "Aventure"
     },
     {
-      "text": "Laboratoire secret",
+      "text": "L'intérieur d'un volcan",
       "category": "Insolite"
     },
     {
-      "text": "Sauna public",
+      "text": "Une cabine de pilotage d'avion",
       "category": "Huis clos"
     },
     {
-      "text": "Laverie automatique",
+      "text": "Un bureau de poste",
       "category": "Quotidien"
     },
     {
-      "text": "Pont d'un cargo",
+      "text": "Un navire pirate tempétueux",
       "category": "Aventure"
     },
     {
-      "text": "Chambre forte blindée",
-      "category": "Insolite"
-    },
-    {
-      "text": "Téléphérique bloqué",
+      "text": "Une bibliothèque silencieuse",
       "category": "Huis clos"
     },
     {
-      "text": "Guichet de banque",
+      "text": "Une boulangerie artisanale",
       "category": "Quotidien"
     },
     {
-      "text": "Forêt enneigée",
+      "text": "Une station spatiale internationale",
+      "category": "Insolite"
+    },
+    {
+      "text": "Une cave à vin sombre",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Une terrasse de café parisien",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un désert de sable brûlant",
       "category": "Aventure"
     },
     {
-      "text": "Observatoire astronomique",
-      "category": "Insolite"
-    },
-    {
-      "text": "Abri anti-atome",
+      "text": "Le bureau d'un détective privé",
       "category": "Huis clos"
     },
     {
-      "text": "Salle des professeurs",
+      "text": "Un cabinet dentaire moderne",
       "category": "Quotidien"
     },
     {
-      "text": "Île déserte",
+      "text": "Un temple maya enfoui",
       "category": "Aventure"
     },
     {
-      "text": "Grenier poussiéreux",
+      "text": "Un nuage dans le ciel",
       "category": "Insolite"
     },
     {
-      "text": "Cabine d'essayage",
+      "text": "Un sauna surchauffé",
       "category": "Huis clos"
     },
     {
-      "text": "Rayon bricolage",
+      "text": "Une salle de classe d'examen",
       "category": "Quotidien"
     },
     {
-      "text": "Montgolfière en vol",
+      "text": "La cime d'un baobab géant",
       "category": "Aventure"
     },
     {
-      "text": "Cimetière de nuit",
+      "text": "Une usine de recyclage de robots",
       "category": "Insolite"
     },
     {
-      "text": "Voiture sous l'orage",
+      "text": "Un igloo au Groenland",
       "category": "Huis clos"
     },
     {
-      "text": "Terrasse de café",
+      "text": "Une cuisine de grand restaurant",
       "category": "Quotidien"
     },
     {
-      "text": "Mine d'or abandonnée",
+      "text": "Une banquise à la dérive",
       "category": "Aventure"
     },
     {
-      "text": "Chantier de fouilles",
+      "text": "Une fête foraine abandonnée",
       "category": "Insolite"
     },
     {
-      "text": "Poste de sécurité",
+      "text": "Un confessionnal d'église",
       "category": "Huis clos"
     },
     {
-      "text": "Vide-grenier de quartier",
+      "text": "Une laverie automatique",
       "category": "Quotidien"
     },
     {
-      "text": "Rafting sur rapides",
+      "text": "Le Grand Canyon américain",
       "category": "Aventure"
     },
     {
-      "text": "Cabane de pêcheur",
+      "text": "La cour de récréation d'une école",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un nid d'aigle géant",
       "category": "Insolite"
     },
     {
-      "text": "Sous-marin militaire",
+      "text": "Une montgolfière dans la brume",
+      "category": "Aventure"
+    },
+    {
+      "text": "Une bijouterie de luxe",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un coffre-fort géant ouvert",
       "category": "Huis clos"
     },
     {
-      "text": "Salle de sport",
-      "category": "Quotidien"
+      "text": "Un sous-sol de château médiéval",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Un parc d'attraction futuriste",
+      "category": "Insolite"
     }
   ],
   "eras": [
-    {
-      "text": "Rome antique",
-      "era": "Passé"
-    },
     {
       "text": "Moyen Âge féodal",
       "era": "Passé"
     },
     {
-      "text": "Renaissance italienne",
+      "text": "La ruée vers l'or",
       "era": "Passé"
     },
     {
-      "text": "Révolution française",
-      "era": "Passé"
-    },
-    {
-      "text": "Far West américain",
-      "era": "Passé"
-    },
-    {
-      "text": "Années folles",
-      "era": "Passé"
-    },
-    {
-      "text": "Guerre froide",
-      "era": "Passé"
-    },
-    {
-      "text": "Égypte des pharaons",
-      "era": "Passé"
-    },
-    {
-      "text": "Ruée vers l'or",
-      "era": "Passé"
-    },
-    {
-      "text": "Angleterre victorienne",
-      "era": "Passé"
-    },
-    {
-      "text": "Piraterie des Caraïbes",
+      "text": "La Renaissance italienne",
       "era": "Passé"
     },
     {
@@ -1361,15 +1329,39 @@
       "era": "Passé"
     },
     {
+      "text": "L'Égypte des Pharaons",
+      "era": "Passé"
+    },
+    {
+      "text": "La Rome antique",
+      "era": "Passé"
+    },
+    {
+      "text": "Les années folles",
+      "era": "Passé"
+    },
+    {
+      "text": "Guerre froide",
+      "era": "Passé"
+    },
+    {
+      "text": "La piraterie",
+      "era": "Passé"
+    },
+    {
+      "text": "L'époque victorienne",
+      "era": "Passé"
+    },
+    {
       "text": "Mai 68",
       "era": "Passé"
     },
     {
-      "text": "Grèce antique",
+      "text": "La Révolution française",
       "era": "Passé"
     },
     {
-      "text": "L'Occupation",
+      "text": "L'époque préhistorique",
       "era": "Passé"
     },
     {
@@ -1377,27 +1369,19 @@
       "era": "Passé"
     },
     {
-      "text": "Empire napoléonien",
+      "text": "Le Far West",
       "era": "Passé"
     },
     {
-      "text": "La Prohibition",
+      "text": "La Grèce antique",
       "era": "Passé"
     },
     {
-      "text": "La Préhistoire",
+      "text": "L'occupation en 1942",
       "era": "Passé"
     },
     {
-      "text": "Les Vikings",
-      "era": "Passé"
-    },
-    {
-      "text": "Japon des samouraïs",
-      "era": "Passé"
-    },
-    {
-      "text": "Crise de 1929",
+      "text": "L'apogée des Vikings",
       "era": "Passé"
     },
     {
@@ -1405,59 +1389,39 @@
       "era": "Passé"
     },
     {
-      "text": "Cour de Versailles",
+      "text": "Le Japon des Samouraïs",
       "era": "Passé"
     },
     {
-      "text": "L'Inquisition",
+      "text": "La prohibition américaine",
       "era": "Passé"
     },
     {
-      "text": "Conquête spatiale",
+      "text": "La cour de Versailles",
       "era": "Passé"
     },
     {
-      "text": "Le Baby-boom",
+      "text": "L'Angleterre punk",
       "era": "Passé"
     },
     {
-      "text": "Les années trente",
+      "text": "L'empire aztèque",
       "era": "Passé"
     },
     {
-      "text": "Commune de Paris",
+      "text": "La crise de 1929",
       "era": "Passé"
     },
     {
-      "text": "L'âge de bronze",
-      "era": "Passé"
-    },
-    {
-      "text": "Le monde actuel",
+      "text": "Le monde d'aujourd'hui",
       "era": "Présent"
     },
     {
-      "text": "L'ère du numérique",
+      "text": "L'ère des réseaux sociaux",
       "era": "Présent"
     },
     {
-      "text": "Le confinement",
-      "era": "Présent"
-    },
-    {
-      "text": "Notre époque",
-      "era": "Présent"
-    },
-    {
-      "text": "Le XXIe siècle",
-      "era": "Présent"
-    },
-    {
-      "text": "La vie moderne",
-      "era": "Présent"
-    },
-    {
-      "text": "Génération réseaux sociaux",
+      "text": "Le confinement récent",
       "era": "Présent"
     },
     {
@@ -1465,51 +1429,87 @@
       "era": "Présent"
     },
     {
-      "text": "Le temps présent",
+      "text": "L'époque moderne",
       "era": "Présent"
     },
     {
-      "text": "Aujourd'hui",
+      "text": "La crise écologique actuelle",
       "era": "Présent"
     },
     {
-      "text": "Colonisation de Mars",
+      "text": "Le monde des start-ups",
+      "era": "Présent"
+    },
+    {
+      "text": "La société de consommation",
+      "era": "Présent"
+    },
+    {
+      "text": "L'ère du smartphone",
+      "era": "Présent"
+    },
+    {
+      "text": "Le quotidien urbain",
+      "era": "Présent"
+    },
+    {
+      "text": "La colocation étudiante",
+      "era": "Présent"
+    },
+    {
+      "text": "Le télétravail généralisé",
+      "era": "Présent"
+    },
+    {
+      "text": "La colonisation de Mars",
       "era": "Futur"
     },
     {
-      "text": "L'ère des robots",
+      "text": "L'ère des robots domestiques",
       "era": "Futur"
     },
     {
-      "text": "Monde post-apocalyptique",
+      "text": "Un futur post-apocalyptique",
       "era": "Futur"
     },
     {
-      "text": "La Terre en 2100",
+      "text": "La Terre sans eau",
       "era": "Futur"
     },
     {
-      "text": "Le futur proche",
+      "text": "L'an 3000",
       "era": "Futur"
     },
     {
-      "text": "L'humanité augmentée",
+      "text": "L'ère du clonage humain",
       "era": "Futur"
     },
     {
-      "text": "Dictature technologique",
+      "text": "La dictature technologique",
       "era": "Futur"
     },
     {
-      "text": "Voyageurs du temps",
+      "text": "Les voitures volantes",
       "era": "Futur"
     },
     {
-      "text": "Station orbitale",
+      "text": "La fin du monde",
       "era": "Futur"
     },
     {
-      "text": "Le XXIIe siècle",
+      "text": "L'exploration spatiale",
+      "era": "Futur"
+    },
+    {
+      "text": "Une cyber-dictature",
+      "era": "Futur"
+    },
+    {
+      "text": "Le futur post-technologique",
+      "era": "Futur"
+    },
+    {
+      "text": "L'intelligence artificielle reine",
       "era": "Futur"
     }
   ],
@@ -1817,85 +1817,85 @@
   ],
   "animals": [
     {
-      "text": "Un caniche philosophe",
-      "category": "Domestique"
-    },
-    {
-      "text": "Un pigeon kleptomane",
-      "category": "Urbain"
-    },
-    {
-      "text": "Un ours polaire frileux",
-      "category": "Polaire"
-    },
-    {
       "text": "Un lion végétarien",
       "category": "Sauvage"
     },
     {
-      "text": "Un dauphin snob",
-      "category": "Aquatique"
+      "text": "Un paresseux pressé",
+      "category": "Sauvage"
     },
     {
-      "text": "Une fourmi hyperactive",
-      "category": "Insecte"
-    },
-    {
-      "text": "Un rat romantique",
-      "category": "Urbain"
-    },
-    {
-      "text": "Un chat manipulateur",
+      "text": "Un caniche philosophe",
       "category": "Domestique"
     },
     {
-      "text": "Un pingouin grincheux",
+      "text": "Un pigeon agent secret",
+      "category": "Urbain"
+    },
+    {
+      "text": "Un requin ayant le mal de mer",
+      "category": "Aquatique"
+    },
+    {
+      "text": "Un caméléon qui n'arrive pas à choisir sa couleur",
+      "category": "Sauvage"
+    },
+    {
+      "text": "Un chat snob et manipulateur",
+      "category": "Domestique"
+    },
+    {
+      "text": "Un moustique syndicaliste",
+      "category": "Insecte"
+    },
+    {
+      "text": "Un pingouin qui rêve de voler",
       "category": "Polaire"
     },
     {
-      "text": "Un requin peureux",
-      "category": "Aquatique"
+      "text": "Un écureuil amnésique",
+      "category": "Sauvage"
     }
   ],
   "objects": [
     {
-      "text": "Une lettre d'amour froissée",
+      "text": "Un trousseau de clés",
       "category": "Quotidien"
     },
     {
-      "text": "Un faux testament",
+      "text": "Une lettre d'amour anonyme",
       "category": "Insolite"
     },
     {
-      "text": "Un téléphone verrouillé",
+      "text": "Un vieux téléavertisseur",
       "category": "Technologie"
-    },
-    {
-      "text": "Une alliance en toc",
-      "category": "Vêtement"
-    },
-    {
-      "text": "Une clé de coffre-fort",
-      "category": "Outil"
-    },
-    {
-      "text": "Un test de grossesse",
-      "category": "Quotidien"
     },
     {
       "text": "Un manteau trop grand",
       "category": "Vêtement"
     },
     {
-      "text": "Une bague volée",
+      "text": "Un marteau de juge",
+      "category": "Outil"
+    },
+    {
+      "text": "Un testament froissé",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une bague de fiançailles",
       "category": "Insolite"
     },
     {
-      "text": "Une clé USB cryptée",
+      "text": "Un dictaphone usagé",
       "category": "Technologie"
     },
     {
-      "text": "Un tournevis ensanglanté",
+      "text": "Une robe de mariée",
+      "category": "Vêtement"
+    },
+    {
+      "text": "Un tournevis rouillé",
       "category": "Outil"
     }
   ]
