@@ -657,456 +657,456 @@
   ],
   "echauffements": [
     {
-      "text": "Le jeu du miroir",
+      "text": "Le regard complice",
       "duration": "3 min",
-      "description": "Par deux, l'un imite exactement les mouvements de l'autre."
+      "description": "Les joueurs marchent et s'arrêtent dès qu'ils croisent le regard d'un partenaire."
     },
     {
-      "text": "Association d'idées rapide",
-      "duration": "2 min",
-      "description": "Dire rapidement le premier mot qui vient après celui du voisin."
-    },
-    {
-      "text": "Le chef d'orchestre imaginaire",
-      "duration": "5 min",
-      "description": "Un joueur dirige silencieusement le groupe qui imite ses gestes."
-    },
-    {
-      "text": "Le cadeau empoisonné",
+      "text": "La poignée de main",
       "duration": "4 min",
-      "description": "S'offrir des objets imaginaires et justifier leur utilité loufoque."
+      "description": "Saluer chaque personne du groupe en changeant d'intention sociale à chaque fois."
     },
     {
-      "text": "La phrase mot à mot",
-      "duration": "5 min",
-      "description": "Construire une histoire en cercle, chaque joueur ne disant qu'un seul mot à la fois."
-    },
-    {
-      "text": "Le chef trois têtes",
-      "duration": "4 min",
-      "description": "Trois joueurs répondent aux questions en parlant en même temps ou mot à mot."
-    },
-    {
-      "text": "Le cri de la bête",
+      "text": "Le secret partagé",
       "duration": "3 min",
-      "description": "Se passer un cri imaginaire en cercle en amplifiant le mouvement corporel."
+      "description": "Chuchoter un faux secret à l'oreille d'un partenaire pour provoquer une réaction physique."
     },
     {
-      "text": "Le défilé de mode absurde",
-      "duration": "5 min",
-      "description": "Chacun défile en décrivant les vêtements invisibles et ridicules de son voisin."
-    },
-    {
-      "text": "Le Zip Zap Boing",
+      "text": "L'appel du prénom",
       "duration": "3 min",
-      "description": "Jeu de réflexe en cercle pour envoyer et bloquer l'énergie avec des sons précis."
+      "description": "Établir un contact visuel puis appeler un joueur par son prénom pour échanger vos places."
     },
     {
-      "text": "La marche des âges",
+      "text": "La marche synchrone",
       "duration": "4 min",
-      "description": "Se déplacer dans l'espace en adoptant différents âges (bébé, adulte pressé, centenaire)."
+      "description": "Tout le groupe doit s'arrêter et repartir en même temps sans aucun signal visible."
     },
     {
-      "text": "Le zoom vocal",
+      "text": "Le mime du métier",
+      "duration": "4 min",
+      "description": "Faire deviner une profession du quotidien uniquement par des gestes précis et réalistes."
+    },
+    {
+      "text": "Le conflit chuchoté",
       "duration": "3 min",
-      "description": "Produire des sons qui s'amplifient ou se réduisent selon la proximité des joueurs."
+      "description": "S'engager dans une dispute intense avec son partenaire en parlant exclusivement à voix basse."
     },
     {
-      "text": "L'expert autoproclamé",
-      "duration": "5 min",
-      "description": "Répondre à des questions du public sur un thème inconnu avec une assurance totale."
-    },
-    {
-      "text": "La rumeur publique",
-      "duration": "5 min",
-      "description": "Se transmettre un secret à l'oreille, le dernier doit révéler la version déformée."
-    },
-    {
-      "text": "Le traducteur extraterrestre",
+      "text": "L'ombre portée",
       "duration": "4 min",
-      "description": "Un joueur parle en langue spatiale inventée, l'autre traduit au public."
+      "description": "Suivre un partenaire en imitant fidèlement sa démarche et sa posture à un mètre de distance."
     },
     {
-      "text": "Le tableau vivant",
-      "duration": "5 min",
-      "description": "Créer une scène figée en y ajoutant un joueur après l'autre selon un thème."
-    },
-    {
-      "text": "La balle imaginaire",
+      "text": "Le régulateur",
       "duration": "3 min",
-      "description": "Se lancer une balle invisible en adaptant ses mouvements à sa taille et son poids changeants."
+      "description": "Diriger le rythme de marche de tout le groupe par des gestes simples de la main."
     },
     {
-      "text": "Le ping-pong des émotions",
-      "duration": "4 min",
-      "description": "Échanger des répliques simples en changeant d'émotion à chaque renvoi."
-    },
-    {
-      "text": "L'alphabet de l'impro",
-      "duration": "5 min",
-      "description": "Faire une courte scène où chaque phrase commence par la lettre suivante de l'alphabet."
-    },
-    {
-      "text": "Le réveil du corps",
+      "text": "La transmission silencieuse",
       "duration": "3 min",
-      "description": "Étirements collectifs et tapotements pour stimuler l'énergie corporelle."
+      "description": "Faire passer une émotion précise à travers le cercle uniquement par le regard."
     },
     {
-      "text": "La chaise musicale des voix",
+      "text": "Le duo de statues",
       "duration": "4 min",
-      "description": "Parler avec la voix du joueur précédent dès qu'on prend sa place."
+      "description": "Un joueur sculpte physiquement son partenaire pour exprimer une relation de pouvoir claire."
     },
     {
-      "text": "Le monologue en un souffle",
-      "duration": "3 min",
-      "description": "Parler sans s'arrêter tant qu'on a de l'air dans les poumons."
-    },
-    {
-      "text": "Les marionnettes à fils",
-      "duration": "4 min",
-      "description": "En binôme, l'un mime tirer des fils pour faire bouger son partenaire."
-    },
-    {
-      "text": "Le dictionnaire fou",
-      "duration": "4 min",
-      "description": "Inventer des définitions absurdes pour des mots inventés par le groupe."
-    },
-    {
-      "text": "La dispute silencieuse",
-      "duration": "3 min",
-      "description": "Se disputer intensément en n'utilisant que le regard et le mime."
-    },
-    {
-      "text": "Le jeu du détective",
+      "text": "L'interview vérité",
       "duration": "5 min",
-      "description": "Deviner le coupable et le crime grâce à des indices mimés par les autres."
+      "description": "Répondre du tac au tac à des questions personnelles en incarnant un personnage réaliste."
     },
     {
-      "text": "Le cercle de rythme",
+      "text": "Le pas de deux",
       "duration": "3 min",
-      "description": "Créer une percussion corporelle collective en ajoutant son rythme propre."
+      "description": "Marcher de profil par deux en maintenant une distance constante et un contact visuel."
     },
     {
-      "text": "L'ascenseur émotionnel",
-      "duration": "5 min",
-      "description": "Jouer une scène où le niveau d'intensité émotionnelle monte de 1 à 10."
-    },
-    {
-      "text": "Le conteur interrompu",
-      "duration": "4 min",
-      "description": "Raconter une histoire, le groupe crie 'MENTEUR !' et le conteur doit changer le fait."
-    },
-    {
-      "text": "La machine humaine",
-      "duration": "5 min",
-      "description": "Chaque joueur devient un rouage sonore et visuel d'une usine imaginaire."
-    },
-    {
-      "text": "Le mime de l'objet géant",
+      "text": "La salutation royale",
       "duration": "3 min",
-      "description": "Passer un objet invisible qui grossit ou rétrécit à chaque transmission."
+      "description": "Se saluer mutuellement en exagérant les statuts sociaux, du mendiant au monarque."
     },
     {
-      "text": "La démarche partagée",
+      "text": "Le mot interdit",
+      "duration": "4 min",
+      "description": "Tenir une conversation banale à deux sans jamais utiliser les mots oui, non, ou je."
+    },
+    {
+      "text": "La colère froide",
       "duration": "3 min",
-      "description": "Imiter la démarche de la personne qui marche devant soi dans la pièce."
+      "description": "Exprimer un désaccord profond en gardant un ton de voix parfaitement calme et posé."
     },
     {
-      "text": "Le oui et en plus",
-      "duration": "5 min",
-      "description": "Accepter l'idée de son partenaire et y ajouter systématiquement une surenchère."
-    },
-    {
-      "text": "Le mot en boucle",
+      "text": "Le fil invisible",
       "duration": "3 min",
-      "description": "Répéter le dernier mot du partenaire en changeant son intention dramatique."
+      "description": "Se déplacer à deux en imaginant un fil tendu entre vos nez qui ne doit jamais casser."
     },
     {
-      "text": "La pub flash",
+      "text": "L'aveu soudain",
       "duration": "4 min",
-      "description": "Créer en 30 secondes un produit et son slogan pour convaincre le groupe."
+      "description": "Commencer chaque réplique d'un dialogue par une confession surprenante mais réaliste."
     },
     {
-      "text": "La télépathie",
-      "duration": "4 min",
-      "description": "Trouver le même mot en même temps en partant de deux mots différents."
-    },
-    {
-      "text": "Le chef de tribu",
-      "duration": "4 min",
-      "description": "Suivre les intonations et mimiques du meneur du groupe sans décalage."
-    },
-    {
-      "text": "L'objet détourné",
-      "duration": "5 min",
-      "description": "Utiliser un vrai objet de manière totalement décalée (ex: une bouteille devient un télescope)."
-    },
-    {
-      "text": "Le tic de langage",
-      "duration": "4 min",
-      "description": "Jouer avec une manie verbale imposée par le partenaire."
-    },
-    {
-      "text": "Le photographe",
-      "duration": "4 min",
-      "description": "Créer une pose de groupe parfaite sur consigne du photographe imaginaire."
-    },
-    {
-      "text": "La course lente",
+      "text": "Le rythme cardiaque",
       "duration": "3 min",
-      "description": "Faire une course de vitesse au ralenti extrême, le dernier arrivé gagne."
+      "description": "Frapper dans les mains pour reproduire et propager le rythme cardiaque de son voisin."
     },
     {
-      "text": "La phrase de trop",
+      "text": "La marche des statuts",
       "duration": "4 min",
-      "description": "Parler normalement jusqu'à ce qu'un mot déclenche une chanson."
+      "description": "Marcher dans l'espace en ajustant sa posture selon un niveau de statut social de 1 à 10."
     },
     {
-      "text": "La métamorphose",
-      "duration": "4 min",
-      "description": "Se transformer progressivement en un élément de la nature (eau, feu, arbre)."
-    },
-    {
-      "text": "Le chef d'orchestre de bruitages",
-      "duration": "5 min",
-      "description": "Diriger un groupe pour créer l'ambiance sonore d'une forêt ou d'une usine."
-    },
-    {
-      "text": "Le doublage de film",
-      "duration": "5 min",
-      "description": "Mimer une scène tandis que deux autres joueurs font les voix en direct."
-    },
-    {
-      "text": "Le conteur fou",
-      "duration": "4 min",
-      "description": "Construire un conte où chaque joueur doit ajouter un animal absurde."
-    },
-    {
-      "text": "La marche aveugle",
-      "duration": "4 min",
-      "description": "Se laisser guider par la voix de son partenaire les yeux fermés."
-    },
-    {
-      "text": "Le vendeur de vent",
-      "duration": "4 min",
-      "description": "Essayer de vendre du vide avec des arguments ultra-précis."
-    },
-    {
-      "text": "L'écho corporel",
+      "text": "Le geste retardé",
       "duration": "3 min",
-      "description": "Reproduire instantanément la posture physique de son partenaire."
+      "description": "Reproduire les mouvements physiques du partenaire avec exactement trois secondes de retard."
     },
     {
-      "text": "La tempête émotionnelle",
+      "text": "La phrase imposée",
       "duration": "4 min",
-      "description": "Passer du rire aux larmes au son d'un tambourin."
+      "description": "Intégrer naturellement une phrase du quotidien donnée par le groupe au milieu d'un dialogue."
     },
     {
-      "text": "Le portrait craché",
+      "text": "Le témoin oculaire",
       "duration": "5 min",
-      "description": "Décrire un personnage fictif en détail pour que le partenaire l'incarne."
+      "description": "Décrire une scène imaginaire d'accident avec un maximum de détails réalistes et précis."
+    },
+    {
+      "text": "La fausse dispute",
+      "duration": "4 min",
+      "description": "Se disputer avec ferveur pour un motif totalement futile de la vie quotidienne."
+    },
+    {
+      "text": "Le guide vocal",
+      "duration": "3 min",
+      "description": "Guider un partenaire qui a les yeux fermés uniquement par le son de sa propre voix."
+    },
+    {
+      "text": "La poignée collante",
+      "duration": "3 min",
+      "description": "Se serrer la main et ne la lâcher que lorsqu'un sujet d'intérêt commun est trouvé."
+    },
+    {
+      "text": "Le relais de parole",
+      "duration": "4 min",
+      "description": "Traduire instantanément en français les propos d'un partenaire s'exprimant en grommelot."
+    },
+    {
+      "text": "L'interrogatoire serré",
+      "duration": "5 min",
+      "description": "Poser des questions rapides pour faire avouer un secret fictif à son partenaire de jeu."
+    },
+    {
+      "text": "Le geste contagieux",
+      "duration": "3 min",
+      "description": "Transmettre un tic physique réaliste à travers tout le cercle de joueurs."
+    },
+    {
+      "text": "La réplique unique",
+      "duration": "4 min",
+      "description": "Répondre à toutes les questions en utilisant toujours la même phrase mais avec des intentions variées."
+    },
+    {
+      "text": "Le guidage tactile",
+      "duration": "4 min",
+      "description": "Se déplacer à deux les yeux fermés en gardant un contact physique permanent par les mains."
+    },
+    {
+      "text": "L'accord parfait",
+      "duration": "3 min",
+      "description": "Essayer de prononcer exactement le même mot en même temps après un décompte de trois."
+    },
+    {
+      "text": "La marche lourde",
+      "duration": "3 min",
+      "description": "Marcher en imaginant que la gravité terrestre augmente à chaque signal du meneur."
+    },
+    {
+      "text": "Le compliment sincère",
+      "duration": "3 min",
+      "description": "Regarder un partenaire dans les yeux et lui faire un compliment simple et honnête."
+    },
+    {
+      "text": "La fausse confidence",
+      "duration": "4 min",
+      "description": "Raconter un souvenir d'enfance totalement inventé comme s'il était absolument réel."
+    },
+    {
+      "text": "Le guide corporel",
+      "duration": "3 min",
+      "description": "Diriger les mouvements physiques de tout le groupe par des gestes lents de la main."
+    },
+    {
+      "text": "Le transfert d'énergie",
+      "duration": "3 min",
+      "description": "Envoyer une impulsion physique à un partenaire par un regard franc et un geste sec."
+    },
+    {
+      "text": "La négociation serrée",
+      "duration": "4 min",
+      "description": "Tenter d'acheter un objet banal à un partenaire qui refuse catégoriquement de le vendre."
+    },
+    {
+      "text": "Le rythme commun",
+      "duration": "3 min",
+      "description": "Marcher en calant précisément le rythme de ses pas sur la personne devant soi."
+    },
+    {
+      "text": "La posture imposée",
+      "duration": "3 min",
+      "description": "Commencer une scène dans la position physique exacte laissée par le joueur précédent."
+    },
+    {
+      "text": "Le dialogue de sourds",
+      "duration": "4 min",
+      "description": "Discuter en répondant à côté de la plaque tout en maintenant une relation logique forte."
+    },
+    {
+      "text": "L'attente partagée",
+      "duration": "3 min",
+      "description": "Attendre un train imaginaire à deux en exprimant l'impatience uniquement par le corps."
+    },
+    {
+      "text": "Le geste d'accueil",
+      "duration": "3 min",
+      "description": "Accueillir chaque personne entrant dans le cercle avec une poignée de main chaleureuse."
+    },
+    {
+      "text": "La voix basse",
+      "duration": "3 min",
+      "description": "Parler le plus doucement possible tout en restant parfaitement audible pour l'auditoire."
+    },
+    {
+      "text": "Le regard fuyant",
+      "duration": "3 min",
+      "description": "Discuter avec un partenaire en évitant absolument de croiser son regard durant l'échange."
+    },
+    {
+      "text": "L'imitation subtile",
+      "duration": "4 min",
+      "description": "Adopter discrètement la posture physique de son interlocuteur au fil de la discussion."
+    },
+    {
+      "text": "Le mot final",
+      "duration": "3 min",
+      "description": "Terminer sa phrase par le premier mot de la phrase prononcée par le partenaire."
+    },
+    {
+      "text": "La marche rythmée",
+      "duration": "3 min",
+      "description": "Marcher en calant sa propre respiration sur le rythme des pas collectifs du groupe."
+    },
+    {
+      "text": "Le duo silencieux",
+      "duration": "4 min",
+      "description": "Jouer une scène de retrouvailles intenses sans prononcer une seule parole."
+    },
+    {
+      "text": "L'impact physique",
+      "duration": "3 min",
+      "description": "Réagir physiquement à chaque mot prononcé par le partenaire comme s'il s'agissait d'un choc."
     }
   ],
   "emotions": [
     {
-      "text": "Joie exubérante",
+      "text": "Fierté paternelle",
       "category": "Positive"
     },
     {
-      "text": "Colère froide",
-      "category": "Négative"
-    },
-    {
-      "text": "Tristesse infinie",
-      "category": "Négative"
-    },
-    {
-      "text": "Sérénité absolue",
+      "text": "Soulagement discret",
       "category": "Positive"
     },
     {
-      "text": "Jalousie maladive",
-      "category": "Négative"
-    },
-    {
-      "text": "Fierté excessive",
+      "text": "Complicité immédiate",
       "category": "Positive"
     },
     {
-      "text": "Ennui mortel",
+      "text": "Admiration secrète",
+      "category": "Positive"
+    },
+    {
+      "text": "Espoir timide",
+      "category": "Positive"
+    },
+    {
+      "text": "Tendresse maladroite",
+      "category": "Positive"
+    },
+    {
+      "text": "Ferveur partagée",
+      "category": "Positive"
+    },
+    {
+      "text": "Fascination muette",
+      "category": "Positive"
+    },
+    {
+      "text": "Amusement retenu",
+      "category": "Positive"
+    },
+    {
+      "text": "Soulagement partagé",
+      "category": "Positive"
+    },
+    {
+      "text": "Fierté contenue",
+      "category": "Positive"
+    },
+    {
+      "text": "Affection sincère",
+      "category": "Positive"
+    },
+    {
+      "text": "Enthousiasme mesuré",
+      "category": "Positive"
+    },
+    {
+      "text": "Joie contenue",
+      "category": "Positive"
+    },
+    {
+      "text": "Reconnaissance muette",
+      "category": "Positive"
+    },
+    {
+      "text": "Optimisme prudent",
+      "category": "Positive"
+    },
+    {
+      "text": "Sérénité retrouvée",
+      "category": "Positive"
+    },
+    {
+      "text": "Jalousie fraternelle",
+      "category": "Négative"
+    },
+    {
+      "text": "Rancune étouffée",
+      "category": "Négative"
+    },
+    {
+      "text": "Colère sourde",
+      "category": "Négative"
+    },
+    {
+      "text": "Honte secrète",
+      "category": "Négative"
+    },
+    {
+      "text": "Peur irrationnelle",
+      "category": "Négative"
+    },
+    {
+      "text": "Tristesse feinte",
+      "category": "Négative"
+    },
+    {
+      "text": "Amertume dissimulée",
+      "category": "Négative"
+    },
+    {
+      "text": "Méfiance instinctive",
+      "category": "Négative"
+    },
+    {
+      "text": "Culpabilité étouffante",
+      "category": "Négative"
+    },
+    {
+      "text": "Frustration muette",
+      "category": "Négative"
+    },
+    {
+      "text": "Déception amère",
+      "category": "Négative"
+    },
+    {
+      "text": "Angoisse sourde",
+      "category": "Négative"
+    },
+    {
+      "text": "Agacement passager",
+      "category": "Négative"
+    },
+    {
+      "text": "Hostilité latente",
+      "category": "Négative"
+    },
+    {
+      "text": "Dégoût passager",
+      "category": "Négative"
+    },
+    {
+      "text": "Tristesse résignée",
+      "category": "Négative"
+    },
+    {
+      "text": "Jalousie professionnelle",
+      "category": "Négative"
+    },
+    {
+      "text": "Honte sociale",
+      "category": "Négative"
+    },
+    {
+      "text": "Colère explosive",
+      "category": "Négative"
+    },
+    {
+      "text": "Inquiétude grandissante",
+      "category": "Négative"
+    },
+    {
+      "text": "Sentiment d'impuissance",
+      "category": "Négative"
+    },
+    {
+      "text": "Regret tardif",
+      "category": "Négative"
+    },
+    {
+      "text": "Curiosité polie",
       "category": "Neutre"
     },
     {
-      "text": "Mélancolie douce",
+      "text": "Indifférence polie",
       "category": "Neutre"
     },
     {
-      "text": "Peur panique",
-      "category": "Négative"
-    },
-    {
-      "text": "Curiosité enfantine",
-      "category": "Positive"
-    },
-    {
-      "text": "Dégoût profond",
-      "category": "Négative"
-    },
-    {
-      "text": "Amour passionnel",
-      "category": "Positive"
-    },
-    {
-      "text": "Honte dévorante",
-      "category": "Négative"
-    },
-    {
-      "text": "Nostalgie poignante",
+      "text": "Scepticisme amusé",
       "category": "Neutre"
     },
     {
-      "text": "Impatience fébrile",
+      "text": "Surprise feinte",
       "category": "Neutre"
     },
     {
-      "text": "Frustration intense",
-      "category": "Négative"
-    },
-    {
-      "text": "Surprise totale",
+      "text": "Distraction passagère",
       "category": "Neutre"
     },
     {
-      "text": "Soulagement immense",
-      "category": "Positive"
-    },
-    {
-      "text": "Arrogance méprisante",
-      "category": "Négative"
-    },
-    {
-      "text": "Compassion sincère",
-      "category": "Positive"
-    },
-    {
-      "text": "Timidité maladive",
+      "text": "Hésitation prudente",
       "category": "Neutre"
     },
     {
-      "text": "Panique incontrôlable",
-      "category": "Négative"
-    },
-    {
-      "text": "Hystérie collective",
-      "category": "Positive"
-    },
-    {
-      "text": "Générosité naïve",
-      "category": "Positive"
-    },
-    {
-      "text": "Rancœur tenace",
-      "category": "Négative"
-    },
-    {
-      "text": "Optimisme béat",
-      "category": "Positive"
-    },
-    {
-      "text": "Méfiance paranoïaque",
-      "category": "Négative"
-    },
-    {
-      "text": "Insouciance légère",
-      "category": "Positive"
-    },
-    {
-      "text": "Culpabilité rongeante",
-      "category": "Négative"
-    },
-    {
-      "text": "Enthousiasme débordant",
-      "category": "Positive"
-    },
-    {
-      "text": "Indifférence glaciale",
+      "text": "Neutralité stricte",
       "category": "Neutre"
     },
     {
-      "text": "Cynisme désabusé",
+      "text": "Étonnement discret",
       "category": "Neutre"
     },
     {
-      "text": "Egoïsme pur",
-      "category": "Négative"
-    },
-    {
-      "text": "Empathie chaleureuse",
-      "category": "Positive"
-    },
-    {
-      "text": "Désespoir sombre",
-      "category": "Négative"
-    },
-    {
-      "text": "Euphorie passagère",
-      "category": "Positive"
-    },
-    {
-      "text": "Scepticisme poli",
+      "text": "Concentration intense",
       "category": "Neutre"
     },
     {
-      "text": "Tendresse infinie",
-      "category": "Positive"
-    },
-    {
-      "text": "Rage folle",
-      "category": "Négative"
-    },
-    {
-      "text": "Distraction rêveuse",
+      "text": "Résignation tranquille",
       "category": "Neutre"
     },
     {
-      "text": "Obsession étrange",
+      "text": "Expectative prudente",
       "category": "Neutre"
-    },
-    {
-      "text": "Gratitude humble",
-      "category": "Positive"
-    },
-    {
-      "text": "Amertume tenace",
-      "category": "Négative"
-    },
-    {
-      "text": "Curiosité scientifique",
-      "category": "Neutre"
-    },
-    {
-      "text": "Zèle agaçant",
-      "category": "Neutre"
-    },
-    {
-      "text": "Hésitation constante",
-      "category": "Neutre"
-    },
-    {
-      "text": "Fascination hypnotique",
-      "category": "Positive"
-    },
-    {
-      "text": "Lassitude pesante",
-      "category": "Neutre"
-    },
-    {
-      "text": "Cupidité sans borne",
-      "category": "Négative"
-    },
-    {
-      "text": "Bienveillance tranquille",
-      "category": "Positive"
     }
   ],
   "locations": [
