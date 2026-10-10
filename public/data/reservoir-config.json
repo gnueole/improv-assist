@@ -1817,44 +1817,44 @@
   ],
   "animals": [
     {
-      "text": "Un lion végétarien",
-      "category": "Sauvage"
-    },
-    {
-      "text": "Un paresseux pressé",
-      "category": "Sauvage"
-    },
-    {
-      "text": "Un caniche philosophe",
-      "category": "Domestique"
-    },
-    {
-      "text": "Un pigeon agent secret",
-      "category": "Urbain"
-    },
-    {
-      "text": "Un requin ayant le mal de mer",
-      "category": "Aquatique"
-    },
-    {
-      "text": "Un caméléon qui n'arrive pas à choisir sa couleur",
-      "category": "Sauvage"
-    },
-    {
-      "text": "Un chat snob et manipulateur",
-      "category": "Domestique"
-    },
-    {
-      "text": "Un moustique syndicaliste",
-      "category": "Insecte"
-    },
-    {
-      "text": "Un pingouin qui rêve de voler",
+      "text": "Un ours polaire claustrophobe",
       "category": "Polaire"
     },
     {
-      "text": "Un écureuil amnésique",
+      "text": "Un corbeau mythomane",
+      "category": "Urbain"
+    },
+    {
+      "text": "Une taupe voyante",
       "category": "Sauvage"
+    },
+    {
+      "text": "Un dauphin râleur",
+      "category": "Aquatique"
+    },
+    {
+      "text": "Une fourmi hypocondriaque",
+      "category": "Insecte"
+    },
+    {
+      "text": "Un chihuahua autoritaire",
+      "category": "Domestique"
+    },
+    {
+      "text": "Un morse coquet",
+      "category": "Polaire"
+    },
+    {
+      "text": "Un raton-laveur maniaque",
+      "category": "Urbain"
+    },
+    {
+      "text": "Un hamster insomniaque",
+      "category": "Domestique"
+    },
+    {
+      "text": "Un poulpe kleptomane",
+      "category": "Aquatique"
     }
   ],
   "objects": [
