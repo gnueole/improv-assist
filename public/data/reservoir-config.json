@@ -1111,203 +1111,203 @@
   ],
   "locations": [
     {
-      "text": "Un sous-marin en panne",
+      "text": "Un wagon couchette",
       "category": "Huis clos"
     },
     {
-      "text": "Une file d'attente",
+      "text": "Une cellule de garde",
+      "category": "Huis clos"
+    },
+    {
+      "text": "La réserve d'un magasin",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Une cabine d'essayage",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Une salle d'attente",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Le bunker d'un particulier",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Un compartiment de train",
+      "category": "Huis clos"
+    },
+    {
+      "text": "La loge d'un comédien",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Un hangar à bateaux",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Une chambre d'hôpital",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Un camion de déménagement",
+      "category": "Huis clos"
+    },
+    {
+      "text": "La régie d'un théâtre",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Un sous-sol d'archives",
+      "category": "Huis clos"
+    },
+    {
+      "text": "Une station-service de nuit",
       "category": "Quotidien"
     },
     {
-      "text": "La surface hostile de Mars",
+      "text": "Un parking souterrain",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un marché aux puces",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une cantine d'entreprise",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un hall d'immeuble",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une agence immobilière",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un terrain de camping",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une salle de sport",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Le comptoir d'un bar",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une chambre d'hôtel",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Le banc d'un parc",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une voiture d'auto-école",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Une jardinerie de quartier",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Le guichet d'un péage",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un station de lavage auto",
+      "category": "Quotidien"
+    },
+    {
+      "text": "La passerelle d'un cargo",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un campement de bédouins",
+      "category": "Aventure"
+    },
+    {
+      "text": "Une grotte préhistorique",
+      "category": "Aventure"
+    },
+    {
+      "text": "Le pont d'un voilier",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un sentier de randonnée",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un col de montagne",
+      "category": "Aventure"
+    },
+    {
+      "text": "La lisière d'une forêt",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un phare en mer",
+      "category": "Aventure"
+    },
+    {
+      "text": "Une ruine antique",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un camp de base",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un radeau de sauvetage",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un fort militaire abandonné",
+      "category": "Aventure"
+    },
+    {
+      "text": "Un ring de boxe",
       "category": "Insolite"
     },
     {
-      "text": "Un ascenseur de verre",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un salon de coiffure",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Une jungle tropicale dense",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une île déserte minuscule",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une cabine téléphonique",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un supermarché bondé",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Le sommet de l'Everest",
-      "category": "Aventure"
-    },
-    {
-      "text": "Un laboratoire secret",
+      "text": "Le toit d'un gratte-ciel",
       "category": "Insolite"
     },
     {
-      "text": "Le fond d'un puits",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un guichet de gare",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un zeppelin en feu",
-      "category": "Aventure"
-    },
-    {
-      "text": "Un musée de cire la nuit",
+      "text": "Les coulisses d'un défilé",
       "category": "Insolite"
     },
     {
-      "text": "Un grenier poussiéreux",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un arrêt de bus sous la pluie",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Une mine d'or abandonnée",
-      "category": "Aventure"
-    },
-    {
-      "text": "L'intérieur d'un volcan",
+      "text": "Un plateau de tournage",
       "category": "Insolite"
     },
     {
-      "text": "Une cabine de pilotage d'avion",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un bureau de poste",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un navire pirate tempétueux",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une bibliothèque silencieuse",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une boulangerie artisanale",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Une station spatiale internationale",
+      "text": "Une tente de cirque",
       "category": "Insolite"
     },
     {
-      "text": "Une cave à vin sombre",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une terrasse de café parisien",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un désert de sable brûlant",
-      "category": "Aventure"
-    },
-    {
-      "text": "Le bureau d'un détective privé",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un cabinet dentaire moderne",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un temple maya enfoui",
-      "category": "Aventure"
-    },
-    {
-      "text": "Un nuage dans le ciel",
+      "text": "Le bord d'une piscine",
       "category": "Insolite"
     },
     {
-      "text": "Un sauna surchauffé",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une salle de classe d'examen",
-      "category": "Quotidien"
-    },
-    {
-      "text": "La cime d'un baobab géant",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une usine de recyclage de robots",
+      "text": "Un studio de radio",
       "category": "Insolite"
     },
     {
-      "text": "Un igloo au Groenland",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une cuisine de grand restaurant",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Une banquise à la dérive",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une fête foraine abandonnée",
+      "text": "La tribune d'un stade",
       "category": "Insolite"
     },
     {
-      "text": "Un confessionnal d'église",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Une laverie automatique",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Le Grand Canyon américain",
-      "category": "Aventure"
-    },
-    {
-      "text": "La cour de récréation d'une école",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un nid d'aigle géant",
+      "text": "Un chenil municipal",
       "category": "Insolite"
     },
     {
-      "text": "Une montgolfière dans la brume",
-      "category": "Aventure"
-    },
-    {
-      "text": "Une bijouterie de luxe",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un coffre-fort géant ouvert",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un sous-sol de château médiéval",
-      "category": "Huis clos"
-    },
-    {
-      "text": "Un parc d'attraction futuriste",
+      "text": "Un funérarium municipal",
       "category": "Insolite"
     }
   ],
