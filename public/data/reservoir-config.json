@@ -1,254 +1,254 @@
 {
   "scenarios": [
     {
-      "text": "Rupture devant une caissière fatiguée",
-      "category": "Quotidien",
-      "brief": "Un couple se sépare en plein règlement d'achats sous le regard blasé de l'employée."
-    },
-    {
-      "text": "Coincés dans un ascenseur bloqué",
+      "text": "Annonce du testament",
       "category": "Huis clos",
-      "brief": "Deux inconnus aux tempéraments opposés doivent cohabiter le temps du dépannage."
+      "brief": "Un notaire lit les volontés d'un héritage contesté à deux rivaux."
     },
     {
-      "text": "Deux espions oubliant leur mot de passe",
-      "category": "Aventure",
-      "brief": "Devant la porte blindée, l'infiltration est compromise par un trou de mémoire."
-    },
-    {
-      "text": "Un chevalier face à un lave-linge",
-      "category": "Insolite",
-      "brief": "Un guerrier médiéval prend l'électroménager moderne pour une créature démoniaque."
-    },
-    {
-      "text": "Entretien d'embauche pour être clown triste",
-      "category": "Quotidien",
-      "brief": "Le candidat tente de prouver que sa mélancolie est un atout artistique."
-    },
-    {
-      "text": "Une confession dans un confessionnal trop petit",
+      "text": "Panne de métro",
       "category": "Huis clos",
-      "brief": "Un prêtre et un fidèle s'entassent dans un espace exigu pour un aveu embarrassant."
+      "brief": "Deux anciens amants se retrouvent bloqués dans la même rame sombre."
     },
     {
-      "text": "Négociation de rançon pour un doudou perdu",
-      "category": "Insolite",
-      "brief": "Un parent désespéré négocie avec un ravisseur exigeant des bonbons."
-    },
-    {
-      "text": "Le premier rendez-vous d'un vampire timide",
-      "category": "Insolite",
-      "brief": "Il tente de cacher sa nature tout en évitant le miroir et l'ail."
-    },
-    {
-      "text": "Deux alpinistes suspendus à un fil",
-      "category": "Aventure",
-      "brief": "En pleine paroi rocheuse, ils règlent un différend familial crucial."
-    },
-    {
-      "text": "Un client mécontent dans un magasin de blagues",
+      "text": "Le candidat parfait",
       "category": "Quotidien",
-      "brief": "Il veut se faire rembourser un coussin péteur défectueux."
+      "brief": "Un recruteur reconnaît son ancien rival d'école lors d'un entretien d'embauche."
     },
     {
-      "text": "Un astronaute et un extraterrestre font du stop",
-      "category": "Aventure",
-      "brief": "Sur le bord d'une route spatiale, ils cherchent à rejoindre la Terre."
+      "text": "Erreur de destinataire",
+      "category": "Quotidien",
+      "brief": "Une lettre d'amour adressée au mauvais voisin crée un profond malaise."
     },
     {
-      "text": "Deux statues de cire qui prennent vie la nuit",
-      "category": "Insolite",
-      "brief": "Elles en profitent pour régler leurs comptes historiques hors de leurs socles."
-    },
-    {
-      "text": "Un contrôle fiscal surprise au pôle Nord",
-      "category": "Insolite",
-      "brief": "Un agent tatillon vérifie la comptabilité de l'usine de jouets des elfes."
-    },
-    {
-      "text": "Un chirurgien qui cherche ses clés dans le patient",
-      "category": "Insolite",
-      "brief": "Il tente de réparer son oubli avant la fin de l'anesthésie."
-    },
-    {
-      "text": "Perdus dans le labyrinthe d'un supermarché la nuit",
+      "text": "Vol d'héritage",
       "category": "Huis clos",
-      "brief": "Deux clients oubliés cherchent la sortie entre les rayons obscurs."
+      "brief": "Deux frères cherchent un bijou caché dans le bureau de leur père disparu."
     },
     {
-      "text": "Deux enfants tentent d'acheter une voiture",
-      "category": "Quotidien",
-      "brief": "Armés d'une tirelire et d'un faux permis, ils négocient avec le vendeur."
-    },
-    {
-      "text": "Un cours de pilotage d'avion sans manuel",
+      "text": "Témoin embarrassant",
       "category": "Aventure",
-      "brief": "L'instructeur improvise les commandes en plein vol de démonstration."
+      "brief": "Un fugitif se cache involontairement dans la voiture d'un policier en congé."
     },
     {
-      "text": "Une dispute pour le dernier rouleau de papier toilette",
+      "text": "Retard au mariage",
       "category": "Quotidien",
-      "brief": "En pleine pénurie, deux clients ne lâchent pas le précieux sésame."
+      "brief": "Le témoin a perdu les alliances quelques minutes avant la cérémonie."
     },
     {
-      "text": "Un détective privé interroge son propre reflet",
+      "text": "Secret de famille",
+      "category": "Quotidien",
+      "brief": "Un père avoue à sa fille adulte un lourd mensonge conservé depuis sa naissance."
+    },
+    {
+      "text": "Erreur de réservation",
+      "category": "Quotidien",
+      "brief": "Deux familles ennemies doivent cohabiter dans le même gîte de vacances."
+    },
+    {
+      "text": "Coup de filet",
+      "category": "Aventure",
+      "brief": "Deux détectives planqués réalisent qu'ils surveillent la mauvaise adresse."
+    },
+    {
+      "text": "Double jeu",
       "category": "Insolite",
-      "brief": "Persuadé d'avoir trouvé le coupable, il mène une confrontation interne."
+      "brief": "Un imposteur se fait passer pour le médecin de garde devant le directeur d'hôpital."
     },
     {
-      "text": "Une première leçon de magie qui tourne mal",
-      "category": "Aventure",
-      "brief": "L'apprenti transforme accidentellement son maître en animal de compagnie."
+      "text": "Adieu au collègue",
+      "category": "Quotidien",
+      "brief": "Un pot de départ vire au règlement de comptes entre deux associés."
     },
     {
-      "text": "Coincés dans une cabine de téléphérique en panne",
+      "text": "Garde partagée",
+      "category": "Quotidien",
+      "brief": "Deux parents divorcés se disputent la garde du chien familial devant un arbitre."
+    },
+    {
+      "text": "Le faux braquage",
+      "category": "Insolite",
+      "brief": "Un comédien répète son rôle de voleur et terrorise un véritable banquier."
+    },
+    {
+      "text": "Coincés en réserve",
       "category": "Huis clos",
-      "brief": "Le vertige et la promiscuité font grimper la tension entre les passagers."
+      "brief": "Deux employés rivaux se retrouvent enfermés dans l'arrière-boutique pour la nuit."
     },
     {
-      "text": "Un inventeur présente une machine à faire du vent",
-      "category": "Insolite",
-      "brief": "Le prototype s'emballe et menace de souffler le salon de présentation."
-    },
-    {
-      "text": "Un naufrage sur une île déserte minuscule",
-      "category": "Aventure",
-      "brief": "Deux rescapés doivent partager un espace de trois mètres carrés."
-    },
-    {
-      "text": "Un client veut échanger son chien contre un chat",
+      "text": "Dette de jeu",
       "category": "Quotidien",
-      "brief": "Il explique au vendeur de l'animalerie les défauts logistiques de son canidé."
+      "brief": "Un joueur tente d'emprunter une somme importante à son beau-frère très strict."
     },
     {
-      "text": "Un rendez-vous chez le dentiste des monstres",
-      "category": "Insolite",
-      "brief": "Le praticien doit soigner la carie d'un loup-garou récalcitrant."
-    },
-    {
-      "text": "Deux fantômes discutent de l'inflation de l'ectoplasme",
-      "category": "Insolite",
-      "brief": "Ils constatent que hanter les maisons devient un luxe hors de prix."
-    },
-    {
-      "text": "Un braquage de banque avec une banane",
-      "category": "Aventure",
-      "brief": "Le malfaiteur tente de rester menaçant avec son fruit mûr."
-    },
-    {
-      "text": "Une demande en mariage pendant un séisme",
-      "category": "Aventure",
-      "brief": "Il cherche la bague alors que les murs s'écroulent autour d'eux."
-    },
-    {
-      "text": "Le réveil difficile d'un ours après l'hibernation",
+      "text": "Dîner de fiançailles",
       "category": "Quotidien",
-      "brief": "Son voisin de tanière fait beaucoup trop de bruit avec sa tondeuse."
+      "brief": "La future mariée recroise son premier amour engagé comme serveur pour la soirée."
     },
     {
-      "text": "Un critique gastronomique chez sa grand-mère",
+      "text": "Panne de réseau",
+      "category": "Aventure",
+      "brief": "Deux randonneurs perdus réalisent que l'un d'eux a égaré la seule carte physique."
+    },
+    {
+      "text": "Tricherie aux examens",
       "category": "Quotidien",
-      "brief": "Il doit noter son gigot dominical sans froisser l'amour familial."
+      "brief": "Un professeur prend sur le fait son meilleur élève en train de tricher."
     },
     {
-      "text": "Dans le ventre d'une baleine bavarde",
+      "text": "Changement de testament",
       "category": "Huis clos",
-      "brief": "Deux marins avalés essaient de convaincre le cétacé de les recracher."
+      "brief": "Une riche tante annonce à son neveu qu'elle l'exclut de sa succession."
     },
     {
-      "text": "Deux archivistes découvrent le secret de l'univers",
-      "category": "Aventure",
-      "brief": "La vérité est si absurde qu'ils hésitent à la classer ou à la brûler."
-    },
-    {
-      "text": "Un coiffeur pour chauves très pointilleux",
-      "category": "Insolite",
-      "brief": "Il passe des heures à lustrer le crâne de son client méfiant."
-    },
-    {
-      "text": "Un cours de yoga pour personnes colériques",
+      "text": "Visite du proprio",
       "category": "Quotidien",
-      "brief": "Le professeur tente d'apaiser des élèves qui s'énervent à la moindre posture."
+      "brief": "Un locataire tente d'esquiver un état des lieux désastreux face au bailleur."
     },
     {
-      "text": "Une négociation de paix entre deux chats",
+      "text": "Démission surprise",
+      "category": "Quotidien",
+      "brief": "Le bras droit d'un chef d'entreprise exigeant lui pose sa démission immédiate."
+    },
+    {
+      "text": "Aveu sous hypnose",
       "category": "Insolite",
-      "brief": "Ils délimitent la frontière du canapé après des semaines de griffades."
+      "brief": "Un praticien découvre un secret embarrassant lors d'une séance d'hypnose."
     },
     {
-      "text": "Deux agents secrets déguisés en buisson",
-      "category": "Aventure",
-      "brief": "Ils découvrent qu'ils surveillent la même cible depuis le même jardin."
+      "text": "Retour inattendu",
+      "category": "Quotidien",
+      "brief": "Un homme réapparaît chez son frère après dix ans sans donner la moindre nouvelle."
     },
     {
-      "text": "Une séance de spiritisme pour retrouver une chaussette",
+      "text": "Vol de recette",
+      "category": "Quotidien",
+      "brief": "Un chef étoilé accuse son second d'avoir vendu sa création à la concurrence."
+    },
+    {
+      "text": "Le bon numéro",
       "category": "Insolite",
-      "brief": "Les participants invoquent le fantôme de la machine à laver."
+      "brief": "Un détective privé se trompe de cible et sympathise involontairement avec elle."
     },
     {
-      "text": "Un cosmonaute qui a oublié sa combinaison",
+      "text": "Mauvaise cachette",
       "category": "Aventure",
-      "brief": "Il réalise son oubli juste avant l'ouverture du sas de sortie."
+      "brief": "Deux cambrioleurs se réfugient dans la chambre d'un adolescent éveillé."
     },
     {
-      "text": "Coincés sous une tente de camping sous la tempête",
+      "text": "Contrôle d'identité",
+      "category": "Quotidien",
+      "brief": "Un agent de police contrôle un conducteur qui s'avère être son ancien sauveteur."
+    },
+    {
+      "text": "Erreur de casting",
+      "category": "Quotidien",
+      "brief": "Un réalisateur prend un véritable candidat en colère pour un acteur brillant."
+    },
+    {
+      "text": "Retrouvailles imprévues",
       "category": "Huis clos",
-      "brief": "L'eau monte et l'armature menace de céder à tout moment."
+      "brief": "Deux anciens associés séparés sur un litige se croisent dans une salle d'attente."
     },
     {
-      "text": "Le procès d'un écureuil accusé de vol de noisettes",
-      "category": "Insolite",
-      "brief": "Son avocat tente de plaider la clémence face au procureur hibou."
-    },
-    {
-      "text": "Une dispute entre un GPS et un conducteur",
+      "text": "Faux témoignage",
       "category": "Quotidien",
-      "brief": "La voix de synthèse refuse de recalculer l'itinéraire par fierté."
+      "brief": "Un avocat demande à son meilleur ami de fournir un alibi mensonger."
     },
     {
-      "text": "Deux plongeurs découvrent une boîte aux lettres sous l'eau",
+      "text": "Potion de vérité",
+      "category": "Insolite",
+      "brief": "Un scientifique fait tester par inadvertance un sérum de vérité à son assistant."
+    },
+    {
+      "text": "Chantage discret",
+      "category": "Quotidien",
+      "brief": "Un employé menace de révéler un compromis financier après avoir lu un document."
+    },
+    {
+      "text": "Fuite en voiture",
       "category": "Aventure",
-      "brief": "Ils se demandent s'ils doivent y poster leur courrier de vacances."
+      "brief": "Un chauffeur réalise trop tard que son passager vient d'émettre un délit."
     },
     {
-      "text": "Un test d'orientation scolaire pour un futur super-vilain",
-      "category": "Insolite",
-      "brief": "Le conseiller tente de canaliser ses ambitions destructrices vers des métiers stables."
-    },
-    {
-      "text": "Un client veut acheter une œuvre d'art invisible",
+      "text": "Dîner chez l'ex",
       "category": "Quotidien",
-      "brief": "Le galeriste tente de justifier le prix exorbitant du vide."
+      "brief": "Un homme présente sa nouvelle partenaire lors d'une invitation chez son ex-femme."
     },
     {
-      "text": "Coincés dans la caisse d'un camion de déménagement",
+      "text": "Colocataire surprise",
       "category": "Huis clos",
-      "brief": "Deux passagers clandestins réalisent qu'ils ne connaissent pas la destination."
+      "brief": "Un propriétaire s'aperçoit qu'un occupant clandestin vit dans son grenier."
     },
     {
-      "text": "Un cours de cuisine où tout prend feu",
+      "text": "Test de fidélité",
       "category": "Quotidien",
-      "brief": "Le chef insiste sur le fait que la carbonisation fait partie de la recette."
+      "brief": "Une femme recrute un comédien pour tester la sincérité de son fiancé."
     },
     {
-      "text": "Une rencontre fortuite au sommet de la Tour Eiffel",
+      "text": "Erreur de bagage",
       "category": "Aventure",
-      "brief": "Deux rivaux découvrent qu'ils ont tous deux un rendez-vous mystère au même endroit."
+      "brief": "Deux voyageurs échangent par inadvertance des valises identiques à l'aéroport."
     },
     {
-      "text": "Un horloger face au temps qui s'est arrêté",
+      "text": "Révélation sous anesthésie",
       "category": "Insolite",
-      "brief": "Les aiguilles figées le forcent à mener une enquête temporelle."
+      "brief": "Un patient sur le point de s'endormir confie un délit à son chirurgien."
     },
     {
-      "text": "Dans une capsule spatiale en route vers le Soleil",
-      "category": "Huis clos",
-      "brief": "L'ordinateur de bord annonce une erreur de trajectoire irréversible."
-    },
-    {
-      "text": "Une discussion animée dans une file d'attente de cinéma",
+      "text": "Négociation d'embauche",
       "category": "Quotidien",
-      "brief": "Deux cinéphiles débattent du spoil de la fin du film qu'ils vont voir."
+      "brief": "Un candidat exige des conditions démesurées en invoquant un compromis."
+    },
+    {
+      "text": "Garde à vue",
+      "category": "Huis clos",
+      "brief": "Deux suspects interrogés ensemble essaient d'accorder rapidement leurs versions."
+    },
+    {
+      "text": "La fausse voyante",
+      "category": "Insolite",
+      "brief": "Une arnaqueuse prédit un événement grave qui finit par se réaliser réellement."
+    },
+    {
+      "text": "Amour interdit",
+      "category": "Quotidien",
+      "brief": "Les enfants de deux maires rivaux révèlent leur relation secrète."
+    },
+    {
+      "text": "Dispute de voisinage",
+      "category": "Quotidien",
+      "brief": "Deux propriétaires s'opposent fermement concernant la haie séparant leurs terrains."
+    },
+    {
+      "text": "Erreur de chirurgie",
+      "category": "Insolite",
+      "brief": "Un chirurgien esthétique commet une confusion de dossier sur une personnalité publique."
+    },
+    {
+      "text": "Le testament volé",
+      "category": "Huis clos",
+      "brief": "Deux membres d'une même famille s'accusent d'avoir détruit un document crucial."
+    },
+    {
+      "text": "Rachat de dette",
+      "category": "Aventure",
+      "brief": "Un commerçant essaye de négocier un délai de paiement avec un prêt-à-porter peu scrupuleux."
+    },
+    {
+      "text": "Infiltration risquée",
+      "category": "Aventure",
+      "brief": "Un enquêteur sous couverture manque de se faire démasquer par son ancien voisin."
+    },
+    {
+      "text": "Conseil de famille",
+      "category": "Huis clos",
+      "brief": "Une fratrie doit décider du placement de leur père sans son accord."
+    },
+    {
+      "text": "Fausse identité",
+      "category": "Insolite",
+      "brief": "Un individu usurpe le titre d'expert pour présider un jury exigeant."
     }
   ],
   "categories": [
@@ -1817,85 +1817,85 @@
   ],
   "animals": [
     {
-      "text": "Un ours polaire claustrophobe",
-      "category": "Polaire"
-    },
-    {
-      "text": "Un corbeau mythomane",
+      "text": "Un pigeon somnambule",
       "category": "Urbain"
     },
     {
-      "text": "Une taupe voyante",
+      "text": "Un lama rancunier",
       "category": "Sauvage"
     },
     {
-      "text": "Un dauphin râleur",
+      "text": "Un requin phobique",
       "category": "Aquatique"
     },
     {
-      "text": "Une fourmi hypocondriaque",
-      "category": "Insecte"
-    },
-    {
-      "text": "Un chihuahua autoritaire",
-      "category": "Domestique"
-    },
-    {
-      "text": "Un morse coquet",
+      "text": "Un pingouin hyperactif",
       "category": "Polaire"
     },
     {
-      "text": "Un raton-laveur maniaque",
-      "category": "Urbain"
+      "text": "Un moustique timide",
+      "category": "Insecte"
     },
     {
-      "text": "Un hamster insomniaque",
+      "text": "Un chat snob",
       "category": "Domestique"
     },
     {
-      "text": "Un poulpe kleptomane",
+      "text": "Un sanglier poète",
+      "category": "Sauvage"
+    },
+    {
+      "text": "Un phoque nostalgique",
+      "category": "Polaire"
+    },
+    {
+      "text": "Une mouette bavarde",
+      "category": "Urbain"
+    },
+    {
+      "text": "Un crabe paranoïaque",
       "category": "Aquatique"
     }
   ],
   "objects": [
     {
-      "text": "Un réveil cassé",
+      "text": "Un testament raturé",
       "category": "Quotidien"
     },
     {
-      "text": "Un dentier en or",
+      "text": "Une alliance d'occasion",
+      "category": "Quotidien"
+    },
+    {
+      "text": "Un test de grossesse",
       "category": "Insolite"
     },
     {
-      "text": "Un drone miniature",
+      "text": "Une urne funéraire",
+      "category": "Insolite"
+    },
+    {
+      "text": "Un téléphone crypté",
       "category": "Technologie"
     },
     {
-      "text": "Une cravate tachée",
+      "text": "Un traceur GPS",
+      "category": "Technologie"
+    },
+    {
+      "text": "Une robe d'avocat",
       "category": "Vêtement"
     },
     {
-      "text": "Une clé à molette",
+      "text": "Un gilet pare-balles",
+      "category": "Vêtement"
+    },
+    {
+      "text": "Un marteau de juge",
       "category": "Outil"
     },
     {
-      "text": "Un journal intime verrouillé",
-      "category": "Quotidien"
-    },
-    {
-      "text": "Un faux passeport",
-      "category": "Insolite"
-    },
-    {
-      "text": "Un talkie-walkie enfant",
-      "category": "Technologie"
-    },
-    {
-      "text": "Un chapeau de magicien",
-      "category": "Vêtement"
-    },
-    {
-      "text": "Une pince monseigneur",
+      "text": "Un stéthoscope cassé",
       "category": "Outil"
     }
   ]
