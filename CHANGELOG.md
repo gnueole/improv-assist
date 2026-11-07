@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Security
+
+- **Next.js 16.2.9 → 16.4.5, React 19.2.7 → 19.3.1.** `npm audit` rated the
+  locked Next.js critical (advisories up to 16.4.0, among them a denial of
+  service through Server Actions and a middleware bypass). Production was already
+  being probed for it: from 2026-10-24 to 2026-10-31 the container logged 18
+  `Failed to find Server Action "x"`, a scanner sending a fake action id. The
+  transitive advisories (postcss, sharp, nanoid, source-map-js,
+  baseline-browser-mapping) are cleared by the same lockfile refresh:
+  `npm audit --omit=dev` now reports none. `next build` passes.
+
 ## [0.17.0] - 2026-09-26
 
 ### Added
