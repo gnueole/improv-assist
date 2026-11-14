@@ -253,658 +253,658 @@
   ],
   "categories": [
     {
-      "text": "À la manière de Molière",
-      "description": "Parler avec un langage soutenu et théâtral du XVIIe siècle."
+      "text": "Chuchoté",
+      "description": "Les comédiens doivent jouer toute la scène uniquement en chuchotant."
     },
     {
-      "text": "Sans paroles (mime)",
-      "description": "Jouer la scène entièrement en silence en utilisant le corps."
+      "text": "Chiffres uniquement",
+      "description": "Les comédiens ne peuvent parler qu'en utilisant des nombres et des chiffres."
     },
     {
-      "text": "En rimes",
-      "description": "Chaque réplique doit rimer avec la précédente ou au sein de la tirade."
+      "text": "Point de vue public",
+      "description": "Chaque personnage s'adresse directement au public pour donner sa version des faits."
     },
     {
-      "text": "Comédie musicale",
-      "description": "Chanter et danser à intervalles réguliers durant l'improvisation."
+      "text": "Freeze éclair",
+      "description": "Un mot précis fige un personnage pendant que l'autre continue de jouer."
     },
     {
-      "text": "Théâtre de boulevard",
-      "description": "Jeu énergique, quiproquos, portes qui claquent et exagération."
+      "text": "Écho verbal",
+      "description": "Chaque réplique doit répéter le dernier mot de la réplique précédente."
     },
     {
-      "text": "Film noir / Détective",
-      "description": "Ambiance mystérieuse, voix off dramatique et personnages cyniques."
+      "text": "Ralenti physique",
+      "description": "Toute la scène est jouée en mouvement ultra-lent."
     },
     {
-      "text": "Western",
-      "description": "Silences lourds, regards tendus, duels et accent du Far West."
+      "text": "Espionnage parodique",
+      "description": "Des personnages ordinaires agissent comme des agents secrets suréquipés."
     },
     {
-      "text": "Science-fiction",
-      "description": "Intégrer des technologies imaginaires, des bruits de robots et un jargon futuriste."
+      "text": "Accents régionaux",
+      "description": "Chaque comédien doit adopter un accent très marqué et distinct."
     },
     {
-      "text": "Téléréalité",
-      "description": "Confessionnaux face caméra, drames superficiels et expressions clichés."
+      "text": "Quiproquo permanent",
+      "description": "Toute la scène repose sur un malentendu que personne ne cherche à clarifier."
     },
     {
-      "text": "Dessin animé",
-      "description": "Mouvements exagérés, voix aiguës ou graves et lois de la physique bafouées."
+      "text": "Saut dans le temps",
+      "description": "La scène doit faire un flashback soudain vers un événement passé."
     },
     {
-      "text": "Pièce de Shakespeare",
-      "description": "Tirades tragiques, trahisons, références au destin et poésie sombre."
+      "text": "Chronologie inversée",
+      "description": "La scène commence par la fin et remonte le temps jusqu'au début."
     },
     {
-      "text": "Changement de rythme",
-      "description": "Changer de vitesse (ralenti, accéléré, pause) au signal des spectateurs."
+      "text": "Interview journalistique",
+      "description": "Un personnage pose des questions insistantes pendant que l'autre esquive."
     },
     {
-      "text": "Roman-photo",
-      "description": "Les joueurs se figent et disent à haute voix leurs pensées intimes."
+      "text": "Feuilleton dramatique",
+      "description": "Une scène intense avec des révélations fracassantes à chaque réplique."
     },
     {
-      "text": "Sans la lettre E",
-      "description": "Interdiction absolue de prononcer la lettre ou le son 'E'."
+      "text": "Comédie dramatique",
+      "description": "Un ton sérieux et émouvant entrecoupé de moments d'humour sincère."
     },
     {
-      "text": "Abécédaire",
-      "description": "Chaque réplique commence par la lettre suivante de l'alphabet (A, B, C...)."
+      "text": "Décor invisible",
+      "description": "Les personnages doivent manipuler au moins trois objets imaginaires avec précision."
     },
     {
-      "text": "Doublage étranger",
-      "description": "Deux joueurs miment et parlent une langue imaginaire, deux autres traduisent."
+      "text": "Espace restreint",
+      "description": "Les comédiens doivent jouer la scène confinés dans un espace réduit."
     },
     {
-      "text": "Peplum",
-      "description": "Ambiance romaine ou grecque antique, toges imaginaires et grandeur tragique."
+      "text": "Voix off narrative",
+      "description": "Un comédien hors scène commente les actions et pensées des personnages."
     },
     {
-      "text": "Mélo-drame",
-      "description": "Émotions poussées à l'extrême, larmes faciles et destins brisés."
+      "text": "Mouvements synchronisés",
+      "description": "Les deux personnages doivent faire tous leurs gestes en même temps."
     },
     {
-      "text": "Film d'horreur",
-      "description": "Suspense, bruits suspects, peur panique et décisions absurdes."
+      "text": "Échange de rôles",
+      "description": "Au signal, les comédiens échangent leurs personnages et leurs attitudes."
     },
     {
-      "text": "Sans adjectif",
-      "description": "Interdiction d'utiliser le moindre adjectif qualificatif."
+      "text": "Poème slam",
+      "description": "Les comédiens s'expriment sur un rythme parlé urbain et poétique."
     },
     {
-      "text": "Le mot imposé",
-      "description": "Chaque réplique doit intégrer un mot bizarre suggéré au départ."
+      "text": "Dispute courtoise",
+      "description": "Les comédiens se disputent violemment mais en restant extrêmement polis."
     },
     {
-      "text": "Télé-achat",
-      "description": "Présenter des objets ordinaires comme des révolutions technologiques indispensables."
+      "text": "Absurde du quotidien",
+      "description": "Les échanges sont logiques en apparence mais totalement décalés sur le fond."
     },
     {
-      "text": "Jeu de cartes",
-      "description": "Chaque joueur adopte le comportement d'une carte de jeu (Roi, Valet, Joker...)."
+      "text": "Le secret intime",
+      "description": "Chaque personnage a un secret lourd qu'il doit cacher à tout prix."
     },
     {
-      "text": "Conférence d'expert",
-      "description": "Expliquer un sujet absurde avec un sérieux académique absolu."
+      "text": "Service client tendu",
+      "description": "Un personnage doit traiter la plainte absurde de l'autre très professionnellement."
     },
     {
-      "text": "La marionnette",
-      "description": "Un joueur bouge les membres de l'autre qui doit justifier ses postures."
+      "text": "Tension familiale",
+      "description": "Une rancœur sous-jacente entre proches explose durant un événement banal."
     },
     {
-      "text": "Censuré !",
-      "description": "Bip sonore imaginaire à chaque mot grossier ou inapproprié."
+      "text": "Piège embarrassant",
+      "description": "Un personnage cherche à faire avouer une faute à l'autre sans l'accuser directement."
     },
     {
-      "text": "Changement d'humeur",
-      "description": "Changer d'émotion instantanément à chaque claquement de doigts."
+      "text": "Appel téléphonique",
+      "description": "Toute l'interaction se fait à travers une conversation à distance."
     },
     {
-      "text": "Jeu de rimes AABB",
-      "description": "Suivre un schéma de rimes strict tout au long des échanges."
+      "text": "Discours interrompu",
+      "description": "Un personnage veut faire une annonce solennelle mais est sans cesse dérangé."
     },
     {
-      "text": "Sans verbe",
-      "description": "Construire des phrases nominales uniquement."
+      "text": "Théorie du complot",
+      "description": "Les personnages interprètent chaque petit détail comme une grande conspiration."
     },
     {
-      "text": "Traduction simultanée",
-      "description": "Un joueur parle en jargon technique ou argot, l'autre traduit en français soutenu."
+      "text": "Explication de texte",
+      "description": "Deux partenaires règlent leurs comptes sur un ton posé mais glacial."
     },
     {
-      "text": "Sitcom américaine",
-      "description": "Rires enregistrés imaginaires, punchlines et pauses complices avec le public."
+      "text": "Interrogatoire officieux",
+      "description": "Un personnage soupçonne l'autre et cherche à le faire avouer."
     },
     {
-      "text": "Opéra tragique",
-      "description": "Toutes les répliques doivent être chantées avec lyrisme."
+      "text": "Rupture publique",
+      "description": "Une scène de séparation tendue qui se déroule dans un lieu inapproprié."
     },
     {
-      "text": "Le monologue intérieur",
-      "description": "Exprimer à voix haute ses pensées cachées après chaque réplique."
+      "text": "Dialogue de sourds",
+      "description": "Les personnages parlent de sujets différents sans s'en rendre compte."
     },
     {
-      "text": "La phrase finale imposée",
-      "description": "La scène doit obligatoirement se terminer par une phrase précise."
+      "text": "Jalousie excessive",
+      "description": "Un personnage interprète la moindre parole comme une preuve de trahison."
     },
     {
-      "text": "Langue inventée (Gromolo)",
-      "description": "S'exprimer uniquement dans un charabia expressif sans mots réels."
+      "text": "Entretien d'embauche",
+      "description": "Un rapport de force entre un candidat prêt à tout et un recruteur exigeant."
     },
     {
-      "text": "Le conte de fées",
-      "description": "Raconter et jouer une histoire morale avec princes, sorcières et magie."
+      "text": "Dispute d'héritage",
+      "description": "Un conflit materiel et affectif éclate autour du partage d'un bien."
     },
     {
-      "text": "Théâtre classique (Alexandrins)",
-      "description": "Parler en vers de 12 syllabes (ou essayer de s'en approcher)."
+      "text": "Conflit de voisinage",
+      "description": "Deux voisins s'affrontent sur leurs habitudes de vie incompatibles."
     },
     {
-      "text": "Cinéma muet",
-      "description": "Mimes expressifs, accompagnement musical imaginaire et cartons de texte parlés."
+      "text": "Objet compromettant",
+      "description": "Un personnage découvre un élément gênant appartenant à l'autre."
     },
     {
-      "text": "Publicité télévisée",
-      "description": "Scène coupée par des slogans publicitaires enthousiastes."
+      "text": "Retrouvailles inattendues",
+      "description": "Deux anciens amis se revoient après des années de silence."
     },
     {
-      "text": "Le tribunal",
-      "description": "Chaque joueur tente d'accuser l'autre d'un crime ridicule avec des termes juridiques."
+      "text": "Confession nocturne",
+      "description": "Une révélation importante faite tard la nuit sous le coup de la fatigue."
     },
     {
-      "text": "Le guide touristique",
-      "description": "Présenter le lieu comme une attraction touristique majeure."
+      "text": "Repas de belle-famille",
+      "description": "Sauver les apparences malgré des désaccords idéologiques profonds."
     },
     {
-      "text": "La comédie italienne",
-      "description": "Parler fort, grands gestes, passion et accent chantant."
+      "text": "Chantage affectif",
+      "description": "Un personnage manipule l'autre en jouant habilement sur sa culpabilité."
     },
     {
-      "text": "Le film d'action",
-      "description": "Cascades, explosions mimées, répliques percutantes et suspense insoutenable."
+      "text": "Annonce difficile",
+      "description": "Un personnage doit révéler une triste vérité sans oser le dire franchement."
     },
     {
-      "text": "La bande-annonce",
-      "description": "Résumer une histoire fictive en voix off dramatique et scènes courtes."
+      "text": "Gestion de crise",
+      "description": "Un personnage panique complètement pendant que l'autre tente de le raisonner."
     },
     {
-      "text": "Le jeu des questions",
-      "description": "Toutes les répliques doivent obligatoirement être des questions."
+      "text": "Mensonge commun",
+      "description": "Deux personnes doivent s'accorder rapidement sur une fausse version des faits."
     },
     {
-      "text": "Le poète maudit",
-      "description": "S'exprimer avec mélancolie, métaphores sombres et désespoir lyrique."
+      "text": "Négociation serrée",
+      "description": "Tenter de conclure un accord financier ou personnel sans céder du terrain."
     },
     {
-      "text": "La marionnette humaine",
-      "description": "Les mouvements d'un joueur sont dictés par les gestes d'un autre joueur."
+      "text": "Covoiturage forcé",
+      "description": "Deux inconnus obligés de partager un long trajet malgré leurs différences."
     },
     {
-      "text": "Le documentaire animalier",
-      "description": "Un narrateur commente les actions des joueurs comme s'ils étaient des animaux sauvages."
+      "text": "La gaffe irréparable",
+      "description": "Un personnage révèle sans le vouloir une information dévastatrice."
     },
     {
-      "text": "La comédie romantique",
-      "description": "Rencontre fortuite, malentendus amoureux, déclaration et fin heureuse."
+      "text": "Adieu sur le départ",
+      "description": "Les derniers moments poignants avant le départ définitif d'un proche."
     },
     {
-      "text": "Le jeu vidéo",
-      "description": "Mouvements saccadés, temps de chargement, effets sonores et barres de vie imaginaires."
+      "text": "Rivalité interne",
+      "description": "Deux collègues luttent discrètement pour obtenir la même opportunité."
     }
   ],
   "themes": [
     {
-      "text": "Le testament caché",
+      "text": "L'héritage du grand-père",
       "category": "Libre"
     },
     {
-      "text": "Dernier train pour Paris",
-      "category": "Poétique"
-    },
-    {
-      "text": "Un dîner trop calme",
+      "text": "Panne de réseau",
       "category": "Drôle"
     },
     {
-      "text": "Le secret de famille",
-      "category": "Libre"
-    },
-    {
-      "text": "Retrouvailles sur le quai",
-      "category": "Poétique"
-    },
-    {
-      "text": "Mensonge de dernière minute",
+      "text": "La recette volante",
       "category": "Drôle"
     },
     {
-      "text": "La rupture au restaurant",
-      "category": "Libre"
-    },
-    {
-      "text": "Sous la même pluie",
+      "text": "Le bouquet fané",
       "category": "Poétique"
     },
     {
-      "text": "Erreur de destinataire",
+      "text": "Compte à rebours",
+      "category": "Libre"
+    },
+    {
+      "text": "Le chien perdu",
       "category": "Drôle"
     },
     {
-      "text": "Le pacte d'enfance",
-      "category": "Libre"
-    },
-    {
-      "text": "Un silence partagé",
+      "text": "Dernières vendanges",
       "category": "Poétique"
     },
     {
-      "text": "Le voisin trop curieux",
+      "text": "Un appel anonyme",
+      "category": "Libre"
+    },
+    {
+      "text": "L'échange de garde",
+      "category": "Libre"
+    },
+    {
+      "text": "La contravention contestée",
       "category": "Drôle"
     },
     {
-      "text": "La lettre jamais envoyée",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le grand saut",
+      "text": "Un trésor au grenier",
       "category": "Libre"
     },
     {
-      "text": "Une alliance perdue",
-      "category": "Libre"
-    },
-    {
-      "text": "Coup de foudre tardif",
-      "category": "Poétique"
-    },
-    {
-      "text": "La panne d'ascenseur",
+      "text": "La bague trop petite",
       "category": "Drôle"
     },
     {
-      "text": "L'aveu inattendu",
-      "category": "Libre"
+      "text": "Sur le toit",
+      "category": "Poétique"
     },
     {
-      "text": "Le premier rendez-vous",
+      "text": "L'ampoule grillée",
       "category": "Drôle"
     },
     {
-      "text": "Regrets d'un soir",
-      "category": "Poétique"
-    },
-    {
-      "text": "La clé manquante",
+      "text": "Déménagement d'urgence",
       "category": "Libre"
     },
     {
-      "text": "Un gâteau d'anniversaire raté",
+      "text": "Passeport périmé",
       "category": "Drôle"
     },
     {
-      "text": "Le dernier adieu",
-      "category": "Poétique"
-    },
-    {
-      "text": "Changement de plan",
+      "text": "Dernier jour de travail",
       "category": "Libre"
     },
     {
-      "text": "Le témoin gênant",
-      "category": "Libre"
-    },
-    {
-      "text": "Une nuit blanche",
+      "text": "L'odeur des pins",
       "category": "Poétique"
     },
     {
-      "text": "Le quiproquo du siècle",
+      "text": "Rivalité au bureau",
+      "category": "Libre"
+    },
+    {
+      "text": "La ceinture noire",
       "category": "Drôle"
     },
     {
-      "text": "La trahison amicale",
+      "text": "Le mur mitoyen",
       "category": "Libre"
     },
     {
-      "text": "L'odeur du café chaud",
+      "text": "L'album souvenir",
       "category": "Poétique"
     },
     {
-      "text": "Un invité surprise",
+      "text": "L'amende imminente",
       "category": "Drôle"
     },
     {
-      "text": "La valise échangée",
+      "text": "Dans la salle d'attente",
       "category": "Libre"
     },
     {
-      "text": "Le premier flocon",
-      "category": "Poétique"
+      "text": "Le ticket gagnant",
+      "category": "Libre"
     },
     {
-      "text": "Une facture salée",
+      "text": "L'erreur de réservation",
       "category": "Drôle"
     },
     {
-      "text": "Le choix difficile",
+      "text": "Ligne de départ",
       "category": "Libre"
     },
     {
-      "text": "Le banc des amoureux",
+      "text": "Une dette effacée",
+      "category": "Libre"
+    },
+    {
+      "text": "Au fond du jardin",
       "category": "Poétique"
     },
     {
-      "text": "Un mensonge d'enfant",
-      "category": "Libre"
-    },
-    {
-      "text": "Le colocataire idéal",
+      "text": "Le réveil en retard",
       "category": "Drôle"
     },
     {
-      "text": "La promesse tenue",
-      "category": "Poétique"
-    },
-    {
-      "text": "Le retour de l'ex",
+      "text": "Le taxi bloqué",
       "category": "Drôle"
     },
     {
-      "text": "Une vieille photo",
-      "category": "Libre"
-    },
-    {
-      "text": "Le souffle du vent",
+      "text": "L'ombre des tilleuls",
       "category": "Poétique"
     },
     {
-      "text": "Le contrôle fiscal",
+      "text": "La fausse signature",
+      "category": "Libre"
+    },
+    {
+      "text": "Chantage affectif",
+      "category": "Libre"
+    },
+    {
+      "text": "Le manteau trop grand",
       "category": "Drôle"
     },
     {
-      "text": "Un lourd secret",
-      "category": "Libre"
-    },
-    {
-      "text": "Le dernier vol",
-      "category": "Poétique"
-    },
-    {
-      "text": "La dispute pour rien",
+      "text": "L'addition partagée",
       "category": "Drôle"
     },
     {
-      "text": "Le nouveau départ",
-      "category": "Libre"
-    },
-    {
-      "text": "L'ombre d'un doute",
+      "text": "Sous les étoiles",
       "category": "Poétique"
     },
     {
-      "text": "Le faux coupable",
-      "category": "Libre"
-    },
-    {
-      "text": "Entretien d'embauche absurde",
+      "text": "Le cours de cuisine",
       "category": "Drôle"
     },
     {
-      "text": "Le phare dans la nuit",
+      "text": "Le dossier confondu",
+      "category": "Libre"
+    },
+    {
+      "text": "Une offre d'achat",
+      "category": "Libre"
+    },
+    {
+      "text": "Le piano accordé",
       "category": "Poétique"
+    },
+    {
+      "text": "La dispute du parking",
+      "category": "Drôle"
+    },
+    {
+      "text": "Changement de propriétaire",
+      "category": "Libre"
+    },
+    {
+      "text": "La lettre recommandée",
+      "category": "Libre"
+    },
+    {
+      "text": "Le costume emprunté",
+      "category": "Drôle"
+    },
+    {
+      "text": "Lumière de l'aube",
+      "category": "Poétique"
+    },
+    {
+      "text": "Une surprise gâchée",
+      "category": "Drôle"
+    },
+    {
+      "text": "La promesse du soir",
+      "category": "Poétique"
+    },
+    {
+      "text": "Le discours d'adieu",
+      "category": "Libre"
+    },
+    {
+      "text": "L'inauguration ratée",
+      "category": "Drôle"
     }
   ],
   "echauffements": [
     {
-      "text": "Le clap en cercle",
-      "duration": "5 min",
-      "description": "Les comédiens se passent un son et un clap le plus rapidement possible autour du cercle."
-    },
-    {
-      "text": "Zip Zap Zop",
+      "text": "Le secret partagé",
       "duration": "3 min",
-      "description": "Un joueur pointe un autre en disant Zip, qui pointe un autre avec Zap, puis Zop."
+      "description": "Un joueur chuchote un secret dramatique à son partenaire qui doit réagir immédiatement avec stupéfaction."
     },
     {
-      "text": "Le miroir inversé",
+      "text": "L'avocat défenseur",
       "duration": "5 min",
-      "description": "Deux joueurs font des mouvements, mais l'un reproduit exactement le contraire de l'autre."
+      "description": "Un joueur doit défendre une faute banale mais embarrassante commise par son coéquipier."
     },
     {
-      "text": "La surenchère d'excuses",
+      "text": "Interruption d'urgence",
+      "duration": "2 min",
+      "description": "Entrer en scène pour interrompre une conversation banale en annonçant une nouvelle cruciale."
+    },
+    {
+      "text": "Les deux concierges",
       "duration": "5 min",
-      "description": "Deux joueurs s'excusent à tour de rôle en inventant des raisons de plus en plus absurdes."
+      "description": "Deux voisins colportent des rumeurs de quartier en inventant des secrets de plus en plus intimes."
     },
     {
-      "text": "Le téléphone sans fil",
-      "duration": "5 min",
-      "description": "Une mimique ou une phrase est transmise de dos en dos le long d'une ligne."
-    },
-    {
-      "text": "L'expert et le traducteur",
-      "duration": "5 min",
-      "description": "Un joueur parle une langue inventée et l'autre traduit simultanément pour le public."
-    },
-    {
-      "text": "Le carré suisse",
-      "duration": "7 min",
-      "description": "Quatre joueurs sur les côtés d'un carré changent de scène à chaque rotation de 90 degrés."
-    },
-    {
-      "text": "L'alphabet impro",
-      "duration": "5 min",
-      "description": "Chaque réplique du dialogue doit commencer par la lettre suivante de l'alphabet."
-    },
-    {
-      "text": "Le jeu du 1 à 20",
+      "text": "Reproche silencieux",
       "duration": "3 min",
-      "description": "Le groupe compte jusqu'à 20 sans se fixer d'ordre ni parler en même temps."
+      "description": "Fixer son partenaire avec insistance jusqu'à ce qu'il devine et avoue sa faute."
     },
     {
-      "text": "Le cadavre exquis vocal",
+      "text": "Entretien d'embauche express",
       "duration": "5 min",
-      "description": "Chaque joueur ajoute un mot pour former des phrases cohérentes en groupe."
+      "description": "Justifier un CV totalement falsifié en répondant aux questions piégées du recruteur."
     },
     {
-      "text": "Les émotions en chaîne",
-      "duration": "5 min",
-      "description": "Un joueur transmet une émotion à son voisin uniquement par un regard expressif."
-    },
-    {
-      "text": "Le voleur de démarche",
-      "duration": "5 min",
-      "description": "Les joueurs marchent et adoptent progressivement la démarche de la personne devant eux."
-    },
-    {
-      "text": "Changement de statut",
-      "duration": "5 min",
-      "description": "À chaque signal sonore, les joueurs inversent leur niveau de dominance sociale dans la scène."
-    },
-    {
-      "text": "La rime collective",
-      "duration": "3 min",
-      "description": "Le groupe crée un poème improvisé où chaque participant doit rimer avec le précédent."
-    },
-    {
-      "text": "Le stop et saute",
-      "duration": "5 min",
-      "description": "Au mot Stop un joueur se bloque, au mot Saute un autre prend sa place exacte."
-    },
-    {
-      "text": "La machine humaine",
-      "duration": "5 min",
-      "description": "Chaque comédien entre en scène pour ajouter un bruit et un mouvement répétitif au groupe."
-    },
-    {
-      "text": "L'objection rapide",
+      "text": "Le témoin oculaire",
       "duration": "4 min",
-      "description": "Un joueur fait des affirmations simples et son partenaire doit immédiatement le contredire."
+      "description": "Raconter un incident de rue en intégrant les détails improvisés par les témoins du groupe."
     },
     {
-      "text": "Le chef d'orchestre",
+      "text": "Accord aveugle",
+      "duration": "3 min",
+      "description": "Accepter immédiatement toutes les propositions de l'autre personnage sans jamais hésiter."
+    },
+    {
+      "text": "Le voisin gênant",
       "duration": "5 min",
-      "description": "Un joueur au centre doit deviner qui mène discrètement les mouvements du groupe."
+      "description": "Tenter d'écourter poliment une conversation avec un voisin trop intrusif."
     },
     {
-      "text": "Le vendeur d'objets",
+      "text": "L'annonce d'élection",
+      "duration": "3 min",
+      "description": "Prononcer un discours solennel pour résoudre un problème domestique totalement insignifiant."
+    },
+    {
+      "text": "La poignée de main",
+      "duration": "2 min",
+      "description": "Saisir la main d'un partenaire et adopter instantanément une relation d'amitié ou de rivalité."
+    },
+    {
+      "text": "L'interrogatoire croisé",
       "duration": "5 min",
-      "description": "Un joueur tente de vendre un objet invisible en manipulant sa forme fictive."
+      "description": "Deux enquêteurs cuisinent un suspect qui doit maintenir un alibi fragile."
     },
     {
-      "text": "Le portrait craché",
+      "text": "Dispute d'héritage",
       "duration": "5 min",
-      "description": "Deux comédiens décrivent à tour de rôle les détails physiques d'un voisin imaginaire."
+      "description": "Se disputer un objet sans valeur en lui prêtant un souvenir familial sentimental."
     },
     {
-      "text": "L'accent voyageur",
-      "duration": "5 min",
-      "description": "Un accent régional ou étranger se transmet d'un joueur à l'autre au signal du meneur."
+      "text": "Le coup de téléphone",
+      "duration": "3 min",
+      "description": "Simuler une conversation téléphonique en révélant progressivement l'identité de l'interlocuteur."
     },
     {
-      "text": "La surenchère d'émotions",
-      "duration": "5 min",
-      "description": "Deux joueurs jouent une scène simple en intensifiant leur émotion à chaque réplique."
-    },
-    {
-      "text": "Le duel de compliments",
+      "text": "L'aveu tardif",
       "duration": "4 min",
-      "description": "Deux comédiens s'affrontent en se lançant des éloges exagérés sans jamais flancher."
+      "description": "Confesser un mensonge vieux de plusieurs années dès la première réplique de la scène."
     },
     {
-      "text": "Répliques en trois mots",
+      "text": "Le vendeur sous pression",
       "duration": "5 min",
-      "description": "Les comédiens improvisent une scène en utilisant strictement trois mots par prise de parole."
+      "description": "Convaincre un client méfiant d'acheter un véhicule d'occasion visiblement défectueux."
     },
     {
-      "text": "La double réflexion",
-      "duration": "5 min",
-      "description": "Deux joueurs doublent la voix de deux autres comédiens qui miment l'action sur scène."
-    },
-    {
-      "text": "L'appel du regard",
-      "duration": "3 min",
-      "description": "Les comédiens échangent leurs places dans l'espace uniquement après un contact visuel validé."
-    },
-    {
-      "text": "Le mime collectif",
-      "duration": "5 min",
-      "description": "Tout le groupe construit un lieu complexe uniquement en manipulant des objets invisibles."
-    },
-    {
-      "text": "La question permanente",
-      "duration": "5 min",
-      "description": "Le dialogue de la scène doit se poursuivre uniquement en posant des questions cohérentes."
-    },
-    {
-      "text": "L'ascenseur émotionnel",
-      "duration": "5 min",
-      "description": "Les comédiens traversent cinq niveaux d'intensité croissante d'une même émotion imposée."
-    },
-    {
-      "text": "Le mot pivot",
-      "duration": "5 min",
-      "description": "Dès qu'un joueur prononce un mot clé, le thème de la scène bascule instantanément."
-    },
-    {
-      "text": "Le chœur grec",
-      "duration": "5 min",
-      "description": "Le groupe répète et amplifie les derniers mots prononcés par le comédien principal."
-    },
-    {
-      "text": "Le jeu du prénom",
-      "duration": "3 min",
-      "description": "Se lancer une balle imaginaire en nommant clairement le destinataire avant le lancer."
-    },
-    {
-      "text": "Le changement de lieu",
-      "duration": "5 min",
-      "description": "Au frappe de mains, les comédiens adaptent immédiatement leur jeu à un nouveau décor."
-    },
-    {
-      "text": "La focalisation",
-      "duration": "3 min",
-      "description": "Suivre un partenaire du regard dans l'espace sans jamais rompre l'attention portée."
-    },
-    {
-      "text": "Le ping-pong de mots",
-      "duration": "3 min",
-      "description": "Deux comédiens se renvoient des mots par association d'idées à un rythme soutenu."
-    },
-    {
-      "text": "La marionnette humaine",
-      "duration": "5 min",
-      "description": "Un comédien manipule délicatement les membres d'un autre qui reste totalement passif."
-    },
-    {
-      "text": "L'histoire en un mot",
+      "text": "Retrouvailles inattendues",
       "duration": "4 min",
-      "description": "Raconter une histoire complète en disant un seul mot chacun son tour dans le cercle."
+      "description": "Aborder un inconnu en faisant semblant de le reconnaître comme un ancien ami d'enfance."
     },
     {
-      "text": "Le chef de rang",
+      "text": "Le dilemme moral",
       "duration": "5 min",
-      "description": "Marcher en file indienne en adoptant immédiatement le niveau d'énergie du leader."
+      "description": "Prendre une décision difficile sous les conseils contradictoires de deux proches."
     },
     {
-      "text": "La plainte absurde",
-      "duration": "5 min",
-      "description": "Un client se plaint auprès d'un commerçant pour un motif du quotidien totalement injustifié."
-    },
-    {
-      "text": "L'inversion des rôles",
-      "duration": "5 min",
-      "description": "Au signal, les deux comédiens échangent leurs personnages et leurs positions instantanément."
-    },
-    {
-      "text": "La sculpture vivante",
-      "duration": "5 min",
-      "description": "Modifier la posture d'un partenaire pour lui proposer une nouvelle attitude corporelle."
-    },
-    {
-      "text": "Le bavard et muet",
-      "duration": "5 min",
-      "description": "Un personnage parle sans arrêt tandis que l'autre réagit uniquement par des mimiques."
-    },
-    {
-      "text": "L'amplification du geste",
-      "duration": "4 min",
-      "description": "Reproduire le geste d'un partenaire en l'exagérant un peu plus à chaque passage."
-    },
-    {
-      "text": "Le monologue interrompu",
-      "duration": "5 min",
-      "description": "Un joueur raconte un souvenir et les autres lui imposent des mots pour relancer la suite."
-    },
-    {
-      "text": "Le ralenti extrême",
-      "duration": "5 min",
-      "description": "Mimer une scène du quotidien intense à une vitesse de déplacement extrêmement réduite."
-    },
-    {
-      "text": "Le chuchotement collectif",
+      "text": "Contrat sous contrainte",
       "duration": "3 min",
-      "description": "Diffuser une rumeur dans la pièce en la répétant à voix basse de voisin en voisin."
+      "description": "Négocier un accord financier tout en essayant de cacher une grosse faute personnelle."
     },
     {
-      "text": "La marche des âges",
+      "text": "Le conseil de famille",
       "duration": "5 min",
-      "description": "Faire évoluer son corps de l'enfance à la vieillesse en traversant la pièce à pied."
+      "description": "Annoncer un choix de vie radical à des proches aux réactions très opposées."
     },
     {
-      "text": "L'écho corporel",
+      "text": "L'addition litigieuse",
       "duration": "4 min",
-      "description": "Un joueur prend une posture physique et tout le groupe l'adopte dans la seconde."
+      "description": "Négocier le partage d'une note de restaurant disproportionnée à la fin d'un repas entre amis."
     },
     {
-      "text": "Le rendez-vous manqué",
-      "duration": "5 min",
-      "description": "Deux comédiens cherchent à se croiser dans une foule sans jamais réussir à se trouver."
+      "text": "Le rival de bureau",
+      "duration": "4 min",
+      "description": "Féliciter hypocritement un collègue qui vient d'obtenir la promotion que vous visiez."
     },
     {
-      "text": "La réaction en chaîne",
+      "text": "La dispute de couple",
       "duration": "5 min",
-      "description": "Un petit événement du quotidien déclenche une cascade de réactions chez tous les joueurs."
+      "description": "S'énerver sur un détail quotidien insignifiant qui masque une rancœur beaucoup plus profonde."
+    },
+    {
+      "text": "L'expert autoproclamé",
+      "duration": "4 min",
+      "description": "Donner des conseils très précis à quelqu'un sur un domaine qu'on ne maîtrise pas."
+    },
+    {
+      "text": "Le guichet fermé",
+      "duration": "4 min",
+      "description": "Tenter d'obtenir un document administratif urgent auprès d'un agent d'accueil inflexible."
+    },
+    {
+      "text": "La mise au point",
+      "duration": "3 min",
+      "description": "Recadrer fermement un ami qui a dépassé les bornes tout en préservant la relation."
+    },
+    {
+      "text": "Le pacte secret",
+      "duration": "4 min",
+      "description": "Passer une alliance implicite par le regard pour piéger un troisième personnage."
+    },
+    {
+      "text": "La réconciliation forcée",
+      "duration": "5 min",
+      "description": "Tenter de faire la paix avec un ennemi sous la pression d'un médiateur autoritaire."
+    },
+    {
+      "text": "L'invité mystère",
+      "duration": "4 min",
+      "description": "Accueillir chaleureusement un inconnu chez soi sans avouer qu'on oublie son identité."
+    },
+    {
+      "text": "Le faux alibi",
+      "duration": "5 min",
+      "description": "Inventer à deux un emploi du temps commun pour se couvrir mutuellement face à une accusation."
+    },
+    {
+      "text": "La rumeur incontrôlable",
+      "duration": "4 min",
+      "description": "Transmettre une confidence en l'exagérant à chaque fois qu'elle passe à un nouveau personnage."
+    },
+    {
+      "text": "L'entretien d'évaluation",
+      "duration": "5 min",
+      "description": "Mener un bilan annuel tendu entre un patron intransigeant et un employé ambitieux."
+    },
+    {
+      "text": "Le malentendu amoureux",
+      "duration": "4 min",
+      "description": "Déclarer ses sentiments à une personne qui pense qu'on parle de son meilleur ami."
+    },
+    {
+      "text": "La dispute de voisins",
+      "duration": "5 min",
+      "description": "Réclamer l'arrêt d'une nuisance sonore nocturne tout en restant faussement courtois."
+    },
+    {
+      "text": "Le passager impatient",
+      "duration": "3 min",
+      "description": "Exprimer son énervement face à un retard de train auprès de son voisin de siège."
+    },
+    {
+      "text": "L'héritage surprise",
+      "duration": "4 min",
+      "description": "Découvrir la lecture des dernières volontés d'un proche excentrique chez le notaire."
+    },
+    {
+      "text": "Le secret de famille",
+      "duration": "5 min",
+      "description": "Révéler une vérité tenue cachée depuis des années au cours d'un repas de fête."
+    },
+    {
+      "text": "Le démissionnaire",
+      "duration": "3 min",
+      "description": "Annoncer son départ immédiat de l'entreprise sans vouloir donner la véritable raison."
+    },
+    {
+      "text": "La plainte au propriétaire",
+      "duration": "4 min",
+      "description": "Exiger des réparations urgentes auprès d'un bailleur particulièrement de mauvaise foi."
+    },
+    {
+      "text": "Le marchandage serré",
+      "duration": "4 min",
+      "description": "Négocier fermement le prix d'un objet usagé lors d'une brocante."
+    },
+    {
+      "text": "L'intermédiaire gêné",
+      "duration": "4 min",
+      "description": "Transmettre les remarques agressives entre deux personnes qui refusent de se parler directement."
+    },
+    {
+      "text": "La colocation difficile",
+      "duration": "5 min",
+      "description": "Négocier la répartition des tâches ménagères impayées avec un colocataire bordélique."
+    },
+    {
+      "text": "L'aveu de culpabilité",
+      "duration": "3 min",
+      "description": "Reconnaître soudainement sa responsabilité après un long moment de suspicion générale."
+    },
+    {
+      "text": "La rupture en public",
+      "duration": "4 min",
+      "description": "Rompre avec son partenaire au milieu d'un restaurant comble en restant discret."
+    },
+    {
+      "text": "La promesse impossible",
+      "duration": "4 min",
+      "description": "Accepter de rendre un service irréalisable pour ne pas décevoir un ami proche."
+    },
+    {
+      "text": "Le retard injustifiable",
+      "duration": "3 min",
+      "description": "Justifier un retard critique à une réunion importante par une excuse improbable."
+    },
+    {
+      "text": "La suspicion mutuelle",
+      "duration": "4 min",
+      "description": "Deux collègues se soupçonnent l'un l'autre d'avoir commis une lourde erreur professionnelle."
+    },
+    {
+      "text": "La confrontation amicale",
+      "duration": "5 min",
+      "description": "Avouer à son meilleur ami qu'on a des sentiments pour son conjoint."
+    },
+    {
+      "text": "Le procès d'intention",
+      "duration": "4 min",
+      "description": "Accuser un partenaire de cacher des motifs égoïstes derrière un acte apparemment généreux."
+    },
+    {
+      "text": "L'adieu sur le quai",
+      "duration": "3 min",
+      "description": "Se dire au revoir avant un long voyage sans oser avouer ses véritables émotions."
     }
   ],
   "emotions": [
